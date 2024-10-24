@@ -9,6 +9,7 @@ html, body {
     background: black;
     color: aliceblue;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 a{
     color: aliceblue;
