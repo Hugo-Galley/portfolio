@@ -1,0 +1,31 @@
+.backgroundBar {
+    width: 100vw;  
+    height: 120px; 
+    background: linear-gradient(to right, #8A2BE2, #FFA500);
+    display: flex;
+    align-items: center;
+   
+}
+
+.bar {
+    width: 120vw; 
+    height: 100px;
+    background-color: aliceblue; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+    left: -10vw; 
+    transform: rotate(-5deg); 
+
+}
+
+.bar p {
+
+    font-size: 1.5em;
+    color: black
+
+}
+.bar-items{
+    margin: 40px;
+}

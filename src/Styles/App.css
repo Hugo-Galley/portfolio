@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    font-weight: 600;
+}
+html, body {
+    height: 100%;
+    background: black;
+    color: aliceblue;
+    scroll-behavior: smooth;
+}
+a{
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.grid-project {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 100px; 
+    padding: 40px; 
+
+    justify-items: center; /* Centre horizontalement les éléments de la grille */
+}
+.projectPage{
+    margin-top: 50px;
+}
+.projectPage h1{
+    color: aliceblue;
+    text-align: center;
+    font-size: 4em;
+    font-weight: 900;
+}
+#contactText{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700 ;
+
+}
