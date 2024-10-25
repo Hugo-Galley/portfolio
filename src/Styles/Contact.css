@@ -42,3 +42,20 @@
     margin-top: 10px;
     font-size: 1.6em;
 }
+@media (max-width: 1000px) {
+    .contact-container{
+        flex-direction: column;
+    }
+    .Linkedin img{
+        width: 40%;
+    }
+    .Github img{
+        width: 40%;
+    }
+    .Github{
+        margin-bottom: 20px;
+    }
+    .email{
+        margin-bottom: 20px;
+    }
+}

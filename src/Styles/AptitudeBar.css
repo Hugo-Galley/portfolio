@@ -28,3 +28,9 @@
 .bar-items{
     margin: 40px;
 }
+@media (max-width: 1000px) {
+    .backgroundBar{
+        margin-top: 30px;
+    }
+
+}
