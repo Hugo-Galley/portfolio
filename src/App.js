@@ -23,7 +23,7 @@ import Ransomware from './PagesProjects/Ransomware';
 
 function App() {
   return (
-    <Router basename='/portfolio'>
+    <Router>
       <div className="main">
         <Routes>
           <Route path="/" element={(
