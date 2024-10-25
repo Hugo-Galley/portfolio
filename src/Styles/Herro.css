@@ -32,7 +32,7 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    height: 100vh; 
 }
 .herro-description {
     display: flex;
@@ -94,4 +94,29 @@ nav {
 }
 strong {
     color: #F2C1B6;
+}
+@media (max-width: 1000px) {
+    .herro {
+        margin-top: 200px;
+        flex-direction: column;
+    }
+    .herro-description{
+        font-size: 0.7em;
+        align-items: center;
+        padding: 50px;
+        margin-right: 100px;
+    }
+    nav{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .navbar-logo {
+        width: 15%;
+        padding-top: 20px;
+    }
+    .navbar-right{
+        margin-top: -15px;
+    }
 }

@@ -134,3 +134,9 @@
     padding-left: 10px;
     padding-top: 10px;
 }
+@media (max-width: 1000px) {
+    .container-main{
+        width: 400px;
+        
+    }
+}

@@ -79,3 +79,18 @@
     background-color: transparent;
     box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(255, 255, 255, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
 }
+@media (max-width: 1000px) {
+    .Pages-top{
+        margin: auto;
+        padding: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+    .projects-nom{
+        margin-top: 20px;
+    }
+    #GithubLink{
+        margin-top: 20px;
+    }
+
+}
