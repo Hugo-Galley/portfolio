@@ -3,7 +3,7 @@ import logo from '../assets/logo.png'
 export default function NavBar(){
     return(
         <nav className='navbar'>
-        <a href="#Home"><img className='navbar-logo' src={logo} alt='logo' /></a>
+        <a href="/#Home"><img className='navbar-logo' src={logo} alt='logo' /></a>
           <ul className='navbar-right'>
             <a href="/#Home"><li className='navbar-items'>Home</li></a> 
             <a href="/#AboutMe"><li className='navbar-items'>About</li></a> 

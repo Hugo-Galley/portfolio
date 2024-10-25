@@ -3,6 +3,7 @@
     flex-direction: row;
     margin-top: 100px;
     justify-content: center;
+    align-items: center;
 }
 .contact-container img{
     width: 70%;

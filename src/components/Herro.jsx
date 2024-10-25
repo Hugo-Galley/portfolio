@@ -8,7 +8,7 @@ export default function Herro() {
       <div className='herro-description'>
         <p id='hello'>Hello</p>
         <p id='herro-name'>I'm <strong>Hugo Galley</strong></p>
-        <p id='herro-desc'>I'm a French Developer Actually in Study</p>
+        <p id='herro-desc'>I'm a French Developer actually in Study</p>
         <div className='button-div'>
           <a id='herro-button1' href='#AboutMe'>About Me</a>
           <a id='herro-button2' href='#Projects'>My Works</a>

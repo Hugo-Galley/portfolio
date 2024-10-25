@@ -14,13 +14,12 @@ import ctk from './assets/Card/ctk.png';
 import virus from './assets/Card/virus.png';
 import './Styles/App.css';
 
-// Importation des pages associées aux projets
 import Cartograhy from './PagesProjects/Cartography';
-// import InstagramClone from './pages/InstagramClone';
-// import SportApp from './pages/SportApp';
-// import AdminInterface from './pages/AdminInterface';
-// import PlatformerGame from './pages/PlatformerGame';
-// import Ransomware from './pages/Ransomware';
+import InstaGramClone from './PagesProjects/InstaGramClone';
+import SportApplication from './PagesProjects/SportApplication';
+import AdminInterface from './PagesProjects/AdminInterface';
+import PlatformerGame from './PagesProjects/PlaformerGame';
+import Ransomware from './PagesProjects/Ransomware';
 
 function App() {
   return (
@@ -40,11 +39,11 @@ function App() {
                 <h1 id="Projects">My Projects</h1>
                 <div className="grid-project">
                   <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
-                  <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} />
-                  <Card titre={"Sport Application"} categorie={"Mobile Developement"} image={actifit} />
-                  <Card titre={"Administartion Interface"} categorie={"Python"} image={ctk} />
-                  <Card titre={"Platformer Game"} categorie={"Video Game"} image={mario} />
-                  <Card titre={"Ransomware"} categorie={"Python"} image={virus} />
+                  <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} lien={'/instagram-clone'} />
+                  <Card titre={"Sport Application"} categorie={"Mobile Developement"} image={actifit} lien={'/sport-app'} />
+                  <Card titre={"Administartion Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
+                  <Card titre={"Platformer Game"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
+                  <Card titre={"Ransomware"} categorie={"Python"} image={virus} lien={'/ransomware'} />
                 </div>
                 <h1 id="Contact">Contact</h1>
                 <p id="contactText">If you want to contact me or work with me.</p>
@@ -55,11 +54,11 @@ function App() {
           )} />
           
           <Route path="/cartography" element={<Cartograhy />} />
-          {/* <Route path="/instagram-clone" element={<InstagramClone />} />
-          <Route path="/sport-app" element={<SportApp />} />
+          <Route path="/instagram-clone" element={<InstaGramClone />} />
+          <Route path="/sport-app" element={<SportApplication />} />
           <Route path="/admin-interface" element={<AdminInterface />} />
           <Route path="/platformer-game" element={<PlatformerGame />} />
-          <Route path="/ransomware" element={<Ransomware />} /> */}
+         <Route path="/ransomware" element={<Ransomware />} />
         </Routes>
       </div>
     </Router>

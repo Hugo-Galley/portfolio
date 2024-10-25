@@ -1,0 +1,46 @@
+import imgtest from '../assets/Card/ctk.png'
+import pyth from '../assets/Pages/Python-logo-notext.svg.png'
+import ctk from '../assets/Pages/customctk.png'
+import NavBar from '../components/NavBar'
+import sqlite from '../assets/Pages/sqlite.webp'
+import '../Styles/PagesProjects.css'
+
+export default function AdminInterface(){
+    return(
+        <div>
+        <NavBar/>
+        <div className='Pages'>
+
+        <div className='Pages-top'>
+            <img src={imgtest} alt="" />
+            <div className='pages-info'>
+                <div className='pages-info-prc'>
+                <p className="projects-nom">AdminInterface</p>
+                <p className="projects-techno">Techno use : Python, CutsomTkinter, Sqlite</p>
+                </div>
+                <p className="projects-desc">This is a login interface for a simulated laboratory aimed at testing the use of the CustomTkinter graphical library in Python.</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App">Github</a>
+            </div>
+        </div>
+        <h1>Techno Use</h1>
+        <div className='pages-techo'>
+            <div>
+                <img src={pyth} alt="Python" />
+                <p>Python</p>
+            </div>
+            <div>
+                <img src={ctk} alt="CTK" />
+                <p>CustomTkinter</p>
+            </div>
+            <div>
+                <img src={sqlite} alt="Sqlite" />
+                <p>Sqlite</p>
+            </div>
+        </div>
+
+
+
+        </div>
+        </div>
+    )
+}

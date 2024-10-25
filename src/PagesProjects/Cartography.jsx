@@ -16,10 +16,9 @@ export default function Cartograhy(){
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">Cartographie</p>
-                <p className="projects-techno">Techno use : C#</p>
+                <p className="projects-techno">Techno use : C#; .NET, Blazor, Rest</p>
                 </div>
-                <p className="projects-desc">This is an application designed to map all the company’s servers in order to identify on which server an application is located or not, as well as to allow searching, sorting, and adding search files.</p>
-                <a href="">Github</a>
+                <p className="projects-desc">This is an application designed to map all the company’s servers in order to identify on which server an application is located or not, as well as to allow searching, sorting, and adding search files. For this application I create BDD & Batch & API & WEB APP & Deployement</p>
             </div>
         </div>
         <h1>Techno Use</h1>
