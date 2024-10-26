@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/ctk.png'
+import imgtest from '../assets/Card/ctk2.png'
 import pyth from '../assets/Pages/Python-logo-notext.svg.png'
 import ctk from '../assets/Pages/customctk.png'
 import NavBar from '../components/NavBar'

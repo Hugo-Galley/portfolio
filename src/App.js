@@ -10,7 +10,7 @@ import insta from './assets/Card/instagram.webp';
 import cart from './assets/Card/Carto.png';
 import actifit from './assets/Card/actifit.png';
 import mario from './assets/Card/mario.png';
-import ctk from './assets/Card/ctk.png';
+import ctk from './assets/Card/ctk2.png';
 import virus from './assets/Card/virus.png';
 import './Styles/App.css';
 
@@ -41,9 +41,9 @@ function App() {
                   <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
                   <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} lien={'/instagram-clone'} />
                   <Card titre={"Sport Application"} categorie={"Mobile Developement"} image={actifit} lien={'/sport-app'} />
-                  <Card titre={"Administartion Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
+                  <Card titre={"Administration Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
                   <Card titre={"Platformer Game"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
-                  <Card titre={"Ransomware"} categorie={"Python"} image={virus} lien={'/ransomware'} />
+                  <Card titre={"Cybersecurity "} categorie={"Python"} image={virus} lien={'/ransomware'} />
                 </div>
                 <h1 id="Contact">Contact</h1>
                 <p id="contactText">If you want to contact me or work with me.</p>
