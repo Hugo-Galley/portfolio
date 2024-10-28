@@ -5,6 +5,7 @@ import AptitudeBar from "./components/aptitudeBar";
 import Card from "./components/Card";
 import Bento from "./components/bento";
 import Contact from "./components/contact";
+import CardWork from './components/CardWork';
 import Footer from "./components/Footer";
 import insta from './assets/Card/instagram.webp';
 import cart from './assets/Card/Carto.png';
@@ -12,6 +13,8 @@ import actifit from './assets/Card/actifit.png';
 import mario from './assets/Card/mario.png';
 import ctk from './assets/Card/ctk2.png';
 import virus from './assets/Card/virus.png';
+import unif from './assets/Card/unif.png'
+import but from './assets/Card/Logo-BUT.svg.png'
 import './Styles/App.css';
 
 import Cartograhy from './PagesProjects/Cartography';
@@ -36,6 +39,11 @@ function App() {
               <div className="projectPage">
                 <h1 id="AboutMe">About Me</h1>
                 <Bento/>
+                <h1>I worked at</h1>
+                <div className='work-app-container'>
+                    <CardWork nom={"Ingenieur en developement stagiaire"} duré={"10 semaines"} boite={"Uniformations"} img={unif}/>
+                    <CardWork nom={"Stagiaire"} duré={"1 semaine"} boite={"BUT"} img={but}/>
+                </div>
                 <h1 id="Projects">My Projects</h1>
                 <div className="grid-project">
                   <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
