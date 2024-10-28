@@ -41,7 +41,7 @@ function App() {
                 <Bento/>
                 <h1>I worked at</h1>
                 <div className='work-app-container'>
-                    <CardWork nom={"Ingenieur en developement stagiaire"} duré={"10 semaines"} boite={"Uniformations"} img={unif}/>
+                    <CardWork nom={"Ingénieur développement stagiaire"} duré={"10 semaines"} boite={"Uniformations"} img={unif}/>
                     <CardWork nom={"Stagiaire"} duré={"1 semaine"} boite={"BUT"} img={but}/>
                 </div>
                 <h1 id="Projects">My Projects</h1>
