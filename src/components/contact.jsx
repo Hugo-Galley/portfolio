@@ -10,10 +10,10 @@ export default function Contact(){
                 <p>Hugo-Galley</p>
             </div>   
             </a>         
-            <a href="mailto:galleyhugo@icloud.com">
+            <a href="mailto:contact@galleyhugo.com">
             <div className='email'>
                 <p>Email</p>
-                <p>galleyhugo@icloud.com</p>
+                <p>contact@galleyhugo.com</p>
             </div>
             </a>
             <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">
