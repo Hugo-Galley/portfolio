@@ -19,7 +19,7 @@ export default function AdminInterface(){
                 <p className="projects-techno">Techno use : Python, CutsomTkinter, Sqlite</p>
                 </div>
                 <p className="projects-desc">This is a login interface for a simulated laboratory aimed at testing the use of the CustomTkinter graphical library in Python.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank">Github</a>
             </div>
         </div>
         <h1>Techno Use</h1>

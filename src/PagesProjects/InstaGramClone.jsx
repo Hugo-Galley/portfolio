@@ -18,7 +18,7 @@ export default function InstaGramClone(){
                 <p className="projects-techno">Techno use : React, JS</p>
                 </div>
                 <p className="projects-desc">This is a website developed in React aimed at copying Instagram. The site focuses on the front end and allowed me to learn the basics of React.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim" target="_blank">Github</a>
             </div>
         </div>
         <h1>Techno Use</h1>
