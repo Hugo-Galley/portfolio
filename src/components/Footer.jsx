@@ -8,7 +8,7 @@ export default function Footer(){
             <div className="footer-left">
                 <h1>Informations</h1>
                 <p>©Copyright Galley Hugo 2024</p>
-                <p>galleyhugo@icloud.com</p>
+                <p>contact@galleyhugo.com</p>
             </div>
             <div className="footer-right">
 
