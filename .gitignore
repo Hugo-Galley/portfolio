@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
+# Dossier de configuration de l'éditeur
+/.vscode
 # testing
 /coverage
 
