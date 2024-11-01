@@ -35,7 +35,7 @@ Suivez ces étapes pour exécuter le projet en local.
 ### Technologies utilisées
 
 - React
-- CSS3 / SCSS
+- CSS3
 
 ## Licence
 
