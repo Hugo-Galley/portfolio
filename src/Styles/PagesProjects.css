@@ -23,6 +23,9 @@
     width: 60%;
     border-radius: 10px;
 }
+.Pages #Slide{
+    width: 750px;
+}
 .pages-info-prc{
     margin-top: px;
     text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.5);
@@ -42,23 +45,23 @@
     margin-top: 100px;
 }
 .pages-techo {
-    display: flex;                       
-    justify-content: center;             
-    align-items: center;                 
-    margin-top: 10px;                    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .pages-techo div {
-    display: flex;                      
-    flex-direction: column;              
-    align-items: center;                
-    margin: 0 15px;                     
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
 }
 
 .pages-techo img {
-    width: 100px;                         
-    height: auto;                        
-    margin-bottom: 5px;                 
+    width: 100px;
+    height: auto;
+    margin-bottom: 5px;
 }
 .Pages h1{
     margin-top: 20px;
@@ -91,6 +94,9 @@
     }
     #GithubLink{
         margin-top: 20px;
+    }
+    .Pages #Slide{
+        width: 400px;
     }
 
 }

@@ -11,7 +11,7 @@ export default function InstaGramClone(){
         <div className='Pages'>
 
         <div className='Pages-top'>
-            <img src={imgtest} alt="CardSlide" />
+            <img src={imgtest} alt="CardSlide" id='Slide'/>
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">Instagram Clone</p>
