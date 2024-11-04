@@ -23,8 +23,14 @@ import SportApplication from './PagesProjects/SportApplication';
 import AdminInterface from './PagesProjects/AdminInterface';
 import PlatformerGame from './PagesProjects/PlaformerGame';
 import Ransomware from './PagesProjects/Ransomware';
+import { useEffect } from 'react';
+import hero from './assets/herroBanner.webp'
 
 function App() {
+  useEffect(() => {
+    const img = new Image();
+    img.src = hero; 
+  }, []);
   return (
     <Router>
       <div className="main">
