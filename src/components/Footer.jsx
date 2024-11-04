@@ -18,7 +18,7 @@ export default function Footer(){
                 </div>
                 <div className='div-media'>
                     <img src={lin} alt="logo Linkedin" />
-                <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Likedin</a>
+                <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Linkedin</a>
                 
                 </div>
             </div>
