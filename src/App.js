@@ -7,7 +7,7 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Footer from "./components/Footer";
-import insta from './assets/Card/instagram.webp';
+import insta from './assets/Card/instagram-2.jpg';
 import cart from './assets/Card/Carto.png';
 import actifit from './assets/Card/actifit.png';
 import mario from './assets/Card/mario.png';
