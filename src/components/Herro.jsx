@@ -1,5 +1,5 @@
 import '../Styles/Herro.css'
-import heroImg from'../assets/herroBanner.png'
+import heroImg from'../assets/herroBanner.webp'
 
 export default function Herro() {
   return (

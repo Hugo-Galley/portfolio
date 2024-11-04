@@ -1,8 +1,8 @@
-import imgtest from '../assets/Card/actifit.png'
-import rea from '../assets/Pages/react.png'
-import js from '../assets/Pages/JavaScript-logo.png'
+import imgtest from '../assets/Card/actifit.webp'
+import rea from '../assets/Pages/react.webp'
+import js from '../assets/Pages/JavaScript-logo.webp'
 import NavBar from '../components/NavBar'
-import expo from '../assets/Pages/expo-1.svg'
+import expo from '../assets/Pages/expo-1.webp'
 import '../Styles/PagesProjects.css'
 
 export default function SportApplication(){

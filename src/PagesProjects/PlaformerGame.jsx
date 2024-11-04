@@ -1,7 +1,7 @@
-import imgtest from '../assets/Card/mario.png'
-import pyth from '../assets/Pages/Python-logo-notext.svg.png'
+import imgtest from '../assets/Card/mario.webp'
+import pyth from '../assets/Pages/Python-logo-notext.svg.webp'
 import NavBar from '../components/NavBar'
-import pygame from '../assets/Pages/Pygame_logo.svg.png'
+import pygame from '../assets/Pages/Pygame_logo.svg.webp'
 import '../Styles/PagesProjects.css'
 
 export default function PlatformerGame(){

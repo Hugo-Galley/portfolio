@@ -1,5 +1,5 @@
-import git from '../assets/Contact/github.png'
-import linkedin from '../assets/Contact/img.icons8.com.png'
+import git from '../assets/Contact/github.webp'
+import linkedin from '../assets/Contact/img.icons8.com.webp'
 import '../Styles/Contact.css'
 export default function Contact(){
     return(

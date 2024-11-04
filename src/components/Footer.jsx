@@ -1,6 +1,6 @@
 import '../Styles/Footer.css'
-import git from '../assets/Contact/github.png'
-import lin from '../assets/Contact/img.icons8.com.png'
+import git from '../assets/Contact/github.webp'
+import lin from '../assets/Contact/img.icons8.com.webp'
 
 export default function Footer(){
     return(

@@ -1,10 +1,10 @@
 import '../Styles/Bento.css'
-import me from '../assets/Bento/me.png'
-import epsi from '../assets/Bento/epsi.png'
-import cs from '../assets/Bento/cs.png'
-import react from '../assets/Bento/logo-react.svg'
-import france from '../assets/Bento/france.png'
-import wallet from '../assets/Bento/Wallet.png'
+import me from '../assets/Bento/me.webp'
+import epsi from '../assets/Bento/epsi.webp'
+import cs from '../assets/Bento/cs.webp'
+import react from '../assets/Bento/logo-react.webp'
+import france from '../assets/Bento/france.webp'
+import wallet from '../assets/Bento/Wallet.webp'
 
 
 export default function Bento(){

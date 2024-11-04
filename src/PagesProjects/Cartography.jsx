@@ -1,7 +1,7 @@
-import imgtest from '../assets/Card/Carto.png'
-import cs from '../assets/Bento/cs.png'
-import net from '../assets/Pages/NET_Core_Logo.svg.png'
-import blazor from '../assets/Pages/Blazor.png'
+import imgtest from '../assets/Card/Carto.webp'
+import cs from '../assets/Bento/cs.webp'
+import net from '../assets/Pages/NET_Core_Logo.svg.webp'
+import blazor from '../assets/Pages/Blazor.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
 

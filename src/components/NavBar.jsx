@@ -1,5 +1,5 @@
 import '../Styles/Herro.css'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.webp'
 export default function NavBar(){
     return(
         <nav className='navbar'>

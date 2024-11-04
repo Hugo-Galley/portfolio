@@ -1,6 +1,6 @@
-import imgtest from '../assets/Pages/InstaPreview.png'
-import rea from '../assets/Pages/react.png'
-import js from '../assets/Pages/JavaScript-logo.png'
+import imgtest from '../assets/Pages/InstaPreview.webp'
+import rea from '../assets/Pages/react.webp'
+import js from '../assets/Pages/JavaScript-logo.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
 

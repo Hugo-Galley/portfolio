@@ -1,5 +1,5 @@
-import imgtest from '../assets/Card/virus.png'
-import pyth from '../assets/Pages/Python-logo-notext.svg.png'
+import imgtest from '../assets/Card/virus.webp'
+import pyth from '../assets/Pages/Python-logo-notext.svg.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
 

@@ -7,14 +7,14 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Footer from "./components/Footer";
-import insta from './assets/Card/instagram-2.jpg';
-import cart from './assets/Card/Carto.png';
-import actifit from './assets/Card/actifit.png';
-import mario from './assets/Card/mario.png';
-import ctk from './assets/Card/ctk2.png';
-import virus from './assets/Card/virus.png';
-import unif from './assets/Card/unif.png'
-import but from './assets/Card/Logo-BUT.svg.png'
+import insta from './assets/Card/instagram-2.webp';
+import cart from './assets/Card/Carto.webp';
+import actifit from './assets/Card/actifit.webp';
+import mario from './assets/Card/mario.webp';
+import ctk from './assets/Card/ctk2.webp';
+import virus from './assets/Card/virus.webp';
+import unif from './assets/Card/unif.webp'
+import but from './assets/Card/Logo-BUT.svg.webp'
 import './Styles/App.css';
 
 import Cartograhy from './PagesProjects/Cartography';
