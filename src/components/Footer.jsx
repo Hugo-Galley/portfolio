@@ -14,11 +14,11 @@ export default function Footer(){
 
                 <div className='div-media'>
                     <img src={git} alt="logo Github" />
-                <a href='https://github.com/Hugo-Galley'>Linkedin</a>
+                <a href='https://github.com/Hugo-Galley'>Github</a>
                 </div>
                 <div className='div-media'>
                     <img src={lin} alt="logo Linkedin" />
-                <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Github</a>
+                <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Likedin</a>
                 
                 </div>
             </div>
