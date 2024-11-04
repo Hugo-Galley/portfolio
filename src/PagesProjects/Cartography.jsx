@@ -12,7 +12,7 @@ export default function Cartograhy(){
         <div className='Pages'>
 
         <div className='Pages-top'>
-            <img src={imgtest} alt="" />
+            <img src={imgtest} alt="CardSlide" />
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">Cartographie</p>
