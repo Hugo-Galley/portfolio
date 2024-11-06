@@ -31,9 +31,42 @@ function App() {
     const img = new Image();
     img.src = hero; 
   }, []);
+  useEffect(() => {
+    const cursor = document.querySelector('.cursor');
+  
+    if (cursor) {
+      const handleMouseMove = (e) => {
+        cursor.style.top = `${e.pageY - 20}px`;
+        cursor.style.left = `${e.pageX - 20}px`;
+      };
+  
+      const handleClick = () => {
+        cursor.classList.add('expand');
+  
+        setTimeout(() => {
+          if (cursor) {
+            cursor.classList.remove('expand');
+          }
+        }, 500);
+      };
+  
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('click', handleClick);
+  
+      // Nettoyage des écouteurs d'événements lors du démontage
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('click', handleClick);
+      };
+    } else {
+      console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
+    }
+  }, []);
+
   return (
     <Router>
       <div className="main">
+      <div className='cursor'></div>
         <Routes>
           <Route path="/" element={(
             <>

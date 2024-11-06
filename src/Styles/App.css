@@ -5,12 +5,13 @@
     font-weight: 600;
 }
 html, body {
-    height: 100%;
     background: black;
     color: aliceblue;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    cursor: none;
 }
+
 a{
     color: aliceblue;
     text-decoration: none;
@@ -49,6 +50,56 @@ a{
     flex-direction: row;
     justify-content: center;
 }
+.cursor{
+    width: 40px;
+    height: 40px;
+    border: 1px dashed white;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    animation: Anime1 1.5s infinite alternate;
+}
+.cursor::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 5px;
+    height: 5px;
+    background: #F2C1B6;
+    border-radius: 50%;
+}
+.expand{
+    animation: Anime2 .5s;
+    background: #F2C1B6;
+    border: 1px solid #F2C1B6;
+}
+
+@keyframes Anime1 {
+    from{
+        transform: scale(1) rotate(0deg);
+    }
+    to{
+        transform: scale(0.7) rotate(90deg);
+    }
+}
+
+@keyframes Anime2 {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(2);
+    }
+    100%{
+        transform: scale(1);
+        opacity: 0;
+    }
+    
+}
+
 @media (max-width: 1000px) {
     .work-app-container{
         flex-direction: column;
