@@ -59,7 +59,7 @@
 .navbar2-items {
   margin-right: 35px;
   margin-left: 40px;
-  pointer-events: auto; /* S'assurer que les événements de pointeur sont activés */
+  pointer-events: auto; 
   align-items: center;
   position: relative;
 }
@@ -80,6 +80,11 @@
 
 .navbar2-items:hover::before,
 .navbar2-items.active::before {
-  transform: translate(-50%, -50%) scale(2); /* Agrandit l'élément */
-  opacity: 0.8; /* Le rend visible */
+  transform: translate(-50%, -50%) scale(2); 
+  opacity: 0.8; 
+}
+@media (max-width: 1000px){
+  .navbar2{
+    transform: translate(-50%);
+  }
 }
