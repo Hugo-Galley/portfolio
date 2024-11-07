@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import NavBar2 from './components/NavBar2';
 import Herro from "./components/Herro";
 import AptitudeBar from "./components/aptitudeBar";
 import Card from "./components/Card";
@@ -32,6 +33,15 @@ function App() {
     img.src = hero; 
   }, []);
   useEffect(() => {
+
+    document.querySelectorAll('.navbar2-items').forEach(item => {
+      item.addEventListener('click', () => {
+        // Retire la classe active de tous les éléments
+        document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
+        // Ajoute la classe active à l'élément cliqué
+        item.classList.add('active');
+      });
+    });
     const cursor = document.querySelector('.cursor');
   
     if (cursor) {
@@ -71,9 +81,11 @@ function App() {
           <Route path="/" element={(
             <>
             <NavBar/>
+            <NavBar2/>
               <div id="Home">
                 <Herro/>
               </div>
+
               <AptitudeBar/>
               <div className="projectPage">
                 <h1 id="AboutMe">About Me</h1>

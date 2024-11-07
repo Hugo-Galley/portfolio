@@ -1,0 +1,85 @@
+.navbar2 {
+  width: 400px;
+  height: 80px;
+  margin: auto;
+  border-radius: 4rem;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 5px rgba(255, 255, 255, 0.05),
+    0 5px 15px rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(255, 255, 255, 0.15);
+  overflow: visible; /* Changer de hidden à visible */
+  position: fixed; 
+  bottom: 0;
+  left: 50%; 
+  transform: translate(-50%, -50%); /* Ajuster la transformation */
+  z-index: 100;
+  pointer-events: auto; /* S'assurer que les événements de pointeur sont activés */
+}
+
+.navbar2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: 0.5s;
+  pointer-events: none; /* S'assurer que l'élément après ne bloque pas les clics */
+}
+
+.navbar2:hover::after {
+  left: 0;
+}
+
+.navbar2-right {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.navbar2-items {
+  margin-right: 35px;
+  margin-left: 40px;
+  pointer-events: auto; /* S'assurer que les événements de pointeur sont activés */
+  align-items: center;
+  position: relative;
+}
+.navbar2-items::before {
+  content: '';
+  background-color: #F2C1B6;
+  opacity: 0; 
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); 
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: -1;
+}
+
+.navbar2-items:hover::before,
+.navbar2-items.active::before {
+  transform: translate(-50%, -50%) scale(2); /* Agrandit l'élément */
+  opacity: 0.8; /* Le rend visible */
+}
