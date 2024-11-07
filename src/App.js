@@ -77,11 +77,11 @@ function App() {
     <Router>
       <div className="main">
       <div className='cursor'></div>
+      <NavBar2/>
         <Routes>
           <Route path="/" element={(
             <>
             <NavBar/>
-            <NavBar2/>
               <div id="Home">
                 <Herro/>
               </div>
