@@ -33,45 +33,40 @@ function App() {
     img.src = hero; 
   }, []);
   useEffect(() => {
-
-    document.querySelectorAll('.navbar2-items').forEach(item => {
-      item.addEventListener('click', () => {
-        // Retire la classe active de tous les éléments
-        document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
-        // Ajoute la classe active à l'élément cliqué
-        item.classList.add('active');
-      });
+  document.querySelectorAll('.navbar2-items').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
+      item.classList.add('active');
     });
-    const cursor = document.querySelector('.cursor');
+  });
   
-    if (cursor) {
-      const handleMouseMove = (e) => {
-        cursor.style.top = `${e.pageY - 20}px`;
-        cursor.style.left = `${e.pageX - 20}px`;
-      };
-  
-      const handleClick = () => {
-        cursor.classList.add('expand');
-  
-        setTimeout(() => {
-          if (cursor) {
-            cursor.classList.remove('expand');
-          }
-        }, 500);
-      };
-  
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('click', handleClick);
-  
-      // Nettoyage des écouteurs d'événements lors du démontage
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('click', handleClick);
-      };
-    } else {
-      console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
-    }
-  }, []);
+  const cursor = document.querySelector('.cursor');
+  if (cursor) {
+    const handleMouseMove = (e) => {
+      cursor.style.top = `${e.pageY - 20}px`;
+      cursor.style.left = `${e.pageX - 20}px`;
+    };
+    
+    const handleClick = () => {
+      cursor.classList.add('expand');
+      setTimeout(() => {
+        if (cursor) {
+          cursor.classList.remove('expand');
+        }
+      }, 500);
+    };
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('click', handleClick);
+    
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('click', handleClick);
+    };
+  } else {
+    console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
+  }
+}, []);
 
   return (
     <Router>

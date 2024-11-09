@@ -142,6 +142,7 @@
     
     .navbar {
       height: auto;
+      position: fixed;
     }
     
     .navbar-logo {

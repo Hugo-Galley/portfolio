@@ -19,13 +19,13 @@
     inset 0 -2px 5px rgba(255, 255, 255, 0.05),
     0 5px 15px rgba(255, 255, 255, 0.1),
     0 2px 4px rgba(255, 255, 255, 0.15);
-  overflow: visible; /* Changer de hidden à visible */
+  overflow: visible;
   position: fixed; 
   bottom: 0;
   left: 50%; 
-  transform: translate(-50%, -50%); /* Ajuster la transformation */
+  transform: translate(-50%, -50%); 
   z-index: 100;
-  pointer-events: auto; /* S'assurer que les événements de pointeur sont activés */
+  pointer-events: auto; 
 }
 
 .navbar2::after {
@@ -42,7 +42,7 @@
     transparent
   );
   transition: 0.5s;
-  pointer-events: none; /* S'assurer que l'élément après ne bloque pas les clics */
+  pointer-events: none; 
 }
 
 .navbar2:hover::after {

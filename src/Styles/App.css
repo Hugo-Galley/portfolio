@@ -10,6 +10,8 @@ html, body {
     scroll-behavior: smooth;
     overflow-x: hidden;
     cursor: none;
+    position: relative;
+    min-height: 100vh;
 }
 
 a{
@@ -25,7 +27,7 @@ a{
     gap: 100px; 
     padding: 40px; 
 
-    justify-items: center; /* Centre horizontalement les éléments de la grille */
+    justify-items: center; 
 }
 .projectPage{
     margin-top: 50px;
@@ -50,7 +52,7 @@ a{
     flex-direction: row;
     justify-content: center;
 }
-.cursor{
+.cursor {
     width: 40px;
     height: 40px;
     border: 1px dashed white;
@@ -60,7 +62,8 @@ a{
     pointer-events: none;
     animation: Anime1 1.5s infinite alternate;
     mix-blend-mode: difference;
-}
+    will-change: transform;
+  }
 .cursor::before{
     content: '';
     position: absolute;
