@@ -6,7 +6,7 @@ import '../Styles/PagesProjects.css'
 
 export default function PlatformerGame(){
     return(
-        <div>
+        <div className='ProjectPages'>
         <NavBar/>
         <div className='Pages'>
 
@@ -15,14 +15,7 @@ export default function PlatformerGame(){
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">Mario Briss</p>
-                <p className="projects-techno">Techno use : Python, Pygame</p>
-                </div>
-                <p className="projects-desc">It’s a platformer game imitating Mario, made in Python with Pygame. There is a little easter egg hidden in it</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank">Github</a>
-            </div>
-        </div>
-        <h1>Techno Use</h1>
-        <div className='pages-techo'>
+                <div className='pages-techo'>
             <div>
                 <img src={pyth} alt="Python" />
                 <p>Python</p>
@@ -32,9 +25,11 @@ export default function PlatformerGame(){
                 <p>Pygame</p>
             </div>
         </div>
-
-
-
+                </div>
+                <p className="projects-desc">It’s a platformer game imitating Mario, made in Python with Pygame. There is a little easter egg hidden in it</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank">Github</a>
+            </div>
+        </div>
         </div>
         </div>
     )

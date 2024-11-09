@@ -1,72 +1,102 @@
-.herroBanner {
+/* Styles de la Navbar */
+.navbar {
+    background-color: black;
+    color: aliceblue;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 100;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 2rem;
+  }
+  
+  .navbar-logo-link {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    width: auto;
+    height: 50px;
+  }
+  
+  .navbar-right {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-item {
+    margin: 0 1rem;
+  }
+  
+  .navbar-item a {
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 1.3em;
+  }
+  
+  /* Styles du Hero Banner */
+  .herroBanner {
     background-color: black;
     color: aliceblue;
     height: 100%;
-}
-nav {
-    background-color: black;
-    color: aliceblue;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    top: 0; 
-    width: 100vw;
-    height: 80px; 
-    z-index: 1; 
-    margin-bottom: -100px;
-}
-.navbar-right {
-    display: flex;
-    flex-direction: row;
-}
-.navbar-items { 
-    font-size: 1.3em;
-    list-style: none;
-    margin: 20px;
-}
-.navbar-logo {
-    width: 50%;
-}
-.herro {
+  }
+  
+  .herro {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100vh; 
-}
-.herro-description {
+    height: 100vh;
+  }
+  
+  .herro-description {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-left: 100px;
     width: 600px;
     margin-top: -150px;
-}
-#hello {
+  }
+  
+  #hello {
     color: #F2C1B6;
     font-size: 1.5em;
-}
-#herro-name {
+  }
+  
+  #herro-name {
     font-size: 5em;
-}
-#herro-logo {
+  }
+  
+  #herro-logo {
     width: 650px;
     height: 450px;
     margin: 40px;
-
-}
-#herro-desc{
+  }
+  
+  #herro-desc {
     margin-top: 20px;
-}
-.button-div {
+  }
+  
+  /* Styles des boutons */
+  .button-div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 220px;
     margin-top: 20px;
-}
-#herro-button1 {
+  }
+  
+  #herro-button1 {
     display: flex;
     color: #1e1f24;
     align-items: center;
@@ -77,8 +107,9 @@ nav {
     text-align: center;
     justify-content: center;
     box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
-}
-#herro-button2 {
+  }
+  
+  #herro-button2 {
     display: flex;
     color: aliceblue;
     align-items: center;
@@ -91,39 +122,60 @@ nav {
     text-align: center;
     justify-content: center;
     background-color: transparent;
-    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(255, 255, 255, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
-}
-strong {
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, 
+                rgba(255, 255, 255, 0.12) 0px -12px 30px, 
+                rgba(255, 255, 255, 0.12) 0px 4px 6px, 
+                rgba(255, 255, 255, 0.17) 0px 12px 13px, 
+                rgba(255, 255, 255, 0.09) 0px -3px 5px;
+  }
+  
+  strong {
     color: #F2C1B6;
-}
-@media (max-width: 1000px) {
-    .herro {
-        margin-top: 200px;
-        flex-direction: column;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 1000px) {
+    .navbar-container {
+      flex-direction: column;
+      padding: 1rem;
     }
-    .herro-description{
-        font-size: 0.65em;
-        align-items: center;
-        padding: 50px;
-        margin-right: 100px;
+    
+    .navbar {
+      height: auto;
     }
-    #hello {
-        font-size: 2em;
-    }
-    #herro-desc{
-        font-size: 1.5em;
-    }
-    nav{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
+    
     .navbar-logo {
-        width: 15%;
-        padding-top: 20px;
+      height: 40px;
+      margin-bottom: 1rem;
     }
-    .navbar-right{
-        margin-top: -15px;
+    
+    .navbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-}
+    
+    .navbar-item {
+      margin: 0.5rem;
+    }
+  
+    .herro {
+      margin-top: 200px;
+      flex-direction: column;
+    }
+  
+    .herro-description {
+      font-size: 0.65em;
+      align-items: center;
+      padding: 50px;
+      margin-right: 100px;
+    }
+  
+    #hello {
+      font-size: 2em;
+    }
+  
+    #herro-desc {
+      font-size: 1.5em;
+    }
+  }

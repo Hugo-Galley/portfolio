@@ -7,7 +7,7 @@ import '../Styles/PagesProjects.css'
 
 export default function SportApplication(){
     return(
-        <div>
+        <div className='ProjectPages'>
         <NavBar/>
         <div className='Pages'>
 
@@ -16,14 +16,7 @@ export default function SportApplication(){
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">ActiFit</p>
-                <p className="projects-techno">Techno use : React Native, Expo, JS</p>
-                </div>
-                <p className="projects-desc">This is a sports application designed to offer you personalized workout sessions as well as exercise options while showing you your progress. I also used React Native to ensure it is compatible with all types of devices</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank">Github</a>
-            </div>
-        </div>
-        <h1>Techno Use</h1>
-        <div className='pages-techo'>
+                <div className='pages-techo'>
             <div>
                 <img src={rea} alt="React" />
                 <p>React</p>
@@ -37,9 +30,11 @@ export default function SportApplication(){
                 <p>Expo</p>
             </div>
         </div>
-
-
-
+                </div>
+                <p className="projects-desc">This is a sports application designed to offer you personalized workout sessions as well as exercise options while showing you your progress. I also used React Native to ensure it is compatible with all types of devices</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank">Github</a>
+            </div>
+        </div>
         </div>
         </div>
     )

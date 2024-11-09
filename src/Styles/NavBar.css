@@ -87,4 +87,7 @@
   .navbar2{
     transform: translate(-50%);
   }
+  .navbar2{
+    display: none;
+  }
 }

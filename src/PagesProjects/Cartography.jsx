@@ -7,7 +7,7 @@ import '../Styles/PagesProjects.css'
 
 export default function Cartograhy(){
     return(
-        <div>
+        <div className='ProjectPages'>
         <NavBar/>
         <div className='Pages'>
 
@@ -16,13 +16,7 @@ export default function Cartograhy(){
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">Cartographie</p>
-                <p className="projects-techno">Techno use : C#; .NET, Blazor, Rest</p>
-                </div>
-                <p className="projects-desc">This is an application designed to map all the company’s servers in order to identify on which server an application is located or not, as well as to allow searching, sorting, and adding search files. For this application I create BDD & Batch & API & WEB APP & Deployement</p>
-            </div>
-        </div>
-        <h1>Techno Use</h1>
-        <div className='pages-techo'>
+                <div className='pages-techo'>
             <div>
                 <img src={cs} alt="C#" />
                 <p>C#</p>
@@ -36,9 +30,10 @@ export default function Cartograhy(){
                 <p>C#</p>
             </div>
         </div>
-
-
-
+                </div>
+                <p className="projects-desc">This is an application designed to map all the company’s servers in order to identify on which server an application is located or not, as well as to allow searching, sorting, and adding search files. For this application I create BDD & Batch & API & WEB APP & Deployement</p>
+            </div>
+        </div>
         </div>
         </div>
     )

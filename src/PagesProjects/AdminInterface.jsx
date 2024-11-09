@@ -9,21 +9,14 @@ export default function AdminInterface(){
     return(
         <div>
         <NavBar/>
-        <div className='Pages'>
+        <div className='Pages' id='TopEnter'>
 
         <div className='Pages-top'>
             <img src={imgtest} alt="CardSlide" id='Slide'/>
             <div className='pages-info'>
                 <div className='pages-info-prc'>
                 <p className="projects-nom">AdminInterface</p>
-                <p className="projects-techno">Techno use : Python, CutsomTkinter, Sqlite</p>
-                </div>
-                <p className="projects-desc">This is a login interface for a simulated laboratory aimed at testing the use of the CustomTkinter graphical library in Python.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank">Github</a>
-            </div>
-        </div>
-        <h1>Techno Use</h1>
-        <div className='pages-techo'>
+                <div className='pages-techo'>
             <div>
                 <img src={pyth} alt="Python" />
                 <p>Python</p>
@@ -37,9 +30,11 @@ export default function AdminInterface(){
                 <p>Sqlite</p>
             </div>
         </div>
-
-
-
+                </div>
+                <p className="projects-desc">This is a login interface for a simulated laboratory aimed at testing the use of the CustomTkinter graphical library in Python.</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank">Github</a>
+            </div>
+        </div>
         </div>
         </div>
     )

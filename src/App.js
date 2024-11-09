@@ -75,8 +75,8 @@ function App() {
 
   return (
     <Router>
+            <div className='cursor'></div>
       <div className="main">
-      <div className='cursor'></div>
       <NavBar2/>
         <Routes>
           <Route path="/" element={(

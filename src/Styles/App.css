@@ -56,9 +56,10 @@ a{
     border: 1px dashed white;
     border-radius: 50%;
     position: absolute;
-    z-index: 1000;
+    z-index: 100000;
     pointer-events: none;
     animation: Anime1 1.5s infinite alternate;
+    mix-blend-mode: difference;
 }
 .cursor::before{
     content: '';
