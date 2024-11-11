@@ -4,6 +4,7 @@ import net from '../assets/Pages/NET_Core_Logo.svg.webp'
 import blazor from '../assets/Pages/Blazor.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
+import React from 'react'
 
 export default function Cartograhy(){
     return(
@@ -18,6 +19,7 @@ export default function Cartograhy(){
                 <p className="projects-nom">Cartographie</p>
                 <div className='pages-techo'>
             <div>
+                
                 <img src={cs} alt="C#" />
                 <p>C#</p>
             </div>
@@ -26,7 +28,7 @@ export default function Cartograhy(){
                 <p>.NET</p>
             </div>
             <div>
-                <img src={blazor} alt="C#" />
+                <img src={blazor} alt="Blazor" />
                 <p>C#</p>
             </div>
         </div>
