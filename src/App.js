@@ -33,40 +33,66 @@ function App() {
     img.src = hero; 
   }, []);
   useEffect(() => {
-  document.querySelectorAll('.navbar2-items').forEach(item => {
-    item.addEventListener('click', () => {
-      document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
-      item.classList.add('active');
+    // Gestion de l'activation des éléments du navbar
+    document.querySelectorAll('.navbar2-items').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+      });
     });
-  });
   
-  const cursor = document.querySelector('.cursor');
-  if (cursor) {
-    const handleMouseMove = (e) => {
-      cursor.style.top = `${e.pageY - 20}px`;
-      cursor.style.left = `${e.pageX - 20}px`;
+    // Initialisation pour suivre l'état du curseur sur la page
+    let isCursorOnPage = false;
+  
+    const handleMouseEnter = () => {
+      isCursorOnPage = true;
+      console.log('Le curseur est sur la page.');
+      const cursorElements = document.querySelectorAll('.cursor');
+      cursorElements.forEach(el => el.style.display = 'block');
     };
-    
-    const handleClick = () => {
-      cursor.classList.add('expand');
-      setTimeout(() => {
-        if (cursor) {
-          cursor.classList.remove('expand');
-        }
-      }, 500);
+  
+    const handleMouseLeave = () => {
+      isCursorOnPage = false;
+      console.log('Le curseur a quitté la page.');
+      const cursorElements = document.querySelectorAll('.cursor');
+      cursorElements.forEach(el => el.style.display = 'none');
     };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('click', handleClick);
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('click', handleClick);
-    };
-  } else {
-    console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
-  }
-}, []);
+  
+    // Ajout des événements de détection d'entrée et de sortie
+    document.addEventListener('mouseenter', handleMouseEnter);
+    document.addEventListener('mouseleave', handleMouseLeave);
+  
+    // Gestion du curseur personnalisé
+    const cursor = document.querySelector('.cursor');
+    if (cursor) {
+      const handleMouseMove = (e) => {
+        cursor.style.top = `${e.pageY - 20}px`;
+        cursor.style.left = `${e.pageX - 20}px`;
+      };
+  
+      const handleClick = () => {
+        cursor.classList.add('expand');
+        setTimeout(() => {
+          if (cursor) {
+            cursor.classList.remove('expand');
+          }
+        }, 500);
+      };
+  
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('click', handleClick);
+  
+      // Cleanup
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('click', handleClick);
+        document.removeEventListener('mouseenter', handleMouseEnter);
+        document.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    } else {
+      console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
+    }
+  }, []);
 
   return (
     <Router>
