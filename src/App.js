@@ -48,7 +48,7 @@ function App() {
       isCursorOnPage = true;
       console.log('Le curseur est sur la page.');
       const cursorElements = document.querySelectorAll('.cursor');
-      cursorElements.forEach(el => el.style.display = 'block');
+      cursorElements.forEach(el => el.style.display = 'flex');
     };
   
     const handleMouseLeave = () => {

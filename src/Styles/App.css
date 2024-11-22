@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box; 
     font-weight: 600;
+    font-family: "Faculty Glyphic";
 }
 html, body {
     background: #121212;
@@ -76,6 +77,7 @@ a{
     border-radius: 50%;
 }
 .expand{
+    position: absolute;
     animation: Anime2 .5s;
     background: #F2C1B6;
     border: 1px solid #F2C1B6;

@@ -9,6 +9,11 @@ import wallet from '../assets/Bento/Wallet.webp'
 
 export default function Bento(){
     return(
+        <div>
+            <div className='About-Responsive'>
+                <img src={me} alt="Photo of Me" />
+                <p className='textABouteMe'>I am a young, passionate developer studying at EPSI, based in Paris. My passions include sports, travel, music, and many other things.</p>
+            </div>
         <div className="container-main">
             <div className="container-horizontale">
                 <div className="container-verticale-long">
@@ -53,5 +58,7 @@ export default function Bento(){
             </div>
 
         </div>
+        </div>
+
     )
 }

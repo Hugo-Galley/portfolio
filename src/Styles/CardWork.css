@@ -78,9 +78,8 @@
   }
   
 
-  @media (max-width: 768px) {
+  @media (max-width: 1068px) {
     .work-container {
       margin-bottom: 100px;
-      
     }
   }
