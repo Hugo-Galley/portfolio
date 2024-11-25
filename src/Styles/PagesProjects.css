@@ -29,7 +29,6 @@
     width: 750px;
 }
 .pages-info-prc{
-    margin-top: px;
     text-shadow: 3px 1px 10px rgba(255, 255, 255, 0.2);
 }
 .projects-nom{
@@ -51,7 +50,6 @@
     justify-content: left;
     align-items: center;
     margin-top: 10px;
-
     padding-top: 50px;
 }
 
@@ -97,11 +95,16 @@
         
     }
     .pages-info{
+        padding: 0;
+        margin: 0;
         align-items: center;
         margin-top: 20px;
         margin-bottom: 20px;
+
     }
+
     .projects-nom{
+        margin: auto;
         margin-top: 20px;
     }
     #GithubLink{
