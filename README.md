@@ -20,7 +20,7 @@ Suivez ces étapes pour exécuter le projet en local.
 
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/votreutilisateur/portfolio.git
+   git clone https://github.com/Hugo-Galley/portfolio.git
    cd portfolio
    ```
 2. Installer les dependances :
