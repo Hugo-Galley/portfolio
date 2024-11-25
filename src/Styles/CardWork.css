@@ -22,6 +22,7 @@
     margin-right: 100px;
     margin-left: 100px;
     color: black;
+    justify-content: space-around;
   }
   .work-container::after {
     content: '';
@@ -60,7 +61,7 @@
   }
   
   .work-boite {
-    color: #0000;
+    color: #ffff;
     font-size: 16px;
     margin: 5px 0;
     font-weight: 500;

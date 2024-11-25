@@ -114,7 +114,7 @@ function App() {
                 <h1>I worked at</h1>
                 <div className='work-app-container'>
                     <CardWork nom={"Intern Development Engineer"} duré={"10 weeks"} boite={"Uniformation"} img={unif}/>
-                    <CardWork nom={"Intern"} duré={"1 week"} boite={"BUT"} img={but}/>
+                    <CardWork nom={"Career discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
                 </div>
                 <h1 id="Projects">My Projects</h1>
                 <div className="grid-project">
