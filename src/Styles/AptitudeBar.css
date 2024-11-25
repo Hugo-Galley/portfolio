@@ -32,5 +32,8 @@
     .backgroundBar{
         margin-top: 30px;
     }
+    .bar-items{
+        margin: 10px;
+    }
 
 }
