@@ -16,6 +16,8 @@ import ctk from './assets/Card/ctk2.webp';
 import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
+import gmailAi from './assets/Card/gmailAi.webp'
+
 import './Styles/App.css';
 
 import Cartograhy from './PagesProjects/Cartography';
@@ -24,6 +26,7 @@ import SportApplication from './PagesProjects/SportApplication';
 import AdminInterface from './PagesProjects/AdminInterface';
 import PlatformerGame from './PagesProjects/PlaformerGame';
 import Ransomware from './PagesProjects/Ransomware';
+import GmailAiSort from './PagesProjects/GmailAISort';
 import { useEffect } from 'react';
 import hero from './assets/herroBanner.webp'
 
@@ -124,6 +127,7 @@ function App() {
                   <Card titre={"Administration Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
                   <Card titre={"Platformer Game"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
                   <Card titre={"Cybersecurity "} categorie={"Python"} image={virus} lien={'/ransomware'} />
+                  <Card titre={"GmailAiSort "} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort'} />
                 </div>
                 <h1 id="Contact">Contact</h1>
                 <p id="contactText">If you want to contact me or work with me.</p>
@@ -138,7 +142,8 @@ function App() {
           <Route path="/sport-app" element={<SportApplication />} />
           <Route path="/admin-interface" element={<AdminInterface />} />
           <Route path="/platformer-game" element={<PlatformerGame />} />
-         <Route path="/ransomware" element={<Ransomware />} />
+          <Route path="/ransomware" element={<Ransomware />} />
+          <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
         </Routes>
       </div>
     </Router>
