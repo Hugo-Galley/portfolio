@@ -28,7 +28,7 @@ export default function InstaGramClone(){
         </div>
                 </div>
                 <p className="projects-desc">This is a website developed in React aimed at copying Instagram. The site focuses on the front end and allowed me to learn the basics of React.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim" target="_blank">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim" target="_blank" rel="noreferrer">Github</a>
             </div>
         </div>
         

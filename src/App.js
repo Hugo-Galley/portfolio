@@ -45,17 +45,15 @@ function App() {
     });
   
     // Initialisation pour suivre l'état du curseur sur la page
-    let isCursorOnPage = false;
+
   
     const handleMouseEnter = () => {
-      isCursorOnPage = true;
       console.log('Le curseur est sur la page.');
       const cursorElements = document.querySelectorAll('.cursor');
       cursorElements.forEach(el => el.style.display = 'flex');
     };
   
     const handleMouseLeave = () => {
-      isCursorOnPage = false;
       console.log('Le curseur a quitté la page.');
       const cursorElements = document.querySelectorAll('.cursor');
       cursorElements.forEach(el => el.style.display = 'none');
@@ -116,7 +114,7 @@ function App() {
                 <Bento/>
                 <h1>I worked at</h1>
                 <div className='work-app-container'>
-                    <CardWork nom={"Intern Development Engineer"} duré={"10 weeks"} boite={"Uniformation"} img={unif}/>
+                    <CardWork nom={"Intern Development Engineer"} duré={"17 weeks"} boite={"Uniformation"} img={unif}/>
                     <CardWork nom={"Career discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
                 </div>
                 <h1 id="Projects">My Projects</h1>

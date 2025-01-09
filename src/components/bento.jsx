@@ -11,7 +11,7 @@ export default function Bento(){
     return(
         <div>
             <div className='About-Responsive'>
-                <img src={me} alt="Photo of Me" />
+                <img src={me} alt="Me" />
                 <p className='textABouteMe'>I am a young, passionate developer studying at EPSI, based in Paris. My passions include sports, travel, music, and many other things.</p>
             </div>
         <div className="container-main">
@@ -48,7 +48,7 @@ export default function Bento(){
                         <p className="verticale-titre">Passion</p>
                         <p className="verticale-desc">I’m passionate about sports, music, and travel.</p>
                     </div>
-                    <img src={wallet} alt="Wallet Picture" />
+                    <img src={wallet} alt="Wallet" />
                 </div>
                 <div className="container-verticale-small-2">
                     <p className="verticale-titre">Location</p>

@@ -27,7 +27,7 @@ export default function PlatformerGame(){
         </div>
                 </div>
                 <p className="projects-desc">It’s a platformer game imitating Mario, made in Python with Pygame. There is a little easter egg hidden in it</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank" rel="noreferrer">Github</a>
             </div>
         </div>
         </div>

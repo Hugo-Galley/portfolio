@@ -22,7 +22,7 @@ export default function Ransomware(){
         </div>
                 </div>
                 <p className="projects-desc">It is a ransomware aimed at raising awareness about cybersecurity and learning more about data protection</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Ransomware" target="_blank">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Ransomware" target="_blank" rel="noreferrer">Github</a>
             </div>
         </div>
         </div>

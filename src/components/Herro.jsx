@@ -14,7 +14,7 @@ export default function Herro() {
           <a id='herro-button2' href='#Projects'>My Works</a>
         </div>
       </div>
-      <img src={heroImg} id='herro-logo' alt='Herro Image'/>
+      <img src={heroImg} id='herro-logo' alt='Herro'/>
       </div>
     </div>
   );

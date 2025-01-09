@@ -32,7 +32,7 @@ export default function SportApplication(){
         </div>
                 </div>
                 <p className="projects-desc">This is a sports application designed to offer you personalized workout sessions as well as exercise options while showing you your progress. I also used React Native to ensure it is compatible with all types of devices</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank" rel="noreferrer">Github</a>
             </div>
         </div>
         </div>
