@@ -130,6 +130,10 @@
                 rgba(255, 255, 255, 0.09) 0px -3px 5px;
     font-weight: 300;
   }
+
+#DownloadButton{
+    margin-top: 20px;
+  }
   
   strong {
     color: #F2C1B6;

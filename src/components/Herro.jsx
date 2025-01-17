@@ -1,5 +1,6 @@
 import '../Styles/Herro.css'
 import heroImg from'../assets/herroBanner.webp'
+import DownLoadButton from './DownloadButton';
 
 export default function Herro() {
   return (
@@ -13,6 +14,8 @@ export default function Herro() {
           <a id='herro-button1' href='#AboutMe'>About Me</a>
           <a id='herro-button2' href='#Projects'>My Works</a>
         </div>
+        <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blanck'><DownLoadButton/></a>
+
       </div>
       <img src={heroImg} id='herro-logo' alt='Herro'/>
       </div>
