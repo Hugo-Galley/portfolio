@@ -47,7 +47,7 @@ export default function Skills(){
             speed={5000} 
             autoplay={{
               delay: 0, 
-              disableOnInteraction: true, 
+              disableOnInteraction: false, 
             }}
             freeMode={true} 
             modules={[Autoplay]} 
