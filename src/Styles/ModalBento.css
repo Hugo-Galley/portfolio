@@ -59,6 +59,5 @@
 }
 #TitleBento {
     background: linear-gradient(to right, #8A2BE2, #FFA500);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
