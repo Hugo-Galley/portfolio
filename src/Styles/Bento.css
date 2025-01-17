@@ -138,6 +138,15 @@
 .About-Responsive{
     display: none;
 }
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 20000;
+    background-color: red;
+}
+
 @media (max-width: 1000px) {
     .container-main{
         width: 700px;
