@@ -18,7 +18,7 @@
    
 }
 .container-verticale-long{
-    background-color: #b296eb;
+    background-color: #FF6B6B;
     width: 40%;
     height: 410px;
     border-radius: 20px;
@@ -48,7 +48,7 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);}
 
 .container-verticale-large{
-    background-color: #f4779c;
+    background-color: #4ECDC4;
     width: 59%;
     margin-left: 20px;
     height: 200px;
@@ -66,7 +66,7 @@
     margin-right: 20px;
 }
 .container-verticale-small-1{
-    background-color: #b4d44a;
+    background-color: #FFD93D;
     width: 28%;
     margin-top: -190px;
     padding-left: 10px;
@@ -87,7 +87,7 @@
     margin-top: 30px;
 }
 .container-verticale-small-3{
-    background-color: #ffdf6f;
+    background-color: #6C5CE7;
     width: 28%;
     margin-top: -190px;
     margin-left: 20px;
@@ -98,7 +98,7 @@
     text-align: center;
 }
 .container-verticale-horizontale-large{
-    background-color: #e69362;
+    background-color: #A8E6CF;
     width: 70%;
     border-radius: 20px;
     overflow: hidden;
@@ -126,7 +126,7 @@
 
 }
 .container-verticale-small-2{
-    background-color: #7fb6de;
+    background-color: #FF8B94;
     width: 29%;
     margin-left: 20px;
     border-radius: 20px;

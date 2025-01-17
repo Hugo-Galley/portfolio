@@ -7,6 +7,9 @@ import Card from "./components/Card";
 import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
+import Skills from './components/Skills';
+
+
 import Footer from "./components/Footer";
 import insta from './assets/Card/instagram-2.webp';
 import cart from './assets/Card/Carto.webp';
@@ -112,10 +115,12 @@ function App() {
               <div className="projectPage">
                 <h1 id="AboutMe">About Me</h1>
                 <Bento/>
+                <h1>My Skills</h1>
+                <Skills/>
                 <h1>I worked at</h1>
                 <div className='work-app-container'>
                     <CardWork nom={"Intern Development Engineer"} duré={"17 weeks"} boite={"Uniformation"} img={unif}/>
-                    <CardWork nom={"Career discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
+                    <CardWork nom={"Career and trade discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
                 </div>
                 <h1 id="Projects">My Projects</h1>
                 <div className="grid-project">
