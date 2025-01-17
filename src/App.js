@@ -115,9 +115,9 @@ function App() {
               <div className="projectPage">
                 <h1 id="AboutMe">About Me</h1>
                 <Bento/>
-                <h1>My Skills</h1>
+                <h1 id='MySkills'>My Skills</h1>
                 <Skills/>
-                <h1>I worked at</h1>
+                <h1 id='WorkAt'>I worked at</h1>
                 <div className='work-app-container'>
                     <CardWork nom={"Intern Development Engineer"} duré={"17 weeks"} boite={"Uniformation"} img={unif}/>
                     <CardWork nom={"Career and trade discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
