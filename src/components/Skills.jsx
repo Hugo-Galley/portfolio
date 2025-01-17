@@ -42,8 +42,8 @@ export default function Skills(){
         <div style={{ overflow: "hidden", width: "100%", whiteSpace: "nowrap", textAlign: 'center' }}>
           <Swiper
             spaceBetween={0} 
-            slidesPerView={4} 
             loop={true} 
+            slidesPerView={2}
             speed={5000} 
             autoplay={{
               delay: 0, 
@@ -52,6 +52,14 @@ export default function Skills(){
             freeMode={true} 
             modules={[Autoplay]} 
             className="linear-swiper"
+            breakpoints={{
+              800: {
+                  slidesPerView: 3,
+              },
+              1200: {
+                  slidesPerView: 4,
+              },
+          }}
           >
             {skillsList.map((skill, index) => (
               <SwiperSlide
