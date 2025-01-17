@@ -4,6 +4,7 @@ import ollama from '../assets/Pages/ollama.png'
 import meta from '../assets/Pages/meta.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
+import GithubButton from '../components/GithubButton'
 import React from 'react'
 
 export default function GmailAiSort(){
@@ -34,6 +35,8 @@ export default function GmailAiSort(){
         </div>
                 </div>
                 <p className="projects-desc">This project aims to sort your emails into five main categories using AI. EN made Llama 3 communicate with Gmail, this code allows you to easily organize your emails by label in order to better find them</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer"> <GithubButton/></a>
+               
             </div>
         </div>
         </div>

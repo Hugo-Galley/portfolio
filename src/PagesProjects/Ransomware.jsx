@@ -1,6 +1,7 @@
 import imgtest from '../assets/Card/virus.webp'
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp'
 import NavBar from '../components/NavBar'
+import GithubButton from '../components/GithubButton'
 import '../Styles/PagesProjects.css'
 
 export default function Ransomware(){
@@ -22,7 +23,7 @@ export default function Ransomware(){
         </div>
                 </div>
                 <p className="projects-desc">It is a ransomware aimed at raising awareness about cybersecurity and learning more about data protection</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Ransomware" target="_blank" rel="noreferrer">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Ransomware" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         </div>
