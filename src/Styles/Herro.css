@@ -107,7 +107,7 @@
     text-align: center;
     justify-content: center;
     box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
-    font-weight: 300;
+    font-weight: 700;
   }
   
   #herro-button2 {
@@ -138,8 +138,12 @@
   strong {
     color: #F2C1B6;
   }
-  
-  /* Media Queries */
+
+#ScrollButton{
+    width: 35vw;
+    display: flex;
+    justify-content: right;
+  }
   @media (max-width: 1000px) {
     .navbar-container {
       flex-direction: column;

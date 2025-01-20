@@ -31,7 +31,7 @@ export default function AdminInterface(){
             </div>
         </div>
                 </div>
-                <p className="projects-desc">This is a login interface for a simulated laboratory aimed at testing the use of the CustomTkinter graphical library in Python.</p>
+                <p className="projects-desc">Ceci est une interface de connexion pour un laboratoire simulé visant à tester l'utilisation de la bibliothèque graphique CustomTkinter en Python.</p>
                 <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank" rel="noreferrer">Github</a>
             </div>
         </div>

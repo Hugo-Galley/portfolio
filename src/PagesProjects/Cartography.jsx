@@ -33,7 +33,7 @@ export default function Cartograhy(){
             </div>
         </div>
                 </div>
-                <p className="projects-desc">This is an application designed to map all the company’s servers in order to identify on which server an application is located or not, as well as to allow searching, sorting, and adding search files. For this application I create BDD & Batch & API & WEB APP & Deployement</p>
+                <p className="projects-desc">Ceci est une application conçue pour cartographier tous les serveurs de l'entreprise afin d'identifier sur quel serveur une application est localisée ou non, ainsi que pour permettre la recherche, le tri et l'ajout de fichiers de recherche. Pour cette application, je crée la base de données, les batchs, l'API, l'application web et le déploiement.</p>
             </div>
         </div>
         </div>

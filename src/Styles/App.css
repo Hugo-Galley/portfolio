@@ -106,6 +106,8 @@ a{
     
 }
 
+
+
 @media (max-width: 1000px) {
     .work-app-container{
         flex-direction: column;

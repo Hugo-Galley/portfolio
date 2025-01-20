@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import NavBar from './components/NavBar';
 import NavBar2 from './components/NavBar2';
 import Herro from "./components/Herro";
@@ -8,6 +9,7 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Skills from './components/Skills';
+import ScrollButton from './components/ScrollButton';
 
 
 import Footer from "./components/Footer";
@@ -20,6 +22,7 @@ import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
+import hero from './assets/herroBanner.webp'
 
 import './Styles/App.css';
 
@@ -30,8 +33,8 @@ import AdminInterface from './PagesProjects/AdminInterface';
 import PlatformerGame from './PagesProjects/PlaformerGame';
 import Ransomware from './PagesProjects/Ransomware';
 import GmailAiSort from './PagesProjects/GmailAISort';
-import { useEffect } from 'react';
-import hero from './assets/herroBanner.webp'
+
+
 
 function App() {
   useEffect(() => {
@@ -109,31 +112,33 @@ function App() {
             <NavBar/>
               <div id="Home">
                 <Herro/>
+
               </div>
+              
 
               <AptitudeBar/>
               <div className="projectPage">
-                <h1 id="AboutMe">About Me</h1>
+                <h1 id="AboutMe">A Propos</h1>
                 <Bento/>
-                <h1 id='MySkills'>My Skills</h1>
+                <h1 id='MySkills'>Mes Skills</h1>
                 <Skills/>
-                <h1 id='WorkAt'>I worked at</h1>
+                <h1 id='WorkAt'>Experiences Profesionelles</h1>
                 <div className='work-app-container'>
-                    <CardWork nom={"Intern Development Engineer"} duré={"17 weeks"} boite={"Uniformation"} img={unif}/>
-                    <CardWork nom={"Career and trade discovery intern"} duré={"1 week"} boite={"BUT"} img={but}/>
+                    <CardWork nom={"Stagiaire Ingénieur en Développement"} duré={"17 semaines"} boite={"Uniformation"} img={unif}/>
+                    <CardWork nom={"Stagaire à la decouverte des métiers "} duré={"1 semaine"} boite={"BUT"} img={but}/>
                 </div>
-                <h1 id="Projects">My Projects</h1>
+                <h1 id="Projects">Mes Projects</h1>
                 <div className="grid-project">
                   <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
                   <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} lien={'/instagram-clone'} />
-                  <Card titre={"Sport Application"} categorie={"Mobile Developement"} image={actifit} lien={'/sport-app'} />
-                  <Card titre={"Administration Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
-                  <Card titre={"Platformer Game"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
-                  <Card titre={"Cybersecurity "} categorie={"Python"} image={virus} lien={'/ransomware'} />
+                  <Card titre={"Application de Sport"} categorie={"Mobile Developement"} image={actifit} lien={'/sport-app'} />
+                  <Card titre={"Administration d'interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
+                  <Card titre={"Jeux Platformer"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
+                  <Card titre={"Cybersecuritée "} categorie={"Python"} image={virus} lien={'/ransomware'} />
                   <Card titre={"GmailAiSort "} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort'} />
                 </div>
                 <h1 id="Contact">Contact</h1>
-                <p id="contactText">If you want to contact me or work with me.</p>
+                <p id="contactText">Si vous souhaitez me contacter ou collaborer avec moi.</p>
                 <Contact/>
               </div>
               <Footer/>

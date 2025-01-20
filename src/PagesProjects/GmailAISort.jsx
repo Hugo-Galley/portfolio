@@ -33,7 +33,7 @@ export default function GmailAiSort(){
             </div>
         </div>
                 </div>
-                <p className="projects-desc">This project aims to sort your emails into five main categories using AI. EN made Llama 3 communicate with Gmail, this code allows you to easily organize your emails by label in order to better find them</p>
+                <p className="projects-desc">Ce projet vise à trier vos e-mails en cinq catégories principales à l'aide de l'IA. En utilisant Llama 3, il permet de communiquer avec Gmail. Ce code vous permet d'organiser facilement vos e-mails par étiquette afin de les retrouver plus facilement.</p>
             </div>
         </div>
         </div>
