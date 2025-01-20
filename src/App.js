@@ -127,7 +127,7 @@ function App() {
                     <CardWork nom={"Stagiaire Ingénieur en Développement"} duré={"17 semaines"} boite={"Uniformation"} img={unif}/>
                     <CardWork nom={"Stagaire à la decouverte des métiers "} duré={"1 semaine"} boite={"BUT"} img={but}/>
                 </div>
-                <h1 id="Projects">Mes Projects</h1>
+                <h1 id="Projects">Mes Projets</h1>
                 <div className="grid-project">
                   <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
                   <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} lien={'/instagram-clone'} />
