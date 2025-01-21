@@ -54,7 +54,7 @@ a{
     flex-direction: row;
     justify-content: center;
 }
-.cursor {
+/* .cursor {
     width: 40px;
     height: 40px;
     border: 1px dashed white;
@@ -108,7 +108,7 @@ a{
         opacity: 0;
     }
     
-}
+} */
 
 
 
