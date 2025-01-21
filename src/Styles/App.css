@@ -10,7 +10,7 @@ html, body {
     color: aliceblue;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    cursor: none;
+    cursor: default;
     position: relative;
     min-height: 100vh;
 }
@@ -60,11 +60,12 @@ a{
     border: 1px dashed white;
     border-radius: 50%;
     position: absolute;
-    z-index: 100000;
+    z-index: 200000;
     pointer-events: none;
     animation: Anime1 1.5s infinite alternate;
     mix-blend-mode: difference;
     will-change: transform;
+    display: none;
   }
 .cursor::before{
     content: '';
@@ -76,12 +77,14 @@ a{
     height: 5px;
     background: #F2C1B6;
     border-radius: 50%;
+    display: none;
 }
 .expand{
     position: absolute;
     animation: Anime2 .5s;
     background: #F2C1B6;
     border: 1px solid #F2C1B6;
+    display: none;
 }
 
 @keyframes Anime1 {
