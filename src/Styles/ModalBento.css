@@ -63,10 +63,10 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-@media (max-width: 1000px){
+@media (max-width: 1200px){
     .headModal{
         width: 35vw;
         font-size: 0.5em;
         margin-left: 20px;
     }
-}
+} 
