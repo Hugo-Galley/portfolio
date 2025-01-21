@@ -35,3 +35,20 @@ height: 200px;
 .footer-left h1{
     margin-bottom: 20px;
 }
+@media (max-width: 7000px){
+    .footer-main{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-left{
+        
+        margin: auto;
+    }
+    .footer-right{
+        margin: auto;
+    }
+    .div-media img{
+        width: 12%;
+        margin-right: 10px;
+    }
+}
