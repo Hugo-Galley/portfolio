@@ -54,18 +54,17 @@ a{
     flex-direction: row;
     justify-content: center;
 }
-/* .cursor {
+.cursor {
     width: 40px;
     height: 40px;
     border: 1px dashed white;
     border-radius: 50%;
-    position: absolute;
+    position: fixed;
     z-index: 200000;
     pointer-events: none;
     animation: Anime1 1.5s infinite alternate;
     mix-blend-mode: difference;
     will-change: transform;
-    display: none;
   }
 .cursor::before{
     content: '';
@@ -77,14 +76,12 @@ a{
     height: 5px;
     background: #F2C1B6;
     border-radius: 50%;
-    display: none;
 }
 .expand{
-    position: absolute;
+    position: fixed;
     animation: Anime2 .5s;
     background: #F2C1B6;
     border: 1px solid #F2C1B6;
-    display: none;
 }
 
 @keyframes Anime1 {
@@ -108,7 +105,7 @@ a{
         opacity: 0;
     }
     
-} */
+}
 
 
 

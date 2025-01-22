@@ -9,7 +9,6 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Skills from './components/Skills';
-import ScrollButton from './components/ScrollButton';
 
 
 import Footer from "./components/Footer";
@@ -44,62 +43,53 @@ function App() {
   useEffect(() => {
     // Gestion de l'activation des éléments du navbar
     document.querySelectorAll('.navbar2-items').forEach(item => {
-      item.addEventListener('click', () => {
-        document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
-        item.classList.add('active');
-      });
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
+            item.classList.add('active');
+        });
     });
-  
-    // Initialisation pour suivre l'état du curseur sur la page
 
-  
-    const handleMouseEnter = () => {
-      console.log('Le curseur est sur la page.');
-      const cursorElements = document.querySelectorAll('.cursor');
-      cursorElements.forEach(el => el.style.display = 'flex');
-    };
-  
-    const handleMouseLeave = () => {
-      console.log('Le curseur a quitté la page.');
-      const cursorElements = document.querySelectorAll('.cursor');
-      cursorElements.forEach(el => el.style.display = 'none');
-    };
-  
-    // Ajout des événements de détection d'entrée et de sortie
-    document.addEventListener('mouseenter', handleMouseEnter);
-    document.addEventListener('mouseleave', handleMouseLeave);
-  
-    // Gestion du curseur personnalisé
     const cursor = document.querySelector('.cursor');
+
     if (cursor) {
-      const handleMouseMove = (e) => {
-        cursor.style.top = `${e.pageY - 20}px`;
-        cursor.style.left = `${e.pageX - 20}px`;
-      };
-  
-      const handleClick = () => {
-        cursor.classList.add('expand');
-        setTimeout(() => {
-          if (cursor) {
-            cursor.classList.remove('expand');
-          }
-        }, 500);
-      };
-  
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('click', handleClick);
-  
-      // Cleanup
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('click', handleClick);
-        document.removeEventListener('mouseenter', handleMouseEnter);
-        document.removeEventListener('mouseleave', handleMouseLeave);
-      };
+        // Fonction pour déplacer le curseur
+        const handleMouseMove = (e) => {
+            cursor.style.top = `${e.clientY -20}px`;
+            cursor.style.left = `${e.clientX -20}px`;
+        };
+
+        // Fonction pour gérer le clic (animation d'expansion)
+        const handleClick = () => {
+            cursor.classList.add('expand');
+            setTimeout(() => {
+                cursor.classList.remove('expand');
+            }, 500);
+        };
+
+       
+        const handleMouseEnter = () => {
+            cursor.style.display = 'flex';
+        };
+
+        const handleMouseLeave = () => {
+            cursor.style.display = 'none';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('click', handleClick);
+        document.addEventListener('mouseenter', handleMouseEnter);
+        document.addEventListener('mouseleave', handleMouseLeave);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('click', handleClick);
+            document.removeEventListener('mouseenter', handleMouseEnter);
+            document.removeEventListener('mouseleave', handleMouseLeave);
+        };
     } else {
-      console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
+        console.error("L'élément avec la classe '.cursor' n'a pas été trouvé.");
     }
-  }, []);
+}, []);
 
   return (
     <Router>
