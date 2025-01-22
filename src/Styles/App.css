@@ -10,7 +10,7 @@ html, body {
     color: aliceblue;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    cursor: default;
+    cursor: none;
     position: relative;
     min-height: 100vh;
 }
