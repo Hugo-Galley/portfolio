@@ -5,6 +5,7 @@ import meta from '../assets/Pages/meta.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
 import React from 'react'
+import GithubButton from '../components/GithubButton'
 
 export default function GmailAiSort(){
     return(
@@ -34,6 +35,7 @@ export default function GmailAiSort(){
         </div>
                 </div>
                 <p className="projects-desc">Ce projet vise à trier vos e-mails en cinq catégories principales à l'aide de l'IA. En utilisant Llama 3, il permet de communiquer avec Gmail. Ce code vous permet d'organiser facilement vos e-mails par étiquette afin de les retrouver plus facilement.</p>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         </div>

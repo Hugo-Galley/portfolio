@@ -4,6 +4,7 @@ import js from '../assets/Pages/JavaScript-logo.webp'
 import NavBar from '../components/NavBar'
 import expo from '../assets/Pages/expo-1.webp'
 import '../Styles/PagesProjects.css'
+import GithubButton from '../components/GithubButton'
 
 export default function SportApplication(){
     return(
@@ -32,7 +33,7 @@ export default function SportApplication(){
         </div>
                 </div>
                 <p className="projects-desc">Il s'agit d'une application sportive conçue pour vous proposer des séances d'entraînement personnalisées ainsi que des options d'exercices, tout en affichant votre progression. J'ai également utilisé React Native pour garantir sa compatibilité avec tous les types d'appareils.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank" rel="noreferrer">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/ActiFit" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         </div>

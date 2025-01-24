@@ -74,6 +74,34 @@
     color: aliceblue;
     margin-top: 30px;
 }
+@media (max-width: 1600px){
+    .Pages-top{
+        margin: auto;
+        padding: auto;
+        height: 200px;      
+    }
+     .pages-techo img {
+        width: 80px;
+        height: auto;
+        margin-bottom: 5px;
+    }
+    .Pages #Slide{
+        width: 600px;
+        height: 300px;
+    } 
+    .pages-info{
+        margin-top: -30px;
+
+    }
+    #GithubLink{
+        margin-top: 20px;
+        float: right;
+        display: flex;
+        justify-content: end;
+        margin-right: 100px;
+    }
+
+}
 @media (max-width: 1200px) {
 
     .Pages-top{

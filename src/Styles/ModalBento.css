@@ -64,6 +64,17 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+@media (max-width: 1600px){
+    .headModal{
+        width: 35vw;
+        font-size: 0.5em;
+        margin-left: 20px;
+    }
+    .ModalBox p{
+        margin-top: 20px;
+        
+    }
+}
 @media (max-width: 1000px){
     .headModal{
         width: 35vw;

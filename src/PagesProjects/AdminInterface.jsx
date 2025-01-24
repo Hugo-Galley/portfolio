@@ -4,6 +4,7 @@ import ctk from '../assets/Pages/customctk.webp'
 import NavBar from '../components/NavBar'
 import sqlite from '../assets/Pages/sqlite.webp'
 import '../Styles/PagesProjects.css'
+import GithubButton from '../components/GithubButton'
 
 export default function AdminInterface(){
     return(
@@ -32,7 +33,7 @@ export default function AdminInterface(){
         </div>
                 </div>
                 <p className="projects-desc">Ceci est une interface de connexion pour un laboratoire simulé visant à tester l'utilisation de la bibliothèque graphique CustomTkinter en Python.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank" rel="noreferrer">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Portail_App" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         </div>

@@ -3,6 +3,7 @@ import rea from '../assets/Pages/react.webp'
 import js from '../assets/Pages/JavaScript-logo.webp'
 import NavBar from '../components/NavBar'
 import '../Styles/PagesProjects.css'
+import GithubButton from '../components/GithubButton'
 
 export default function InstaGramClone(){
     return(
@@ -28,7 +29,7 @@ export default function InstaGramClone(){
         </div>
                 </div>
                 <p className="projects-desc">Il s'agit d'un site web développé en React, visant à reproduire Instagram. Le site se concentre sur le front-end et m'a permis d'apprendre les bases de React.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim" target="_blank" rel="noreferrer">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Instagrim" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         

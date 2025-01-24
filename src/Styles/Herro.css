@@ -145,7 +145,18 @@
     display: flex;
     justify-content: right;
   }
-  @media (max-width: 1000px) {
+
+  @media (max-width: 1700px ){
+    .herro {
+      margin-top: 50px;
+      justify-content: center;
+    }
+    #ScrollButton{
+      display: none;
+    }
+
+  }
+  @media (max-width: 1000px ) {
     .navbar-container {
       flex-direction: column;
       padding: 1rem;

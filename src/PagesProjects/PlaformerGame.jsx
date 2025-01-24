@@ -3,6 +3,7 @@ import pyth from '../assets/Pages/Python-logo-notext.svg.webp'
 import NavBar from '../components/NavBar'
 import pygame from '../assets/Pages/Pygame_logo.svg.webp'
 import '../Styles/PagesProjects.css'
+import GithubButton from '../components/GithubButton'
 
 export default function PlatformerGame(){
     return(
@@ -27,7 +28,7 @@ export default function PlatformerGame(){
         </div>
                 </div>
                 <p className="projects-desc">C'est un jeu de plateforme imitant Mario, réalisé en Python avec Pygame. Un petit easter egg y est caché.</p>
-                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank" rel="noreferrer">Github</a>
+                <a id='GithubLink' href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank" rel="noreferrer"><GithubButton/></a>
             </div>
         </div>
         </div>
