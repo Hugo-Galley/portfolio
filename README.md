@@ -3,7 +3,7 @@
 Ce projet est un portfolio personnel développé en React. Il présente mes compétences, projets et expériences. Le design est moderne, réactif, et pensé pour offrir une navigation fluide.
 ## Lien 
 
-[galleyhugo.com]('https://galleyhugo.com')
+[galleyhugo.com](https://galleyhugo.com)
 ## Fonctionnalités
 
 - Présentation des compétences, projets, et expériences professionnelles.
