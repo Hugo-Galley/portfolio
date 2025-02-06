@@ -165,16 +165,148 @@
     
     .About-Responsive img {
         margin-top: 100px;
+        background-color: #121212d2;
         width: 250px;
-        -webkit-box-shadow: -33px -33px 15px 10px rgba(242,193,182,0.84); 
-        box-shadow: -22px -22px 35px 5px rgba(242,193,182,0.84);
         border-radius: 10px;
     }
-    .textABouteMe{
-        margin-bottom: 50px;
-        text-align: left;
-        margin-top: 50px;
-        padding-left: 30px;
+    .About-text{
+        display: flex;
+        margin-top: 5vh;
+        flex-direction: column;
     }
+    .About-WhoAmi,.About-Passions,.About-Objectifs{
+        background-color: #141415;
+        width: 90vw;
+        display: flex;
+        margin-bottom: 40px;
+        flex-direction: column;
+        padding: 4vw;
+        border-radius: 20px;
+        box-shadow: rgba(255, 255, 255, 0.24) 0px 1px 8px;
+    }
+    .About-WhoAmi > p,.About-Passions > p,.About-Objectifs > p{
+        font-weight: 200;
+        color: #999999d2;
+    }
+    .About-Responsive {
+        display: flex;
+        min-height: 100vh;
+        color: white;
+        padding: 4rem 2rem;
+        gap: 4rem;
 
+        
+      }
+      
+      .About-Responsive img {
+        max-width: 600px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        transition: transform 0.5s ease;
+        position: relative;
+      }
+      
+      
+     
+      .About-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        align-items: center;
+      }
+      
+    
+      .About-WhoAmi, .About-Passions, .About-Objectifs {
+        padding: 2rem;
+        background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+        border: 1px solid #333;
+        border-radius: 12px;
+        transition: transform 0.3s ease;
+      }
+      
+      
+      .About-text h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        position: relative;
+        display: inline-block;
+      }
+      
+      .About-text p {
+        color: #aaa;
+        line-height: 1.6;
+        font-size: 1.1rem;
+      }
+      
+      .About-Passions > div {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      
+      .About-Passions > div > div {
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      
+      .About-Passions > div > div:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      
+      .About-Passions h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: #fff;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .About-WhoAmi, .About-Passions, .About-Objectifs {
+        animation: fadeIn 0.6s ease forwards;
+        opacity: 0;
+      }
+      
+      .About-WhoAmi { animation-delay: 0.1s; }
+      .About-Passions { animation-delay: 0.3s; }
+      .About-Objectifs { animation-delay: 0.5s; }
+      
+      /* Media Queries */
+      @media (max-width: 1024px) {
+        .About-Responsive {
+          flex-direction: column;
+          align-items: center;
+          padding: 2rem 1rem;
+          gap: 2rem;
+        }
+      
+        .About-Responsive img {
+          max-width: 300px;
+        }
+      
+        .About-text {
+          width: 100%;
+          gap: 2rem;
+        }
+      
+        .About-Passions > div {
+          grid-template-columns: 1fr;
+        }
+      }
+      
 }

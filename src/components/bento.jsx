@@ -52,7 +52,37 @@ export default function Bento(){
 
             <div className='About-Responsive'>
                 <img src={me} alt="Me" />
-                <p className='textABouteMe'>Je suis un jeune développeur passionné étudiant à l'EPSI, basé à Paris. Mes passions incluent le sport, les voyages, la musique et bien d'autres choses.</p>
+                <div className='About-text'>
+                    <div className='About-WhoAmi'>
+                        <h2>Qui suis-je ?</h2>
+                        <p>Je suis un jeune développeur passionné étudiant à l'EPSI, basé à Paris.</p>
+                    </div>
+                    <div className='About-Passions'>
+                        <h2>Mes Passions</h2>
+                        <div>
+                            <div>
+                                <h4>Sport</h4>
+                                <p>Je pratique la course à pied et j'ai réalisé plusieurs triathlons, ce qui me passionne vraiment.</p>
+                            </div>
+                            <div>
+                                <h4>Voyages</h4>
+                                <p>J'aime les voyages, car j'adore bouger et découvrir le monde.</p>
+                            </div>
+                            <div>
+                                <h4>Musiques</h4>
+                                <p>J'ai joué du violon pendant plus de 13 ans, ce qui a développé mon goût pour la musique.</p>
+                            </div>
+                            <div>
+                                <h4>Technologies</h4>
+                                <p>J'ai toujours été attiré par les nouvelles technologie, telle que la blockchain, l'IA, ou le developement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='About-Objectifs'>
+                        <h2>Objectifs</h2>
+                        <p>J'aime le veeaux</p>
+                    </div>
+                </div>
             </div>
         <div className="container-main">
             <div className="container-horizontale">
