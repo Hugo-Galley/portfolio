@@ -6,13 +6,58 @@
     font-family: "Faculty Glyphic";
 }
 html, body {
-    background: #121212;
+    background-color: #0a0a0a;
+    position: relative;
     color: aliceblue;
     scroll-behavior: smooth;
     overflow-x: hidden;
     cursor: none;
-    position: relative;
     min-height: 100vh;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 65px 65px;
+    background-position: center;
+    -webkit-mask-image: radial-gradient(circle at center, 
+        black 0%,
+        black 50%,
+        transparent 10%
+    );
+    mask-image: radial-gradient(circle at center, 
+        black 0%,
+        black 70%,
+        transparent 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+.glow {
+    position: absolute;
+    width: 200px;
+    height: 1000px;
+    background: radial-gradient(ellipse, 
+        rgba(255, 255, 255, 0.3) 40%,
+        rgba(255, 255, 255, 0.1) 80%,
+        transparent 60%
+    );
+    border-radius: 35%;
+    filter: blur(50px);
+    pointer-events: none;
+    top: -300px;
+    left: 400px;
+    transform: rotate(-50deg);
+    z-index: 200;
 }
 
 a{

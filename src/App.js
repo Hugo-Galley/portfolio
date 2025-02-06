@@ -101,6 +101,7 @@ function App() {
             <>
             <NavBar/>
               <div id="Home">
+              <div className='glow'></div>
                 <Herro/>
 
               </div>
