@@ -105,8 +105,7 @@
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-
-  height: 20vh;
+  height: 22vh;
 }
 
 .gradient-text {
@@ -121,6 +120,7 @@
   font-size: clamp(1.25rem, 4vw, 1.5rem);
   color: #9ca3af;
   margin-bottom: 3rem;
+  margin-top: 2vh;
 }
 
 .button-div {
@@ -247,6 +247,8 @@ strong {
 
   .hero-subtitle {
     font-size: clamp(0.875rem, 2.5vw, 1rem);
+    max-width: 80vw;
+    margin-top: 3vh;
   }
 
   .button-div {
@@ -256,7 +258,7 @@ strong {
 
   #herro-button1,
   #herro-button2 {
-    width: 40vw;
+    width: 45vw;
     text-align: center;
   }
 
