@@ -1,230 +1,264 @@
-/* Styles de la Navbar */
 .navbar {
   background: #121212be;
-  /* background: transparent; */
-    color: aliceblue;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 80px;
-    z-index: 100;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 2rem;
-  }
-  
-  .navbar-logo-link {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-logo {
-    width: auto;
-    height: 50px;
-  }
-  
-  .navbar-right {
-    display: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+  background: transparent;
+  color: aliceblue;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  z-index: 100;
+}
 
-  .navbar-item {
-    margin: 0 1rem;
-  }
-  
-  .navbar-item a {
-    color: aliceblue;
-    text-decoration: none;
-    font-size: 1.3em;
-  }
-  
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+}
 
-  .herroBanner {
+.navbar-logo-link {
+  display: flex;
+  align-items: center;
+}
 
-    color: aliceblue;
-    height: 100%;
-  }
-  
+.navbar-logo {
+  width: auto;
+  height: 50px;
+}
+
+.navbar-right {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  margin: 0 1rem;
+}
+
+.navbar-item a {
+  color: aliceblue;
+  text-decoration: none;
+  font-size: 1.3em;
+}
+
+.herroBanner {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.herroBanner::before,
+.herroBanner::after {
+  content: '';
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 1;
+}
+
+.herroBanner::before {
+  background: rgba(168, 85, 247, 0.3);
+  top: -4rem;
+  left: -12rem;
+}
+
+.herroBanner::after {
+  background: rgba(236, 72, 153, 0.3);
+  bottom: -4rem;
+  right: -12rem;
+}
+
+.herro {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.herro-description {
+  max-width: 800px;
+
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #a855f7, #ec4899, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-left: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  color: #9ca3af;
+  margin-bottom: 3rem;
+}
+
+.button-div {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+#herro-button1,
+#herro-button2 {
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#herro-button1 {
+  background: linear-gradient(to right, #a855f7, #ec4899);
+  color: white;
+}
+
+#herro-button1:hover {
+  opacity: 0.9;
+}
+
+#herro-button2 {
+  background: transparent;
+  color: white;
+  border: 2px solid #a855f7;
+}
+
+#herro-button2:hover {
+  background-color: rgba(168, 85, 247, 0.1);
+}
+
+#DownloadButton {
+  display: inline-block;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+#ScrollButton {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#DownloadButton {
+  margin-top: 20px;
+}
+
+strong {
+  color: #F2C1B6;
+}
+
+#ScrollButton {
+  width: 10vw;
+  display: flex;
+  justify-content: right;
+}
+
+@media (max-width: 768px) {
   .herro {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 100vh;
+    text-align: center;
   }
-  
-  .herro-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 100px;
-    width: 600px;
-    margin-top: -150px;
-  }
-  
-  #hello {
-    color: #F2C1B6;
-    font-size: 1.5em;
-  }
-  
-  #herro-name {
-    font-size: 4em;
-  }
-  
-  #herro-logo {
-    width: 680px;
-    height: 450px;
-    margin: 40px;
-  }
-  
-  #herro-desc {
-    margin-top: 20px;
-  }
-  
+
   .button-div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 220px;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  #herro-button1 {
-    display: flex;
-    color: #1e1f24;
-    align-items: center;
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    background: #F2C1B6;
-    text-align: center;
-    justify-content: center;
-    box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
-    font-weight: 700;
-  }
-  
+
+  #herro-button1,
   #herro-button2 {
-    display: flex;
-    font-size: 0.9em;
-    color: aliceblue;
-    align-items: center;
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    border-width: 2px;
-    border-color: #F2C1B6;
-    border-style: solid;
+    display: block;
     text-align: center;
-    justify-content: center;
-    background-color: transparent;
-    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, 
-                rgba(255, 255, 255, 0.12) 0px -12px 30px, 
-                rgba(255, 255, 255, 0.12) 0px 4px 6px, 
-                rgba(255, 255, 255, 0.17) 0px 12px 13px, 
-                rgba(255, 255, 255, 0.09) 0px -3px 5px;
-    font-weight: -0;
   }
 
-#DownloadButton{
-    margin-top: 20px;
+  #ScrollButton {
+    display: none;
   }
-  
-  strong {
-    color: #F2C1B6;
+}
+
+@keyframes blobMovement {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(50px, 50px); }
+  100% { transform: translate(0, 0); }
+}
+
+.herroBanner::before {
+  animation: blobMovement 10s ease-in-out infinite;
+}
+
+.herroBanner::after {
+  animation: blobMovement 10s ease-in-out infinite reverse;
+}
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: clamp(3rem, 6vw, 3.5rem);
   }
 
-#ScrollButton{
-    width:10vw;
-    display: flex;
-    justify-content: right;
+  .hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.25rem);
   }
 
-  @media (max-width: 1700px ){
-    .herro {
-      margin-top: 50px;
-      justify-content: center;
-    }
-
+  .button-div {
+    flex-direction: row;
+    align-items: center;
   }
-  @media (max-width: 1000px ) {
-    .navbar-container {
-      flex-direction: column;
-      padding: 1rem;
-    }
-    .navbar-right2{
-      display: none;
-    }
-    
-    .navbar {
-      height: auto;
-      position: fixed;
-      background-color: #121212;
 
-    }
-    
-    .navbar-logo {
-      height: 40px;
-      margin-bottom: 1rem;
-    }
-    
-    .navbar-right {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    
-    .navbar-item {
-      margin: 0.5rem;
-    }
-  
-    .herro {
-      margin-top: 200px;
-      flex-direction: column;
-      justify-content: center;
-    }
-  
-    .herro-description {
-      font-size: 0.60em;
-      align-items: center;
-      padding: 50px;
-      margin-right: 100px;
-    }
-  
-    #hello {
-      font-size: 2em;
-    }
-    #herro-name{
-      font-size: 4em;
-    }
-  
-    #herro-desc {
-      font-size: 1.5em;
-    }
-    #herro-logo{
-      margin-top: 30px;
-      margin-left: 80px;
-    }
-    #ScrollButton{
-      display: none;
-    }
+  #herro-button1,
+  #herro-button2 {
+    width: 100%;
+    text-align: center;
   }
-  @media (max-width: 700px){
-    .herro{
+}
 
-      margin-top: 22vh;
-    }
-    .navbar{
-
-      height: 13vh;
-      overflow: hidden;
-      font-size: 0.9em;
-
-    }
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 2.5rem);
   }
+
+  .hero-subtitle {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+
+  .button-div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #herro-button1,
+  #herro-button2 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .gradient-text {
+    margin-left: 0;
+  }
+}
