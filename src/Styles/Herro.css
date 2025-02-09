@@ -105,6 +105,8 @@
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
+
+  height: 20vh;
 }
 
 .gradient-text {
