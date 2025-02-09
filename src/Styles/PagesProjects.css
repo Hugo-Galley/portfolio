@@ -104,20 +104,20 @@
     display: inline-block;
     margin-top: auto;
 }
-
-/* Responsive Design */
 @media (max-width: 968px) {
     .project-card {
         flex-direction: column;
+
     }
 
     .project-image,
     .project-info {
         width: 100%;
+        
     }
 
     .project-image {
-        border-radius: 20px 20px 0 0;
+        border-radius: 20px;
         max-height: 400px;
     }
 
