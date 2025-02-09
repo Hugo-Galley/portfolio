@@ -1,134 +1,153 @@
-.Pages{
-
-    margin-top: 100px;
-    padding-left: 30px;
-    text-align: center;
-    overflow-y: none;
+.project-container {
+    min-height: 100vh;
+    padding: 2rem;
 
 }
+.project-container::before,
+.project-container::after {
+  content: '';
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 1;
+}
 
-.Pages-top{
-    text-align: left;
+.project-container::before {
+  background: rgba(168, 85, 247, 0.3);
+  top: -4rem;
+  left: -12rem;
+}
+
+.project-container::after {
+  background: rgba(236, 72, 153, 0.3);
+  bottom: -4rem;
+  right: -12rem;
+}
+
+.project-card {
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: transparent;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     display: flex;
     flex-direction: row;
-    padding-top: 20px;
-
-
+    transition: transform 0.3s ease;
+    margin-top: 20vh;
 }
-.pages-info{
-    padding-left: 30px;
+
+
+
+.project-image {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 20px 0 0 20px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.project-info {
+    width: 50%;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
-.Pages img{
-    width: 60%;
-    border-radius: 10px;
+
+.project-title {
+    font-size: 2.5rem;
+    color: #fffafa;
+    margin-bottom: 1.5rem;
 }
-.Pages #Slide{
-    width: 750px;
+
+.project-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 2rem;
 }
-.pages-info-prc{
-    text-shadow: 3px 1px 10px rgba(255, 255, 255, 0.2);
-}
-.projects-nom{
-    margin-bottom:20px ;
-    font-size: 2em;
-    font-weight: 1000;
-}
-.projects-techno{
-    font-size: 0.9em;
-    font-weight: 400;
-}
-.projects-desc{
-    text-shadow: 3px 1px 10px rgba(255, 255, 255, 0.2);
-    width: 90%;
-    margin-top: 50px;
-}
-.pages-techo {
+
+.tech-stack {
     display: flex;
-    justify-content: left;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.tech-item {
+    display: flex;
     align-items: center;
-    margin-top: 10px;
-    padding-top: 50px;
+    gap: 0.5rem;
+    background: #787a7c98;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    color: whitesmoke;
 }
 
-.pages-techo div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 15px;
+
+
+.tech-item img {
+    width: 24px;
+    height: 24px;
 }
 
-.pages-techo img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 5px;
+.tech-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: whitesmoke;
 }
-.Pages h1{
-    margin-top: 20px;
-    font-size: 4em;
-}
-#GithubLink{
-    display: flex;
-    color: aliceblue;
-    margin-top: 30px;
-}
-@media (max-width: 1600px){
-    .Pages-top{
-        margin: auto;
-        padding: auto;
-        height: 200px;      
-    }
-     .pages-techo img {
-        width: 80px;
-        height: auto;
-        margin-bottom: 5px;
-    }
-    .Pages #Slide{
-        width: 600px;
-        height: 300px;
-    } 
-    .pages-info{
-        margin-top: -30px;
 
-    }
-    #GithubLink{
-        margin-top: 20px;
-        float: right;
-        display: flex;
-        justify-content: end;
-        margin-right: 100px;
-    }
-
+.github-link {
+    display: inline-block;
+    margin-top: auto;
 }
-@media (max-width: 1200px) {
 
-    .Pages-top{
-        margin: auto;
-        padding: auto;
+/* Responsive Design */
+@media (max-width: 968px) {
+    .project-card {
         flex-direction: column;
-        align-items: center;
-        
-    }
-    .pages-info{
-        padding: 0;
-        margin: 0;
-        align-items: center;
-        margin-top: 20px;
-        margin-bottom: 20px;
-
     }
 
-    .projects-nom{
-        margin: auto;
-        margin-top: 20px;
-    }
-    #GithubLink{
-        margin-top: 20px;
-    }
-    .Pages #Slide{
-        width: 400px;
+    .project-image,
+    .project-info {
+        width: 100%;
     }
 
+    .project-image {
+        border-radius: 20px 20px 0 0;
+        max-height: 400px;
+    }
+
+    .project-info {
+        padding: 2rem;
+    }
+
+    .project-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-container {
+        padding: 1rem;
+    }
+
+    .project-card {
+        margin: 1rem auto;
+    }
+
+    .project-info {
+        padding: 1.5rem;
+    }
+
+    .project-title {
+        font-size: 1.75rem;
+    }
+
+    .tech-stack {
+        gap: 1rem;
+    }
 }

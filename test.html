@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Grid background */
+        .grid-background {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+        }
+
+        .grid-background div {
+            border: 1px solid #444;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a855f7;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 96px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Background blobs */
+        .blob-1, .blob-2 {
+            position: absolute;
+            width: 24rem;
+            height: 24rem;
+            border-radius: 50%;
+            filter: blur(100px);
+        }
+
+        .blob-1 {
+            background: rgba(168, 85, 247, 0.3);
+            top: -4rem;
+            left: -12rem;
+        }
+
+        .blob-2 {
+            background: rgba(236, 72, 153, 0.3);
+            bottom: -4rem;
+            right: -12rem;
+        }
+
+        /* Hero content */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #a855f7, #ec4899, #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
+            color: #9ca3af;
+            max-width: 36rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Buttons */
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .primary-button {
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .primary-button:hover {
+            opacity: 0.9;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            border: 2px solid #a855f7;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(168, 85, 247, 0.1);
+        }
+
+        .cv-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cv-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cv-button:hover svg {
+            transform: translateX(4px);
+        }
+
+        .cv-button svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .buttons-container button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid Background -->
+    <div class="grid-background">
+        <!-- Les divs seront générées en JS -->
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">HG</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">A Propos</a>
+                <a href="#">Projets</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        
+        <h1 class="hero-title">
+            Hello,<br>
+            <span class="gradient-text">Je suis Hugo Galley</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            Je suis un jeune développeur actuellement en études
+        </p>
+
+        <div class="buttons-container">
+            <button class="primary-button">A Propos</button>
+            <button class="secondary-button">Mon Travail</button>
+        </div>
+
+        <button class="cv-button">
+            Mon CV
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </button>
+    </section>
+
+    <script>
+        // Générer la grille en arrière-plan
+        const gridBackground = document.querySelector('.grid-background');
+        for (let i = 0; i < 144; i++) {
+            const div = document.createElement('div');
+            gridBackground.appendChild(div);
+        }
+    </script>
+</body>
+</html>
