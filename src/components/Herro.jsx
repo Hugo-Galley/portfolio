@@ -6,12 +6,12 @@ export default function Herro() {
     <div className='herroBanner'>
       <div className='herro'>
       <div className='herro-description'>
-      <h1 class="hero-title">
+      <h1 className="hero-title">
             Hello,<br/>
-            <span class="gradient-text">Je suis Hugo Galley</span>
+            <span className="gradient-text">Je suis Hugo Galley</span>
         </h1>
         
-        <p class="hero-subtitle">
+        <p className="hero-subtitle">
             Je suis un jeune développeur actuellement en études
         </p>
 

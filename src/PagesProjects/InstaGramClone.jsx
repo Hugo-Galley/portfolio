@@ -1,14 +1,12 @@
 import imgtest from '../assets/Pages/InstaPreview.webp';
 import rea from '../assets/Pages/react.webp';
 import js from '../assets/Pages/JavaScript-logo.webp';
-import NavBar from '../components/NavBar';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 
 export default function InstaGramClone() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>

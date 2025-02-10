@@ -1,6 +1,5 @@
 import imgtest from '../assets/Card/mario.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
-import NavBar from '../components/NavBar';
 import pygame from '../assets/Pages/Pygame_logo.svg.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
@@ -8,7 +7,6 @@ import '../Styles/PagesProjects.css';
 export default function PlatformerGame() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>

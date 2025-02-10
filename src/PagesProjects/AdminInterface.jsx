@@ -2,14 +2,12 @@ import imgtest from '../assets/Card/ctk2.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import ctk from '../assets/Pages/customctk.webp';
 import sqlite from '../assets/Pages/sqlite.webp';
-import NavBar from '../components/NavBar';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 
 export default function AdminInterface() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
                 <div className='project-info'>

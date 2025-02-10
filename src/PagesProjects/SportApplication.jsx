@@ -2,14 +2,12 @@ import imgtest from '../assets/Card/actifit.webp';
 import rea from '../assets/Pages/react.webp';
 import js from '../assets/Pages/JavaScript-logo.webp';
 import expo from '../assets/Pages/expo-1.webp';
-import NavBar from '../components/NavBar';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 
 export default function SportApplication() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>

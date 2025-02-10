@@ -2,7 +2,6 @@ import imgtest from '../assets/Card/Carto.webp';
 import cs from '../assets/Bento/cs.webp';
 import net from '../assets/Pages/NET_Core_Logo.svg.webp';
 import blazor from '../assets/Pages/Blazor.webp';
-import NavBar from '../components/NavBar';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import React from 'react';
@@ -10,7 +9,6 @@ import React from 'react';
 export default function Cartography() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>

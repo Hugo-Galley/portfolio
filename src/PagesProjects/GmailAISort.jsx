@@ -2,7 +2,6 @@ import imgtest from '../assets/Card/gmailAi.webp';
 import python from '../assets/Pages/Python-logo-notext.svg.webp';
 import ollama from '../assets/Pages/ollama.png';
 import meta from '../assets/Pages/meta.webp';
-import NavBar from '../components/NavBar';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import React from 'react';
@@ -10,7 +9,6 @@ import React from 'react';
 export default function GmailAiSort() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>

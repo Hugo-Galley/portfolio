@@ -1,13 +1,11 @@
 import imgtest from '../assets/Card/virus.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import GithubButton from '../components/GithubButton';
-import NavBar from '../components/NavBar';
 import '../Styles/PagesProjects.css';
 
 export default function Ransomware() {
     return (
         <div className='project-container'>
-            <NavBar />
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>
