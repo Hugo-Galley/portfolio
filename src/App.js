@@ -21,6 +21,7 @@ import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
 import hero from './assets/herroBanner.webp'
+import Sync from './assets/Pages/SyncCard.png'
 
 import './Styles/App.css';
 
@@ -31,6 +32,7 @@ import AdminInterface from './PagesProjects/AdminInterface';
 import PlatformerGame from './PagesProjects/PlaformerGame';
 import Ransomware from './PagesProjects/Ransomware';
 import GmailAiSort from './PagesProjects/GmailAISort';
+import SyncCRD2CRM from './PagesProjects/SyncCRD2CRM';
 
 
 
@@ -118,13 +120,14 @@ function App() {
                 </div>
                 <h1 id="Projects">Mes Projets</h1>
                 <div className="grid-project">
-                  <Card titre={"Cartography"} categorie={"Web App"} image={cart} lien={'/cartography'}/>
-                  <Card titre={"Instagram clone"} categorie={"Web Developement"} image={insta} lien={'/instagram-clone'} />
-                  <Card titre={"Application de Sport"} categorie={"Mobile Developement"} image={actifit} lien={'/sport-app'} />
+                  <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography'}/>
+                  <Card titre={"Instagram clone"} categorie={"React"} image={insta} lien={'/instagram-clone'} />
+                  <Card titre={"Application de Sport"} categorie={"Expo | React Native"} image={actifit} lien={'/sport-app'} />
                   <Card titre={"Administration d'interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
-                  <Card titre={"Jeux Platformer"} categorie={"Video Game"} image={mario} lien={"/platformer-game"}/>
+                  <Card titre={"Jeux Platformer"} categorie={"Python "} image={mario} lien={"/platformer-game"}/>
                   <Card titre={"Cybersecuritée "} categorie={"Python"} image={virus} lien={'/ransomware'} />
                   <Card titre={"GmailAiSort "} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort'} />
+                  <Card titre={"SyncCRD2CRM"} categorie={".NET | Blazor"} image={Sync} lien={'/sync-crd-crm'}/>
                 </div>
                 <h1 id="Contact">Contact</h1>
                 <p id="contactText">Si vous souhaitez me contacter ou collaborer avec moi.</p>
@@ -141,6 +144,7 @@ function App() {
           <Route path="/platformer-game" element={<PlatformerGame />} />
           <Route path="/ransomware" element={<Ransomware />} />
           <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
+          <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
         </Routes>
       </div>
     </Router>
