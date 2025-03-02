@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBar2 from './components/NavBar2';
 import Herro from "./components/Herro";
