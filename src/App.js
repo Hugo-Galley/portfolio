@@ -33,6 +33,7 @@ import PlatformerGame from './PagesProjects/PlaformerGame';
 import Ransomware from './PagesProjects/Ransomware';
 import GmailAiSort from './PagesProjects/GmailAISort';
 import SyncCRD2CRM from './PagesProjects/SyncCRD2CRM';
+import NotFound from './components/NotFound';
 
 
 
@@ -145,6 +146,7 @@ function App() {
           <Route path="/ransomware" element={<Ransomware />} />
           <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
           <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </div>
     </Router>
