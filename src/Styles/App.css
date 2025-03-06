@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Faculty Glyphic';
-    src: url('/public/fonts/FacultyGlyphic-Regular.ttf') format('truetype');
+    src: url('/public/fonts/Poppins-Light.ttf') format('truetype');
     font-display: swap;
   }
   
@@ -47,25 +47,49 @@ body::before {
     );
     pointer-events: none;
     z-index: -1;
+    animation: gridAppear 1.5s ease-out forwards;
+    transform-origin: center;
+    opacity: 0;
 }
-
+@keyframes gridAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
 .glow {
     position: absolute;
-    width: 200px;
+    width: 2000px;
     height: 1000px;
     background: radial-gradient(ellipse, 
-        rgba(255, 255, 255, 0.3) 40%,
-        rgba(255, 255, 255, 0.1) 80%,
+        rgba(255, 255, 255, 0.3) 10%,
+        rgba(255, 255, 255, 0.1) 20%,
         transparent 60%
     );
     border-radius: 35%;
-    filter: blur(50px);
+    filter: blur(100px);
     pointer-events: none;
     top: -300px;
     left: 400px;
     transform: rotate(-50deg);
+    animation: glowAppear 1.8s ease-out forwards;
     z-index: 200;
+    z-index: 200;
+}
+@keyframes glowAppear {
+    0% {
+        opacity: 0;
+        transform: rotate(-50deg) translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(-50deg) translateY(0);
+    }
 }
 
 a{
