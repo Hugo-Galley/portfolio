@@ -83,7 +83,7 @@ export default function Herro() {
             custom={2} 
             variants={textVariants}
           >
-            Je suis un jeune développeur actuellement en études
+            Je suis un jeune développeur actuellement en recherche d'une alternance en tant que développeur 
           </motion.p>
 
           <motion.div 
