@@ -111,18 +111,18 @@ export default function Herro() {
             <a id='herro-button2' onClick={() => handleNavigation('Projects')} style={{ cursor: 'pointer' }}>Mon Travail</a>
           </motion.div>
           
-          <motion.div 
-            id='DownloadButton' 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={4} 
-            variants={textVariants}
-            style={{ cursor: 'pointer' }}
-            onClick={() => handleNavigation('AboutMe')}
-          >
+          <motion.a 
+             id='DownloadButton' 
+             href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" 
+             target='_blank'
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true }}
+             custom={4} 
+             variants={textVariants}
+           >
             <DownLoadButton/>
-          </motion.div>
+          </motion.a>
         </motion.div>
       </div>
     </div>
