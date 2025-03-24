@@ -30,7 +30,7 @@ export default function Herro() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  const threshold = isMobile ? 120 : 200; 
+  const threshold = isMobile ? 200 : 300; 
   
   const opacity = useTransform(
     scrollY, 
@@ -43,6 +43,12 @@ export default function Herro() {
     [0, threshold], 
     [0, 50]  
   );
+
+  const scale = useTransform(
+    scrollY,
+    [0, threshold],
+    [1, 0.85]
+  )
   
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -64,6 +70,8 @@ export default function Herro() {
           style={{ 
             opacity, 
             y,
+            scale,
+            transformOrigin: 'center top',
             pointerEvents: scrollY.get() > threshold ? 'none' : 'auto'
           }}
         >
@@ -116,6 +124,7 @@ export default function Herro() {
              href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" 
              target='_blank'
              initial="hidden"
+             
              whileInView="visible"
              viewport={{ once: true }}
              custom={4} 
