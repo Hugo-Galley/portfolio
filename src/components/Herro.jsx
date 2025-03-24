@@ -2,8 +2,21 @@ import '../Styles/Herro.css'
 import { motion, useScroll, useTransform } from 'framer-motion';
 import DownLoadButton from './DownloadButton';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Herro() {
+      const navigate = useNavigate();
+  
+      const handleNavigation = (section) => {
+          navigate('/');
+          
+          setTimeout(() => {
+              const element = document.getElementById(section);
+              if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+              }
+          }, 100);
+      };
   const { scrollY } = useScroll();
   const [isMobile, setIsMobile] = useState(false);
   
@@ -94,22 +107,22 @@ export default function Herro() {
             custom={3} 
             variants={textVariants}
           >
-            <a id='herro-button1' href='#AboutMe'>A Propos</a>
-            <a id='herro-button2' href='#Projects'>Mon Travail</a>
+            <a id='herro-button1' onClick={() => handleNavigation('AboutMe')} style={{ cursor: 'pointer' }}>A Propos</a>
+            <a id='herro-button2' onClick={() => handleNavigation('Projects')} style={{ cursor: 'pointer' }}>Mon Travail</a>
           </motion.div>
           
-          <motion.a 
+          <motion.div 
             id='DownloadButton' 
-            href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" 
-            target='_blank'
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             custom={4} 
             variants={textVariants}
+            style={{ cursor: 'pointer' }}
+            onClick={() => handleNavigation('AboutMe')}
           >
             <DownLoadButton/>
-          </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </div>
