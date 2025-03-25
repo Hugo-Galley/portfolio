@@ -24,8 +24,8 @@ export default function SyncCRD2CRM() {
                             <p>Blazor</p>
                         </div>
                         <div className='tech-item'>
-                            <img src={ssms} alt="SSMS" />
-                            <p>SSMS</p>
+                            <img src={ssms} alt="SQL Server" />
+                            <p>SQL Server</p>
                         </div>
                     </div>
                 </div>
