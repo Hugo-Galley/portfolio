@@ -8,6 +8,7 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Skills from './components/Skills';
+import Phantom from './PagesProjects/Phantom';
 
 
 import Footer from "./components/Footer";
@@ -34,6 +35,7 @@ import Ransomware from './PagesProjects/Ransomware';
 import GmailAiSort from './PagesProjects/GmailAISort';
 import SyncCRD2CRM from './PagesProjects/SyncCRD2CRM';
 import NotFound from './components/NotFound';
+import phantom from './assets/Card/phantom-card.png'
 
 
 
@@ -121,6 +123,7 @@ function App() {
                 </div>
                 <h1 id="Projects">Mes Projets</h1>
                 <div className="grid-project">
+                <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom'}/>
                   <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography'}/>
                   <Card titre={"Instagram clone"} categorie={"React"} image={insta} lien={'/instagram-clone'} />
                   <Card titre={"Application de Sport"} categorie={"Expo | React Native"} image={actifit} lien={'/sport-app'} />
@@ -146,6 +149,7 @@ function App() {
           <Route path="/ransomware" element={<Ransomware />} />
           <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
           <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
+          <Route path="/phantom" element={<Phantom />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </div>
