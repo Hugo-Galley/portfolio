@@ -101,7 +101,7 @@ export default function Bento(){
             <div className="container-verticale-small-3" onClick={() => showModal('modal4')}>
                 <p className="verticale-titre">FrameWork</p>
                 <p className="verticale-desc">Mon Framework favoris est React</p>
-                <img src={react} alt="React Logo" />
+                <img src={react} alt="React Logo" id="reactLogo"/>
             </div>
             </div>
             <div className="container-horizontale">

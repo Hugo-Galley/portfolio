@@ -35,7 +35,7 @@
 .verticale-titre{
     text-align:start;
     font-size: 2em;
-    font-weight:800 ;
+    font-weight: 550 ;
     color: black;
     text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
 }
@@ -144,7 +144,20 @@
     height: 100vh;
     position: fixed;
     z-index: 20000;
-    background-color: red;
+
+}
+#reactLogo{
+
+  animation: rotation ease  10s infinite alternate-reverse;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(360deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
 }
 
 @media (max-width: 1000px) {

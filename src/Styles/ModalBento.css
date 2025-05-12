@@ -41,10 +41,10 @@
     width: 23vw;
     margin-top: 20px;
 
+
 }
 
 .headModal{
-    
     font-size: 0.75em;
     width: 39vw;
 
@@ -63,6 +63,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 550;
 }
 @media (max-width: 1600px){
     .headModal{

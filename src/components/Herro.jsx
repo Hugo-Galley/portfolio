@@ -104,7 +104,7 @@ export default function Herro() {
             custom={2} 
             variants={textVariants}
           >
-            Je suis un jeune développeur actuellement en recherche d'une alternance en tant que développeur 
+            Je suis un jeune développeur actuellement en recherche d'une alternance. 
           </motion.p>
 
           <motion.div 
@@ -133,6 +133,8 @@ export default function Herro() {
             <DownLoadButton/>
           </motion.a>
         </motion.div>
+        <div class="radial-glow"/>
+
       </div>
     </div>
   );

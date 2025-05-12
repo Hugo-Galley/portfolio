@@ -45,7 +45,6 @@ function App() {
     img.src = hero; 
   }, []);
   useEffect(() => {
-    // Gestion de l'activation des éléments du navbar
     document.querySelectorAll('.navbar2-items').forEach(item => {
         item.addEventListener('click', () => {
             document.querySelectorAll('.navbar2-items').forEach(el => el.classList.remove('active'));
@@ -104,9 +103,7 @@ function App() {
           <Route path="/" element={(
             <>
               <div id="Home">
-              <div className='glow'></div>
                 <Herro/>
-
               </div>
               
 

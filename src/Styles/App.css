@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Faculty Glyphic';
-    src: url('/public/fonts/Poppins-Light.ttf') format('truetype');
+    src: url('/public/fonts/Geist.ttf') format('truetype');
     font-display: swap;
   }
   
@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
-    font-weight: 600;
+    font-weight: 500;
     font-family: "Faculty Glyphic";
 }
 html, body {
@@ -33,6 +33,8 @@ body::before {
     background-image: 
         linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-repeat: repeat;
+        transform: skewY(-20deg) scaleY(1.3);
     background-size: 65px 65px;
     background-position: center;
     -webkit-mask-image: radial-gradient(circle at center, 
