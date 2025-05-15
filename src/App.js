@@ -21,7 +21,6 @@ import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
-import hero from './assets/herroBanner.webp'
 import Sync from './assets/Pages/SyncCard.png'
 
 import './Styles/App.css';
@@ -41,8 +40,6 @@ import phantom from './assets/Card/phantom-card.png'
 
 function App() {
   useEffect(() => {
-    const img = new Image();
-    img.src = hero; 
   }, []);
   useEffect(() => {
     document.querySelectorAll('.navbar2-items').forEach(item => {

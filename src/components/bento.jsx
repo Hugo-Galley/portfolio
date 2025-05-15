@@ -1,6 +1,6 @@
 import '../Styles/Bento.css'
 import React, {useRef} from 'react'
-import me from '../assets/Bento/me.webp'
+import me from '../assets/Bento/me.png'
 import epsi from '../assets/Bento/epsi.webp'
 import cs from '../assets/Bento/cs.webp'
 import react from '../assets/Pages/react.webp'
