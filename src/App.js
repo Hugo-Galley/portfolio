@@ -8,10 +8,9 @@ import Bento from "./components/bento";
 import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Skills from './components/Skills';
-import Phantom from './PagesProjects/Phantom';
-
-
 import Footer from "./components/Footer";
+
+
 import insta from './assets/Card/instagram-2.webp';
 import cart from './assets/Card/Carto.webp';
 import actifit from './assets/Card/actifit.webp';
@@ -22,6 +21,8 @@ import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
 import Sync from './assets/Pages/SyncCard.png'
+import Phantom from './PagesProjects/Phantom';
+import EasyWorkEnv from './PagesProjects/EasyWorkEnv';
 
 import './Styles/App.css';
 
@@ -35,6 +36,7 @@ import GmailAiSort from './PagesProjects/GmailAISort';
 import SyncCRD2CRM from './PagesProjects/SyncCRD2CRM';
 import NotFound from './components/NotFound';
 import phantom from './assets/Card/phantom-card.png'
+import pythonPackage from './assets/Pages/Screenshot 2022-11-05 at 10.44.06 PM.webp'
 
 
 
@@ -52,13 +54,11 @@ function App() {
     const cursor = document.querySelector('.cursor');
 
     if (cursor) {
-        // Fonction pour déplacer le curseur
         const handleMouseMove = (e) => {
             cursor.style.top = `${e.clientY -20}px`;
             cursor.style.left = `${e.clientX -20}px`;
         };
 
-        // Fonction pour gérer le clic (animation d'expansion)
         const handleClick = () => {
             cursor.classList.add('expand');
             setTimeout(() => {
@@ -118,10 +118,10 @@ function App() {
                 <h1 id="Projects">Mes Projets</h1>
                 <div className="grid-project">
                 <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom'}/>
+                 <Card titre={"EasyWorkEnv"} categorie={"Package Python"} image={pythonPackage} lien={'/easyworkenv'}/>
                   <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography'}/>
                   <Card titre={"Instagram clone"} categorie={"React"} image={insta} lien={'/instagram-clone'} />
                   <Card titre={"Application de Sport"} categorie={"Expo | React Native"} image={actifit} lien={'/sport-app'} />
-                  <Card titre={"Administration d'interface"} categorie={"Python"} image={ctk} lien={'/admin-interface'}/>
                   <Card titre={"Jeux Platformer"} categorie={"Python "} image={mario} lien={"/platformer-game"}/>
                   <Card titre={"Cybersecuritée "} categorie={"Python"} image={virus} lien={'/ransomware'} />
                   <Card titre={"GmailAiSort "} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort'} />
@@ -144,6 +144,7 @@ function App() {
           <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
           <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
           <Route path="/phantom" element={<Phantom />} />
+          <Route path='/easyworkenv' element={<EasyWorkEnv/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </div>
