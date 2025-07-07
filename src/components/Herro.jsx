@@ -133,7 +133,7 @@ export default function Herro() {
             <DownLoadButton/>
           </motion.a>
         </motion.div>
-        <div class="radial-glow"/>
+        <div className="radial-glow"/>
 
       </div>
     </div>

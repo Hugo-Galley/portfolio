@@ -1,6 +1,7 @@
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBar2 from './components/NavBar2';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Herro from "./components/Herro";
 import AptitudeBar from "./components/aptitudeBar";
 import Card from "./components/Card";
@@ -15,7 +16,6 @@ import insta from './assets/Card/instagram-2.webp';
 import cart from './assets/Card/Carto.webp';
 import actifit from './assets/Card/actifit.webp';
 import mario from './assets/Card/mario.webp';
-import ctk from './assets/Card/ctk2.webp';
 import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
@@ -92,11 +92,12 @@ function App() {
 }, []);
 
   return (
-    <Router>
-            <div className='cursor'></div>
-      <div className="main">
-      <NavBar2/>
-        <Routes>
+    <ThemeProvider>
+      <Router>
+              <div className='cursor'></div>
+        <div className="main">
+        <NavBar2/>
+          <Routes>
           <Route path="/" element={(
             <>
               <div id="Home">
@@ -149,6 +150,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 
