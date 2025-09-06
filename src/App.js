@@ -15,12 +15,13 @@ import insta from './assets/Card/instagram-2.webp';
 import cart from './assets/Card/Carto.webp';
 import actifit from './assets/Card/actifit.webp';
 import mario from './assets/Card/mario.webp';
-import ctk from './assets/Card/ctk2.webp';
 import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
 import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
 import Sync from './assets/Pages/SyncCard.png'
+import axa from './assets/Card/AXA_Logo.svg-2.png'
+
 import Phantom from './PagesProjects/Phantom';
 import EasyWorkEnv from './PagesProjects/EasyWorkEnv';
 
@@ -112,8 +113,9 @@ function App() {
                 <Skills/>
                 <h1 id='WorkAt'>Experiences Profesionelles</h1>
                 <div className='work-app-container'>
+                    <CardWork nom={"ALternant Ingénieur Logiciel"} duré={"Actuellement"} boite={"AXA"} img={axa}/>
                     <CardWork nom={"Stagiaire Ingénieur en Développement"} duré={"17 semaines"} boite={"Uniformation"} img={unif}/>
-                    <CardWork nom={"Stagaire à la decouverte des métiers "} duré={"1 semaine"} boite={"BUT"} img={but}/>
+                    
                 </div>
                 <h1 id="Projects">Mes Projets</h1>
                 <div className="grid-project">

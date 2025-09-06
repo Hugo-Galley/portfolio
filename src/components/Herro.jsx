@@ -31,7 +31,7 @@ export default function Herro() {
           
           <p 
             className="hero-subtitle">
-            Je suis un jeune développeur actuellement en recherche d'une alternance. 
+            Développeur curieux, je crois en un code ouvert et collaboratif.
           </p>
 
           <div 
@@ -45,7 +45,6 @@ export default function Herro() {
           </a>
         </div>
         <div class="radial-glow"/>
-
       </div>
     </div>
   );
