@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/NotFound.css';
-import astronautImg from '../assets/Card/astronaut.jpg'; // Vous devrez ajouter cette image
 
 function NotFound() {
   return (

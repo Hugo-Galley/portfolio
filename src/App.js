@@ -17,7 +17,6 @@ import actifit from './assets/Card/actifit.webp';
 import mario from './assets/Card/mario.webp';
 import virus from './assets/Card/virus.webp';
 import unif from './assets/Card/unif.webp'
-import but from './assets/Card/Logo-BUT.svg.webp'
 import gmailAi from './assets/Card/gmailAi.webp'
 import Sync from './assets/Pages/SyncCard.png'
 import axa from './assets/Card/AXA_Logo.svg-2.png'
