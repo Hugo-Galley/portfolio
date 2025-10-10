@@ -69,7 +69,7 @@ export default function Skills(){
                 key={index}
               >
                 <div className="language-box">
-                <img src={skill} alt="Language" className="language-box-img" />
+                <img src={skill} alt={skillsListName[index]} className="language-box-img" />
                 <p>{skillsListName[index]}</p>
                 </div>
                 

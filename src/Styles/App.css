@@ -3,7 +3,74 @@
     src: url('/public/fonts/Geist.ttf') format('truetype');
     font-display: swap;
   }
-  
+
+:root {
+  /* Variables pour le mode sombre (défaut) */
+  --bg-color: #000000;
+  --text-color: #f0f8ff;
+  --text-secondary: #9ca3af;
+  --grid-color: rgba(255, 255, 255, 0.1);
+  --glow-color-1: rgba(255, 255, 255, 0.3);
+  --glow-color-2: rgba(255, 255, 255, 0.1);
+  --card-bg: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  --card-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 5px rgba(255, 255, 255, 0.05),
+    0 5px 15px rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(255, 255, 255, 0.15);
+  --card-shine: rgba(255, 255, 255, 0.08);
+  --blur-bg-1: rgba(168, 85, 247, 0.3);
+  --blur-bg-2: rgba(236, 72, 153, 0.3);
+  --cursor-border: white;
+  --cursor-dot: #F2C1B6;
+  --accent-color: #F2C1B6;
+  --navbar-active: #F2C1B6;
+  --theme-toggle-bg: rgba(255, 255, 255, 0.1);
+  --theme-toggle-border: rgba(255, 255, 255, 0.2);
+  --theme-toggle-shadow: rgba(0, 0, 0, 0.3);
+  --theme-toggle-shadow-hover: rgba(0, 0, 0, 0.5);
+  --theme-toggle-icon: white;
+}
+
+[data-theme="light"] {
+  /* Variables pour le mode clair */
+  --bg-color: #ffffff;
+  --text-color: #1a202c;
+  --text-secondary: #4a5568;
+  --grid-color: rgba(0, 0, 0, 0.08);
+  --glow-color-1: rgba(168, 85, 247, 0.15);
+  --glow-color-2: rgba(236, 72, 153, 0.1);
+  --card-bg: linear-gradient(
+    165deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.03) 40%,
+    rgba(0, 0, 0, 0.02) 50%,
+    rgba(0, 0, 0, 0.01) 100%
+  );
+  --card-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.03),
+    0 5px 15px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  --card-shine: rgba(0, 0, 0, 0.04);
+  --blur-bg-1: rgba(168, 85, 247, 0.15);
+  --blur-bg-2: rgba(236, 72, 153, 0.15);
+  --cursor-border: #1a202c;
+  --cursor-dot: #a855f7;
+  --accent-color: #a855f7;
+  --navbar-active: #ec4899;
+  --theme-toggle-bg: rgba(0, 0, 0, 0.08);
+  --theme-toggle-border: rgba(0, 0, 0, 0.15);
+  --theme-toggle-shadow: rgba(168, 85, 247, 0.2);
+  --theme-toggle-shadow-hover: rgba(168, 85, 247, 0.4);
+  --theme-toggle-icon: #1a202c;
+}
 
 * {
     margin: 0;
@@ -13,14 +80,15 @@
     font-family: "Faculty Glyphic";
 }
 html, body {
-    background-color: black;
+    background-color: var(--bg-color);
     position: relative;
-    color: aliceblue;
+    color: var(--text-color);
     scroll-behavior: smooth;
     overflow-x: hidden;
     cursor: none;
     min-height: 100vh;
     z-index: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body::before {
@@ -31,8 +99,8 @@ body::before {
     right: 0;
     bottom: 0;
     background-image: 
-        linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
         background-repeat: repeat;
         transform: skewY(-20deg) scaleY(1.3);
     background-size: 65px 65px;
@@ -52,6 +120,7 @@ body::before {
     animation: gridAppear 1.5s ease-out forwards;
     transform-origin: center;
     opacity: 0;
+    transition: background-image 0.3s ease;
 }
 @keyframes gridAppear {
     0% {
@@ -69,8 +138,8 @@ body::before {
     width: 2000px;
     height: 1000px;
     background: radial-gradient(ellipse, 
-        rgba(255, 255, 255, 0.3) 10%,
-        rgba(255, 255, 255, 0.1) 20%,
+        var(--glow-color-1) 10%,
+        var(--glow-color-2) 20%,
         transparent 60%
     );
     border-radius: 35%;
@@ -81,7 +150,7 @@ body::before {
     transform: rotate(-50deg);
     animation: glowAppear 1.8s ease-out forwards;
     z-index: 200;
-    z-index: 200;
+    transition: background 0.3s ease;
 }
 @keyframes glowAppear {
     0% {
@@ -95,8 +164,9 @@ body::before {
 }
 
 a{
-    color: aliceblue;
+    color: var(--text-color);
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .grid-project {
@@ -113,10 +183,11 @@ a{
     margin-top: 50px;
 }
 .projectPage h1{
-    color: aliceblue;
+    color: var(--text-color);
     text-align: center;
     font-size: 4em;
     font-weight: 900;
+    transition: color 0.3s ease;
 }
 
 #contactText{
@@ -136,7 +207,7 @@ a{
 .cursor {
     width: 40px;
     height: 40px;
-    border: 1px dashed white;
+    border: 1px dashed var(--cursor-border);
     border-radius: 50%;
     position: fixed;
     z-index: 200000;
@@ -144,6 +215,7 @@ a{
     animation: Anime1 1.5s infinite alternate;
     mix-blend-mode: difference;
     will-change: transform;
+    transition: border-color 0.3s ease;
   }
 .cursor::before{
     content: '';
@@ -153,14 +225,16 @@ a{
     transform: translate(-50%,-50%);
     width: 5px;
     height: 5px;
-    background: #F2C1B6;
+    background: var(--cursor-dot);
     border-radius: 50%;
+    transition: background 0.3s ease;
 }
 .expand{
     position: fixed;
     animation: Anime2 .5s;
-    background: #F2C1B6;
-    border: 1px solid #F2C1B6;
+    background: var(--cursor-dot);
+    border: 1px solid var(--cursor-dot);
+    transition: all 0.3s ease;
 }
 
 @keyframes Anime1 {

@@ -1,0 +1,74 @@
+.theme-toggle-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--theme-toggle-bg);
+  border: 2px solid var(--theme-toggle-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10000;
+  box-shadow: 0 4px 15px var(--theme-toggle-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 6px 25px var(--theme-toggle-shadow-hover);
+}
+
+.theme-toggle-button:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--theme-toggle-icon);
+  transition: all 0.3s ease;
+}
+
+.sun-icon {
+  animation: sunRotate 20s linear infinite;
+}
+
+.moon-icon {
+  animation: moonFloat 3s ease-in-out infinite;
+}
+
+@keyframes sunRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moonFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-button {
+    width: 50px;
+    height: 50px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .theme-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

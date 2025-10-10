@@ -7,12 +7,16 @@
     background-color: rgba(29, 29, 29, 0.5);
     display: none;
     z-index: 1000;
+    transition: background-color 0.3s ease;
+}
 
+[data-theme="light"] .overlay {
+    background-color: rgba(200, 200, 200, 0.6);
 }
 
 .ModalBox {
     z-index: 2000;
-    background-color: rgb(20, 20, 20);
+    background-color: var(--bg-color);
     width: 40vw;
     height: 40vh;
     margin: auto;
@@ -23,7 +27,8 @@
     transform: translate(-50%, -50%);
     border-radius:   13% 90% 10% 87% / 93% 7% 94% 6% ;
     text-align: center;
-
+    border: 1px solid var(--grid-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .ModalBox p{
     margin: auto;

@@ -9,6 +9,8 @@ import Contact from "./components/contact";
 import CardWork from './components/CardWork';
 import Skills from './components/Skills';
 import Footer from "./components/Footer";
+import ThemeToggle from './components/ThemeToggle';
+import { ThemeProvider } from './context/ThemeContext';
 
 
 import insta from './assets/Card/instagram-2.webp';
@@ -92,16 +94,18 @@ function App() {
 }, []);
 
   return (
-    <Router>
-            <div className='cursor'></div>
-      <div className="main">
-      <NavBar2/>
-        <Routes>
-          <Route path="/" element={(
-            <>
-              <div id="Home">
-                <Herro/>
-              </div>
+    <ThemeProvider>
+      <Router>
+        <div className='cursor'></div>
+        <div className="main">
+          <NavBar2/>
+          <ThemeToggle />
+          <Routes>
+            <Route path="/" element={(
+              <>
+                <div id="Home">
+                  <Herro/>
+                </div>
               
 
               <AptitudeBar/>
@@ -150,6 +154,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

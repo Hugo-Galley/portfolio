@@ -11,8 +11,13 @@
 
 }
 .language-box-img{
-
     margin: auto;
+    transition: filter 0.3s ease;
+}
+
+/* Inverser uniquement le logo Linux en mode clair */
+[data-theme="light"] .language-box:has(img[alt*="Linux"]) .language-box-img {
+    filter: brightness(0) saturate(100%);
 }
 .language-box p{
     font-size: 1.7em;

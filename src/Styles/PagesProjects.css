@@ -15,15 +15,17 @@
 }
 
 .project-container::before {
-  background: rgba(168, 85, 247, 0.3);
+  background: var(--blur-bg-1);
   top: -4rem;
   left: -12rem;
+  transition: background 0.3s ease;
 }
 
 .project-container::after {
-  background: rgba(236, 72, 153, 0.3);
+  background: var(--blur-bg-2);
   bottom: -4rem;
   right: -12rem;
+  transition: background 0.3s ease;
 }
 
 .project-card {
@@ -59,15 +61,17 @@
 
 .project-title {
     font-size: 2.5rem;
-    color: #fffafa;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
 }
 
 .project-description {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #ffffff;
+    color: var(--text-color);
     margin-bottom: 2rem;
+    transition: color 0.3s ease;
 }
 
 .tech-stack {
@@ -92,6 +96,15 @@
 .tech-item img {
     width: 24px;
     height: 24px;
+    transition: filter 0.3s ease;
+}
+
+/* Inverser le logo Linux et GitHub en mode clair */
+[data-theme="light"] .tech-item img[alt*="Linux"],
+[data-theme="light"] .tech-item img[alt*="GitHub"],
+[data-theme="light"] .tech-item img[alt*="Github"],
+[data-theme="light"] .tech-item img[alt*="SQLite"] {
+    filter: brightness(0) saturate(100%);
 }
 
 .tech-item p {
