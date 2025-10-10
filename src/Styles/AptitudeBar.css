@@ -11,24 +11,38 @@
 .bar {
     width: 120vw; 
     height: 100px;
-    background-color: aliceblue; 
+    background-color: var(--aptitude-bar-bg, aliceblue); 
     display: flex;
     align-items: center;
     justify-content: center;
     left: -10vw; 
-    transform: rotate(-5deg); 
+    transform: rotate(-5deg);
+    transition: background-color 0.3s ease;
+}
 
+[data-theme="light"] .bar {
+    background-color: #1a202c;
 }
 
 .bar p {
-
     font-size: 1.5em;
-    color: black
+    color: var(--aptitude-bar-text, black);
+    transition: color 0.3s ease;
+}
 
+[data-theme="light"] .bar p {
+    color: white;
 }
 .bar-items{
     margin: 40px;
 }
+
+.bar-items svg,
+svg.bar-items {
+    fill: var(--accent-color);
+    transition: fill 0.3s ease;
+}
+
 @media (max-width: 1000px) {
 .backgroundBar{
     display: none;

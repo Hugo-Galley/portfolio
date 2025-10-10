@@ -3,10 +3,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #181818;
-    color: #fff;
+    background-color: var(--footer-bg, #181818);
+    color: var(--text-color);
     padding: 20px 50px;
     font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .footer-main {
+    background-color: #f5f5f5;
 }
 
 .footer-left h1 {
@@ -39,7 +44,7 @@
 }
 
 .div-media a {
-    color: #fff;
+    color: var(--text-color);
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: bold;

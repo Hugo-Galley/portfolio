@@ -1,29 +1,25 @@
 /* Container principal */
 .work-container {
     width: 300px;
-    background: linear-gradient(
-      165deg,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 255, 255, 0.08) 40%,
-      rgba(255, 255, 255, 0.05) 50%,
-      rgba(255, 255, 255, 0.03) 100%
-    );
+    background: var(--card-bg);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      inset 0 2px 8px rgba(255, 255, 255, 0.1),
-      inset 0 -2px 5px rgba(255, 255, 255, 0.05),
-      0 5px 15px rgba(255, 255, 255, 0.1),
-      0 2px 4px rgba(255, 255, 255, 0.15);
+    box-shadow: var(--card-shadow);
     border-radius: 15px;
     padding: 20px;
     overflow: hidden;
     text-align: center;
     margin-right: 100px;
     margin-left: 100px;
-    color: black;
+    color: var(--text-color);
     justify-content: space-around;
+    transition: all 0.3s ease;
   }
+
+  [data-theme="light"] .work-container {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
   .work-container::after {
     content: '';
     position: absolute;
@@ -34,7 +30,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.08),
+      var(--card-shine),
       transparent
     );
     transition: 0.5s;
@@ -52,40 +48,42 @@
   }
   
   .work-nom {
-    color: #ffffff;
+    color: var(--text-color);
     font-size: 22px;
     font-weight: 800;
     margin: 0 0 10px 0;
     text-transform: uppercase;
     letter-spacing: 2px;
+    transition: color 0.3s ease;
   }
   
   .work-boite {
-    color: #ffff;
+    color: var(--text-color);
     font-size: 16px;
     margin: 5px 0;
     font-weight: 500;
+    transition: color 0.3s ease;
   }
   
   .work-durée {
     display: inline-block;
-    color: #ffffff;
+    color: var(--text-color);
     background: rgba(255, 255, 255, 0.039);
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 14px;
     margin-top: 10px;
     backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  [data-theme="light"] .work-durée {
+    background: rgba(0, 0, 0, 0.05);
   }
   
 
   @media (max-width: 1068px) {
     .work-container {
       margin-bottom: 100px;
-    }
-    .work-durée {
-
-      color: black;
-
     }
   }
