@@ -1,8 +1,4 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /private/
-Disallow: /temp/
-Disallow: /cgi-bin/
 Allow: /public/
 Allow: /assets/
 Allow: /index.html

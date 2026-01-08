@@ -10,6 +10,7 @@ import git from '../assets/Card/git.png'
 import c from '../assets/Card/C_Logo.png'
 import figma from '../assets/Card/Figma-logo.svg.png'
 import azure from '../assets/Card/azure.webp'
+import docker from '../assets/Card/docker-icon-seeklogo.png'
 import 'swiper/css'
 import '../Styles/Skills.css'
 
@@ -25,7 +26,8 @@ export default function Skills(){
         git,
         c,
         figma,
-        azure
+        azure,
+        docker
 
     ]
     const skillsListName = [
@@ -38,7 +40,8 @@ export default function Skills(){
       "Git",
       "C",
       "Figma",
-      "Azure DevOps"
+      "Azure DevOps",
+      "Docker"
     ]
 
     return (
