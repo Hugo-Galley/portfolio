@@ -1,6 +1,5 @@
 User-agent: *
-Allow: /public/
-Allow: /assets/
-Allow: /index.html
+Disallow:
 
+# Sitemap
 Sitemap: https://www.galleyhugo.com/sitemap.xml
