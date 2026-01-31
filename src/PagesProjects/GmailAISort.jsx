@@ -5,16 +5,19 @@ import meta from '../assets/Pages/meta.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function GmailAiSort() {
+    const { t } = useLanguage();
+    
     return (
         <div className='project-container'>
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>Gmail Ai Sort</h2>
+                    <h2 className='project-title'>{t('projectPages.gmailAiSort.title')}</h2>
                     <p className='project-description'>
-                        Ce projet vise à trier vos e-mails en cinq catégories principales à l'aide de l'IA. En utilisant Llama 3, il permet de communiquer avec Gmail. Ce code vous permet d'organiser facilement vos e-mails par étiquette afin de les retrouver plus facilement.
+                        {t('projectPages.gmailAiSort.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>

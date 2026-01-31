@@ -3,16 +3,19 @@ import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import js from '../assets/Pages/JavaScript-logo.webp'
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Phantom() {
+    const { t } = useLanguage();
+    
     return (
         <div className='project-container'>
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>Phantom</h2>
+                    <h2 className='project-title'>{t('projectPages.phantom.title')}</h2>
                     <p className='project-description'>
-                       Il s'agit d'un projet de messagerie sécurisé comme Whatsap ou Signal. Le but étant de pouvoir echangé des messages ou n'importe qu'elle type de communications, de maniee chiffré de bout en bout. 
+                       {t('projectPages.phantom.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>

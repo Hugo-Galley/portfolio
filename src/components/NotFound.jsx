@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/NotFound.css';
+import { useLanguage } from '../context/LanguageContext';
 
 function NotFound() {
+  const { t } = useLanguage();
+  
   return (
     <div className="error-container">
       <div className="error-content">
-        <h1 className="title">404</h1>
-        <h2 className="subtitle">Page Non Trouvée</h2>
+        <h1 className="title">{t('notFound.title')}</h1>
+        <h2 className="subtitle">{t('notFound.subtitle')}</h2>
         <p className="description">
-          La page que vous recherchez s'est perdue dans l'espace. 
-          Elle a peut-être été déplacée ou n'existe plus.
+          {t('notFound.description')}
         </p>
         <Link to="/" className="home-button">
-          Retour à la terre ferme
+          {t('notFound.button')}
         </Link>
       </div>
 

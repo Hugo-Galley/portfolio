@@ -5,17 +5,19 @@ import blazor from '../assets/Pages/Blazor.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Cartography() {
+    const { t } = useLanguage();
+    
     return (
         <div className='project-container'>
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>Cartographie</h2>
+                    <h2 className='project-title'>{t('projectPages.cartography.title')}</h2>
                     <p className='project-description'>
-                        Ceci est une application conçue pour cartographier tous les serveurs de l'entreprise afin d'identifier sur quel serveur une application est localisée ou non, ainsi que pour permettre la recherche, le tri et l'ajout de fichiers de recherche.
-                        Pour cette application, je crée la base de données, les batchs, l'API, l'application web et le déploiement.
+                        {t('projectPages.cartography.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>

@@ -4,16 +4,19 @@ import js from '../assets/Pages/JavaScript-logo.webp';
 import expo from '../assets/Pages/expo-1.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function SportApplication() {
+    const { t } = useLanguage();
+    
     return (
         <div className='project-container'>
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>ActiFit</h2>
+                    <h2 className='project-title'>{t('projectPages.sportApp.title')}</h2>
                     <p className='project-description'>
-                        Il s'agit d'une application sportive conçue pour vous proposer des séances d'entraînement personnalisées ainsi que des options d'exercices, tout en affichant votre progression. J'ai également utilisé React Native pour garantir sa compatibilité avec tous les types d'appareils.
+                        {t('projectPages.sportApp.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>

@@ -1,9 +1,11 @@
 import '../Styles/Herro.css'
 import DownLoadButton from './DownloadButton';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Herro() {
       const navigate = useNavigate();
+      const { t } = useLanguage();
   
       const handleNavigation = (section) => {
           navigate('/');
@@ -22,22 +24,22 @@ export default function Herro() {
       <div className='herro'>
         <div className='herro-description'>
           <h1 className="hero-title">
-            Hello,<br/>
+            {t('hero.hello')}<br/>
             <span 
               className="gradient-text">
-              Je suis Hugo Galley
+              {t('hero.iAm')}
             </span>
           </h1>
           
           <p 
             className="hero-subtitle">
-            Développeur curieux, je crois en un code ouvert et collaboratif.
+            {t('hero.subtitle')}
           </p>
 
           <div 
             className='button-div'>
-            <a id='herro-button1' onClick={() => handleNavigation('AboutMe')} style={{ cursor: 'pointer' }}>A Propos</a>
-            <a id='herro-button2' onClick={() => handleNavigation('Projects')} style={{ cursor: 'pointer' }}>Mon Travail</a>
+            <a id='herro-button1' onClick={() => handleNavigation('AboutMe')} style={{ cursor: 'pointer' }}>{t('hero.aboutButton')}</a>
+            <a id='herro-button2' onClick={() => handleNavigation('Projects')} style={{ cursor: 'pointer' }}>{t('hero.workButton')}</a>
           </div>
           
           <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank'>

@@ -4,16 +4,19 @@ import pypi from '../assets/Card/PyPI-Logo-notext.svg.png';
 import github from '../assets/Contact/github.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function EasyWorkEnv() {
+    const { t } = useLanguage();
+    
     return (
         <div className='project-container'>
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>EasyWorkEnv</h2>
+                    <h2 className='project-title'>{t('projectPages.easyWorkEnv.title')}</h2>
                     <p className='project-description'>
-                       Il s'agit de la création d'un package en python permetant de gerer facilement ses variables d'environement grace a un objet.
+                       {t('projectPages.easyWorkEnv.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>
