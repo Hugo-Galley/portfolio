@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- Page d'accueil -->
+<url>
+  <loc>https://galleyhugo.com/</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>1.0</priority>
+</url>
+
+<!-- Pages de projets -->
+<url>
+  <loc>https://galleyhugo.com/cartography</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/instagram-clone</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/sport-app</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/admin-interface</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/platformer-game</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/ransomware</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/gmail-ai-sort</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://galleyhugo.com/sync-crd-crm</loc>
+  <lastmod>2024-11-04T17:10:59+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+</urlset>

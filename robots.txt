@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+# Sitemap
+Sitemap: https://www.galleyhugo.com/sitemap.xml
