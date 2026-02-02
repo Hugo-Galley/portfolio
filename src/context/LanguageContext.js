@@ -14,7 +14,35 @@ export const useLanguage = () => {
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     const savedLanguage = localStorage.getItem('language');
-    return savedLanguage || 'fr';
+    if (savedLanguage) {
+      console.log('Langue sauvegardée:', savedLanguage);
+      return savedLanguage;
+    }
+
+    // Détection automatique basée sur la localisation
+    const browserLang = navigator.language || navigator.userLanguage || '';
+    console.log('Langue du navigateur:', browserLang);
+    
+    if (browserLang.toLowerCase().startsWith('fr')) {
+      console.log('Détection: Français (navigateur)');
+      return 'fr';
+    }
+
+    // 2. Vérifier la timezone (pour les utilisateurs avec navigateur en anglais mais en France)
+    try {
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      console.log('Timezone:', userTimezone);
+      if (userTimezone.includes('Paris')) {
+        console.log('Détection: Français (timezone Paris)');
+        return 'fr';
+      }
+    } catch (e) {
+      // Ignorer les erreurs de timezone
+      console.error('Erreur timezone:', e);
+    }
+    
+    console.log('Détection: Anglais (défaut)');
+    return 'en';
   });
 
   useEffect(() => {

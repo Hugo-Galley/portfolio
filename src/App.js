@@ -2,7 +2,6 @@ import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBar2 from './components/NavBar2';
 import ThemeToggle from './components/ThemeToggle';
-import LanguageSelector from './components/LanguageSelector';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import HomePage from './components/HomePage';
@@ -82,7 +81,6 @@ function App() {
         <div className="main">
           <NavBar2/>
           <ThemeToggle />
-          <LanguageSelector />
           <Routes>
             <Route path="/" element={<HomePage />} />
           
