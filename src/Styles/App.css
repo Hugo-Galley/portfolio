@@ -36,6 +36,12 @@
   --theme-toggle-shadow: rgba(0, 0, 0, 0.3);
   --theme-toggle-shadow-hover: rgba(0, 0, 0, 0.5);
   --theme-toggle-icon: white;
+  
+  /* Blobs & Noise */
+  --blob-yellow: rgba(255, 238, 173, 0.15);
+  --blob-orange: rgba(255, 183, 178, 0.12);
+  --blob-violet: rgba(197, 163, 255, 0.15);
+  --noise-opacity: 0.07;
 }
 
 [data-theme="light"] {
@@ -70,6 +76,12 @@
   --theme-toggle-shadow: rgba(168, 85, 247, 0.2);
   --theme-toggle-shadow-hover: rgba(168, 85, 247, 0.4);
   --theme-toggle-icon: #1a202c;
+  
+  /* Blobs & Noise */
+  --blob-yellow: rgba(255, 238, 173, 0.4);
+  --blob-orange: rgba(255, 183, 178, 0.3);
+  --blob-violet: rgba(197, 163, 255, 0.4);
+  --noise-opacity: 0.09;
 }
 
 * {
@@ -276,4 +288,71 @@ a{
     #WorkAt{
         font-size: 3em;
     }
+}
+
+/* Background Effects: Noise and Diffuse Blobs */
+.bg-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10; /* high enough to be over bg, low enough to be under content */
+    opacity: var(--noise-opacity, 0.05);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+}
+
+.bg-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -2; /* under the main background elements */
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: blobFloat 20s infinite alternate ease-in-out;
+    transform: translateZ(0); /* Hardware acceleration */
+    will-change: transform;
+}
+
+.blob-1 {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, var(--blob-yellow) 0%, transparent 60%);
+    top: -200px;
+    left: -100px;
+}
+
+.blob-2 {
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, var(--blob-orange) 0%, transparent 60%);
+    top: 40%;
+    right: -300px;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(circle, var(--blob-violet) 0%, transparent 60%);
+    bottom: -200px;
+    left: 10%;
+    animation-delay: -10s;
+}
+
+@keyframes blobFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, 40px) scale(1.05); }
+    100% { transform: translate(-30px, 20px) scale(0.95); }
 }
