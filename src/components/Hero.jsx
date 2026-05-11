@@ -3,19 +3,12 @@ import DownLoadButton from './DownloadButton';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
-export default function Herro() {
+export default function Hero() {
       const navigate = useNavigate();
       const { t } = useLanguage();
   
       const handleNavigation = (section) => {
-          navigate('/');
-          
-          setTimeout(() => {
-              const element = document.getElementById(section);
-              if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-              }
-          }, 100);
+          navigate('/', { state: { scrollTo: section } });
       };
   
 
@@ -38,11 +31,11 @@ export default function Herro() {
 
           <div 
             className='button-div'>
-            <a id='herro-button1' onClick={() => handleNavigation('AboutMe')} style={{ cursor: 'pointer' }}>{t('hero.aboutButton')}</a>
-            <a id='herro-button2' onClick={() => handleNavigation('Projects')} style={{ cursor: 'pointer' }}>{t('hero.workButton')}</a>
+            <button type='button' id='herro-button1' onClick={() => handleNavigation('AboutMe')}>{t('hero.aboutButton')}</button>
+            <button type='button' id='herro-button2' onClick={() => handleNavigation('Projects')}>{t('hero.workButton')}</button>
           </div>
           
-          <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank'>
+          <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer'>
             <DownLoadButton/>
           </a>
         </div>

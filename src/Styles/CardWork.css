@@ -65,7 +65,7 @@
     transition: color 0.3s ease;
   }
   
-  .work-durée {
+  .work-duree {
     display: inline-block;
     color: var(--text-color);
     background: rgba(255, 255, 255, 0.039);
@@ -77,7 +77,7 @@
     transition: all 0.3s ease;
   }
 
-  [data-theme="light"] .work-durée {
+  [data-theme="light"] .work-duree {
     background: rgba(0, 0, 0, 0.05);
   }
   

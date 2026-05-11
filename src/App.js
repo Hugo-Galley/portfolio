@@ -1,7 +1,8 @@
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import NavBar2 from './components/NavBar2';
 import ThemeToggle from './components/ThemeToggle';
+import SeoManager from './components/SeoManager';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import HomePage from './components/HomePage';
@@ -88,6 +89,7 @@ function App() {
         </div>
         <div className="bg-noise"></div>
         <div className="main">
+          <SeoManager />
           <NavBar2/>
           <ThemeToggle />
           <Routes>

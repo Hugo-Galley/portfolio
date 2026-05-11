@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export default function ScrollButton () {
@@ -54,5 +53,4 @@ const StyledWrapper = styled.div`
       transform: translateY(90%);
     }
   };`;
-
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import '../Styles/GithubButton.css';
 import { useLanguage } from '../context/LanguageContext';
 

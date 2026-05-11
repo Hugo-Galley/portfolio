@@ -4,7 +4,6 @@ import net from '../assets/Pages/NET_Core_Logo.svg.webp';
 import blazor from '../assets/Pages/Blazor.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
-import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Cartography() {

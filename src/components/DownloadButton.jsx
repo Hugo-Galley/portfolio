@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -78,4 +77,3 @@ const StyledWrapper = styled.div`
     transform: translate(3px, 3px);
     box-shadow: 0px 0px var(--main-color);
   }`;
-

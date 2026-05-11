@@ -58,6 +58,17 @@
   align-items: center;
   position: relative;
 }
+
+.navbar2-items button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .navbar2-items::before {
   content: '';
   background-color: var(--navbar-active);

@@ -1,26 +1,27 @@
 import git from '../assets/Contact/github.webp'
 import linkedin from '../assets/Contact/img.icons8.com.webp'
 import '../Styles/Contact.css'
-export default function Contact(){
-    return(
+
+export default function Contact() {
+    return (
         <div className='contact-container'>
             <a href="https://github.com/Hugo-Galley">
-            <div className="Github">
-                <img src={git} alt="Logo Github" />
-                <p>Hugo-Galley</p>
-            </div>   
-            </a>         
+                <div className="Github">
+                    <img src={git} alt="Logo Github" />
+                    <p>Hugo-Galley</p>
+                </div>
+            </a>
             <a href="mailto:contact@galleyhugo.com">
-            <div className='email'>
-                <p>Email</p>
-                <p>contact@galleyhugo.com</p>
-            </div>
+                <div className='email'>
+                    <p>Email</p>
+                    <p>contact@galleyhugo.com</p>
+                </div>
             </a>
             <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">
-            <div className="Linkedin">
-                <img src={linkedin} alt="logo Linkedin" />
-                <p>Hugo Galley</p>
-            </div>
+                <div className="Linkedin">
+                    <img src={linkedin} alt="logo Linkedin" />
+                    <p>Hugo Galley</p>
+                </div>
             </a>
 
         </div>

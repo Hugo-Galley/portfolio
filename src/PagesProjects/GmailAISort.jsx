@@ -4,7 +4,6 @@ import ollama from '../assets/Pages/ollama.png';
 import meta from '../assets/Pages/meta.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
-import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function GmailAiSort() {

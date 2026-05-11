@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export default function CloseModalButton() {
@@ -83,4 +82,3 @@ const StyledWrapper = styled.div`
       opacity: 1;
     }
   }`;
-

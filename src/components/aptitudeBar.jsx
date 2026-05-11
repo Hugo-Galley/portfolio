@@ -1,10 +1,10 @@
 import '../Styles/AptitudeBar.css'
 import { useLanguage } from '../context/LanguageContext';
 
-export default function AptitudeBar(){
+export default function AptitudeBar() {
     const { t } = useLanguage();
 
-    return(
+    return (
         <div className='backgroundBar'>
             <div className='bar'>
                 <p className='bar-items'>{t('aptitude.developer')}</p>

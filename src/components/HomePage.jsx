@@ -1,10 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import Herro from "./Herro";
-import AptitudeBar from "./aptitudeBar";
+import Hero from "./Hero";
+import AptitudeBar from "./AptitudeBar";
 import Card from "./Card";
-import Bento from "./bento";
-import Contact from "./contact";
+import Bento from "./Bento";
+import Contact from "./Contact";
 import CardWork from './CardWork';
 import Skills from './Skills';
 import Footer from "./Footer";
@@ -23,11 +24,27 @@ import pythonPackage from '../assets/Pages/Screenshot 2022-11-05 at 10.44.06 PM.
 
 export default function HomePage() {
   const { t } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const section = location.state?.scrollTo;
+    if (!section) {
+      return;
+    }
+
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    navigate('.', { replace: true, state: null });
+  }, [location.state, navigate]);
 
   return (
     <>
       <div id="Home">
-        <Herro/>
+        <Hero/>
       </div>
       
       <AptitudeBar/>
@@ -40,13 +57,13 @@ export default function HomePage() {
         <div className='work-app-container'>
           <CardWork 
             nom={t('work.softwareEngineerIntern')} 
-            duré={t('work.currently')} 
+            duree={t('work.currently')} 
             boite={"AXA"} 
             img={axa}
           />
           <CardWork 
             nom={t('work.devEngineerIntern')} 
-            duré={`17 ${t('work.weeks')}`} 
+            duree={`17 ${t('work.weeks')}`} 
             boite={"Uniformation"} 
             img={unif}
           />

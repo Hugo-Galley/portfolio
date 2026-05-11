@@ -4,14 +4,14 @@ const fr = {
     hello: "Hello,",
     iAm: "Je suis Hugo Galley",
     subtitle: "Développeur curieux, je crois en un code ouvert et collaboratif.",
-    aboutButton: "A Propos",
+    aboutButton: "A propos",
     workButton: "Mon Travail",
     cvButton: "Mon CV"
   },
 
   // Aptitude bar
   aptitude: {
-    developer: "Developer",
+    developer: "Developpeur",
     backend: "Backend",
     web: "Web",
     design: "Design"
@@ -19,7 +19,7 @@ const fr = {
 
   // About / Bento section
   about: {
-    title: "A Propos",
+    title: "A propos",
     whoAmI: "Qui suis-je ?",
     whoAmIText: "Je suis un jeune développeur passionné étudiant à l'EPSI, basé à Paris.",
     passions: "Mes Passions",
@@ -27,7 +27,7 @@ const fr = {
     sportText: "Je pratique la course à pied et j'ai réalisé plusieurs triathlons, ce qui me passionne vraiment.",
     travel: "Voyages",
     travelText: "J'aime les voyages, car j'adore bouger et découvrir le monde.",
-    music: "Musiques",
+    music: "Musique",
     musicText: "J'ai joué du violon pendant plus de 13 ans, ce qui a développé mon goût pour la musique."
   },
 
@@ -66,35 +66,35 @@ const fr = {
     studies: "Etudes",
     studiesDesc: "Actuellement étudiant en informatique à l'EPSI Paris",
     language: "Langage",
-    languageDesc: "Mon langage favoris est le C#",
-    framework: "FrameWork",
-    frameworkDesc: "Mon Framework favoris est React",
+    languageDesc: "Mon langage favori est le C#",
+    framework: "Framework",
+    frameworkDesc: "Mon framework favori est React",
     passions: "Passions",
-    passionsDesc: "Je suis passioné de sport, de musique et de voyages",
+    passionsDesc: "Je suis passionne de sport, de musique et de voyages",
     location: "Localisation",
-    locationDesc: "Je vis à Paris et travail en France"
+    locationDesc: "Je vis a Paris et travaille en France"
   },
 
   // Skills section
   skills: {
-    title: "Mes Skills"
+    title: "Mes competences"
   },
 
   // Work experience section
   work: {
-    title: "Experiences Profesionelles",
+    title: "Experiences professionnelles",
     currently: "Actuellement",
-    softwareEngineerIntern: "ALternant Ingénieur Logiciel",
-    devEngineerIntern: "Stagiaire Ingénieur en Développement",
+    softwareEngineerIntern: "Alternant ingenieur logiciel",
+    devEngineerIntern: "Stagiaire ingenieur en developpement",
     weeks: "semaines"
   },
 
   // Projects section
   projects: {
     title: "Mes Projets",
-    sportApp: "Application de Sport",
-    platformerGame: "Jeux Platformer",
-    cybersecurity: "Cybersecuritée"
+    sportApp: "Application de sport",
+    platformerGame: "Jeu de plateforme",
+    cybersecurity: "Cybersecurite"
   },
 
   // Contact section
@@ -119,18 +119,18 @@ const fr = {
 
   // Github button
   github: {
-    sourceCode: "Get source code"
+    sourceCode: "Voir le code source"
   },
 
   // Project pages
   projectPages: {
     phantom: {
       title: "Phantom",
-      description: "Il s'agit d'un projet de messagerie sécurisé comme Whatsap ou Signal. Le but étant de pouvoir echangé des messages ou n'importe qu'elle type de communications, de maniee chiffré de bout en bout."
+      description: "Il s'agit d'un projet de messagerie securisee comme WhatsApp ou Signal. Le but est de pouvoir echanger des messages ou d'autres types de communication de maniere chiffree de bout en bout."
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "Il s'agit de la création d'un package en python permetant de gerer facilement ses variables d'environement grace a un objet."
+      description: "Il s'agit de la creation d'un package Python permettant de gerer facilement ses variables d'environnement grace a un objet."
     },
     cartography: {
       title: "Cartographie",
@@ -138,7 +138,7 @@ const fr = {
     },
     instaClone: {
       title: "Instagram Clone",
-      techTitle: "Techno Used",
+      techTitle: "Technologies utilisees",
       description: "Il s'agit d'un site web développé en React, visant à reproduire Instagram. Le site se concentre sur le front-end et m'a permis d'apprendre les bases de React."
     },
     sportApp: {
