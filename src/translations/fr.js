@@ -3,7 +3,7 @@ const fr = {
   hero: {
     hello: "Hello,",
     iAm: "Je suis Hugo Galley",
-    subtitle: "Développeur curieux, je crois en un code ouvert et collaboratif.",
+    subtitle: "Développeur curieux, je crois que le code est fait pour être paratgé",
     aboutButton: "A propos",
     workButton: "Mon Travail",
     cvButton: "Mon CV"

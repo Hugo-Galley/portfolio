@@ -3,12 +3,14 @@ import CloseModalButton from './CloseModalButton';
 
 export default function ModalBento({ Title, text, hideModal }) {
     return (
-        <div className='ModalBox'>
-            <div className='headModal'>
-                <h1 id='TitleBento'>{Title}</h1>
-                <div id='closeButton' onClick={hideModal}><CloseModalButton /></div>
+        <article className='modal-card' role='dialog' aria-modal='true' aria-label={Title}>
+            <div className='modal-header'>
+                <h2 className='modal-title'>{Title}</h2>
+                <button type='button' className='close-button' onClick={hideModal} aria-label='Fermer la fenetre'>
+                    <CloseModalButton />
+                </button>
             </div>
-            <p>{text}</p>
-        </div>
+            <p className='modal-text'>{text}</p>
+        </article>
     );
 }

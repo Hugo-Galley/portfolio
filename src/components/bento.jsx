@@ -43,7 +43,7 @@ export default function Bento() {
                         key={block.id}
                         id={block.id}
                         ref={(el) => (modalRefs.current[block.id] = el)}
-                        className='ModalBox'
+                        className='modal-shell'
                         style={{ display: 'none' }}
                     >
                         <ModalBento Title={block.title} text={block.text} hideModal={hideModal} />
