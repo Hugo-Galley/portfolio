@@ -2,4 +2,4 @@ User-agent: *
 Disallow:
 
 # Sitemap
-Sitemap: https://www.galleyhugo.com/sitemap.xml
+Sitemap: https://galleyhugo.com/sitemap.xml

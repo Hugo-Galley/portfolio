@@ -12,12 +12,16 @@
 </script>
 
 <script>
-  (function() {
-  
-    if (window.location.pathname !== '/' && window.location.pathname !== '/index.html' && !window.location.hash) {
-      window.location.replace('/#' + window.location.pathname);
+  (function(l) {
+    if (l.search[1] === '/' ) {
+      var decoded = l.search.slice(1).split('&').map(function(s) {
+        return s.replace(/~and~/g, '&');
+      }).join('?');
+      window.history.replaceState(null, null,
+        l.pathname.slice(0, -1) + decoded + l.hash
+      );
     }
-  })();
+  }(window.location));
 </script>
    
   
@@ -25,15 +29,14 @@
     <link rel="icon" href="%PUBLIC_URL%/logo.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta property="og:title" content="Portfolio | Hugo Galley - Développeur" />
+    <meta property="og:title" content="Portfolio | Hugo Galley - Developpeur" />
     <meta name="author" content="Galley Hugo">
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.ico" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <meta name="description" content="Bienvenue sur mon portfolio ! Je suis Hugo Galley, développeur en troisième année d'études. Découvrez mes projets et mes compétences en développement web et logiciel." />
-    <meta name="keywords" content="Hugo Galley, développeur , portfolio, web, logiciel, développement" />
+    <meta name="description" content="Portfolio de Hugo Galley, developpeur logiciel et web. Decouvrez mes projets, mes competences et mon parcours." />
 
-    <meta property="og:description" content="Bienvenue sur mon portfolio ! Je suis Hugo Galley, développeur en troisième année d'études. Découvrez mes projets et mes compétences en développement web et logiciel." />
+    <meta property="og:description" content="Portfolio de Hugo Galley, developpeur logiciel et web. Decouvrez mes projets, mes competences et mon parcours." />
     <meta property="og:image" content="https://galleyhugo.com/preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -42,15 +45,16 @@
     <meta property="og:url" content="https://galleyhugo.com/">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Portfolio | Hugo Galley - Développeur">
-    <meta name="twitter:description" content="Bienvenue sur mon portfolio ! Je suis Hugo Galley, développeur en troisième année d'études. Découvrez mes projets et mes compétences en développement web et logiciel" />
+    <meta name="twitter:title" content="Portfolio | Hugo Galley - Developpeur">
+    <meta name="twitter:description" content="Portfolio de Hugo Galley, developpeur logiciel et web. Decouvrez mes projets, mes competences et mon parcours." />
     <meta name="twitter:image" content="https://galleyhugo.com/preview.png">
-    <meta name="twitter:image:alt" content="Portfolio Hugo Galley - Développeur">
+    <meta name="twitter:image:alt" content="Portfolio Hugo Galley - Developpeur">
 
     <link rel="canonical" href="https://galleyhugo.com/" />
-    <link rel="sitemap" href="https://galleyhugo.com/sitemap.xml" />
 
-    <title>Portfolio | Hugo Galley - Développeur</title>
+    <meta name="robots" content="index,follow" />
+
+    <title>Portfolio | Hugo Galley - Developpeur</title>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
