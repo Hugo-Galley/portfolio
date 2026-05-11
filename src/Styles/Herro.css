@@ -74,6 +74,7 @@
   color: transparent;
   margin-left: 0.5rem;
   font-weight: 500;
+  display: block;
 }
 
 .hero-subtitle {
