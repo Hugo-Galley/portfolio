@@ -46,7 +46,7 @@ export default function Herro() {
             <DownLoadButton/>
           </a>
         </div>
-        <div class="radial-glow"/>
+        <div className="radial-glow" />
       </div>
     </div>
   );
