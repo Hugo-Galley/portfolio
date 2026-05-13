@@ -1,18 +1,38 @@
-.language-box{
+.skills-track-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin: 80px 0 140px;
+}
 
-    height: 300px;
+.skills-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: skills-marquee 28s linear infinite;
+}
+
+@keyframes skills-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.language-box{
+    width: 220px;
+    height: 230px;
     align-items: center;
     text-align: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
-    margin-bottom: 150px;
-    margin-top: 100px;
-
 }
 .language-box-img{
     margin: auto;
     transition: filter 0.3s ease;
+    object-fit: contain;
 }
 
 /* Inverser uniquement le logo Linux en mode clair */
@@ -25,15 +45,18 @@
 }
 
 @media (max-width: 1000px) {
-    .language-box{
-
-        height: 300px;
-        margin-bottom: 100px;
-        margin-top: 100px;
-    
+    .skills-track-wrapper {
+        margin: 60px 0 110px;
     }
+
+    .language-box{
+        width: 190px;
+        height: 210px;
+    }
+
     .language-box-img{
-        width: 40%;
+        width: 110px;
+        height: 110px;
     }
     .language-box p{
         font-size: 1.3em;
@@ -42,17 +65,28 @@
 }
 @media (max-width: 700px) {
     .language-box{
-
-        height: 200px;
-        margin: auto;
-        margin-bottom: 100px;
-        margin-top: 100px;
+        width: 160px;
+        height: 180px;
         justify-content: space-between;
-    
     }
+
+    .language-box-img{
+        width: 90px;
+        height: 90px;
+    }
+
     .language-box p{
         margin-top: 20px;
         font-size: 1em;
-    
+    }
+
+    .skills-track {
+        animation-duration: 24s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skills-track {
+        animation: none;
     }
 }

@@ -18,8 +18,8 @@ import virus from '../assets/Card/virus.webp';
 import unif from '../assets/Card/unif.webp';
 import gmailAi from '../assets/Card/gmailAi.webp';
 import Sync from '../assets/Pages/SyncCard.png';
-import axa from '../assets/Card/AXA_Logo.svg-2.png';
-import phantom from '../assets/Card/phantom-card.png';
+import axa from '../assets/Card/AXA_Logo.webp';
+import phantom from '../assets/Card/phantom-card.webp';
 import pythonPackage from '../assets/Pages/Screenshot 2022-11-05 at 10.44.06 PM.webp';
 
 export default function HomePage() {

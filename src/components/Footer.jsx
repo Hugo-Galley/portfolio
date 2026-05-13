@@ -37,11 +37,11 @@ export default function Footer(){
             </div>
             <div className="footer-right">
                 <div className='div-media'>
-                    <img src={git} alt="logo Github" />
+                    <img src={git} alt="logo Github" width="30" height="30" loading="lazy" decoding="async" />
                     <a href='https://github.com/Hugo-Galley'>Github</a>
                 </div>
                 <div className='div-media'>
-                    <img src={lin} alt="logo Linkedin" />
+                    <img src={lin} alt="logo Linkedin" width="30" height="30" loading="lazy" decoding="async" />
                     <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Linkedin</a>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import '../Styles/Bento.css'
 import { useRef } from 'react'
-import me from '../assets/Bento/me.png'
+import me from '../assets/Bento/me.webp'
 import epsi from '../assets/Bento/epsi.webp'
 import cs from '../assets/Bento/cs.webp'
 import react from '../assets/Pages/react.webp'
@@ -52,7 +52,7 @@ export default function Bento() {
             </div>
 
             <div className='About-Responsive'>
-                <img src={me} alt="Me" />
+                <img src={me} alt="Me" loading="eager" decoding="async" fetchPriority="high" />
                 <div className='About-text'>
                     <div className='About-WhoAmi'>
                         <h2>{t('about.whoAmI')}</h2>
@@ -62,15 +62,15 @@ export default function Bento() {
                         <h2>{t('about.passions')}</h2>
                         <div>
                             <div>
-                                <h4>{t('about.sport')}</h4>
+                                <h3>{t('about.sport')}</h3>
                                 <p>{t('about.sportText')}</p>
                             </div>
                             <div>
-                                <h4>{t('about.travel')}</h4>
+                                <h3>{t('about.travel')}</h3>
                                 <p>{t('about.travelText')}</p>
                             </div>
                             <div>
-                                <h4>{t('about.music')}</h4>
+                                <h3>{t('about.music')}</h3>
                                 <p>{t('about.musicText')}</p>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ export default function Bento() {
                 <div className="container-horizontale">
                     <div className="container-verticale-long" onClick={() => showModal('modal1')}>
                         <p className="verticale-titre">{t('bentoCards.me')}</p>
-                        <img src={me} alt="Me" />
+                        <img src={me} alt="Me" loading="lazy" decoding="async" />
                         <p className="verticale-desc">{t('bentoCards.meDesc')}</p>
                     </div>
                     <div className="container-verticale-large" onClick={() => showModal('modal2')}>
@@ -89,12 +89,12 @@ export default function Bento() {
                             <p className="verticale-titre">{t('bentoCards.studies')}</p>
                             <p className="verticale-desc">{t('bentoCards.studiesDesc')}</p>
                         </div>
-                        <img src={epsi} alt="Epsi Logo" />
+                        <img src={epsi} alt="Epsi Logo" loading="lazy" decoding="async" />
                     </div>
                 </div>
                 <div className="container-horizontale-2">
                     <div className="container-verticale-small-1" onClick={() => showModal('modal3')}>
-                        <img src={cs} alt="C# logo" />
+                        <img src={cs} alt="C# logo" loading="lazy" decoding="async" />
                         <p className="verticale-titre">{t('bentoCards.language')}</p>
                         <p className="verticale-desc">{t('bentoCards.languageDesc')}</p>
 
@@ -102,7 +102,7 @@ export default function Bento() {
                     <div className="container-verticale-small-3" onClick={() => showModal('modal4')}>
                         <p className="verticale-titre">{t('bentoCards.framework')}</p>
                         <p className="verticale-desc">{t('bentoCards.frameworkDesc')}</p>
-                        <img src={react} alt="React Logo" id="reactLogo" />
+                        <img src={react} alt="React Logo" id="reactLogo" loading="lazy" decoding="async" />
                     </div>
                 </div>
                 <div className="container-horizontale">
@@ -111,12 +111,12 @@ export default function Bento() {
                             <p className="verticale-titre">{t('bentoCards.passions')}</p>
                             <p className="verticale-desc">{t('bentoCards.passionsDesc')}</p>
                         </div>
-                        <img src={wallet} alt="Wallet" />
+                        <img src={wallet} alt="Wallet" loading="lazy" decoding="async" />
                     </div>
                     <div className="container-verticale-small-2" onClick={() => showModal('modal6')}>
                         <p className="verticale-titre">{t('bentoCards.location')}</p>
                         <p className="verticale-desc">{t('bentoCards.locationDesc')}</p>
-                        <img src={france} alt="France Flag" />
+                        <img src={france} alt="France Flag" loading="lazy" decoding="async" />
                     </div>
                 </div>
 

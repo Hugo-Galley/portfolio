@@ -295,7 +295,7 @@
         transform: translateY(-5px);
       }
       
-      .About-Passions h4 {
+      .About-Passions h3 {
         font-size: 1.3rem;
         margin-bottom: 1rem;
         color: var(--text-color);

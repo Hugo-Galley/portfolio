@@ -1,25 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import NavBar2 from './components/NavBar2';
 import ThemeToggle from './components/ThemeToggle';
 import SeoManager from './components/SeoManager';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import HomePage from './components/HomePage';
+import NotFound from './components/NotFound';
 
 import './Styles/App.css';
 
-import Cartography from './PagesProjects/Cartography';
-import InstaGramClone from './PagesProjects/InstaGramClone';
-import SportApplication from './PagesProjects/SportApplication';
-import AdminInterface from './PagesProjects/AdminInterface';
-import PlatformerGame from './PagesProjects/PlaformerGame';
-import Ransomware from './PagesProjects/Ransomware';
-import GmailAiSort from './PagesProjects/GmailAISort';
-import SyncCRD2CRM from './PagesProjects/SyncCRD2CRM';
-import NotFound from './components/NotFound';
-import Phantom from './PagesProjects/Phantom';
-import EasyWorkEnv from './PagesProjects/EasyWorkEnv';
+const Cartography = lazy(() => import('./PagesProjects/Cartography'));
+const InstaGramClone = lazy(() => import('./PagesProjects/InstaGramClone'));
+const SportApplication = lazy(() => import('./PagesProjects/SportApplication'));
+const AdminInterface = lazy(() => import('./PagesProjects/AdminInterface'));
+const PlatformerGame = lazy(() => import('./PagesProjects/PlaformerGame'));
+const Ransomware = lazy(() => import('./PagesProjects/Ransomware'));
+const GmailAiSort = lazy(() => import('./PagesProjects/GmailAISort'));
+const SyncCRD2CRM = lazy(() => import('./PagesProjects/SyncCRD2CRM'));
+const Phantom = lazy(() => import('./PagesProjects/Phantom'));
+const EasyWorkEnv = lazy(() => import('./PagesProjects/EasyWorkEnv'));
 
 
 
@@ -92,6 +92,7 @@ function App() {
           <SeoManager />
           <NavBar2/>
           <ThemeToggle />
+          <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<HomePage />} />
           
@@ -107,6 +108,7 @@ function App() {
           <Route path='/easyworkenv' element={<EasyWorkEnv/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>
+        </Suspense>
       </div>
     </Router>
     </LanguageProvider>

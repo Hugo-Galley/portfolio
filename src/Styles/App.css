@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Faculty Glyphic';
-    src: url('/public/fonts/Geist.ttf') format('truetype');
+    src: url('../assets/fonts/Geist.ttf') format('truetype');
     font-display: swap;
   }
 

@@ -7,7 +7,7 @@ export default function Contact() {
         <div className='contact-container'>
             <a href="https://github.com/Hugo-Galley">
                 <div className="Github">
-                    <img src={git} alt="Logo Github" />
+                    <img src={git} alt="Logo Github" width="42" height="42" loading="lazy" decoding="async" />
                     <p>Hugo-Galley</p>
                 </div>
             </a>
@@ -19,7 +19,7 @@ export default function Contact() {
             </a>
             <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">
                 <div className="Linkedin">
-                    <img src={linkedin} alt="logo Linkedin" />
+                    <img src={linkedin} alt="logo Linkedin" width="42" height="42" loading="lazy" decoding="async" />
                     <p>Hugo Galley</p>
                 </div>
             </a>

@@ -8,7 +8,7 @@ export default function Card({titre,categorie,image,lien}){
       };
     return(
         <div className="Card" onClick={handleClick}>
-            <img src={image} alt="PhotoCard" />
+            <img src={image} alt="PhotoCard" width="400" height="220" loading="lazy" decoding="async" />
             <div className='bloc-Card'>
                 <p className='titre'>{titre}</p>
                 <p className='categorie'>{categorie}</p>
