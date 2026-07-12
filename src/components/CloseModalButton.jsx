@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function CloseModalButton() {
+export default function CloseModalButton({ onClick, ariaLabel }) {
   return (
-    <StyledWrapper>
-      <button className="button">
+    <StyledWrapper className="close-button">
+      <button className="button" type="button" onClick={onClick} aria-label={ariaLabel}>
         <span className="X" />
         <span className="Y" />
         <div className="close">Close</div>

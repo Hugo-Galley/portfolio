@@ -4,16 +4,18 @@ import ctk from '../assets/Pages/customctk.webp';
 import sqlite from '../assets/Pages/sqlite.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AdminInterface() {
+    const { t } = useLanguage();
     return (
         <div className='project-container'>
             <div className='project-card'>
-                <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
+                <img src={imgtest} alt={t('projectPages.adminInterface.title') + ' - Aperçu'} className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>AdminInterface</h2>
+                    <h1 className='project-title'>{t('projectPages.adminInterface.title')}</h1>
                     <p className='project-description'>
-                        Ceci est une interface de connexion pour un laboratoire simulé visant à tester l'utilisation de la bibliothèque graphique CustomTkinter en Python.
+                        {t('projectPages.adminInterface.description')}
                     </p>
                     <div className='tech-stack'>
                         <div className='tech-item'>

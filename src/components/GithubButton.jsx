@@ -5,7 +5,7 @@ export default function GithubButton() {
   const { t } = useLanguage();
   
   return (
-    <button className="github-button"> 
+    <span className="github-button"> 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <g strokeWidth={0} id="SVGRepo_bgCarrier" />
         <g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier" />
@@ -16,6 +16,6 @@ export default function GithubButton() {
         </g>
       </svg>
       {t('github.sourceCode')}
-    </button>
+    </span>
   );
 }

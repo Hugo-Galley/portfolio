@@ -14,7 +14,7 @@ const Cartography = lazy(() => import('./PagesProjects/Cartography'));
 const InstaGramClone = lazy(() => import('./PagesProjects/InstaGramClone'));
 const SportApplication = lazy(() => import('./PagesProjects/SportApplication'));
 const AdminInterface = lazy(() => import('./PagesProjects/AdminInterface'));
-const PlatformerGame = lazy(() => import('./PagesProjects/PlaformerGame'));
+const PlatformerGame = lazy(() => import('./PagesProjects/PlatformerGame'));
 const Ransomware = lazy(() => import('./PagesProjects/Ransomware'));
 const GmailAiSort = lazy(() => import('./PagesProjects/GmailAISort'));
 const SyncCRD2CRM = lazy(() => import('./PagesProjects/SyncCRD2CRM'));
@@ -25,22 +25,24 @@ const EasyWorkEnv = lazy(() => import('./PagesProjects/EasyWorkEnv'));
 
 function App() {
   useEffect(() => {
-    const navItems = document.querySelectorAll('.navbar2-items');
-    const navClickHandlers = Array.from(navItems).map((item) => {
-      const handler = () => {
-        navItems.forEach((el) => el.classList.remove('active'));
-        item.classList.add('active');
-      };
-      item.addEventListener('click', handler);
-      return { item, handler };
-    });
-
+    const cursorWrapper = document.querySelector('.cursor-wrapper');
     const cursor = document.querySelector('.cursor');
 
-    if (cursor) {
+    const isTouchOrMobile = 
+      'ontouchstart' in window || 
+      navigator.maxTouchPoints > 0 || 
+      window.innerWidth <= 1200;
+
+    if (isTouchOrMobile) {
+      if (cursorWrapper) {
+        cursorWrapper.style.display = 'none';
+      }
+      return;
+    }
+
+    if (cursorWrapper && cursor) {
       const handleMouseMove = (e) => {
-        cursor.style.top = `${e.clientY - 20}px`;
-        cursor.style.left = `${e.clientX - 20}px`;
+        cursorWrapper.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
       };
 
       const handleClick = () => {
@@ -51,11 +53,11 @@ function App() {
       };
 
       const handleMouseEnter = () => {
-        cursor.style.display = 'flex';
+        cursorWrapper.style.display = 'flex';
       };
 
       const handleMouseLeave = () => {
-        cursor.style.display = 'none';
+        cursorWrapper.style.display = 'none';
       };
 
       document.addEventListener('mousemove', handleMouseMove);
@@ -64,24 +66,21 @@ function App() {
       document.addEventListener('mouseleave', handleMouseLeave);
 
       return () => {
-        navClickHandlers.forEach(({ item, handler }) => item.removeEventListener('click', handler));
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('click', handleClick);
         document.removeEventListener('mouseenter', handleMouseEnter);
         document.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
-
-    return () => {
-      navClickHandlers.forEach(({ item, handler }) => item.removeEventListener('click', handler));
-    };
-}, []);
+  }, []);
 
   return (
     <ThemeProvider>
       <LanguageProvider>
       <Router>
-        <div className='cursor'></div>
+        <div className='cursor-wrapper'>
+          <div className='cursor'></div>
+        </div>
         <div className="bg-blobs">
           <div className="blob blob-1"></div>
           <div className="blob blob-2"></div>

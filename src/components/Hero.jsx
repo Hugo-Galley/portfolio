@@ -1,4 +1,4 @@
-import '../Styles/Herro.css'
+import '../Styles/Hero.css'
 import DownLoadButton from './DownloadButton';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';

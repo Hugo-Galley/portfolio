@@ -14,7 +14,7 @@ export default function GmailAiSort() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.gmailAiSort.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.gmailAiSort.title')}</h1>
                     <p className='project-description'>
                         {t('projectPages.gmailAiSort.description')}
                     </p>

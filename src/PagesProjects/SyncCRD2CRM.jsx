@@ -13,7 +13,7 @@ export default function SyncCRD2CRM() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.syncCrd2Crm.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.syncCrd2Crm.title')}</h1>
                     <p className='project-description'>
                         {t('projectPages.syncCrd2Crm.description')}
                     </p>

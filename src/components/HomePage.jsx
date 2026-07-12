@@ -49,11 +49,11 @@ export default function HomePage() {
       
       <AptitudeBar/>
       <div className="projectPage">
-        <h1 id="AboutMe">{t('about.title')}</h1>
+        <h2 id="AboutMe">{t('about.title')}</h2>
         <Bento/>
-        <h1 id='MySkills'>{t('skills.title')}</h1>
+        <h2 id='MySkills'>{t('skills.title')}</h2>
         <Skills/>
-        <h1 id='WorkAt'>{t('work.title')}</h1>
+        <h2 id='WorkAt'>{t('work.title')}</h2>
         <div className='work-app-container'>
           <CardWork 
             nom={t('work.softwareEngineerIntern')} 
@@ -68,7 +68,7 @@ export default function HomePage() {
             img={unif}
           />
         </div>
-        <h1 id="Projects">{t('projects.title')}</h1>
+        <h2 id="Projects">{t('projects.title')}</h2>
         <div className="grid-project">
           <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom'}/>
           <Card titre={"EasyWorkEnv"} categorie={"Package Python"} image={pythonPackage} lien={'/easyworkenv'}/>
@@ -80,7 +80,7 @@ export default function HomePage() {
           <Card titre={"GmailAiSort"} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort'} />
           <Card titre={"SyncCRD2CRM"} categorie={".NET | Blazor"} image={Sync} lien={'/sync-crd-crm'}/>
         </div>
-        <h1 id="Contact">{t('contact.title')}</h1>
+        <h2 id="Contact">{t('contact.title')}</h2>
         <p id="contactText">{t('contact.subtitle')}</p>
         <Contact/>
       </div>

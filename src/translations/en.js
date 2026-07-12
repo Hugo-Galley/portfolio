@@ -124,6 +124,10 @@ const en = {
 
   // Project pages
   projectPages: {
+    adminInterface: {
+      title: "AdminInterface",
+      description: "This is a login interface for a simulated laboratory designed to test the use of the CustomTkinter graphical library in Python."
+    },
     phantom: {
       title: "Phantom",
       description: "This is a secure messaging project like WhatsApp or Signal. The goal is to be able to exchange messages or any type of communication in an end-to-end encrypted manner."

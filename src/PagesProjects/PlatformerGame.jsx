@@ -13,7 +13,7 @@ export default function PlatformerGame() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.platformerGame.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.platformerGame.title')}</h1>
                     <div className='tech-stack'>
                         <div className='tech-item'>
                             <img src={pyth} alt="Python" />

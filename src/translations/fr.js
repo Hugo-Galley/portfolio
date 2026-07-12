@@ -3,7 +3,7 @@ const fr = {
   hero: {
     hello: "Hello,",
     iAm: "Je suis Hugo Galley",
-    subtitle: "Développeur curieux, je crois que le code est fait pour être paratgé",
+    subtitle: "Développeur curieux, je crois que le code est fait pour être partagé",
     aboutButton: "A propos",
     workButton: "Mon Travail",
     cvButton: "Mon CV"
@@ -124,6 +124,10 @@ const fr = {
 
   // Project pages
   projectPages: {
+    adminInterface: {
+      title: "AdminInterface",
+      description: "Ceci est une interface de connexion pour un laboratoire simulé visant à tester l'utilisation de la bibliothèque graphique CustomTkinter en Python."
+    },
     phantom: {
       title: "Phantom",
       description: "Il s'agit d'un projet de messagerie securisee comme WhatsApp ou Signal. Le but est de pouvoir echanger des messages ou d'autres types de communication de maniere chiffree de bout en bout."

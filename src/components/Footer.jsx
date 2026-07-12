@@ -8,19 +8,11 @@ export default function Footer(){
     const date = new Date();
     const year = date.getFullYear();
 
-    const handleLanguageKeyDown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleLanguage();
-        }
-    };
-
     return(
         <div className="footer-main">
             <button 
                 className="language-selector" 
                 onClick={toggleLanguage}
-                onKeyDown={handleLanguageKeyDown}
                 aria-label={`Switch to ${language === 'fr' ? 'English' : 'French'}`}
             >
                 <span className={`flag-option ${language === 'fr' ? 'active' : ''}`}>
@@ -31,7 +23,7 @@ export default function Footer(){
                 </span>
             </button>
             <div className="footer-left">
-                <h1>{t('footer.info')}</h1>
+                <h2>{t('footer.info')}</h2>
                 <p>{t('footer.copyright')} {year} </p>
                 <p>contact@galleyhugo.com</p>
             </div>

@@ -14,7 +14,7 @@ export default function Cartography() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.cartography.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.cartography.title')}</h1>
                     <p className='project-description'>
                         {t('projectPages.cartography.description')}
                     </p>

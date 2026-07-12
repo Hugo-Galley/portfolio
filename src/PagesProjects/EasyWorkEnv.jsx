@@ -14,7 +14,7 @@ export default function EasyWorkEnv() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.easyWorkEnv.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.easyWorkEnv.title')}</h1>
                     <p className='project-description'>
                        {t('projectPages.easyWorkEnv.description')}
                     </p>

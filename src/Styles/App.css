@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'Faculty Glyphic';
+    font-family: 'Geist';
     src: url('../assets/fonts/Geist.ttf') format('truetype');
     font-display: swap;
-  }
+}
 
 :root {
   /* Variables pour le mode sombre (défaut) */
@@ -89,7 +89,7 @@
     padding: 0;
     box-sizing: border-box; 
     font-weight: 500;
-    font-family: "Faculty Glyphic";
+    font-family: 'Geist';
 }
 html, body {
     background-color: var(--bg-color);
@@ -97,7 +97,6 @@ html, body {
     color: var(--text-color);
     scroll-behavior: smooth;
     overflow-x: hidden;
-    cursor: none;
     min-height: 100vh;
     z-index: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -194,7 +193,7 @@ a{
 .projectPage{
     margin-top: 50px;
 }
-.projectPage h1{
+.projectPage h1, .projectPage h2{
     color: var(--text-color);
     text-align: center;
     font-size: 4em;
@@ -216,19 +215,30 @@ a{
     flex-direction: row;
     justify-content: center;
 }
+.cursor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 200000;
+    will-change: transform;
+    mix-blend-mode: difference;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
 .cursor {
     width: 40px;
     height: 40px;
     border: 1px dashed var(--cursor-border);
     border-radius: 50%;
-    position: fixed;
-    z-index: 200000;
+    position: relative;
     pointer-events: none;
     animation: Anime1 1.5s infinite alternate;
-    mix-blend-mode: difference;
-    will-change: transform;
     transition: border-color 0.3s ease;
-  }
+}
 .cursor::before{
     content: '';
     position: absolute;
@@ -242,7 +252,7 @@ a{
     transition: background 0.3s ease;
 }
 .expand{
-    position: fixed;
+    position: absolute;
     animation: Anime2 .5s;
     background: var(--cursor-dot);
     border: 1px solid var(--cursor-dot);
@@ -279,7 +289,7 @@ a{
         flex-direction: column;
         align-items: center;
     }
-    .cursor{
+    .cursor-wrapper{
         display: none;
     }
     body{

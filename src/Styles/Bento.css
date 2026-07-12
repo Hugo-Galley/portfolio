@@ -320,28 +320,27 @@
       .About-WhoAmi { animation-delay: 0.1s; }
       .About-Passions { animation-delay: 0.3s; }
       .About-Objectifs { animation-delay: 0.5s; }
-      
-      /* Media Queries */
-      @media (max-width: 1024px) {
-        .About-Responsive {
-          flex-direction: column;
-          align-items: center;
-          padding: 2rem 1rem;
-          gap: 2rem;
-        }
-      
-        .About-Responsive img {
-          max-width: 300px;
-        }
-      
-        .About-text {
-          width: 100%;
-          gap: 2rem;
-        }
-      
-        .About-Passions > div {
-          grid-template-columns: 1fr;
-        }
-      }
-      
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .About-Responsive {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .About-Responsive img {
+    max-width: 300px;
+  }
+
+  .About-text {
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .About-Passions > div {
+    grid-template-columns: 1fr;
+  }
 }

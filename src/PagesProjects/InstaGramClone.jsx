@@ -13,7 +13,7 @@ export default function InstaGramClone() {
             <div className='project-card'>
                 <img src={imgtest} alt="Aperçu du projet" className='project-image' />
                 <div className='project-info'>
-                    <h2 className='project-title'>{t('projectPages.instaClone.title')}</h2>
+                    <h1 className='project-title'>{t('projectPages.instaClone.title')}</h1>
                     <h3 className='tech-title'>{t('projectPages.instaClone.techTitle')}</h3>
                     <div className='tech-stack'>
                         <div className='tech-item'>

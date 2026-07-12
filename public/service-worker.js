@@ -16,6 +16,9 @@ self.addEventListener('fetch', (event) => {
           return response; 
         }
         return fetch(event.request).then((networkResponse) => {
+          if (!networkResponse || !networkResponse.ok) {
+            return networkResponse;
+          }
           return caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, networkResponse.clone());
             return networkResponse;
