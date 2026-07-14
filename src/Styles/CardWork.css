@@ -1,3 +1,8 @@
+.work-wrapper {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
 /* Container principal */
 .work-container {
     width: 300px;
@@ -9,11 +14,9 @@
     padding: 20px;
     overflow: hidden;
     text-align: center;
-    margin-right: 100px;
-    margin-left: 100px;
     color: var(--text-color);
     justify-content: space-around;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease;
   }
 
   [data-theme="light"] .work-container {
@@ -83,7 +86,7 @@
   
 
   @media (max-width: 1068px) {
-    .work-container {
+    .work-wrapper {
       margin-bottom: 100px;
     }
   }

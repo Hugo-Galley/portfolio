@@ -60,12 +60,14 @@ export default function HomePage() {
             duree={t('work.currently')} 
             boite={"AXA"} 
             img={axa}
+            desc={t('work.axaDesc')}
           />
           <CardWork 
             nom={t('work.devEngineerIntern')} 
-            duree={`17 ${t('work.weeks')}`} 
+            duree={`2 ${t('work.stages')}`} 
             boite={"Uniformation"} 
             img={unif}
+            desc={t('work.unifDesc')}
           />
         </div>
         <h2 id="Projects">{t('projects.title')}</h2>

@@ -86,7 +86,8 @@ const fr = {
     currently: "Actuellement",
     softwareEngineerIntern: "Alternant ingenieur logiciel",
     devEngineerIntern: "Stagiaire ingenieur en developpement",
-    weeks: "semaines"
+    weeks: "semaines",
+    stages: "stages"
   },
 
   // Projects section

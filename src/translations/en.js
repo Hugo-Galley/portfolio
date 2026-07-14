@@ -86,7 +86,8 @@ const en = {
     currently: "Currently",
     softwareEngineerIntern: "Software Engineer Apprentice",
     devEngineerIntern: "Development Engineer Intern",
-    weeks: "weeks"
+    weeks: "weeks",
+    stages: "internships",
   },
 
   // Projects section
