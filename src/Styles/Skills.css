@@ -1,92 +1,164 @@
 .skills-track-wrapper {
     width: 100%;
     overflow: hidden;
-    margin: 80px 0 140px;
+    margin: 40px 0 100px;
+    padding: 60px 0; /* Plenty of room for vertical pop and shadow */
+    position: relative;
+    /* Mask to fade edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .skills-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 3rem;
     width: max-content;
-    animation: skills-marquee 28s linear infinite;
+    padding: 10px;
+    will-change: transform;
 }
 
-@keyframes skills-marquee {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-.language-box{
-    width: 220px;
-    height: 230px;
+.language-box {
+    width: 200px;
+    height: 220px;
     align-items: center;
     text-align: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    background: var(--card-bg, rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    position: relative;
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+    transform-style: preserve-3d;
 }
-.language-box-img{
+
+[data-theme="light"] .language-box {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.language-box:hover {
+    box-shadow: -15px 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .language-box:hover {
+    box-shadow: -15px 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.language-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+.language-box:hover::before {
+    opacity: 1;
+}
+
+.language-box-img {
     margin: auto;
-    transition: filter 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     object-fit: contain;
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.2));
+}
+
+.language-box:hover .language-box-img {
+    transform: scale(1.2) translateZ(30px);
+    filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.4));
+}
+
+[data-theme="light"] .language-box:hover .language-box-img {
+    filter: drop-shadow(-10px 15px 15px rgba(0,0,0,0.15));
 }
 
 /* Inverser uniquement le logo Linux en mode clair */
 [data-theme="light"] .language-box:has(img[alt*="Linux"]) .language-box-img {
     filter: brightness(0) saturate(100%);
 }
-.language-box p{
-    font-size: 1.7em;
 
+.language-box p {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: all 0.4s ease;
+    margin-bottom: 20px;
+    z-index: 2;
+}
+
+.language-box:hover p {
+    transform: translateZ(20px);
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+[data-theme="light"] .language-box:hover p {
+    color: #000;
+    text-shadow: none;
 }
 
 @media (max-width: 1000px) {
     .skills-track-wrapper {
-        margin: 60px 0 110px;
+        margin: 20px 0 60px;
     }
 
-    .language-box{
-        width: 190px;
-        height: 210px;
+    .language-box {
+        width: 170px;
+        height: 190px;
     }
 
-    .language-box-img{
-        width: 110px;
-        height: 110px;
+    .language-box-img {
+        width: 80px;
+        height: 80px;
     }
-    .language-box p{
-        font-size: 1.3em;
     
+    .language-box p {
+        font-size: 1.2em;
     }
 }
+
 @media (max-width: 700px) {
-    .language-box{
-        width: 160px;
-        height: 180px;
-        justify-content: space-between;
+    .skills-track-wrapper {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+    
+    .language-box {
+        width: 140px;
+        height: 160px;
     }
 
-    .language-box-img{
-        width: 90px;
-        height: 90px;
+    .language-box-img {
+        width: 60px;
+        height: 60px;
     }
 
-    .language-box p{
-        margin-top: 20px;
+    .language-box p {
         font-size: 1em;
+        margin-bottom: 15px;
     }
 
     .skills-track {
         animation-duration: 24s;
+        gap: 2rem;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .skills-track {
-        animation: none;
-    }
-}
+
