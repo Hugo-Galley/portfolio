@@ -88,6 +88,8 @@ const en = {
     devEngineerIntern: "Development Engineer Intern",
     weeks: "weeks",
     stages: "internships",
+    unifDesc: "Over two internships, I developed an end-to-end .NET application monitoring tool (DB, API, UI, CI/CD). I also created a Windows service and a Blazor interface to synchronize an internal tool with Dynamics 365 CRM, significantly improving user efficiency.",
+    axaDesc: "Software Engineer Apprentice."
   },
 
   // Projects section
@@ -166,6 +168,13 @@ const en = {
       title: "SyncCRD2CRM",
       description: "This is a synchronization service between the company's internal tools (CRD) and Microsoft's Dynamics 365 CRM. The service comes with a UI for mapping between the two, as well as a catch-up batch to realign data between CRD and CRM."
     }
+  },
+
+  // Open Source section
+  openSource: {
+    title: "Open Source",
+    leafwikiRole: "Contributor",
+    leafwikiDesc: "Implemented part of the DevOps pipeline (scripts, Docker tags, CI/CD), developed features like custom CSS support, and beta-tested pre-releases."
   }
 };
 

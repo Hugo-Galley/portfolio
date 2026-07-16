@@ -1,0 +1,107 @@
+.os-wrapper {
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+/* Container principal */
+.os-container {
+    width: 300px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--card-shadow);
+    border-radius: 15px;
+    padding: 20px;
+    overflow: hidden;
+    text-align: center;
+    color: var(--text-color);
+    justify-content: space-around;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[data-theme="light"] .os-container {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.os-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--card-shine),
+        transparent
+    );
+    transition: 0.5s;
+    pointer-events: none; 
+}
+.os-container:hover::after {
+    left: 0;
+}
+  
+.os-img-container {
+    width: 200px;
+    height: 150px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.os-img-container img, .os-img-container svg {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+  
+.os-nom {
+    color: var(--text-color);
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+  
+.os-role {
+    color: var(--text-color);
+    font-size: 16px;
+    margin: 5px 0;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+  
+.os-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.039);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-top: 10px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .os-stars {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.star-icon {
+    color: #f1c40f;
+}
+
+@media (max-width: 1068px) {
+    .os-wrapper {
+        margin-bottom: 100px;
+    }
+}

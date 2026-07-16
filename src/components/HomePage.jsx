@@ -7,6 +7,7 @@ import Card from "./Card";
 import Bento from "./Bento";
 import Contact from "./Contact";
 import CardWork from './CardWork';
+import CardOpenSource from './CardOpenSource';
 import Skills from './Skills';
 import Footer from "./Footer";
 
@@ -68,6 +69,15 @@ export default function HomePage() {
             boite={"Uniformation"} 
             img={unif}
             desc={t('work.unifDesc')}
+          />
+        </div>
+        <h2 id='OpenSource'>{t('openSource.title')}</h2>
+        <div className='work-app-container'>
+          <CardOpenSource 
+            nom="LeafWiki" 
+            role={t('openSource.leafwikiRole')}
+            repo="perber/leafwiki" 
+            desc={t('openSource.leafwikiDesc')} 
           />
         </div>
         <h2 id="Projects">{t('projects.title')}</h2>

@@ -87,7 +87,9 @@ const fr = {
     softwareEngineerIntern: "Alternant ingenieur logiciel",
     devEngineerIntern: "Stagiaire ingenieur en developpement",
     weeks: "semaines",
-    stages: "stages"
+    stages: "stages",
+    unifDesc: "Lors de mes deux stages, j'ai développé un outil complet de monitoring du parc applicatif (.NET) de bout en bout (BDD, API, UI, CI/CD). J'ai également créé un service Windows et une interface Blazor pour synchroniser un outil interne avec Dynamics 365 CRM, améliorant grandement la vie des utilisateurs.",
+    axaDesc: "Alternance en tant qu'ingénieur logiciel."
   },
 
   // Projects section
@@ -166,6 +168,13 @@ const fr = {
       title: "SyncCRD2CRM",
       description: "Il s'agit d'un service de synchronisation entre les outils internes de l'entreprise (CRD) et le CRM Dynamics 365 de Microsoft. Le service est accompagné d'une IHM pour faire le mapping entre les deux, ainsi que d'un batch de rattrapage pour remettre d'équerre les données entre CRD et CRM."
     }
+  },
+
+  // Open Source section
+  openSource: {
+    title: "Open Source",
+    leafwikiRole: "Contributeur",
+    leafwikiDesc: "Mise en place d'une partie du pipeline DevOps (scripts, Docker, CI/CD), ajout de fonctionnalités comme le CSS personnalisé, et rôle de beta-testeur."
   }
 };
 
