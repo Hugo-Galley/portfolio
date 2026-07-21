@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -100,55 +100,62 @@ const SEO_TRANSLATIONS = {
   },
 };
 
-function setMeta(name, content, attribute = 'name') {
-  const selector = `meta[${attribute}="${name}"]`;
-  let tag = document.head.querySelector(selector);
-  if (!tag) {
-    tag = document.createElement('meta');
-    tag.setAttribute(attribute, name);
-    document.head.appendChild(tag);
-  }
-  tag.setAttribute('content', content);
-}
-
-function setCanonical(href) {
-  let link = document.head.querySelector('link[rel="canonical"]');
-  if (!link) {
-    link = document.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    document.head.appendChild(link);
-  }
-  link.setAttribute('href', href);
-}
-
 export default function SeoManager() {
   const location = useLocation();
   const { language } = useLanguage();
 
-  useEffect(() => {
-    const translations = SEO_TRANSLATIONS[language] || SEO_TRANSLATIONS['en'];
-    const seo = translations[location.pathname] || {
-      title: language === 'fr' ? 'Page introuvable | Hugo Galley' : 'Page Not Found | Hugo Galley',
-      description: language === 'fr' ? 'La page demandée est introuvable.' : 'The requested page could not be found.',
-      noIndex: true,
-    };
+  const translations = SEO_TRANSLATIONS[language] || SEO_TRANSLATIONS['en'];
+  const seo = translations[location.pathname] || {
+    title: language === 'fr' ? 'Page introuvable | Hugo Galley' : 'Page Not Found | Hugo Galley',
+    description: language === 'fr' ? 'La page demandée est introuvable.' : 'The requested page could not be found.',
+    noIndex: true,
+  };
 
-    const absoluteUrl = `${SITE_URL}${location.pathname}`;
+  const absoluteUrl = `${SITE_URL}${location.pathname}`;
 
-    document.title = seo.title;
-    setCanonical(absoluteUrl);
-    setMeta('description', seo.description);
-    setMeta('og:title', seo.title, 'property');
-    setMeta('og:description', seo.description, 'property');
-    setMeta('og:type', 'website', 'property');
-    setMeta('og:url', absoluteUrl, 'property');
-    setMeta('og:image', DEFAULT_IMAGE, 'property');
-    setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:title', seo.title);
-    setMeta('twitter:description', seo.description);
-    setMeta('twitter:image', DEFAULT_IMAGE);
-    setMeta('robots', seo.noIndex ? 'noindex, nofollow' : 'index, follow');
-  }, [location.pathname, language]);
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': location.pathname === '/' ? 'ProfilePage' : 'WebPage',
+    name: seo.title,
+    description: seo.description,
+    url: absoluteUrl,
+    ...(location.pathname === '/' && {
+      mainEntity: {
+        '@type': 'Person',
+        name: 'Hugo Galley',
+        jobTitle: language === 'fr' ? 'Développeur' : 'Developer',
+        url: SITE_URL,
+      },
+    }),
+  };
 
-  return null;
+  return (
+    <Helmet>
+      <html lang={language} />
+      <title>{seo.title}</title>
+      <link rel="canonical" href={absoluteUrl} />
+
+      <meta name="description" content={seo.description} />
+      <meta name="robots" content={seo.noIndex ? 'noindex, nofollow' : 'index, follow'} />
+
+      <meta property="og:title" content={seo.title} />
+      <meta property="og:description" content={seo.description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={absoluteUrl} />
+      <meta property="og:image" content={DEFAULT_IMAGE} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={seo.title} />
+      <meta name="twitter:description" content={seo.description} />
+      <meta name="twitter:image" content={DEFAULT_IMAGE} />
+      <meta name="twitter:image:alt" content={seo.title} />
+
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+    </Helmet>
+  );
 }
