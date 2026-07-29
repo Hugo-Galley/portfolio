@@ -41,7 +41,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .herro-description {
@@ -54,15 +54,15 @@
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  margin-bottom: 1rem;
   line-height: 1.2;
   color: var(--text-color);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-  height: 22vh;
+  height: 16vh;
   font-weight: 500;
   transition: color 0.3s ease;
 }
@@ -78,10 +78,10 @@
 }
 
 .hero-subtitle {
-  font-size: clamp(1.25rem, 4vw, 1.5rem);
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   color: var(--text-secondary);
-  margin-bottom: 3rem;
-  margin-top: 2vh;
+  margin-bottom: 2rem;
+  margin-top: 1.5vh;
   text-align: center;
   font-weight: 450;
   transition: color 0.3s ease;
@@ -90,18 +90,19 @@
 .button-div {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 #herro-button1,
 #herro-button2 {
-  padding: 1rem 2rem;
+  padding: 0.65rem 1.4rem;
   border-radius: 9999px;
   text-decoration: none;
   border: 0;
   cursor: pointer;
   font: inherit;
   font-weight: 500;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -127,7 +128,7 @@
 
 #DownloadButton {
   display: inline-block;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   text-decoration: none;
 }
 
@@ -139,7 +140,7 @@
 }
 
 #DownloadButton {
-  margin-top: 20px;
+  margin-top: 12px;
 }
 
 strong {

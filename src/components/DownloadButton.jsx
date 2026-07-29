@@ -22,8 +22,8 @@ const StyledWrapper = styled.div`
     --bg-color: #323232;
     --main-color: #dedede;
     position: relative;
-    width: 150px;
-    height: 40px;
+    width: 130px;
+    height: 34px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -39,16 +39,17 @@ const StyledWrapper = styled.div`
   }
 
   .button .button__text {
-    transform: translateX(21px);
+    transform: translateX(18px);
     color: var(--font-color);
+    font-size: 0.85rem;
     font-weight: 600;
   }
 
   .button .button__icon {
     position: absolute;
-    transform: translateX(109px);
+    transform: translateX(91px);
     height: 100%;
-    width: 39px;
+    width: 37px;
     background-color: var(--bg-color-sub);
     display: flex;
     align-items: center;
@@ -69,7 +70,7 @@ const StyledWrapper = styled.div`
   }
 
   .button:hover .button__icon {
-    width: 148px;
+    width: 128px;
     transform: translateX(0);
   }
 
