@@ -155,19 +155,19 @@ strong {
 
 .radial-glow{
   position: absolute;
-      bottom: 0;
+      bottom: -2%;
       left: 50%;
       transform:  translateX(-50%) rotate(180deg);
-      width: 100vw;
+      width: 140vw;
       height: 100%;
       background: radial-gradient(circle at 50% 100%,
                    hsla(0, 0%, 4%, 0) 44%,
-                   hsla(218, 100%, 58%, 1) 61%,
-                   hsla(340, 100%, 75%, 1) 76%, 
-                   hsla(26, 100%, 50%, 1) 87%, 
-                   hsla(50, 100%, 50%, 1) 96%, 
+                   hsla(218, 100%, 58%, 0.7) 61%,
+                   hsla(340, 100%, 75%, 0.6) 76%, 
+                   hsla(26, 100%, 50%, 0.5) 87%, 
+                   hsla(50, 100%, 50%, 0.4) 96%, 
                    hsla(231, 99%, 62%, 0) 100%);
-      filter: blur(90px);
+      filter: blur(120px);
       animation: breathe 4s ease-in-out forwards; 
       z-index: -1;
       

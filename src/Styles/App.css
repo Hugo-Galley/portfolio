@@ -90,6 +90,7 @@
     box-sizing: border-box; 
     font-weight: 500;
     font-family: 'Geist';
+    cursor: none;
 }
 html, body {
     background-color: var(--bg-color);
@@ -99,6 +100,7 @@ html, body {
     overflow-x: hidden;
     min-height: 100vh;
     z-index: 0;
+    cursor: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -128,7 +130,7 @@ body::before {
     );
     pointer-events: none;
     z-index: -1;
-    animation: gridAppear 1.5s ease-out forwards;
+    animation: gridAppear 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     transform-origin: center;
     opacity: 0;
     transition: background-image 0.3s ease;
@@ -136,7 +138,7 @@ body::before {
 @keyframes gridAppear {
     0% {
         opacity: 0;
-        transform: scale(0.5);
+        transform: scale(0.95);
     }
     100% {
         opacity: 1;
@@ -226,60 +228,65 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 .cursor {
-    width: 40px;
-    height: 40px;
-    border: 1px dashed var(--cursor-border);
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
     border-radius: 50%;
     position: relative;
     pointer-events: none;
-    animation: Anime1 1.5s infinite alternate;
-    transition: border-color 0.3s ease;
+    opacity: 0.85;
+    animation: cursorPulse 2s ease-in-out infinite alternate;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.cursor::before{
+.cursor::before {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
-    width: 5px;
-    height: 5px;
-    background: var(--cursor-dot);
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: white;
     border-radius: 50%;
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.9);
     transition: background 0.3s ease;
 }
-.expand{
+.expand {
     position: absolute;
     animation: Anime2 .5s;
-    background: var(--cursor-dot);
-    border: 1px solid var(--cursor-dot);
+    background: white;
+    border: 1px solid white;
     transition: all 0.3s ease;
 }
 
-@keyframes Anime1 {
-    from{
-        transform: scale(1) rotate(0deg);
+@keyframes cursorPulse {
+    from {
+        transform: scale(1);
+        opacity: 0.85;
     }
-    to{
-        transform: scale(0.7) rotate(90deg);
+    to {
+        transform: scale(0.85);
+        opacity: 0.6;
     }
 }
 
 @keyframes Anime2 {
-    0%{
+    0% {
         transform: scale(1);
+        opacity: 0.8;
     }
-    50%{
-        transform: scale(2);
+    50% {
+        transform: scale(2.5);
+        opacity: 0.4;
     }
-    100%{
+    100% {
         transform: scale(1);
         opacity: 0;
     }
-    
 }
 
 

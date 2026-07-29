@@ -42,7 +42,7 @@ function App() {
 
     if (cursorWrapper && cursor) {
       const handleMouseMove = (e) => {
-        cursorWrapper.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
+        cursorWrapper.style.transform = `translate3d(${e.clientX - 25}px, ${e.clientY - 25}px, 0)`;
       };
 
       const handleClick = () => {

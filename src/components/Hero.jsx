@@ -1,5 +1,7 @@
 import '../Styles/Hero.css'
 import DownLoadButton from './DownloadButton';
+import OrganicMesh from './OrganicMesh';
+import FluidText from './FluidText';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -14,20 +16,19 @@ export default function Hero() {
 
   return (
     <div className='herroBanner'>
+      <OrganicMesh />
       <div className='herro'>
         <div className='herro-description'>
-          <h1 className="hero-title">
+          <FluidText as="h1" className="hero-title">
             {t('hero.hello')}<br/>
-            <span 
-              className="gradient-text">
+            <span className="gradient-text">
               {t('hero.iAm')}
             </span>
-          </h1>
+          </FluidText>
           
-          <p 
-            className="hero-subtitle">
+          <FluidText as="p" className="hero-subtitle">
             {t('hero.subtitle')}
-          </p>
+          </FluidText>
 
           <div 
             className='button-div'>
