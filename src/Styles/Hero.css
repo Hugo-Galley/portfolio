@@ -213,11 +213,11 @@ strong {
 
 @media (max-width: 1024px) {
   .hero-title {
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
   }
 
   .hero-subtitle {
-    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
   }
 
   .button-div {
@@ -232,15 +232,26 @@ strong {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .hero-title {
-    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    font-size: clamp(2.1rem, 7vw, 2.8rem);
   }
 
   .hero-subtitle {
-    font-size: clamp(0.875rem, 2.5vw, 1rem);
-    max-width: 80vw;
-    margin-top: 1vh;
+    font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    max-width: 90vw;
+    margin-top: 1.5vh;
   }
 
   .button-div {
