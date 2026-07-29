@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 
 /*
  * Simplex noise implementation for organic flow fields.
@@ -77,6 +77,15 @@ class SimplexNoise {
 }
 
 export default function OrganicMesh() {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    const handler = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const animFrameRef = useRef(null);
@@ -137,6 +146,7 @@ export default function OrganicMesh() {
   }, []);
 
   useEffect(() => {
+    if (isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -313,7 +323,9 @@ export default function OrganicMesh() {
         cancelAnimationFrame(animFrameRef.current);
       }
     };
-  }, [initParticles]);
+  }, [initParticles, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas
