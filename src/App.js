@@ -94,6 +94,7 @@ function App() {
           <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/index.html" element={<HomePage />} />
           
           <Route path="/cartography" element={<Cartography />} />
           <Route path="/instagram-clone" element={<InstaGramClone />} />

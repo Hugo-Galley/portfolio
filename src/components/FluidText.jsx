@@ -17,11 +17,11 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
   const DAMPING = 0.75;
 
   const splitText = useCallback((node) => {
-    const fragments = [];
-
     const processNode = (n, key = 0) => {
       if (typeof n === 'string') {
-        return n.split('').map((char, i) => {
+        const chars = n.split('');
+        const total = chars.length;
+        return chars.map((char, i) => {
           const uniqueKey = `${key}-${i}`;
           return (
             <span
@@ -29,9 +29,10 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
               data-fluid-char
               style={{
                 display: 'inline-block',
-                willChange: 'transform',
                 transition: 'none',
                 whiteSpace: char === ' ' ? 'pre' : undefined,
+                '--char-index': i,
+                '--total-chars': total,
               }}
             >
               {char === ' ' ? '\u00A0' : char}

@@ -54,13 +54,11 @@
 }
 
 .hero-title {
-  font-size: clamp(2.1rem, 6vw, 3.5rem);
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
   margin-bottom: 0.5rem;
   line-height: 1.2;
   color: var(--text-color);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: block;
   text-align: center;
   height: auto;
   font-weight: 500;
@@ -68,14 +66,19 @@
 }
 
 .gradient-text {
+  margin-left: 0;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.gradient-text [data-fluid-char] {
   background: linear-gradient(to right, #9333ea, #db2777, #9333ea);
+  background-size: calc(var(--total-chars, 1) * 100%) 100%;
+  background-position: calc(var(--char-index, 0) * (100% / max(1, var(--total-chars, 1) - 1))) 0;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  margin-left: 0.5rem;
-  font-weight: 500;
-  display: inline-block;
 }
 
 .hero-subtitle {
