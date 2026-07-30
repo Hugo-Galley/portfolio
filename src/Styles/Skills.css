@@ -5,8 +5,19 @@
     padding: 60px 0; /* Plenty of room for vertical pop and shadow */
     position: relative;
     /* Mask to fade edges */
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 1) 90%, transparent 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+}
+
+@keyframes skillsMarquee {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
 }
 
 .skills-track {
@@ -15,6 +26,11 @@
     width: max-content;
     padding: 10px;
     will-change: transform;
+    animation: skillsMarquee 35s linear infinite;
+}
+
+.skills-track-wrapper:hover .skills-track {
+    animation-play-state: paused;
 }
 
 .language-box {
@@ -90,7 +106,7 @@
 }
 
 /* Inverser uniquement le logo Linux en mode clair */
-[data-theme="light"] .language-box:has(img[alt*="Linux"]) .language-box-img {
+[data-theme="light"] .linux-img {
     filter: brightness(0) saturate(100%);
 }
 

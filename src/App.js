@@ -29,9 +29,8 @@ function App() {
     const cursor = document.querySelector('.cursor');
 
     const isTouchOrMobile = 
-      'ontouchstart' in window || 
-      navigator.maxTouchPoints > 0 || 
-      window.innerWidth <= 1200;
+      window.matchMedia('(pointer: coarse)').matches || 
+      window.innerWidth <= 768;
 
     if (isTouchOrMobile) {
       if (cursorWrapper) {

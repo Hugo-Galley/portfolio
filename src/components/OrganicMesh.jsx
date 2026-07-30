@@ -94,7 +94,7 @@ export default function OrganicMesh() {
   const timeRef = useRef(0);
   const dprRef = useRef(1);
 
-  const PARTICLE_COUNT = 4000;
+  const PARTICLE_COUNT = 2000;
   const MOUSE_RADIUS = 150;
   const NOISE_SCALE = 0.003;
   const FLOW_SPEED = 0.0004;
@@ -279,9 +279,9 @@ export default function OrganicMesh() {
       
       ctx.lineWidth = 0.3;
       
-      for (let i = 0; i < particles.length; i += 3) {
+      for (let i = 0; i < particles.length; i += 4) {
         const a = particles[i];
-        for (let j = i + 3; j < particles.length; j += 3) {
+        for (let j = i + 4; j < particles.length; j += 8) {
           const b = particles[j];
           const ddx = a.x - b.x;
           const ddy = a.y - b.y;
@@ -294,9 +294,9 @@ export default function OrganicMesh() {
             const midY = (a.y + b.y) / 2;
             const mouseDx = midX - mouse.x;
             const mouseDy = midY - mouse.y;
-            const mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
-            const mouseBoost = mouseDist < MOUSE_RADIUS 
-              ? (1 - mouseDist / MOUSE_RADIUS) * 0.5 
+            const mouseDistSq = mouseDx * mouseDx + mouseDy * mouseDy;
+            const mouseBoost = mouseDistSq < MOUSE_RADIUS * MOUSE_RADIUS 
+              ? (1 - Math.sqrt(mouseDistSq) / MOUSE_RADIUS) * 0.5 
               : 0;
             
             ctx.beginPath();

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import py from '../assets/Pages/Python-logo-notext.svg.webp'
 import cs from '../assets/Card/cs.webp'
 import rct from '../assets/Pages/react.webp'
@@ -57,7 +57,15 @@ function SkillCard({ skill }) {
                 zIndex: isHovered ? 10 : 1
             }}
         >
-            <img src={skill.src} alt={skill.name} className="language-box-img" width="144" height="144" loading="lazy" decoding="async" />
+            <img 
+                src={skill.src} 
+                alt={skill.name} 
+                className={`language-box-img ${skill.name === 'Linux' ? 'linux-img' : ''}`} 
+                width="144" 
+                height="144" 
+                loading="lazy" 
+                decoding="async" 
+            />
             <p>{skill.name}</p>
             {isHovered && (
                 <div 
@@ -96,45 +104,12 @@ export default function Skills(){
 
     const repeatedList = [...skillsList, ...skillsList];
 
-    const [isHovered, setIsHovered] = useState(false);
-    const progressRef = useRef(0);
-    const speedRef = useRef(0.04);
-    const trackRef = useRef(null);
-    const rafRef = useRef(null);
-
-    useEffect(() => {
-        const updateAnimation = () => {
-            // Target speed: 0 if hovered, otherwise 0.04 (approx 30s for 50%)
-            const targetSpeed = isHovered ? 0 : 0.04;
-            
-            // Lerp the speed towards target speed for smooth deceleration/acceleration
-            speedRef.current = speedRef.current + (targetSpeed - speedRef.current) * 0.05;
-            
-            progressRef.current += speedRef.current;
-            
-            if (progressRef.current >= 50) {
-                progressRef.current -= 50;
-            }
-            
-            if (trackRef.current) {
-                trackRef.current.style.transform = `translateX(-${progressRef.current}%)`;
-            }
-            
-            rafRef.current = requestAnimationFrame(updateAnimation);
-        };
-        
-        rafRef.current = requestAnimationFrame(updateAnimation);
-        return () => cancelAnimationFrame(rafRef.current);
-    }, [isHovered]);
-
     return (
         <div 
             className="skills-track-wrapper" 
             aria-label="Competences techniques"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="skills-track" ref={trackRef}>
+          <div className="skills-track">
             {repeatedList.map((skill, index) => (
               <SkillCard skill={skill} key={`${skill.name}-${index}`} />
             ))}
