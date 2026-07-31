@@ -7,9 +7,11 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 export default function FluidText({ children, className, as: Tag = 'span' }) {
   const containerRef = useRef(null);
   const charsRef = useRef([]);
+  const charPosRef = useRef([]);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const rafRef = useRef(null);
   const velocitiesRef = useRef([]);
+  const isAnimatingRef = useRef(false);
 
   const INFLUENCE_RADIUS = 120;
   const MAX_DISPLACEMENT = 25;
@@ -19,23 +21,34 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
   const splitText = useCallback((node) => {
     const processNode = (n, key = 0) => {
       if (typeof n === 'string') {
-        const chars = n.split('');
-        const total = chars.length;
-        return chars.map((char, i) => {
-          const uniqueKey = `${key}-${i}`;
+        const words = n.split(/(\s+)/);
+        let charCounter = 0;
+        return words.map((word, wordIdx) => {
+          if (/^\s+$/.test(word)) {
+            return <span key={`s-${key}-${wordIdx}`}>{word}</span>;
+          }
+          const chars = word.split('');
           return (
             <span
-              key={uniqueKey}
-              data-fluid-char
-              style={{
-                display: 'inline-block',
-                transition: 'none',
-                whiteSpace: char === ' ' ? 'pre' : undefined,
-                '--char-index': i,
-                '--total-chars': total,
-              }}
+              key={`w-${key}-${wordIdx}`}
+              style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
             >
-              {char === ' ' ? '\u00A0' : char}
+              {chars.map((char, i) => {
+                const charIdx = charCounter++;
+                return (
+                  <span
+                    key={`c-${key}-${wordIdx}-${i}`}
+                    data-fluid-char
+                    style={{
+                      display: 'inline-block',
+                      transition: 'none',
+                      '--char-index': charIdx,
+                    }}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
             </span>
           );
         });
@@ -50,7 +63,6 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
           ? n.props.children.flatMap((child, i) => processNode(child, `${key}-${i}`))
           : processNode(n.props.children, `${key}-c`);
         
-        // Clone the element but with split children
         const { children: _, ...restProps } = n.props;
         return (
           <n.type key={`el-${key}`} {...restProps}>
@@ -74,9 +86,99 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
     setSplitChildren(splitText(children));
   }, [children, splitText]);
 
+  // Recalculate character base positions (without triggering reflow inside RAF)
+  const updateCharPositions = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const chars = container.querySelectorAll('[data-fluid-char]');
+    charsRef.current = Array.from(chars);
+    
+    charPosRef.current = charsRef.current.map((charEl) => {
+      // Temporarily remove transform to measure natural position
+      const prevTransform = charEl.style.transform;
+      charEl.style.transform = '';
+      const rect = charEl.getBoundingClientRect();
+      charEl.style.transform = prevTransform;
+
+      return {
+        x: rect.left - containerRect.left + rect.width / 2,
+        y: rect.top - containerRect.top + rect.height / 2,
+      };
+    });
+
+    if (velocitiesRef.current.length !== charsRef.current.length) {
+      velocitiesRef.current = charsRef.current.map(() => ({ x: 0, y: 0, currentX: 0, currentY: 0 }));
+    }
+  }, []);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    updateCharPositions();
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateCharPositions);
+    }
+
+    window.addEventListener('resize', updateCharPositions);
+
+    const startAnimation = () => {
+      if (isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
+
+      const animate = () => {
+        const mouse = mouseRef.current;
+        let activeMotion = false;
+
+        charsRef.current.forEach((charEl, i) => {
+          const pos = charPosRef.current[i];
+          const vel = velocitiesRef.current[i];
+          if (!pos || !vel) return;
+
+          const dx = pos.x - mouse.x;
+          const dy = pos.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          let targetX = 0;
+          let targetY = 0;
+
+          if (dist < INFLUENCE_RADIUS && dist > 0) {
+            const force = (1 - dist / INFLUENCE_RADIUS);
+            const strength = force * force * MAX_DISPLACEMENT;
+            targetX = (dx / dist) * strength;
+            targetY = (dy / dist) * strength;
+          }
+
+          vel.x += (targetX - vel.currentX) * SPRING;
+          vel.y += (targetY - vel.currentY) * SPRING;
+          vel.x *= DAMPING;
+          vel.y *= DAMPING;
+          vel.currentX += vel.x;
+          vel.currentY += vel.y;
+
+          if (Math.abs(vel.currentX) > 0.05 || Math.abs(vel.currentY) > 0.05 || targetX !== 0 || targetY !== 0) {
+            charEl.style.transform = `translate3d(${vel.currentX.toFixed(2)}px, ${vel.currentY.toFixed(2)}px, 0)`;
+            activeMotion = true;
+          } else if (vel.currentX !== 0 || vel.currentY !== 0) {
+            vel.currentX = 0;
+            vel.currentY = 0;
+            charEl.style.transform = '';
+          }
+        });
+
+        if (activeMotion || mouse.x > -9000) {
+          rafRef.current = requestAnimationFrame(animate);
+        } else {
+          isAnimatingRef.current = false;
+          rafRef.current = null;
+        }
+      };
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
 
     const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
@@ -84,76 +186,25 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
       };
+      startAnimation();
     };
 
     const handleMouseLeave = () => {
       mouseRef.current = { x: -9999, y: -9999 };
     };
 
-    // Listen on the herroBanner parent for wider mouse tracking
     const heroParent = container.closest('.herroBanner') || container.parentElement;
-    heroParent.addEventListener('mousemove', handleMouseMove);
-    heroParent.addEventListener('mouseleave', handleMouseLeave);
-
-    const animate = () => {
-      const chars = container.querySelectorAll('[data-fluid-char]');
-      if (!charsRef.current.length || charsRef.current.length !== chars.length) {
-        charsRef.current = Array.from(chars);
-        velocitiesRef.current = Array.from(chars).map(() => ({ x: 0, y: 0, currentX: 0, currentY: 0 }));
-      }
-
-      const mouse = mouseRef.current;
-      const containerRect = container.getBoundingClientRect();
-
-      charsRef.current.forEach((charEl, i) => {
-        const vel = velocitiesRef.current[i];
-        const rect = charEl.getBoundingClientRect();
-        const charX = rect.left - containerRect.left + rect.width / 2;
-        const charY = rect.top - containerRect.top + rect.height / 2;
-
-        const dx = charX - mouse.x;
-        const dy = charY - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        let targetX = 0;
-        let targetY = 0;
-
-        if (dist < INFLUENCE_RADIUS && dist > 0) {
-          const force = (1 - dist / INFLUENCE_RADIUS);
-          const strength = force * force * MAX_DISPLACEMENT;
-          targetX = (dx / dist) * strength;
-          targetY = (dy / dist) * strength;
-        }
-
-        // Spring physics for smooth organic motion
-        vel.x += (targetX - vel.currentX) * SPRING;
-        vel.y += (targetY - vel.currentY) * SPRING;
-        vel.x *= DAMPING;
-        vel.y *= DAMPING;
-        vel.currentX += vel.x;
-        vel.currentY += vel.y;
-
-        // Small threshold to avoid unnecessary transforms
-        if (Math.abs(vel.currentX) > 0.1 || Math.abs(vel.currentY) > 0.1) {
-          charEl.style.transform = `translate(${vel.currentX}px, ${vel.currentY}px)`;
-        } else {
-          vel.currentX = 0;
-          vel.currentY = 0;
-          charEl.style.transform = '';
-        }
-      });
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
+    heroParent.addEventListener('mousemove', handleMouseMove, { passive: true });
+    heroParent.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
     return () => {
+      window.removeEventListener('resize', updateCharPositions);
       heroParent.removeEventListener('mousemove', handleMouseMove);
       heroParent.removeEventListener('mouseleave', handleMouseLeave);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      isAnimatingRef.current = false;
     };
-  }, [splitChildren]);
+  }, [splitChildren, updateCharPositions]);
 
   return (
     <Tag ref={containerRef} className={className} style={{ position: 'relative' }}>

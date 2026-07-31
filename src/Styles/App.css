@@ -5,6 +5,10 @@
 }
 
 :root {
+  /* Typography */
+  --font-heading: 'Fraunces', serif;
+  --font-body: 'Geist', sans-serif;
+
   /* Variables pour le mode sombre (défaut) */
   --bg-color: #000000;
   --text-color: #f0f8ff;
@@ -42,6 +46,10 @@
   --blob-orange: rgba(255, 183, 178, 0.12);
   --blob-violet: rgba(197, 163, 255, 0.15);
   --noise-opacity: 0.07;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
 }
 
 [data-theme="light"] {

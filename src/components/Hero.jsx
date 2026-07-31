@@ -20,7 +20,7 @@ export default function Hero() {
       <div className='herro'>
         <div className='herro-description'>
           <FluidText as="h1" className="hero-title">
-            {t('hero.hello')}<br/>
+            <span className="hero-greeting">{t('hero.hello')}</span><br/>
             <span className="gradient-text">
               {t('hero.iAm')}
             </span>
@@ -30,9 +30,11 @@ export default function Hero() {
             {t('hero.subtitle')}
           </FluidText>
 
-          <div 
-            className='button-div'>
-            <button type='button' id='herro-button1' onClick={() => handleNavigation('AboutMe')}>{t('hero.aboutButton')}</button>
+          <div className='button-div'>
+            <button type='button' id='herro-button1' onClick={() => handleNavigation('AboutMe')}>
+              <span>{t('hero.aboutButton')}</span>
+              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
             <button type='button' id='herro-button2' onClick={() => handleNavigation('Projects')}>{t('hero.workButton')}</button>
           </div>
           

@@ -45,8 +45,7 @@
 }
 
 .herro-description {
-  max-width: 800px;
-
+  max-width: 820px;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -54,6 +53,7 @@
 }
 
 .hero-title {
+  font-family: var(--font-heading);
   font-size: clamp(1.8rem, 6vw, 3.5rem);
   margin-bottom: 0.5rem;
   line-height: 1.2;
@@ -61,45 +61,71 @@
   display: block;
   text-align: center;
   height: auto;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
   transition: color 0.3s ease;
 }
 
+.hero-greeting {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05em;
+  color: var(--accent-color);
+  opacity: 0.95;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 10px rgba(242, 193, 182, 0.25);
+}
+
 .gradient-text {
+  font-family: var(--font-heading);
   margin-left: 0;
-  font-weight: 500;
+  font-weight: 800;
   display: inline-block;
+  letter-spacing: -0.015em;
 }
 
 .gradient-text [data-fluid-char] {
-  background: linear-gradient(to right, #9333ea, #db2777, #9333ea);
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f43f5e 100%);
   background-size: calc(var(--total-chars, 1) * 100%) 100%;
   background-position: calc(var(--char-index, 0) * (100% / max(1, var(--total-chars, 1) - 1))) 0;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 4px 18px rgba(168, 85, 247, 0.3));
 }
 
 .hero-subtitle {
   font-size: clamp(1.05rem, 3vw, 1.3rem);
   color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.6;
   margin-bottom: 2.5rem;
   margin-top: 0.5rem;
   text-align: center;
   font-weight: 450;
+  letter-spacing: -0.01em;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
   transition: color 0.3s ease;
 }
 
 .button-div {
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
 #herro-button1,
 #herro-button2 {
-  padding: 0.8rem 1.6rem;
+  padding: 0.85rem 1.8rem;
   border-radius: 9999px;
   text-decoration: none;
   border: 0;
@@ -107,23 +133,52 @@
   font: inherit;
   font-weight: 500;
   font-size: 0.95rem;
-  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #herro-button1 {
-  background: linear-gradient(to right, #a855f7, #ec4899);
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
   color: white;
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.35);
 }
 
 #herro-button1:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.5);
+  opacity: 0.98;
+}
+
+#herro-button1 .btn-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
+}
+
+#herro-button1:hover .btn-icon {
+  transform: translateX(4px);
 }
 
 #herro-button2 {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text-color);
-  border: 2px solid #a855f7;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] #herro-button2 {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+#herro-button2:hover {
+  background-color: rgba(168, 85, 247, 0.15);
+  border-color: #a855f7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
 }
 
 #herro-button2:hover {
