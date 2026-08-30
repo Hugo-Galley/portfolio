@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <meta charset="utf-8" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Serif:ital@0;1&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -48,7 +49,6 @@
 </script>
    
   
-    <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/logo.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -56,8 +56,43 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- Fallback title — overridden by react-helmet-async per route -->
-    <title>Portfolio | Hugo Galley - Developpeur</title>
+    <meta name="description" content="Portfolio de Hugo Galley, développeur logiciel et web. Découvrez mes projets, mes compétences et mon parcours." />
+
+    <meta property="og:title" content="Portfolio | Hugo Galley - Développeur" />
+    <meta property="og:description" content="Portfolio de Hugo Galley, développeur logiciel et web. Découvrez mes projets, mes compétences et mon parcours." />
+    <meta property="og:image" content="https://galleyhugo.com/preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://galleyhugo.com/">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Hugo Galley - Portfolio">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portfolio | Hugo Galley - Développeur">
+    <meta name="twitter:description" content="Portfolio de Hugo Galley, développeur logiciel et web. Découvrez mes projets, mes compétences et mon parcours." />
+    <meta name="twitter:image" content="https://galleyhugo.com/preview.png">
+    <meta name="twitter:image:alt" content="Portfolio Hugo Galley - Développeur">
+
+    <link rel="canonical" href="https://galleyhugo.com/" />
+
+    <meta name="robots" content="index,follow" />
+    <title>Portfolio | Hugo Galley - Développeur</title>
+
+     <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "name": "Portfolio | Hugo Galley - Développeur",
+        "description": "Développeur passionné, découvrez mes projets et compétences",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Hugo Galley",
+          "jobTitle": "Développeur"
+        }
+      }
+      </script>
 
   </head>
   <body>
