@@ -5,6 +5,7 @@ import expo from '../assets/Pages/expo-1.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function SportApplication() {
     const { t } = useLanguage();
@@ -32,7 +33,7 @@ export default function SportApplication() {
                             <p>Expo</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/ActiFit" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/ActiFit" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/ActiFit' })}>
                         <GithubButton />
                     </a>
                 </div>

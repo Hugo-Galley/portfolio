@@ -5,6 +5,7 @@ import sqlite from '../assets/Pages/sqlite.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function AdminInterface() {
     const { t } = useLanguage();
@@ -31,7 +32,7 @@ export default function AdminInterface() {
                             <p>SQLite</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/Portail_App" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/Portail_App" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Portail_App' })}>
                         <GithubButton />
                     </a>
                 </div>

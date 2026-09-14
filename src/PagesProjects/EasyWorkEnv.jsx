@@ -5,6 +5,7 @@ import github from '../assets/Contact/github.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function EasyWorkEnv() {
     const { t } = useLanguage();
@@ -32,7 +33,7 @@ export default function EasyWorkEnv() {
                             <p>Github Actions</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/EasyWorkEnv' })}>
                         <GithubButton />
                     </a>
                 </div>

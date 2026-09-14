@@ -1,6 +1,7 @@
 import '../Styles/NavBar.css'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function NavBar2() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function NavBar2() {
     ];
 
     const handleNavigation = (section) => {
+        trackEvent('navbar-click', { section });
         navigate('/', { state: { scrollTo: section } });
     };
 

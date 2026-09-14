@@ -5,6 +5,7 @@ import blazor from '../assets/Pages/Blazor.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function Cartography() {
     const { t } = useLanguage();
@@ -32,7 +33,7 @@ export default function Cartography() {
                             <p>Blazor</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/Cartography" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/Cartography" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Cartography' })}>
                         <GithubButton />
                     </a>
                 </div>

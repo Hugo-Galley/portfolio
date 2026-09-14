@@ -5,6 +5,7 @@ import meta from '../assets/Pages/meta.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function GmailAiSort() {
     const { t } = useLanguage();
@@ -32,7 +33,7 @@ export default function GmailAiSort() {
                             <p>Llama 3</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/GmailAiSort' })}>
                         <GithubButton />
                     </a>
                 </div>

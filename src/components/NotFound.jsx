@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/NotFound.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 function NotFound() {
   const { t } = useLanguage();
+
+  useEffect(() => {
+    trackEvent('404-hit', { path: window.location.pathname });
+  }, []);
   
   return (
     <div className="error-container">

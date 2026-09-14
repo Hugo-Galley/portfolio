@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext, useMemo, useCallback } from 'react';
 import { translations } from '../translations';
+import { trackEvent } from '../hooks/useUmami';
 
 const LanguageContext = createContext();
 
@@ -42,7 +43,11 @@ export const LanguageProvider = ({ children }) => {
   }, [language]);
 
   const toggleLanguage = useCallback(() => {
-    setLanguage(prevLang => prevLang === 'fr' ? 'en' : 'fr');
+    setLanguage(prevLang => {
+        const newLang = prevLang === 'fr' ? 'en' : 'fr';
+        trackEvent('language-switch', { from: prevLang, to: newLang });
+        return newLang;
+    });
   }, []);
 
   const t = useCallback((key) => {

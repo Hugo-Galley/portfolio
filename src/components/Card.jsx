@@ -1,9 +1,10 @@
 import '../Styles/Card.css'
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function Card({titre,categorie,image,lien}){
     return(
-        <Link to={lien} className="Card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+        <Link to={lien} className="Card" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }} onClick={() => trackEvent('project-click', { project: titre })}>
             <img src={image} alt={titre} width="400" height="220" loading="lazy" decoding="async" />
             <div className='bloc-Card'>
                 <p className='titre'>{titre}</p>

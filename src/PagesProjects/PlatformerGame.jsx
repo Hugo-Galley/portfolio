@@ -4,6 +4,7 @@ import pygame from '../assets/Pages/Pygame_logo.svg.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function PlatformerGame() {
     const { t } = useLanguage();
@@ -27,7 +28,7 @@ export default function PlatformerGame() {
                     <p className="project-description">
                         {t('projectPages.platformerGame.description')}
                     </p>
-                    <a href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/Mario-in-Pygame" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Mario-in-Pygame' })}>
                         <GithubButton />
                     </a>
                 </div>

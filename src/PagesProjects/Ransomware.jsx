@@ -3,6 +3,7 @@ import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function Ransomware() {
     const { t } = useLanguage();
@@ -22,7 +23,7 @@ export default function Ransomware() {
                     <p className="project-description">
                         {t('projectPages.ransomware.description')}
                     </p>
-                    <a href="https://github.com/Hugo-Galley/Ransomware" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/Ransomware" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Ransomware' })}>
                         <GithubButton />
                     </a>
                 </div>

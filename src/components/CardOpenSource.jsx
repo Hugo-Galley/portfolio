@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import '../Styles/CardOpenSource.css';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function CardOpenSource({ nom, role, repo, desc }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -52,7 +53,12 @@ export default function CardOpenSource({ nom, role, repo, desc }) {
     };
 
     const handleClick = () => {
-        if (desc) setIsFlipped(!isFlipped);
+        if (desc) {
+            if (!isFlipped) {
+                trackEvent('opensource-card-flip', { project: nom });
+            }
+            setIsFlipped(!isFlipped);
+        }
     };
 
     return (

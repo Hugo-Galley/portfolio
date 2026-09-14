@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import { trackEvent } from '../hooks/useUmami';
 
 const ThemeContext = createContext();
 
@@ -22,7 +23,11 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    setTheme(prevTheme => {
+        const newTheme = prevTheme === 'dark' ? 'light' : 'dark';
+        trackEvent('theme-switch', { theme: newTheme });
+        return newTheme;
+    });
   };
 
   return (

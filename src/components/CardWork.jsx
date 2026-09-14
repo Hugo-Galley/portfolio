@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import '../Styles/CardWork.css';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function CardWork({ nom, boite, img, duree, desc }) {
     const [isHovered, setIsHovered] = useState(false);
@@ -44,6 +45,9 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
 
     const handleClick = () => {
         if (desc) {
+            if (!isFlipped) {
+                trackEvent('work-card-flip', { company: boite });
+            }
             setIsFlipped(!isFlipped);
         }
     };

@@ -7,6 +7,7 @@ import react from '../assets/Pages/react.webp'
 import france from '../assets/Bento/france.webp'
 import wallet from '../assets/Bento/Wallet.webp'
 import { useLanguage } from '../context/LanguageContext'
+import { trackEvent } from '../hooks/useUmami';
 
 import ModalBento from './ModalBento'
 
@@ -22,7 +23,10 @@ export default function Bento() {
         { id: 'modal6', title: t('bento.location.title'), text: t('bento.location.text') },
     ];
 
-    const showModal = (id) => setActiveModalId(id);
+    const showModal = (id) => {
+        trackEvent('bento-modal-open', { section: id });
+        setActiveModalId(id);
+    };
     const hideModal = () => setActiveModalId(null);
 
     const handleTileKeyDown = (e, id) => {

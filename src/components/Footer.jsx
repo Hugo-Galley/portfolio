@@ -1,3 +1,4 @@
+import { trackEvent } from '../hooks/useUmami';
 import '../Styles/Footer.css'
 import git from '../assets/Contact/github.webp'
 import lin from '../assets/Contact/img.icons8.com.webp'
@@ -30,11 +31,11 @@ export default function Footer(){
             <div className="footer-right">
                 <div className='div-media'>
                     <img src={git} alt="logo Github" width="30" height="30" loading="lazy" decoding="async" />
-                    <a href='https://github.com/Hugo-Galley'>Github</a>
+                    <a href='https://github.com/Hugo-Galley' onClick={() => trackEvent('contact-github-profile')}>Github</a>
                 </div>
                 <div className='div-media'>
                     <img src={lin} alt="logo Linkedin" width="30" height="30" loading="lazy" decoding="async" />
-                    <a href="https://www.linkedin.com/in/hugo-galley-a88198304/">Linkedin</a>
+                    <a href="https://www.linkedin.com/in/hugo-galley-a88198304/" onClick={() => trackEvent('contact-linkedin')}>Linkedin</a>
                 </div>
             </div>
         </div>

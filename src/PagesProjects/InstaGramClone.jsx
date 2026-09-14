@@ -4,6 +4,7 @@ import js from '../assets/Pages/JavaScript-logo.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
+import { trackEvent } from '../hooks/useUmami';
 
 export default function InstaGramClone() {
     const { t } = useLanguage();
@@ -28,7 +29,7 @@ export default function InstaGramClone() {
                     <p className="project-description">
                         {t('projectPages.instaClone.description')}
                     </p>
-                    <a href="https://github.com/Hugo-Galley/Instagrim" target="_blank" rel="noreferrer" className='github-link'>
+                    <a href="https://github.com/Hugo-Galley/Instagrim" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Instagrim' })}>
                         <GithubButton />
                     </a>
                 </div>

@@ -1,3 +1,4 @@
+import { trackEvent } from '../hooks/useUmami';
 import '../Styles/Hero.css'
 import DownLoadButton from './DownloadButton';
 import OrganicMesh from './OrganicMesh';
@@ -38,7 +39,7 @@ export default function Hero() {
             <button type='button' id='herro-button2' onClick={() => handleNavigation('Projects')}>{t('hero.workButton')}</button>
           </div>
           
-          <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer'>
+          <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer' onClick={() => trackEvent('cv-download')}>
             <DownLoadButton/>
           </a>
         </div>
