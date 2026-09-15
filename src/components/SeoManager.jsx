@@ -9,7 +9,7 @@ const SEO_TRANSLATIONS = {
   fr: {
     '/': {
       title: 'Portfolio | Hugo Galley - Développeur',
-      description: 'Portfolio de Hugo Galley, développeur logiciel et web. Découvrez mes projets, mes compétences et mon parcours.',
+      description: 'Hugo Galley — Développeur logiciel chez AXA, diplômé EPSI Paris. React, .NET, Python. Découvrez mes projets open-source et mes expériences professionnelles.',
     },
     '/cartography': {
       title: 'Cartography | Projet .NET Blazor - Hugo Galley',
@@ -55,7 +55,7 @@ const SEO_TRANSLATIONS = {
   en: {
     '/': {
       title: 'Portfolio | Hugo Galley - Developer',
-      description: 'Portfolio of Hugo Galley, software and web developer. Discover my projects, skills, and background.',
+      description: 'Hugo Galley — Software developer at AXA, EPSI Paris graduate. React, .NET, Python. Explore my open-source projects and professional experience.',
     },
     '/cartography': {
       title: 'Cartography | .NET Blazor Project - Hugo Galley',
@@ -112,28 +112,63 @@ export default function SeoManager() {
   };
 
   const absoluteUrl = `${SITE_URL}${location.pathname}`;
+  const altLang = language === 'fr' ? 'en' : 'fr';
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': location.pathname === '/' ? 'ProfilePage' : 'WebPage',
-    name: seo.title,
-    description: seo.description,
-    url: absoluteUrl,
-    ...(location.pathname === '/' && {
-      mainEntity: {
-        '@type': 'Person',
-        name: 'Hugo Galley',
-        jobTitle: language === 'fr' ? 'Développeur' : 'Developer',
-        url: SITE_URL,
-      },
-    }),
-  };
+  const structuredData = location.pathname === '/'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        name: seo.title,
+        description: seo.description,
+        url: absoluteUrl,
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Hugo Galley',
+          jobTitle: language === 'fr' ? 'Développeur logiciel' : 'Software Developer',
+          description: language === 'fr'
+            ? 'Développeur logiciel chez AXA, diplômé EPSI Paris, spécialisé en .NET et Python.'
+            : 'Software developer at AXA, EPSI Paris graduate, specializing  .NET and Python.',
+          url: SITE_URL,
+          image: DEFAULT_IMAGE,
+          email: 'contact@galleyhugo.com',
+          worksFor: {
+            '@type': 'Organization',
+            name: 'AXA',
+          },
+          alumniOf: {
+            '@type': 'EducationalOrganization',
+            name: 'EPSI Paris',
+          },
+          knowsAbout: ['.NET', 'Blazor', 'Python', 'C#', 'DevOps', 'Docker'],
+          sameAs: [
+            'https://www.linkedin.com/in/hugo-galley-a88198304/',
+            'https://github.com/Hugo-Galley',
+            'https://wiki.galleyhugo.com',
+          ],
+        },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: seo.title,
+        description: seo.description,
+        url: absoluteUrl,
+        author: {
+          '@type': 'Person',
+          name: 'Hugo Galley',
+          url: SITE_URL,
+        },
+      };
 
   return (
     <Helmet>
       <html lang={language} />
       <title>{seo.title}</title>
       <link rel="canonical" href={absoluteUrl} />
+
+      <link rel="alternate" hreflang={language} href={absoluteUrl} />
+      <link rel="alternate" hreflang={altLang} href={absoluteUrl} />
+      <link rel="alternate" hreflang="x-default" href={absoluteUrl} />
 
       <meta name="description" content={seo.description} />
       <meta name="robots" content={seo.noIndex ? 'noindex, nofollow' : 'index, follow'} />
@@ -146,6 +181,8 @@ export default function SeoManager() {
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
+      <meta property="og:locale" content={language === 'fr' ? 'fr_FR' : 'en_US'} />
+      <meta property="og:site_name" content="Hugo Galley - Portfolio" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seo.title} />
