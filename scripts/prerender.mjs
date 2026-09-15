@@ -78,14 +78,16 @@ function startServer() {
       }
     });
 
-    server.listen(PORT, () => {
-      console.log(`📦 Static server running on http://localhost:${PORT}`);
-      resolve(server);
+    // Listen on port 0 to let OS assign an available free port
+    server.listen(0, () => {
+      const port = server.address().port;
+      console.log(`📦 Static server running on http://localhost:${port}`);
+      resolve({ server, port });
     });
   });
 }
 
-async function prerenderRoute(browser, route) {
+async function prerenderRoute(browser, route, port) {
   const page = await browser.newPage();
 
   // Block external requests (analytics, fonts, etc.) to speed up rendering
@@ -104,7 +106,7 @@ async function prerenderRoute(browser, route) {
     }
   });
 
-  const url = `http://localhost:${PORT}${route}`;
+  const url = `http://localhost:${port}${route}`;
   console.log(`  🔄 Pre-rendering ${route}...`);
 
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
@@ -147,7 +149,7 @@ async function prerenderRoute(browser, route) {
 async function main() {
   console.log('\n🚀 Starting pre-rendering...\n');
 
-  const server = await startServer();
+  const { server, port } = await startServer();
   const browser = await puppeteer.launch({
     headless: 'new',
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -155,7 +157,7 @@ async function main() {
 
   try {
     for (const route of ROUTES) {
-      await prerenderRoute(browser, route);
+      await prerenderRoute(browser, route, port);
     }
     console.log(`\n✨ Pre-rendered ${ROUTES.length} pages successfully!\n`);
   } catch (error) {
