@@ -103,7 +103,10 @@ const en = {
   // Contact section
   contact: {
     title: "Contact",
-    subtitle: "If you'd like to contact me or collaborate with me."
+    subtitle: "If you'd like to contact me or collaborate with me.",
+    copied: "✓ Email copied!",
+    copyHint: "Click to copy",
+    openMail: "Open mail app"
   },
 
   // Footer

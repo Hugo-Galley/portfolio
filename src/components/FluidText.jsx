@@ -1,5 +1,14 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 
+function extractText(node) {
+  if (!node) return '';
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join(' ');
+  if (node.props && node.props.children) return extractText(node.props.children);
+  return '';
+}
+
 /**
  * FluidText – Splits text into individual characters that organically
  * displace away from the mouse cursor, creating a living text effect.
@@ -206,9 +215,18 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
     };
   }, [splitChildren, updateCharPositions]);
 
+  const accessibleLabel = extractText(children).replace(/\s+/g, ' ').trim();
+
   return (
-    <Tag ref={containerRef} className={className} style={{ position: 'relative' }}>
-      {splitChildren}
+    <Tag
+      ref={containerRef}
+      className={className}
+      style={{ position: 'relative' }}
+      aria-label={accessibleLabel || undefined}
+    >
+      <span aria-hidden="true" style={{ display: 'contents' }}>
+        {splitChildren}
+      </span>
     </Tag>
   );
 }

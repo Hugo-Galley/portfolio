@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "gh-pages": "^6.2.0",
-    "puppeteer": "^25.11.0",
-    "react-snap": "^1.23.0"
+    "puppeteer": "^25.11.0"
   }
 }
