@@ -107,11 +107,15 @@ async function prerenderRoute(browser, route) {
   const url = `http://localhost:${PORT}${route}`;
   console.log(`  🔄 Pre-rendering ${route}...`);
 
-  await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
 
-  // Wait a bit for React to fully hydrate and Helmet to inject meta tags
-  await page.waitForSelector('#root > *', { timeout: 10000 });
-  await new Promise((r) => setTimeout(r, 1000));
+  // Wait a bit for React to fully render and Helmet to inject meta tags
+  try {
+    await page.waitForSelector('#root > *', { timeout: 20000 });
+  } catch {
+    await page.waitForSelector('#root', { timeout: 5000 });
+  }
+  await new Promise((r) => setTimeout(r, 800));
 
   // Get the full rendered HTML
   let html = await page.content();
