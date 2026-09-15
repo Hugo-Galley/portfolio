@@ -1,346 +1,494 @@
-.container-main{
+.bento-section {
+    max-width: 1160px;
+    margin: 60px auto 100px auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Grille Bento principale — Spacieuse et aérée */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 24px;
+}
+
+/* Base de carte Bento : finition soignée, organique */
+.bento-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 28px;
+    box-shadow: var(--card-shadow);
+    padding: 2.2rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+    outline: none;
+}
+
+[data-theme="light"] .bento-card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(252, 250, 255, 0.92) 50%,
+        rgba(248, 245, 252, 0.88) 100%
+    );
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.bento-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.32);
+}
+
+[data-theme="light"] .bento-card:hover {
+    border-color: rgba(0, 0, 0, 0.16);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09);
+}
+
+.bento-card:focus-visible {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(242, 193, 182, 0.35);
+}
+
+/* Typographie éditoriale & titres généreux */
+.bento-eyebrow {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.bento-title {
+    font-family: var(--font-heading);
+    font-size: 1.85rem;
+    font-weight: 500;
+    line-height: 1.2;
     color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    width: 1000px;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    transition: color 0.3s ease;
+    margin: 0.2rem 0 0.6rem 0;
+    letter-spacing: -0.3px;
 }
-.container-main img{
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
-}
-.container-horizontale{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-   
-}
-.container-verticale-long{
-    background-color: #FF9AA2;
-    width: 40%;
-    height: 410px;
-    border-radius: 20px;
-    overflow: hidden;
 
+.bento-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* 1. CARTE PROFIL / PORTRAIT (Style éditorial) */
+.bento-card-me {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    min-height: 560px;
+    padding: 0;
+    display: block;
+}
+
+.bento-me-image-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bento-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card-me:hover .bento-portrait-img {
+    transform: scale(1.03);
+}
+
+.bento-portrait-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.1) 45%,
+        rgba(7, 10, 15, 0.82) 75%,
+        rgba(7, 10, 15, 0.98) 100%
+    );
+}
+
+.bento-me-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2.2rem;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.bento-me-content .bento-eyebrow {
+    color: #F2C1B6;
+    letter-spacing: 2px;
+}
+
+.bento-me-name {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0.1rem 0 0.3rem 0;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+}
+
+.bento-me-subtitle {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 0.5rem 0;
+}
+
+.bento-me-content .bento-desc {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.95rem;
+}
+
+/* 2. CARTE FORMATION / EPSI (Grand format horizontal) */
+.bento-card-studies {
+    grid-column: 2 / 4;
+    grid-row: 1;
+    min-height: 270px;
     justify-content: center;
-    text-align:center;
-    padding: 20px;
-}
-.container-verticale-long img{
-    width: 60%;
-    margin-bottom: 20px;
-}
-.verticale-titre{
-    text-align:start;
-    font-size: 2em;
-    font-weight: 550 ;
-    color: black;
-    text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
-}
-.verticale-desc{
-    text-align:start;
-    font-size: 0.9em;
-    font-weight:400 ;
-    color: black;
-
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);}
-
-.container-verticale-large{
-    background-color: #A0D2DB;
-    width: 59%;
-    margin-left: 20px;
-    height: 200px;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-}
-.container-verticale-large .text {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 100px;
-    margin-left: 10px;
-    margin-right: 20px;
-}
-.container-verticale-small-1{
-    background-color: #FFEEAD;
-    width: 28%;
-    margin-top: -190px;
-    padding-left: 10px;
-    border-radius: 20px;
-    overflow: hidden;
-    text-align: center;
-}
-.container-verticale-small-1 img{
-    margin-top: 10px;
-    width: 35%;
-}
-.container-verticale-small-3 img{
-    margin-top: 10px;
-    width: 35%;
-}
-.container-verticale-small-2 img{
-    width: 60%;
-    margin-top: 30px;
-}
-.container-verticale-small-3{
-    background-color: #C5A3FF;
-    width: 28%;
-    margin-top: -190px;
-    margin-left: 20px;
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-top: 10px;
-    overflow: hidden;
-    text-align: center;
-}
-.container-verticale-horizontale-large{
-    background-color: #B5EAD7;
-    width: 70%;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-}
-.container-verticale-horizontale-large .text {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 180px;
-    margin-left: 10px;
-    padding-left: 10px;
-    margin-right: 20px;
-}
-.container-verticale-horizontale-large img{
-    width: 60%;
-
-}
-.container-horizontale-2{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-bottom: 25px;
-
-}
-.container-verticale-small-2{
-    background-color: #FFB7B2;
-    width: 29%;
-    margin-left: 20px;
-    border-radius: 20px;
-    overflow: hidden;
-    text-align: center;
-    padding-left: 10px;
-    padding-top: 10px;
-}
-.About-Responsive{
-    display: none;
 }
 
-.overlay{
+.bento-studies-layout {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+}
+
+.bento-epsi-frame {
+    width: 105px;
+    height: 105px;
+    border-radius: 22px;
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card-studies:hover .bento-epsi-frame {
+    transform: scale(1.08) rotate(-2deg);
+}
+
+.bento-epsi-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bento-studies-info {
+    flex: 1;
+}
+
+.bento-studies-info .bento-title {
+    font-size: 2.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.bento-studies-highlight {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.92rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+[data-theme="light"] .bento-studies-highlight {
+    color: #9333ea;
+}
+
+/* 3 & 4. CARTES TECH (C# & REACT) — Visuels affirmés */
+.bento-card-tech {
+    min-height: 270px;
+    justify-content: space-between;
+}
+
+.bento-tech-icon-wrap {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-tech-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+}
+
+.bento-card-tech:hover .bento-tech-icon-wrap {
+    transform: scale(1.15) rotate(4deg);
+}
+
+#reactLogo {
+    animation: slowSpin 16s linear infinite;
+}
+
+@keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.bento-card-cs {
+    background: radial-gradient(circle at top right, rgba(155, 79, 150, 0.12) 0%, transparent 70%), var(--card-bg);
+}
+
+.bento-card-react {
+    background: radial-gradient(circle at top right, rgba(97, 218, 251, 0.12) 0%, transparent 70%), var(--card-bg);
+}
+
+/* 5. CARTE PASSIONS (WALLET DESIGN PERSONNEL) */
+.bento-card-passions {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    min-height: 280px;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 2.2rem 2.6rem;
+    background: radial-gradient(circle at right center, rgba(236, 72, 153, 0.08) 0%, transparent 70%), var(--card-bg);
+}
+
+.bento-passions-left {
+    padding-right: 1rem;
+}
+
+.bento-passions-left .bento-title {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+}
+
+.bento-passions-quote {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    font-style: normal;
+}
+
+.bento-passions-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bento-wallet-artwork {
+    width: 230px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.45));
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.bento-card-passions:hover .bento-wallet-artwork {
+    transform: scale(1.1) rotate(2deg);
+    filter: drop-shadow(0 20px 40px rgba(236, 72, 153, 0.25));
+}
+
+/* 6. CARTE LOCALISATION (PARIS / LA DÉFENSE ÉLÉGANTE) */
+.bento-card-location {
+    grid-column: 3;
+    grid-row: 3;
+    min-height: 280px;
+    justify-content: space-between;
+    background: radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.08) 0%, transparent 70%), var(--card-bg);
+}
+
+.bento-location-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bento-paris-badge {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.bento-location-pin {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-card-location:hover .bento-location-pin {
+    transform: scale(1.2) rotate(-12deg);
+}
+
+.bento-location-main {
+    margin-top: auto;
+}
+
+.bento-location-main .bento-title {
+    font-size: 1.85rem;
+    margin-bottom: 0.4rem;
+}
+
+.bento-location-footer {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .bento-location-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* OVERLAY POUR MODALES */
+.overlay {
+    position: fixed;
+    inset: 0;
     width: 100vw;
     height: 100vh;
-    position: fixed;
     z-index: 20000;
-
-}
-#reactLogo{
-
-  animation: rotation ease  10s infinite alternate-reverse;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
 }
 
-@keyframes rotation {
-  from {
-    transform: rotate(360deg);
-  }
-  to{
-    transform: rotate(0deg);
-  }
-}
-
-@media (max-width: 1000px) {
-    .container-main{
-        width: 700px;
-    }
-}
-
-@media (max-width: 700px) {
-    .container-main{
-        display: none;
-    }
-    .About-Responsive{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .About-Responsive img {
-        margin-top: 100px;
-        background-color: var(--card-bg);
-        width: 250px;
-        border-radius: 10px;
-    }
-    .About-text{
-        display: flex;
-        margin-top: 5vh;
-        flex-direction: column;
-    }
-    .About-WhoAmi,.About-Passions,.About-Objectifs{
-        background: var(--card-bg);
-        backdrop-filter: blur(15px);
-        width: 90vw;
-        display: flex;
-        margin-bottom: 40px;
-        flex-direction: column;
-        padding: 4vw;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: var(--card-shadow);
-    }
-    
-    [data-theme="light"] .About-WhoAmi,
-    [data-theme="light"] .About-Passions,
-    [data-theme="light"] .About-Objectifs {
-        border: 1px solid rgba(0, 0, 0, 0.15);
-    }
-
-    .About-WhoAmi > p,.About-Passions > p,.About-Objectifs > p{
-        font-weight: 200;
-        color: var(--text-secondary);
-    }
-    .About-Responsive {
-        display: flex;
-        min-height: 100vh;
-        color: var(--text-color);
-        padding: 4rem 2rem;
-        gap: 4rem;
-
-        
-      }
-      
-      .About-Responsive img {
-        max-width: 600px;
-        height: auto;
-        object-fit: cover;
-        border-radius: 12px;
-        transition: transform 0.5s ease;
-        position: relative;
-      }
-      
-      
-     
-      .About-text {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 4rem;
-        align-items: center;
-      }
-      
-    
-      .About-WhoAmi, .About-Passions, .About-Objectifs {
-        padding: 2rem;
-        background: var(--card-bg);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: var(--card-shadow);
-        border-radius: 12px;
-        transition: all 0.3s ease;
-      }
-      
-      [data-theme="light"] .About-WhoAmi,
-      [data-theme="light"] .About-Passions,
-      [data-theme="light"] .About-Objectifs {
-        border: 1px solid rgba(0, 0, 0, 0.15);
-      }
-      
-      
-      .About-text h2 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin-bottom: 1.5rem;
-        position: relative;
-        display: inline-block;
-        color: var(--text-color);
-      }
-      
-      .About-text p {
-        color: var(--text-secondary);
-        line-height: 1.6;
-        font-size: 1.1rem;
-      }
-      
-      .About-Passions > div {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-      }
-      
-      .About-Passions > div > div {
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.039);
-        backdrop-filter: blur(5px);
-        border-radius: 8px;
-        transition: all 0.3s ease;
-      }
-      
-      [data-theme="light"] .About-Passions > div > div {
-        background: rgba(0, 0, 0, 0.05);
-      }
-      
-      .About-Passions > div > div:hover {
-        transform: translateY(-5px);
-      }
-      
-      .About-Passions h3 {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-        color: var(--text-color);
-      }
-      
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      
-      .About-WhoAmi, .About-Passions, .About-Objectifs {
-        animation: fadeIn 0.6s ease forwards;
-        opacity: 0;
-      }
-      
-      .About-WhoAmi { animation-delay: 0.1s; }
-      .About-Passions { animation-delay: 0.3s; }
-      .About-Objectifs { animation-delay: 0.5s; }
-}
-
-/* Media Queries */
+/* RESPONSIVE TABLETTE (2 COLONNES) */
 @media (max-width: 1024px) {
-  .About-Responsive {
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-    gap: 2rem;
-  }
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
 
-  .About-Responsive img {
-    max-width: 300px;
-  }
+    .bento-card-me {
+        grid-column: 1 / 3;
+        grid-row: auto;
+        min-height: 480px;
+    }
 
-  .About-text {
-    width: 100%;
-    gap: 2rem;
-  }
+    .bento-card-studies {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
 
-  .About-Passions > div {
-    grid-template-columns: 1fr;
-  }
+    .bento-card-cs {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .bento-card-react {
+        grid-column: 2;
+        grid-row: auto;
+    }
+
+    .bento-card-passions {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+
+    .bento-card-location {
+        grid-column: 1 / 3;
+        grid-row: auto;
+    }
+}
+
+/* RESPONSIVE MOBILE (1 COLONNE FLUIDE) */
+@media (max-width: 680px) {
+    .bento-section {
+        padding: 0 1.2rem;
+        margin: 30px auto 60px auto;
+    }
+
+    .bento-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .bento-card {
+        padding: 1.8rem;
+        border-radius: 24px;
+        min-height: auto;
+    }
+
+    .bento-card-me {
+        grid-column: 1;
+        min-height: 440px;
+    }
+
+    .bento-me-name {
+        font-size: 2rem;
+    }
+
+    .bento-card-studies {
+        grid-column: 1;
+    }
+
+    .bento-studies-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+
+    .bento-card-cs, .bento-card-react {
+        grid-column: 1;
+        min-height: 220px;
+    }
+
+    .bento-card-passions {
+        grid-column: 1;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.8rem;
+    }
+
+    .bento-passions-left {
+        padding-right: 0;
+        margin-bottom: 1.2rem;
+    }
+
+    .bento-passions-right {
+        width: 100%;
+    }
+
+    .bento-wallet-artwork {
+        width: 170px;
+    }
+
+    .bento-card-location {
+        grid-column: 1;
+        min-height: 200px;
+    }
 }

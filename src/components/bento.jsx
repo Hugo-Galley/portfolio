@@ -1,19 +1,18 @@
-import '../Styles/Bento.css'
-import { useState } from 'react'
-import me from '../assets/Bento/me.webp'
-import epsi from '../assets/Bento/epsi.webp'
-import cs from '../assets/Bento/cs.webp'
-import react from '../assets/Pages/react.webp'
-import france from '../assets/Bento/france.webp'
-import wallet from '../assets/Bento/Wallet.webp'
-import { useLanguage } from '../context/LanguageContext'
+import '../Styles/Bento.css';
+import { useState } from 'react';
+import portrait from '../assets/Bento/portrait.webp';
+import epsi from '../assets/Bento/epsi.webp';
+import cs from '../assets/Bento/cs.webp';
+import react from '../assets/Pages/react.webp';
+import wallet from '../assets/Bento/Wallet.webp';
+import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
-
-import ModalBento from './ModalBento'
+import ModalBento from './ModalBento';
 
 export default function Bento() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [activeModalId, setActiveModalId] = useState(null);
+
     const blocks = [
         { id: 'modal1', title: t('bento.me.title'), text: t('bento.me.text') },
         { id: 'modal2', title: t('bento.studies.title'), text: t('bento.studies.text') },
@@ -37,7 +36,7 @@ export default function Bento() {
     };
 
     return (
-        <div>
+        <section className="bento-section" aria-label={t('about.title')}>
             {activeModalId && (
                 <div>
                     <div className='overlay' onClick={hideModal}></div>
@@ -51,77 +50,138 @@ export default function Bento() {
                 </div>
             )}
 
-            <div className='About-Responsive'>
-                <img src={me} alt="Hugo Galley - Développeur" loading="eager" decoding="async" fetchPriority="high" />
-                <div className='About-text'>
-                    <div className='About-WhoAmi'>
-                        <h2>{t('about.whoAmI')}</h2>
-                        <p>{t('about.whoAmIText')}</p>
+            <div className="bento-grid">
+                {/* 1. Carte Profil / Portrait éditorial */}
+                <div 
+                    className="bento-card bento-card-me" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal1')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal1')}
+                    aria-label={t('bentoCards.me')}
+                >
+                    <div className="bento-me-image-container">
+                        <img 
+                            src={portrait} 
+                            alt="Hugo Galley - Portrait" 
+                            className="bento-portrait-img" 
+                            loading="eager" 
+                            decoding="async" 
+                        />
+                        <div className="bento-portrait-gradient"></div>
                     </div>
-                    <div className='About-Passions'>
-                        <h2>{t('about.passions')}</h2>
-                        <div>
-                            <div>
-                                <h3>{t('about.sport')}</h3>
-                                <p>{t('about.sportText')}</p>
-                            </div>
-                            <div>
-                                <h3>{t('about.travel')}</h3>
-                                <p>{t('about.travelText')}</p>
-                            </div>
-                            <div>
-                                <h3>{t('about.music')}</h3>
-                                <p>{t('about.musicText')}</p>
-                            </div>
+                    <div className="bento-me-content">
+                        <span className="bento-eyebrow">{language === 'fr' ? 'À propos' : 'About me'}</span>
+                        <h3 className="bento-me-name">Hugo Galley</h3>
+                        <p className="bento-desc">{t('bentoCards.meDesc')}</p>
+                    </div>
+                </div>
+
+                {/* 2. Carte Formation / EPSI Paris (Grand format) */}
+                <div 
+                    className="bento-card bento-card-studies" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal2')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal2')}
+                    aria-label={t('bentoCards.studies')}
+                >
+                    <div className="bento-studies-layout">
+                        <div className="bento-epsi-frame">
+                            <img src={epsi} alt="EPSI Paris" className="bento-epsi-img" loading="lazy" decoding="async" />
                         </div>
+                        <div className="bento-studies-info">
+                            <span className="bento-eyebrow">{t('bentoCards.studies')}</span>
+                            <h3 className="bento-title">EPSI Paris</h3>
+                            <p className="bento-desc">{t('bentoCards.studiesDesc')}</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 3. Carte Langage (C# & .NET) */}
+                <div 
+                    className="bento-card bento-card-tech bento-card-cs" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal3')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal3')}
+                    aria-label={t('bentoCards.language')}
+                >
+                    <div>
+                        <div className="bento-tech-icon-wrap">
+                            <img src={cs} alt="C#" className="bento-tech-icon" loading="lazy" decoding="async" />
+                        </div>
+                        <span className="bento-eyebrow">{t('bentoCards.language')}</span>
+                        <h3 className="bento-title">C# & .NET</h3>
+                    </div>
+                    <p className="bento-desc">{t('bentoCards.languageDesc')}</p>
+                </div>
+
+                {/* 4. Carte Framework (React & Web) */}
+                <div 
+                    className="bento-card bento-card-tech bento-card-react" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal4')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal4')}
+                    aria-label={t('bentoCards.framework')}
+                >
+                    <div>
+                        <div className="bento-tech-icon-wrap">
+                            <img src={react} alt="React" id="reactLogo" className="bento-tech-icon" loading="lazy" decoding="async" />
+                        </div>
+                        <span className="bento-eyebrow">{t('bentoCards.framework')}</span>
+                        <h3 className="bento-title">React</h3>
+                    </div>
+                    <p className="bento-desc">{t('bentoCards.frameworkDesc')}</p>
+                </div>
+
+                {/* 5. Carte Passions (Design personnel avec Wallet.webp en vedette) */}
+                <div 
+                    className="bento-card bento-card-passions" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal5')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal5')}
+                    aria-label={t('bentoCards.passions')}
+                >
+                    <div className="bento-passions-left">
+                        <span className="bento-eyebrow">{t('bentoCards.passions')}</span>
+                        <h3 className="bento-title">
+                            {language === 'fr' ? 'En dehors du code' : 'Outside of code'}
+                        </h3>
+                        <p className="bento-desc">{t('bentoCards.passionsDesc')}</p>
+                    </div>
+                    <div className="bento-passions-right">
+                        <img 
+                            src={wallet} 
+                            alt="Passions - Wallet of Passion" 
+                            className="bento-wallet-artwork" 
+                            loading="lazy" 
+                            decoding="async" 
+                        />
+                    </div>
+                </div>
+
+                {/* 6. Carte Localisation (Paris & La Défense) */}
+                <div 
+                    className="bento-card bento-card-location" 
+                    role="button" 
+                    tabIndex="0" 
+                    onClick={() => showModal('modal6')} 
+                    onKeyDown={(e) => handleTileKeyDown(e, 'modal6')}
+                    aria-label={t('bentoCards.location')}
+                >
+                    <div className="bento-location-top">
+                        <span className="bento-eyebrow">{t('bentoCards.location')}</span>
+                        <span className="bento-location-pin">📍</span>
+                    </div>
+                    <div className="bento-location-main">
+                        <h3 className="bento-title">Paris & La Défense</h3>
+                        <p className="bento-desc">{t('bentoCards.locationDesc')}</p>
                     </div>
                 </div>
             </div>
-            <div className="container-main">
-                <div className="container-horizontale">
-                    <div className="container-verticale-long" role="button" tabIndex="0" onClick={() => showModal('modal1')} onKeyDown={(e) => handleTileKeyDown(e, 'modal1')}>
-                        <p className="verticale-titre">{t('bentoCards.me')}</p>
-                        <img src={me} alt="Hugo Galley - Portrait" loading="lazy" decoding="async" />
-                        <p className="verticale-desc">{t('bentoCards.meDesc')}</p>
-                    </div>
-                    <div className="container-verticale-large" role="button" tabIndex="0" onClick={() => showModal('modal2')} onKeyDown={(e) => handleTileKeyDown(e, 'modal2')}>
-                        <div className='text'>
-                            <p className="verticale-titre">{t('bentoCards.studies')}</p>
-                            <p className="verticale-desc">{t('bentoCards.studiesDesc')}</p>
-                        </div>
-                        <img src={epsi} alt="EPSI Paris - École d'informatique" loading="lazy" decoding="async" />
-                    </div>
-                </div>
-                <div className="container-horizontale-2">
-                    <div className="container-verticale-small-1" role="button" tabIndex="0" onClick={() => showModal('modal3')} onKeyDown={(e) => handleTileKeyDown(e, 'modal3')}>
-                        <img src={cs} alt="C# - Langage de programmation" loading="lazy" decoding="async" />
-                        <p className="verticale-titre">{t('bentoCards.language')}</p>
-                        <p className="verticale-desc">{t('bentoCards.languageDesc')}</p>
-
-                    </div>
-                    <div className="container-verticale-small-3" role="button" tabIndex="0" onClick={() => showModal('modal4')} onKeyDown={(e) => handleTileKeyDown(e, 'modal4')}>
-                        <p className="verticale-titre">{t('bentoCards.framework')}</p>
-                        <p className="verticale-desc">{t('bentoCards.frameworkDesc')}</p>
-                        <img src={react} alt="React - Framework JavaScript" id="reactLogo" loading="lazy" decoding="async" />
-                    </div>
-                </div>
-                <div className="container-horizontale">
-                    <div className="container-verticale-horizontale-large" role="button" tabIndex="0" onClick={() => showModal('modal5')} onKeyDown={(e) => handleTileKeyDown(e, 'modal5')}>
-                        <div className='text'>
-                            <p className="verticale-titre">{t('bentoCards.passions')}</p>
-                            <p className="verticale-desc">{t('bentoCards.passionsDesc')}</p>
-                        </div>
-                        <img src={wallet} alt="Passions - Sport, Musique, Voyages" loading="lazy" decoding="async" />
-                    </div>
-                    <div className="container-verticale-small-2" role="button" tabIndex="0" onClick={() => showModal('modal6')} onKeyDown={(e) => handleTileKeyDown(e, 'modal6')}>
-                        <p className="verticale-titre">{t('bentoCards.location')}</p>
-                        <p className="verticale-desc">{t('bentoCards.locationDesc')}</p>
-                        <img src={france} alt="France - Paris, La Défense" loading="lazy" decoding="async" />
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    )
+        </section>
+    );
 }

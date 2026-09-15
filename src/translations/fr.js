@@ -61,18 +61,18 @@ const fr = {
 
   // Bento cards
   bentoCards: {
-    me: "Moi",
-    meDesc: "Passionné par l'informatique depuis mon plus jeune âge et désireux de m'améliorer",
-    studies: "Etudes",
-    studiesDesc: "Actuellement étudiant en informatique à l'EPSI Paris",
+    me: "À propos",
+    meDesc: "Développeur chez AXA et étudiant à l'EPSI. J'aime construire des projets utiles et bien pensés.",
+    studies: "Formation",
+    studiesDesc: "En formation d'ingénierie logicielle à l'EPSI Paris La Défense (2023 — 2028).",
     language: "Langage",
-    languageDesc: "Mon langage favori est le C#",
+    languageDesc: "Ce que j'utilise le plus pour concevoir des API et des applications backend solides.",
     framework: "Framework",
-    frameworkDesc: "Mon framework favori est React",
+    frameworkDesc: "Mon choix pour créer des interfaces web modernes, fluides et agréables à utiliser.",
     passions: "Passions",
-    passionsDesc: "Je suis passionne de sport, de musique et de voyages",
+    passionsDesc: "Course à pied, triathlon, 13 ans de violon et voyages dès que l'occasion se présente.",
     location: "Localisation",
-    locationDesc: "Je vis a Paris et travaille en France"
+    locationDesc: "Disponible sur place ou en télétravail."
   },
 
   // Skills section
