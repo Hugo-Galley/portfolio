@@ -45,9 +45,9 @@ const en = {
       title: "Language",
       text: "My favorite language is C#, because when combined with .NET, it allows for a wide variety of projects ranging from batch processes to APIs and web applications."
     },
-    python: {
-      title: "Python",
-      text: "I regularly use Python for task automation, custom utility scripts, data processing, and developing open-source packages like EasyWorkEnv."
+    docker: {
+      title: "Docker & DevOps",
+      text: "I use Docker to isolate dependencies, create consistent development environments, and ensure reliable, reproducible deployments."
     },
     passion: {
       title: "Passion",
@@ -67,8 +67,8 @@ const en = {
     studiesDesc: "Software engineering degree at EPSI Paris La Défense (2023 — 2028).",
     language: "Language",
     languageDesc: "What I use most to build solid APIs and backend applications.",
-    python: "Scripting & AI",
-    pythonDesc: "My go-to choice for automation, data processing, and AI projects.",
+    docker: "DevOps",
+    dockerDesc: "Containerizing services and ensuring reliable, reproducible deployment environments.",
     passions: "Passions",
     passionsDesc: "Running, triathlons, 13 years of violin, and traveling whenever possible.",
     location: "Location",

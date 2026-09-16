@@ -260,8 +260,8 @@
     background: radial-gradient(circle at top right, rgba(155, 79, 150, 0.12) 0%, transparent 70%), var(--card-bg);
 }
 
-.bento-card-python {
-    background: radial-gradient(circle at top right, rgba(55, 118, 171, 0.15) 0%, rgba(255, 212, 59, 0.08) 55%, transparent 75%), var(--card-bg);
+.bento-card-docker {
+    background: radial-gradient(circle at top right, rgba(36, 150, 237, 0.16) 0%, transparent 70%), var(--card-bg);
 }
 
 /* 5. CARTE PASSIONS (WALLET DESIGN PERSONNEL COMPACT) */
@@ -379,7 +379,7 @@
         grid-row: auto;
     }
 
-    .bento-card-python {
+    .bento-card-docker {
         grid-column: 2;
         grid-row: auto;
     }
@@ -435,7 +435,7 @@
         gap: 1.1rem;
     }
 
-    .bento-card-cs, .bento-card-python {
+    .bento-card-cs, .bento-card-docker {
         grid-column: 1;
         min-height: 170px;
     }

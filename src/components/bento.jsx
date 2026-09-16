@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import portrait from '../assets/Bento/portrait.webp';
 import epsi from '../assets/Bento/epsi.webp';
 import cs from '../assets/Bento/cs.webp';
-import pythonLogo from '../assets/Pages/Python-logo-notext.svg.webp';
+import dockerLogo from '../assets/Card/docker-icon-seeklogo.png';
 import wallet from '../assets/Bento/Wallet.webp';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
@@ -17,7 +17,7 @@ export default function Bento() {
         { id: 'modal1', title: t('bento.me.title'), text: t('bento.me.text') },
         { id: 'modal2', title: t('bento.studies.title'), text: t('bento.studies.text') },
         { id: 'modal3', title: t('bento.language.title'), text: t('bento.language.text') },
-        { id: 'modal4', title: t('bento.python.title'), text: t('bento.python.text') },
+        { id: 'modal4', title: t('bento.docker.title'), text: t('bento.docker.text') },
         { id: 'modal5', title: t('bento.passion.title'), text: t('bento.passion.text') },
         { id: 'modal6', title: t('bento.location.title'), text: t('bento.location.text') },
     ];
@@ -134,23 +134,23 @@ export default function Bento() {
                     <p className="bento-desc">{t('bentoCards.languageDesc')}</p>
                 </div>
 
-                {/* 4. Carte Python (Remplace React) */}
+                {/* 4. Carte DevOps (Docker) */}
                 <div 
-                    className="bento-card bento-card-tech bento-card-python" 
+                    className="bento-card bento-card-tech bento-card-docker" 
                     role="button" 
                     tabIndex="0" 
                     onClick={() => showModal('modal4')} 
                     onKeyDown={(e) => handleTileKeyDown(e, 'modal4')}
-                    aria-label={t('bentoCards.python')}
+                    aria-label={t('bentoCards.docker')}
                 >
                     <div>
                         <div className="bento-tech-icon-wrap">
-                            <img src={pythonLogo} alt="Python" className="bento-tech-icon" loading="lazy" decoding="async" />
+                            <img src={dockerLogo} alt="Docker" className="bento-tech-icon" loading="lazy" decoding="async" />
                         </div>
-                        <span className="bento-eyebrow">{t('bentoCards.python')}</span>
-                        <h3 className="bento-title">Python</h3>
+                        <span className="bento-eyebrow">{t('bentoCards.docker')}</span>
+                        <h3 className="bento-title">Docker</h3>
                     </div>
-                    <p className="bento-desc">{t('bentoCards.pythonDesc')}</p>
+                    <p className="bento-desc">{t('bentoCards.dockerDesc')}</p>
                 </div>
 
                 {/* 5. Carte Passions (Design personnel avec Wallet.webp en vedette) */}
