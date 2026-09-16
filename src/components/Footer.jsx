@@ -35,7 +35,7 @@ export default function Footer(){
                 </div>
                 <div className='div-media'>
                     <img src={lin} alt="logo Linkedin" width="30" height="30" loading="lazy" decoding="async" />
-                    <a href="https://www.linkedin.com/in/hugo-galley-a88198304/" onClick={() => trackEvent('contact-linkedin')}>Linkedin</a>
+                    <a href="https://www.linkedin.com/in/hugo-galley/" onClick={() => trackEvent('contact-linkedin')}>Linkedin</a>
                 </div>
             </div>
         </footer>

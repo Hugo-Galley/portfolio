@@ -35,7 +35,7 @@ const fr = {
   bento: {
     me: {
       title: "Moi : Hugo",
-      text: "Je suis Galley Hugo, un étudiant en informatique avec une forte envie d'apprendre. J'aime développer des projets informatiques et acquérir de nouvelles compétences."
+      text: "Je suis Hugo Galley, un étudiant en informatique avec une forte envie d'apprendre. J'aime développer des projets informatiques et acquérir de nouvelles compétences."
     },
     studies: {
       title: "Mes études",
@@ -112,7 +112,7 @@ const fr = {
   // Footer
   footer: {
     info: "Informations",
-    copyright: "©Copyright Galley Hugo"
+    copyright: "©Copyright Hugo Galley"
   },
 
   // 404 page

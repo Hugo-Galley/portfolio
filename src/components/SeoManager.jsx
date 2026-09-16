@@ -157,7 +157,7 @@ export default function SeoManager() {
           },
           knowsAbout: ['.NET', 'Blazor', 'C#', 'DevOps', 'Docker', 'CI/CD', 'Azure DevOps', 'Python'],
           sameAs: [
-            'https://www.linkedin.com/in/hugo-galley-a88198304/',
+            'https://www.linkedin.com/in/hugo-galley/',
             'https://github.com/Hugo-Galley',
             'https://wiki.galleyhugo.com',
           ],

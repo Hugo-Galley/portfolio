@@ -35,7 +35,7 @@ const en = {
   bento: {
     me: {
       title: "Me: Hugo",
-      text: "I'm Galley Hugo, a computer science student with a strong desire to learn. I enjoy developing IT projects and acquiring new skills."
+      text: "I'm Hugo Galley, a computer science student with a strong desire to learn. I enjoy developing IT projects and acquiring new skills."
     },
     studies: {
       title: "My Studies",
@@ -112,7 +112,7 @@ const en = {
   // Footer
   footer: {
     info: "Information",
-    copyright: "©Copyright Galley Hugo"
+    copyright: "©Copyright Hugo Galley"
   },
 
   // 404 page

@@ -60,7 +60,7 @@ export default function Contact() {
             </div>
 
             <a 
-                href="https://www.linkedin.com/in/hugo-galley-a88198304/" 
+                href="https://www.linkedin.com/in/hugo-galley/" 
                 target="_blank" 
                 rel="noreferrer" 
                 onClick={() => trackEvent('contact-linkedin')}
