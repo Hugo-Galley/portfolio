@@ -7,7 +7,7 @@ import Card from "./Card";
 import Bento from "./Bento";
 import Contact from "./Contact";
 import CardWork from './CardWork';
-import CardOpenSource from './CardOpenSource';
+import OpenSourceShowcase from './OpenSourceShowcase';
 import Skills from './Skills';
 import Footer from "./Footer";
 
@@ -71,15 +71,7 @@ export default function HomePage() {
             desc={t('work.unifDesc')}
           />
         </div>
-        <h2 id='OpenSource'>{t('openSource.title')}</h2>
-        <div className='work-app-container'>
-          <CardOpenSource 
-            nom="LeafWiki" 
-            role={t('openSource.leafwikiRole')}
-            repo="perber/leafwiki" 
-            desc={t('openSource.leafwikiDesc')} 
-          />
-        </div>
+        <OpenSourceShowcase />
         <h2 id="Projects">{t('projects.title')}</h2>
         <div className="grid-project">
           <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom'}/>

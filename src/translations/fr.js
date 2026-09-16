@@ -176,8 +176,25 @@ const fr = {
   // Open Source section
   openSource: {
     title: "Open Source",
-    leafwikiRole: "Contributeur",
-    leafwikiDesc: "Mise en place d'une partie du pipeline DevOps (scripts, Docker, CI/CD), ajout de fonctionnalités comme le CSS personnalisé, et rôle de beta-testeur."
+    subtitle: "Partager, contribuer, apprendre au contact de la communauté.",
+    statRepos: "Repos publics",
+    statPackage: "Package PyPI",
+    statStars: "Stars reçues",
+    featuredBadge: "Contribution Majeure",
+    leafwikiRole: "Contributeur DevOps & Features",
+    leafwikiIntro: "LeafWiki est un moteur de documentation et wiki open-source moderne et léger.",
+    contributionsTitle: "Contributions clés :",
+    contribution1: "Automatisation des builds multi-plateformes et pipeline CI/CD GitHub Actions",
+    contribution2: "Conteneurisation Docker & intégration dans le workflow de release",
+    contribution3: "Ajout du support pour le CSS personnalisé & beta-testing actif",
+    viewRepo: "Voir le dépôt GitHub",
+    hubBadge: "Philosophie",
+    hubTitle: "Esprit Open Source",
+    hubDesc: "Partager des solutions réutilisables, collaborer sur des projets communautaires et continuellement apprendre au contact d'autres développeurs.",
+    myPackageBadge: "Créateur de Package",
+    myPackageTitle: "EasyWorkEnv",
+    myPackageDesc: "Package Python d'automatisation d'environnement de travail publié sur PyPI.",
+    viewProfile: "Mon Profil GitHub"
   }
 };
 
