@@ -1,9 +1,9 @@
 import '../Styles/Bento.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import portrait from '../assets/Bento/portrait.webp';
 import epsi from '../assets/Bento/epsi.webp';
 import cs from '../assets/Bento/cs.webp';
-import react from '../assets/Pages/react.webp';
+import pythonLogo from '../assets/Pages/Python-logo-notext.svg.webp';
 import wallet from '../assets/Bento/Wallet.webp';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
@@ -17,32 +17,49 @@ export default function Bento() {
         { id: 'modal1', title: t('bento.me.title'), text: t('bento.me.text') },
         { id: 'modal2', title: t('bento.studies.title'), text: t('bento.studies.text') },
         { id: 'modal3', title: t('bento.language.title'), text: t('bento.language.text') },
-        { id: 'modal4', title: t('bento.framework.title'), text: t('bento.framework.text') },
+        { id: 'modal4', title: t('bento.python.title'), text: t('bento.python.text') },
         { id: 'modal5', title: t('bento.passion.title'), text: t('bento.passion.text') },
         { id: 'modal6', title: t('bento.location.title'), text: t('bento.location.text') },
     ];
 
     const showModal = (id) => {
+        if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
         trackEvent('bento-modal-open', { section: id });
         setActiveModalId(id);
     };
     const hideModal = () => setActiveModalId(null);
 
     const handleTileKeyDown = (e, id) => {
+        if (typeof window !== 'undefined' && window.innerWidth <= 768) return;
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             showModal(id);
         }
     };
 
+    useEffect(() => {
+        if (!activeModalId) return;
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') hideModal();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [activeModalId]);
+
     return (
         <section className="bento-section" aria-label={t('about.title')}>
             {activeModalId && (
-                <div>
-                    <div className='overlay' onClick={hideModal}></div>
+                <div className="bento-modal-portal">
+                    <div className='overlay' onClick={hideModal} aria-hidden="true"></div>
                     {blocks.map((block) => (
                         activeModalId === block.id && (
-                            <div key={block.id} id={block.id} className='modal-shell' style={{ display: 'flex' }}>
+                            <div 
+                                key={block.id} 
+                                id={block.id} 
+                                className='modal-shell' 
+                                style={{ display: 'flex' }}
+                                onClick={(e) => e.stopPropagation()}
+                            >
                                 <ModalBento Title={block.title} text={block.text} hideModal={hideModal} />
                             </div>
                         )
@@ -117,23 +134,23 @@ export default function Bento() {
                     <p className="bento-desc">{t('bentoCards.languageDesc')}</p>
                 </div>
 
-                {/* 4. Carte Framework (React & Web) */}
+                {/* 4. Carte Python (Remplace React) */}
                 <div 
-                    className="bento-card bento-card-tech bento-card-react" 
+                    className="bento-card bento-card-tech bento-card-python" 
                     role="button" 
                     tabIndex="0" 
                     onClick={() => showModal('modal4')} 
                     onKeyDown={(e) => handleTileKeyDown(e, 'modal4')}
-                    aria-label={t('bentoCards.framework')}
+                    aria-label={t('bentoCards.python')}
                 >
                     <div>
                         <div className="bento-tech-icon-wrap">
-                            <img src={react} alt="React" id="reactLogo" className="bento-tech-icon" loading="lazy" decoding="async" />
+                            <img src={pythonLogo} alt="Python" className="bento-tech-icon" loading="lazy" decoding="async" />
                         </div>
-                        <span className="bento-eyebrow">{t('bentoCards.framework')}</span>
-                        <h3 className="bento-title">React</h3>
+                        <span className="bento-eyebrow">{t('bentoCards.python')}</span>
+                        <h3 className="bento-title">Python</h3>
                     </div>
-                    <p className="bento-desc">{t('bentoCards.frameworkDesc')}</p>
+                    <p className="bento-desc">{t('bentoCards.pythonDesc')}</p>
                 </div>
 
                 {/* 5. Carte Passions (Design personnel avec Wallet.webp en vedette) */}

@@ -1,14 +1,16 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(8, 12, 20, 0.62);
-  backdrop-filter: blur(1.5px);
-  display: none;
-  z-index: 1000;
+  background: rgba(8, 12, 20, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: block;
+  z-index: 20000;
+  cursor: pointer;
 }
 
 [data-theme="light"] .overlay {
-  background: rgba(235, 239, 246, 0.62);
+  background: rgba(235, 239, 246, 0.7);
 }
 
 .modal-shell {
@@ -16,8 +18,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(720px, calc(100vw - 2rem));
-  z-index: 1100;
+  width: min(640px, calc(100vw - 2rem));
+  z-index: 20001;
+  pointer-events: auto;
 }
 
 .modal-card {
@@ -75,13 +78,9 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 700px) {
-  .modal-card {
-    padding: 1rem;
-    border-radius: 16px;
-  }
-
-  .modal-header {
-    align-items: center;
+@media (max-width: 768px) {
+  .overlay,
+  .modal-shell {
+    display: none !important;
   }
 }

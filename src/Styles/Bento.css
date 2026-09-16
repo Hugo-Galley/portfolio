@@ -229,7 +229,7 @@
     color: #9333ea;
 }
 
-/* 3 & 4. CARTES TECH (C# & REACT) — Compactes (~195px) */
+/* 3 & 4. CARTES TECH (C# & PYTHON) — Compactes (~195px) */
 .bento-card-tech {
     min-height: 195px;
     justify-content: space-between;
@@ -256,21 +256,12 @@
     transform: scale(1.12) rotate(4deg);
 }
 
-#reactLogo {
-    animation: slowSpin 16s linear infinite;
-}
-
-@keyframes slowSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .bento-card-cs {
     background: radial-gradient(circle at top right, rgba(155, 79, 150, 0.12) 0%, transparent 70%), var(--card-bg);
 }
 
-.bento-card-react {
-    background: radial-gradient(circle at top right, rgba(97, 218, 251, 0.12) 0%, transparent 70%), var(--card-bg);
+.bento-card-python {
+    background: radial-gradient(circle at top right, rgba(55, 118, 171, 0.15) 0%, rgba(255, 212, 59, 0.08) 55%, transparent 75%), var(--card-bg);
 }
 
 /* 5. CARTE PASSIONS (WALLET DESIGN PERSONNEL COMPACT) */
@@ -388,7 +379,7 @@
         grid-row: auto;
     }
 
-    .bento-card-react {
+    .bento-card-python {
         grid-column: 2;
         grid-row: auto;
     }
@@ -404,7 +395,7 @@
     }
 }
 
-/* RESPONSIVE MOBILE (1 COLONNE FLUIDE) */
+/* RESPONSIVE MOBILE (1 COLONNE FLUIDE — Pas de modal sur mobile) */
 @media (max-width: 640px) {
     .bento-section {
         padding: 0 1rem;
@@ -420,6 +411,11 @@
         padding: 1.3rem 1.4rem;
         border-radius: 18px;
         min-height: auto;
+        cursor: default;
+    }
+
+    .overlay, .bento-modal-portal {
+        display: none !important;
     }
 
     .bento-card-me {
@@ -439,7 +435,7 @@
         gap: 1.1rem;
     }
 
-    .bento-card-cs, .bento-card-react {
+    .bento-card-cs, .bento-card-python {
         grid-column: 1;
         min-height: 170px;
     }

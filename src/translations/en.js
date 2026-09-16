@@ -45,9 +45,9 @@ const en = {
       title: "Language",
       text: "My favorite language is C#, because when combined with .NET, it allows for a wide variety of projects ranging from batch processes to APIs and web applications."
     },
-    framework: {
-      title: "Framework",
-      text: "My favorite framework is React, because I really like JavaScript, and it allows creating extremely powerful web applications. Plus, it's open source and now enables mobile app development as well."
+    python: {
+      title: "Python",
+      text: "I regularly use Python for task automation, custom utility scripts, data processing, and developing open-source packages like EasyWorkEnv."
     },
     passion: {
       title: "Passion",
@@ -67,8 +67,8 @@ const en = {
     studiesDesc: "Software engineering degree at EPSI Paris La Défense (2023 — 2028).",
     language: "Language",
     languageDesc: "What I use most to build solid APIs and backend applications.",
-    framework: "Framework",
-    frameworkDesc: "My go-to choice for building modern, responsive, and intuitive web interfaces.",
+    python: "Scripting & AI",
+    pythonDesc: "My go-to choice for automation, data processing, and AI projects.",
     passions: "Passions",
     passionsDesc: "Running, triathlons, 13 years of violin, and traveling whenever possible.",
     location: "Location",

@@ -8,20 +8,20 @@ const DEFAULT_IMAGE = `${SITE_URL}/preview.png`;
 const SEO_TRANSLATIONS = {
   fr: {
     '/': {
-      title: 'Portfolio | Hugo Galley - Développeur',
-      description: 'Hugo Galley — Développeur logiciel chez AXA, diplômé EPSI Paris. React, .NET, Python. Découvrez mes projets open-source et mes expériences professionnelles.',
+      title: 'Hugo Galley — Développeur Logiciel | Portfolio',
+      description: 'Hugo Galley — Développeur logiciel chez AXA, diplômé EPSI Paris. C#, .NET, Python. Découvrez mes projets open-source et mes expériences professionnelles.',
     },
     '/cartography': {
       title: 'Cartography | Projet .NET Blazor - Hugo Galley',
       description: 'Projet Cartography : application .NET et Blazor pour cartographier et rechercher les serveurs d\'entreprise.',
     },
     '/instagram-clone': {
-      title: 'Instagram Clone | Projet React - Hugo Galley',
-      description: 'Clone Instagram en React pour travailler le front-end moderne et les composants réutilisables.',
+      title: 'Instagram Clone | Application Web - Hugo Galley',
+      description: 'Application web clone d\'Instagram pour explorer l\'architecture front-end et les composants réutilisables.',
     },
     '/sport-app': {
-      title: 'ActiFit | Projet React Native - Hugo Galley',
-      description: 'Application de sport en React Native avec séances personnalisées et suivi de progression.',
+      title: 'ActiFit | Application Mobile - Hugo Galley',
+      description: 'Application mobile de sport avec séances personnalisées et suivi de progression.',
     },
     '/admin-interface': {
       title: 'Admin Interface | Projet Python - Hugo Galley',
@@ -54,20 +54,20 @@ const SEO_TRANSLATIONS = {
   },
   en: {
     '/': {
-      title: 'Portfolio | Hugo Galley - Developer',
-      description: 'Hugo Galley — Software developer at AXA, EPSI Paris graduate. React, .NET, Python. Explore my open-source projects and professional experience.',
+      title: 'Hugo Galley — Software Developer | Portfolio',
+      description: 'Hugo Galley — Software developer at AXA, EPSI Paris graduate. C#, .NET, Python. Explore my open-source projects and professional experience.',
     },
     '/cartography': {
       title: 'Cartography | .NET Blazor Project - Hugo Galley',
       description: 'Cartography project: .NET and Blazor application to map and search company servers.',
     },
     '/instagram-clone': {
-      title: 'Instagram Clone | React Project - Hugo Galley',
-      description: 'Instagram clone in React to practice modern front-end and reusable components.',
+      title: 'Instagram Clone | Web Application - Hugo Galley',
+      description: 'Instagram web clone built to explore modern front-end architecture and reusable UI components.',
     },
     '/sport-app': {
-      title: 'ActiFit | React Native Project - Hugo Galley',
-      description: 'Sports application in React Native with personalized sessions and progress tracking.',
+      title: 'ActiFit | Mobile Application - Hugo Galley',
+      description: 'Mobile workout tracking application with personalized routines and progress analytics.',
     },
     '/admin-interface': {
       title: 'Admin Interface | Python Project - Hugo Galley',

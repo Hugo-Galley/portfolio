@@ -45,9 +45,9 @@ const fr = {
       title: "Langage",
       text: "Mon langage préféré est le C#, car, lorsqu'il est combiné avec .NET, il permet de réaliser une grande variété de projets allant des batchs aux API, en passant par les applications web."
     },
-    framework: {
-      title: "Framework",
-      text: "Mon framework préféré est React, car j'aime beaucoup JavaScript, et il permet de créer des applications web extrêmement puissantes. De plus, il est open source et permet désormais le développement d'applications mobiles également."
+    python: {
+      title: "Python",
+      text: "J'utilise régulièrement Python pour automatiser des tâches, concevoir des scripts utilitaires, manipuler des flux de données et développer des packages open-source comme EasyWorkEnv."
     },
     passion: {
       title: "Passion",
@@ -67,8 +67,8 @@ const fr = {
     studiesDesc: "En formation d'ingénierie logicielle à l'EPSI Paris La Défense (2023 — 2028).",
     language: "Langage",
     languageDesc: "Ce que j'utilise le plus pour concevoir des API et des applications backend solides.",
-    framework: "Framework",
-    frameworkDesc: "Mon choix pour créer des interfaces web modernes, fluides et agréables à utiliser.",
+    python: "Scripting & IA",
+    pythonDesc: "Mon choix pour l'automatisation, le traitement de données et mes projets IA.",
     passions: "Passions",
     passionsDesc: "Course à pied, triathlon, 13 ans de violon et voyages dès que l'occasion se présente.",
     location: "Localisation",
