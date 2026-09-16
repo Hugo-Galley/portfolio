@@ -62,7 +62,7 @@ const en = {
   // Bento cards
   bentoCards: {
     me: "About",
-    meDesc: "Software developer at AXA and student at EPSI. I enjoy building clean, useful projects.",
+    meDesc: "Software developer & DevOps at AXA and student at EPSI. I enjoy building clean, useful projects.",
     studies: "Education",
     studiesDesc: "Software engineering degree at EPSI Paris La Défense (2023 — 2028).",
     language: "Language",
@@ -84,12 +84,12 @@ const en = {
   work: {
     title: "Professional Experience",
     currently: "Currently",
-    softwareEngineerIntern: "Software Engineer Apprentice",
+    softwareEngineerIntern: "Software Engineer & DevOps Apprentice",
     devEngineerIntern: "Development Engineer Intern",
     weeks: "weeks",
     stages: "internships",
     unifDesc: "Over two internships, I developed an end-to-end .NET application monitoring tool (DB, API, UI, CI/CD). I also created a Windows service and a Blazor interface to synchronize an internal tool with Dynamics 365 CRM, significantly improving user efficiency.",
-    axaDesc: "Software Engineer Apprentice."
+    axaDesc: "Software Engineer & DevOps apprentice at AXA — building internal applications in C# .NET, setting up CI/CD pipelines, Docker containerization and participating in Agile ceremonies."
   },
 
   // Projects section

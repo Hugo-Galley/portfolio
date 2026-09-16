@@ -4,14 +4,14 @@ const fr = {
     hello: "Hello,",
     iAm: "Je suis Hugo Galley",
     subtitle: "Développeur curieux, je crois que le code est fait pour être partagé",
-    aboutButton: "A propos",
+    aboutButton: "À propos",
     workButton: "Mon Travail",
     cvButton: "Mon CV"
   },
 
   // Aptitude bar
   aptitude: {
-    developer: "Developpeur",
+    developer: "Développeur",
     backend: "Backend",
     web: "Web",
     design: "Design"
@@ -19,7 +19,7 @@ const fr = {
 
   // About / Bento section
   about: {
-    title: "A propos",
+    title: "À propos",
     whoAmI: "Qui suis-je ?",
     whoAmIText: "Je suis un jeune développeur passionné étudiant à l'EPSI, basé à Paris.",
     passions: "Mes Passions",
@@ -62,7 +62,7 @@ const fr = {
   // Bento cards
   bentoCards: {
     me: "À propos",
-    meDesc: "Développeur chez AXA et étudiant à l'EPSI. J'aime construire des projets utiles et bien pensés.",
+    meDesc: "Développeur & DevOps chez AXA et étudiant à l'EPSI. J'aime construire des projets utiles et bien pensés.",
     studies: "Formation",
     studiesDesc: "En formation d'ingénierie logicielle à l'EPSI Paris La Défense (2023 — 2028).",
     language: "Langage",
@@ -77,19 +77,19 @@ const fr = {
 
   // Skills section
   skills: {
-    title: "Mes competences"
+    title: "Mes compétences"
   },
 
   // Work experience section
   work: {
-    title: "Experiences professionnelles",
+    title: "Expériences professionnelles",
     currently: "Actuellement",
-    softwareEngineerIntern: "Alternant ingenieur logiciel",
-    devEngineerIntern: "Stagiaire ingenieur en developpement",
+    softwareEngineerIntern: "Alternant ingénieur logiciel",
+    devEngineerIntern: "Stagiaire ingénieur en développement",
     weeks: "semaines",
     stages: "stages",
     unifDesc: "Lors de mes deux stages, j'ai développé un outil complet de monitoring du parc applicatif (.NET) de bout en bout (BDD, API, UI, CI/CD). J'ai également créé un service Windows et une interface Blazor pour synchroniser un outil interne avec Dynamics 365 CRM, améliorant grandement la vie des utilisateurs.",
-    axaDesc: "Alternance en tant qu'ingénieur logiciel."
+    axaDesc: "Alternance ingénieur logiciel & DevOps chez AXA — développement d'applications internes en C# .NET, mise en place de pipelines CI/CD, conteneurisation Docker et participation aux cérémonies Agile."
   },
 
   // Projects section
@@ -97,7 +97,7 @@ const fr = {
     title: "Mes Projets",
     sportApp: "Application de sport",
     platformerGame: "Jeu de plateforme",
-    cybersecurity: "Cybersecurite"
+    cybersecurity: "Cybersécurité"
   },
 
   // Contact section
@@ -136,11 +136,11 @@ const fr = {
     },
     phantom: {
       title: "Phantom",
-      description: "Il s'agit d'un projet de messagerie securisee comme WhatsApp ou Signal. Le but est de pouvoir echanger des messages ou d'autres types de communication de maniere chiffree de bout en bout."
+      description: "Il s'agit d'un projet de messagerie sécurisée comme WhatsApp ou Signal. Le but est de pouvoir échanger des messages ou d'autres types de communication de manière chiffrée de bout en bout."
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "Il s'agit de la creation d'un package Python permettant de gerer facilement ses variables d'environnement grace a un objet."
+      description: "Il s'agit de la création d'un package Python permettant de gérer facilement ses variables d'environnement grâce à un objet."
     },
     cartography: {
       title: "Cartographie",
@@ -148,7 +148,7 @@ const fr = {
     },
     instaClone: {
       title: "Instagram Clone",
-      techTitle: "Technologies utilisees",
+      techTitle: "Technologies utilisées",
       description: "Il s'agit d'un site web développé en React, visant à reproduire Instagram. Le site se concentre sur le front-end et m'a permis d'apprendre les bases de React."
     },
     sportApp: {
@@ -164,7 +164,7 @@ const fr = {
       description: "Il s'agit d'un ransomware conçu pour sensibiliser à la cybersécurité et en apprendre davantage sur la protection des données."
     },
     gmailAiSort: {
-      title: "Gmail Ai Sort",
+      title: "Gmail AI Sort",
       description: "Ce projet vise à trier vos e-mails en cinq catégories principales à l'aide de l'IA. En utilisant Llama 3, il permet de communiquer avec Gmail. Ce code vous permet d'organiser facilement vos e-mails par étiquette afin de les retrouver plus facilement."
     },
     syncCrd2Crm: {

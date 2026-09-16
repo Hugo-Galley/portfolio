@@ -10,7 +10,7 @@ export default function Footer(){
     const year = date.getFullYear();
 
     return(
-        <div className="footer-main">
+        <footer className="footer-main">
             <button 
                 className="language-selector" 
                 onClick={toggleLanguage}
@@ -38,6 +38,6 @@ export default function Footer(){
                     <a href="https://www.linkedin.com/in/hugo-galley-a88198304/" onClick={() => trackEvent('contact-linkedin')}>Linkedin</a>
                 </div>
             </div>
-        </div>
+        </footer>
     )
 }

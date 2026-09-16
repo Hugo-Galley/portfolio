@@ -57,6 +57,11 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
             className="work-wrapper" 
             style={{ perspective: '1000px' }}
             onClick={handleClick}
+            role={desc ? 'button' : undefined}
+            tabIndex={desc ? 0 : undefined}
+            aria-label={desc ? `${nom} — ${boite}. Cliquer pour voir la description.` : undefined}
+            aria-expanded={desc ? isFlipped : undefined}
+            onKeyDown={desc ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } } : undefined}
         >
             <div 
                 ref={cardRef}

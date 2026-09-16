@@ -5,11 +5,24 @@ import { useLanguage } from '../context/LanguageContext';
 const SITE_URL = 'https://galleyhugo.com';
 const DEFAULT_IMAGE = `${SITE_URL}/preview.png`;
 
+const PROJECT_SCHEMAS = {
+  '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
+  '/instagram-clone': { name: 'Instagram Clone', langs: ['React', 'JavaScript'], repo: null },
+  '/sport-app': { name: 'ActiFit', langs: ['React Native', 'Expo', 'JavaScript'], repo: null },
+  '/admin-interface': { name: 'Admin Interface', langs: ['Python'], repo: null },
+  '/platformer-game': { name: 'Mario Briss', langs: ['Python', 'Pygame'], repo: null },
+  '/ransomware': { name: 'Educational Ransomware', langs: ['Python'], repo: null },
+  '/gmail-ai-sort': { name: 'Gmail AI Sort', langs: ['Python'], repo: null },
+  '/sync-crd-crm': { name: 'SyncCRD2CRM', langs: ['.NET', 'Blazor', 'C#'], repo: null },
+  '/phantom': { name: 'Phantom', langs: ['Python', 'JavaScript'], repo: 'https://github.com/Hugo-Galley' },
+  '/easyworkenv': { name: 'EasyWorkEnv', langs: ['Python'], repo: 'https://github.com/Hugo-Galley/EasyWorkEnv' },
+};
+
 const SEO_TRANSLATIONS = {
   fr: {
     '/': {
       title: 'Hugo Galley — Développeur Logiciel | Portfolio',
-      description: 'Hugo Galley — Développeur logiciel chez AXA, diplômé EPSI Paris. C#, .NET, Python. Découvrez mes projets open-source et mes expériences professionnelles.',
+      description: 'Hugo Galley — Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris. C#, .NET, DevOps. Découvrez mes projets open-source et mes expériences professionnelles.',
     },
     '/cartography': {
       title: 'Cartography | Projet .NET Blazor - Hugo Galley',
@@ -55,7 +68,7 @@ const SEO_TRANSLATIONS = {
   en: {
     '/': {
       title: 'Hugo Galley — Software Developer | Portfolio',
-      description: 'Hugo Galley — Software developer at AXA, EPSI Paris graduate. C#, .NET, Python. Explore my open-source projects and professional experience.',
+      description: 'Hugo Galley — Software developer & DevOps at AXA, EPSI Paris graduate. C#, .NET, DevOps. Explore my open-source projects and professional experience.',
     },
     '/cartography': {
       title: 'Cartography | .NET Blazor Project - Hugo Galley',
@@ -112,7 +125,10 @@ export default function SeoManager() {
   };
 
   const absoluteUrl = `${SITE_URL}${location.pathname}`;
-  const altLang = language === 'fr' ? 'en' : 'fr';
+  const frUrl = `${SITE_URL}${location.pathname}?lang=fr`;
+  const enUrl = `${SITE_URL}${location.pathname}?lang=en`;
+
+  const projectSchema = PROJECT_SCHEMAS[location.pathname];
 
   const structuredData = location.pathname === '/'
     ? {
@@ -124,10 +140,10 @@ export default function SeoManager() {
         mainEntity: {
           '@type': 'Person',
           name: 'Hugo Galley',
-          jobTitle: language === 'fr' ? 'Développeur logiciel' : 'Software Developer',
+          jobTitle: language === 'fr' ? 'Développeur logiciel & DevOps' : 'Software Developer & DevOps Engineer',
           description: language === 'fr'
-            ? 'Développeur logiciel chez AXA, diplômé EPSI Paris, spécialisé en .NET et Python.'
-            : 'Software developer at AXA, EPSI Paris graduate, specializing  .NET and Python.',
+            ? 'Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris, spécialisé en .NET, C# et DevOps.'
+            : 'Software developer & DevOps engineer at AXA, EPSI Paris graduate, specializing in .NET, C# and DevOps.',
           url: SITE_URL,
           image: DEFAULT_IMAGE,
           email: 'contact@galleyhugo.com',
@@ -139,12 +155,27 @@ export default function SeoManager() {
             '@type': 'EducationalOrganization',
             name: 'EPSI Paris',
           },
-          knowsAbout: ['.NET', 'Blazor', 'Python', 'C#', 'DevOps', 'Docker'],
+          knowsAbout: ['.NET', 'Blazor', 'C#', 'DevOps', 'Docker', 'CI/CD', 'Azure DevOps', 'Python'],
           sameAs: [
             'https://www.linkedin.com/in/hugo-galley-a88198304/',
             'https://github.com/Hugo-Galley',
             'https://wiki.galleyhugo.com',
           ],
+        },
+      }
+    : projectSchema
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareSourceCode',
+        name: projectSchema.name,
+        description: seo.description,
+        url: absoluteUrl,
+        programmingLanguage: projectSchema.langs,
+        ...(projectSchema.repo ? { codeRepository: projectSchema.repo } : {}),
+        author: {
+          '@type': 'Person',
+          name: 'Hugo Galley',
+          url: SITE_URL,
         },
       }
     : {
@@ -166,8 +197,9 @@ export default function SeoManager() {
       <title>{seo.title}</title>
       <link rel="canonical" href={absoluteUrl} />
 
-      <link rel="alternate" hreflang={language} href={absoluteUrl} />
-      <link rel="alternate" hreflang={altLang} href={absoluteUrl} />
+      {/* hreflang : chaque langue pointe vers son URL dédiée */}
+      <link rel="alternate" hreflang="fr" href={frUrl} />
+      <link rel="alternate" hreflang="en" href={enUrl} />
       <link rel="alternate" hreflang="x-default" href={absoluteUrl} />
 
       <meta name="description" content={seo.description} />

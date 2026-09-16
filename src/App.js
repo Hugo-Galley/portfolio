@@ -21,7 +21,26 @@ const SyncCRD2CRM = lazy(() => import('./PagesProjects/SyncCRD2CRM'));
 const Phantom = lazy(() => import('./PagesProjects/Phantom'));
 const EasyWorkEnv = lazy(() => import('./PagesProjects/EasyWorkEnv'));
 
-
+function PageSkeleton() {
+  return (
+    <div style={{
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      opacity: 0.4,
+    }}>
+      <div style={{
+        width: 40,
+        height: 40,
+        borderRadius: '50%',
+        border: '3px solid currentColor',
+        borderTopColor: 'transparent',
+        animation: 'spin 0.8s linear infinite',
+      }} />
+    </div>
+  );
+}
 
 function App() {
   useEffect(() => {
@@ -77,6 +96,7 @@ function App() {
     <ThemeProvider>
       <LanguageProvider>
       <Router>
+        <a href="#main-content" className="skip-link">Aller au contenu principal</a>
         <div className='cursor-wrapper'>
           <div className='cursor'></div>
         </div>
@@ -86,11 +106,11 @@ function App() {
           <div className="blob blob-3"></div>
         </div>
         <div className="bg-noise"></div>
-        <div className="main">
+        <main className="main" id="main-content">
           <SeoManager />
           <NavBar2/>
           <ThemeToggle />
-          <Suspense fallback={null}>
+          <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/index.html" element={<HomePage />} />
@@ -108,7 +128,7 @@ function App() {
           <Route path="*" element={<NotFound/>} />
         </Routes>
         </Suspense>
-      </div>
+      </main>
     </Router>
     </LanguageProvider>
     </ThemeProvider>
