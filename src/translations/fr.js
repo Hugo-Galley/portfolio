@@ -180,7 +180,7 @@ const fr = {
     statRepos: "Repos publics",
     statPackage: "Package PyPI",
     statStars: "Stars reçues",
-    featuredBadge: "Contribution Majeure",
+    featuredBadge: "Contribution Devops",
     leafwikiRole: "Contributeur DevOps & Features",
     leafwikiIntro: "LeafWiki est un moteur de documentation et wiki open-source moderne et léger.",
     contributionsTitle: "Contributions clés :",
