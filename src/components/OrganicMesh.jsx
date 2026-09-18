@@ -93,20 +93,41 @@ export default function OrganicMesh() {
   const noiseRef = useRef(null);
   const timeRef = useRef(0);
   const dprRef = useRef(1);
+  const isVisibleRef = useRef(true);
 
-  const PARTICLE_COUNT = 2000;
+  const PARTICLE_COUNT = 1500;
   const MOUSE_RADIUS = 150;
   const NOISE_SCALE = 0.003;
   const FLOW_SPEED = 0.0004;
-  const themeColorRef = useRef({ particle: '255, 255, 255', line: '255, 255, 255' });
+
+  const themeStylesRef = useRef({
+    particleLow: 'rgba(255, 255, 255, 0.22)',
+    particleMid: 'rgba(255, 255, 255, 0.5)',
+    particleHigh: 'rgba(255, 255, 255, 0.85)',
+    lineBase: 'rgba(255, 255, 255, 0.12)',
+    lineMouse: 'rgba(255, 255, 255, 0.45)',
+  });
+
+  // Reusable typed arrays for zero-allocation batching
+  const buffersRef = useRef({
+    bucket0: new Int16Array(PARTICLE_COUNT),
+    bucket1: new Int16Array(PARTICLE_COUNT),
+    bucket2: new Int16Array(PARTICLE_COUNT),
+    linesArray: new Float32Array(4000), // up to 1000 lines * 4 coords
+    mouseLinesArray: new Float32Array(2000), // up to 500 lines * 4 coords
+  });
 
   const updateThemeColor = useCallback(() => {
     const theme = document.documentElement.getAttribute('data-theme');
-    if (theme === 'light') {
-      themeColorRef.current = { particle: '20, 20, 30', line: '20, 20, 30' };
-    } else {
-      themeColorRef.current = { particle: '255, 255, 255', line: '255, 255, 255' };
-    }
+    const isLight = theme === 'light';
+    const rgb = isLight ? '20, 20, 30' : '255, 255, 255';
+    themeStylesRef.current = {
+      particleLow: `rgba(${rgb}, 0.22)`,
+      particleMid: `rgba(${rgb}, 0.5)`,
+      particleHigh: `rgba(${rgb}, 0.85)`,
+      lineBase: `rgba(${rgb}, 0.12)`,
+      lineMouse: `rgba(${rgb}, 0.45)`,
+    };
   }, []);
 
   const initParticles = useCallback((width, height) => {
@@ -115,15 +136,10 @@ export default function OrganicMesh() {
     
     // Create particles distributed along noise-driven organic curves
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      // Start from random positions but use noise to cluster them along curves
       const x = Math.random() * width;
       const y = Math.random() * height;
       
-      // Use noise to determine density — particles in high-density noise areas stay,
-      // others get redistributed
       const noiseVal = noise.noise3D(x * NOISE_SCALE, y * NOISE_SCALE, 0);
-      
-      // Bias towards areas where noise forms edges (absolute derivative is high)
       const nx = noise.noise3D((x + 1) * NOISE_SCALE, y * NOISE_SCALE, 0);
       const ny = noise.noise3D(x * NOISE_SCALE, (y + 1) * NOISE_SCALE, 0);
       const edgeStrength = Math.abs(nx - noiseVal) + Math.abs(ny - noiseVal);
@@ -150,25 +166,26 @@ export default function OrganicMesh() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     noiseRef.current = new SimplexNoise(42);
     updateThemeColor();
 
     // Watch for theme changes
-    const observer = new MutationObserver(() => updateThemeColor());
-    observer.observe(document.documentElement, {
+    const themeObserver = new MutationObserver(() => updateThemeColor());
+    themeObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['data-theme'],
     });
 
     const handleResize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       dprRef.current = dpr;
       const rect = canvas.parentElement.getBoundingClientRect();
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
       canvas.style.width = rect.width + 'px';
       canvas.style.height = rect.height + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
       particlesRef.current = initParticles(rect.width, rect.height);
     };
@@ -188,46 +205,54 @@ export default function OrganicMesh() {
       mouseRef.current = { x: -9999, y: -9999 };
     };
 
-    // Listen on the parent (herroBanner) to capture mouse over the whole hero area
     const parent = canvas.parentElement;
-    parent.addEventListener('mousemove', handleMouseMove);
-    parent.addEventListener('mouseleave', handleMouseLeave);
+    parent.addEventListener('mousemove', handleMouseMove, { passive: true });
+    parent.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
     const animate = () => {
+      if (!isVisibleRef.current) {
+        animFrameRef.current = null;
+        return;
+      }
+
       const width = canvas.width / dprRef.current;
       const height = canvas.height / dprRef.current;
       const noise = noiseRef.current;
       const mouse = mouseRef.current;
       const particles = particlesRef.current;
       const time = timeRef.current;
+      const { bucket0, bucket1, bucket2, linesArray, mouseLinesArray } = buffersRef.current;
+      const styles = themeStylesRef.current;
 
       ctx.clearRect(0, 0, width, height);
+
+      let b0Count = 0;
+      let b1Count = 0;
+      let b2Count = 0;
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Organic flow via 3D noise (time as z-axis for animation)
+        // Organic flow via 3D noise
         const angle = noise.noise3D(
           p.x * NOISE_SCALE + p.noiseOffsetX,
           p.y * NOISE_SCALE + p.noiseOffsetY,
           time * FLOW_SPEED
         ) * Math.PI * 2;
 
-        // Secondary noise layer for more organic, swirling patterns
         const angle2 = noise.noise3D(
           p.x * NOISE_SCALE * 2.5 + 500,
           p.y * NOISE_SCALE * 2.5 + 500,
           time * FLOW_SPEED * 0.7
         ) * Math.PI * 2;
 
-        // Combine flow fields for complex organic motion
         const flowX = (Math.cos(angle) * 0.6 + Math.cos(angle2) * 0.4) * p.speed;
         const flowY = (Math.sin(angle) * 0.6 + Math.sin(angle2) * 0.4) * p.speed;
 
         p.x += flowX * 0.5;
         p.y += flowY * 0.5;
 
-        // Gentle pull back towards base position to keep the overall shape
+        // Gentle pull back towards base position
         p.x += (p.baseX - p.x) * 0.002;
         p.y += (p.baseY - p.y) * 0.002;
 
@@ -240,10 +265,8 @@ export default function OrganicMesh() {
         if (dist < MOUSE_RADIUS) {
           mouseInfluence = 1 - dist / MOUSE_RADIUS;
           const force = mouseInfluence * mouseInfluence * 3;
-          // Repel particles away
           p.x += (dx / dist) * force;
           p.y += (dy / dist) * force;
-          // Grow organically near cursor
           p.size = p.baseSize + mouseInfluence * 3;
         } else {
           p.size += (p.baseSize - p.size) * 0.05;
@@ -255,75 +278,179 @@ export default function OrganicMesh() {
         if (p.y < -20) p.y = height + 20;
         if (p.y > height + 20) p.y = -20;
 
-        // Pulsating opacity based on noise for organic breathing
-        const breathe = noise.noise3D(
-          p.x * 0.005 + p.phase,
-          p.y * 0.005,
-          time * 0.0008
-        );
+        // Smooth breathing pulsation using fast trigonometric wave
+        const breathe = Math.sin(time * 0.02 + p.phase);
         const dynamicOpacity = Math.max(0.15, Math.min(1,
           p.opacity * (0.7 + breathe * 0.3) + mouseInfluence * 0.6
         ));
 
-        // Draw particle
+        // Group into buckets for batched rendering
+        if (dynamicOpacity < 0.38) {
+          bucket0[b0Count++] = i;
+        } else if (dynamicOpacity < 0.68) {
+          bucket1[b1Count++] = i;
+        } else {
+          bucket2[b2Count++] = i;
+        }
+      }
+
+      // Draw all particles in 3 batched draw calls instead of 1500+ individual calls
+      if (b0Count > 0) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${themeColorRef.current.particle}, ${dynamicOpacity})`;
+        ctx.fillStyle = styles.particleLow;
+        for (let k = 0; k < b0Count; k++) {
+          const p = particles[bucket0[k]];
+          ctx.moveTo(p.x + p.size, p.y);
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        }
         ctx.fill();
       }
 
-      // Draw connections between nearby particles for mesh effect
-      // Only check a subset for performance
+      if (b1Count > 0) {
+        ctx.beginPath();
+        ctx.fillStyle = styles.particleMid;
+        for (let k = 0; k < b1Count; k++) {
+          const p = particles[bucket1[k]];
+          ctx.moveTo(p.x + p.size, p.y);
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        }
+        ctx.fill();
+      }
+
+      if (b2Count > 0) {
+        ctx.beginPath();
+        ctx.fillStyle = styles.particleHigh;
+        for (let k = 0; k < b2Count; k++) {
+          const p = particles[bucket2[k]];
+          ctx.moveTo(p.x + p.size, p.y);
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        }
+        ctx.fill();
+      }
+
+      // Draw connections with early-exit rejection and batching
       const connectionDist = 50;
       const connectionDistSq = connectionDist * connectionDist;
-      
-      ctx.lineWidth = 0.3;
-      
+      const mouseRadiusSq = MOUSE_RADIUS * MOUSE_RADIUS;
+      let lineCount = 0;
+      let mouseLineCount = 0;
+      const maxLines = linesArray.length / 4;
+      const maxMouseLines = mouseLinesArray.length / 4;
+      const isMouseActive = mouse.x > -1000;
+
       for (let i = 0; i < particles.length; i += 4) {
         const a = particles[i];
         for (let j = i + 4; j < particles.length; j += 8) {
           const b = particles[j];
           const ddx = a.x - b.x;
+          if (ddx > connectionDist || ddx < -connectionDist) continue;
           const ddy = a.y - b.y;
+          if (ddy > connectionDist || ddy < -connectionDist) continue;
+
           const dSq = ddx * ddx + ddy * ddy;
           if (dSq < connectionDistSq) {
-            const alpha = (1 - dSq / connectionDistSq) * 0.25;
-            
-            // Brighter connections near mouse
-            const midX = (a.x + b.x) / 2;
-            const midY = (a.y + b.y) / 2;
-            const mouseDx = midX - mouse.x;
-            const mouseDy = midY - mouse.y;
-            const mouseDistSq = mouseDx * mouseDx + mouseDy * mouseDy;
-            const mouseBoost = mouseDistSq < MOUSE_RADIUS * MOUSE_RADIUS 
-              ? (1 - Math.sqrt(mouseDistSq) / MOUSE_RADIUS) * 0.5 
-              : 0;
-            
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(${themeColorRef.current.line}, ${alpha + mouseBoost})`;
-            ctx.stroke();
+            let isNearMouse = false;
+            if (isMouseActive) {
+              const midX = (a.x + b.x) * 0.5;
+              const midY = (a.y + b.y) * 0.5;
+              const mdx = midX - mouse.x;
+              const mdy = midY - mouse.y;
+              if (mdx * mdx + mdy * mdy < mouseRadiusSq) {
+                isNearMouse = true;
+              }
+            }
+
+            if (isNearMouse && mouseLineCount < maxMouseLines) {
+              const idx = mouseLineCount * 4;
+              mouseLinesArray[idx] = a.x;
+              mouseLinesArray[idx + 1] = a.y;
+              mouseLinesArray[idx + 2] = b.x;
+              mouseLinesArray[idx + 3] = b.y;
+              mouseLineCount++;
+            } else if (!isNearMouse && lineCount < maxLines) {
+              const idx = lineCount * 4;
+              linesArray[idx] = a.x;
+              linesArray[idx + 1] = a.y;
+              linesArray[idx + 2] = b.x;
+              linesArray[idx + 3] = b.y;
+              lineCount++;
+            }
           }
         }
+      }
+
+      ctx.lineWidth = 0.3;
+
+      if (lineCount > 0) {
+        ctx.beginPath();
+        for (let k = 0; k < lineCount; k++) {
+          const idx = k * 4;
+          ctx.moveTo(linesArray[idx], linesArray[idx + 1]);
+          ctx.lineTo(linesArray[idx + 2], linesArray[idx + 3]);
+        }
+        ctx.strokeStyle = styles.lineBase;
+        ctx.stroke();
+      }
+
+      if (mouseLineCount > 0) {
+        ctx.beginPath();
+        for (let k = 0; k < mouseLineCount; k++) {
+          const idx = k * 4;
+          ctx.moveTo(mouseLinesArray[idx], mouseLinesArray[idx + 1]);
+          ctx.lineTo(mouseLinesArray[idx + 2], mouseLinesArray[idx + 3]);
+        }
+        ctx.strokeStyle = styles.lineMouse;
+        ctx.stroke();
       }
 
       timeRef.current += 1;
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Pause animation when hero leaves the viewport
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        const isIntersecting = entry.isIntersecting;
+        isVisibleRef.current = isIntersecting;
+        if (isIntersecting && !animFrameRef.current) {
+          animFrameRef.current = requestAnimationFrame(animate);
+        } else if (!isIntersecting && animFrameRef.current) {
+          cancelAnimationFrame(animFrameRef.current);
+          animFrameRef.current = null;
+        }
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(parent);
+
+    // Pause animation when browser tab is inactive
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (animFrameRef.current) {
+          cancelAnimationFrame(animFrameRef.current);
+          animFrameRef.current = null;
+        }
+      } else if (isVisibleRef.current && !animFrameRef.current) {
+        animFrameRef.current = requestAnimationFrame(animate);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    animFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', handleResize);
       parent.removeEventListener('mousemove', handleMouseMove);
       parent.removeEventListener('mouseleave', handleMouseLeave);
-      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      themeObserver.disconnect();
+      intersectionObserver.disconnect();
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
+        animFrameRef.current = null;
       }
     };
-  }, [initParticles, isMobile]);
+  }, [initParticles, isMobile, updateThemeColor]);
 
   if (isMobile) return null;
 

@@ -13,7 +13,10 @@
   width: 24rem;
   height: 24rem;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(80px);
+  transform: translateZ(0);
+  will-change: transform;
+  pointer-events: none;
   z-index: 1;
 }
 
@@ -217,7 +220,9 @@ strong {
   position: absolute;
   bottom: -2%;
   left: 50%;
-  transform: translateX(-50%) rotate(180deg);
+  transform: translateX(-50%) rotate(180deg) translateZ(0);
+  will-change: transform, opacity;
+  pointer-events: none;
   width: 140vw;
   height: 100%;
   background: radial-gradient(circle at 50% 100%,
@@ -227,7 +232,7 @@ strong {
                hsla(26, 100%, 50%, 0.36) 87%, 
                hsla(50, 100%, 50%, 0.28) 96%, 
                hsla(231, 99%, 62%, 0) 100%);
-  filter: blur(120px);
+  filter: blur(80px);
   animation: breathe 4s ease-in-out forwards; 
   z-index: -1;
 }

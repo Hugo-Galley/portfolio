@@ -12,7 +12,7 @@ import EasyWorkEnv from '../PagesProjects/EasyWorkEnv';
 import GmailAISort from '../PagesProjects/GmailAISort';
 import InstaGramClone from '../PagesProjects/InstaGramClone';
 import Phantom from '../PagesProjects/Phantom';
-import PlaformerGame from '../PagesProjects/PlaformerGame';
+import PlatformerGame from '../PagesProjects/PlatformerGame';
 import Ransomware from '../PagesProjects/Ransomware';
 import SportApplication from '../PagesProjects/SportApplication';
 import SyncCRD2CRM from '../PagesProjects/SyncCRD2CRM';
@@ -66,7 +66,7 @@ describe('Milestone 1 Structural & Layout correctness tests', () => {
     { name: 'GmailAISort', Component: GmailAISort },
     { name: 'InstaGramClone', Component: InstaGramClone },
     { name: 'Phantom', Component: Phantom },
-    { name: 'PlaformerGame', Component: PlaformerGame },
+    { name: 'PlatformerGame', Component: PlatformerGame },
     { name: 'Ransomware', Component: Ransomware },
     { name: 'SportApplication', Component: SportApplication },
     { name: 'SyncCRD2CRM', Component: SyncCRD2CRM },
