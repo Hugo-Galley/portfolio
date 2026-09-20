@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const SITE_URL = 'https://galleyhugo.com';
-const DEFAULT_IMAGE = `${SITE_URL}/preview.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/preview.png?v=2`;
 
 const PROJECT_SCHEMAS = {
   '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
@@ -141,50 +141,107 @@ export default function SeoManager() {
   const structuredData = lookupPath === '/'
     ? {
         '@context': 'https://schema.org',
-        '@type': 'ProfilePage',
-        name: seo.title,
-        description: seo.description,
-        url: absoluteUrl,
-        mainEntity: {
-          '@type': 'Person',
-          name: 'Hugo Galley',
-          jobTitle: language === 'fr' ? 'Développeur logiciel & DevOps' : 'Software Developer & DevOps Engineer',
-          description: language === 'fr'
-            ? 'Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris, spécialisé en .NET, C# et DevOps.'
-            : 'Software developer & DevOps engineer at AXA, EPSI Paris graduate, specializing in .NET, C# and DevOps.',
-          url: SITE_URL,
-          image: DEFAULT_IMAGE,
-          email: 'contact@galleyhugo.com',
-          worksFor: {
-            '@type': 'Organization',
-            name: 'AXA',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            '@id': `${SITE_URL}/#website`,
+            url: `${SITE_URL}/`,
+            name: 'Hugo Galley',
+            alternateName: 'Hugo Galley Portfolio',
+            description: seo.description,
+            inLanguage: language === 'fr' ? 'fr-FR' : 'en-US',
           },
-          alumniOf: {
-            '@type': 'EducationalOrganization',
-            name: 'EPSI Paris',
+          {
+            '@type': 'ProfilePage',
+            '@id': `${SITE_URL}/#profilepage`,
+            name: seo.title,
+            description: seo.description,
+            url: absoluteUrl,
+            mainEntity: {
+              '@type': 'Person',
+              '@id': `${SITE_URL}/#person`,
+              name: 'Hugo Galley',
+              jobTitle: language === 'fr' ? 'Développeur logiciel & DevOps' : 'Software Developer & DevOps Engineer',
+              description: language === 'fr'
+                ? 'Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris, spécialisé en .NET, C# et DevOps.'
+                : 'Software developer & DevOps engineer at AXA, EPSI Paris graduate, specializing in .NET, C# and DevOps.',
+              url: SITE_URL,
+              image: DEFAULT_IMAGE,
+              email: 'contact@galleyhugo.com',
+              worksFor: {
+                '@type': 'Organization',
+                name: 'AXA',
+              },
+              alumniOf: {
+                '@type': 'EducationalOrganization',
+                name: 'EPSI Paris',
+              },
+              knowsAbout: ['.NET', 'C#', 'DevOps', 'Docker', 'CI/CD', 'Azure DevOps', 'Python'],
+              sameAs: [
+                'https://www.linkedin.com/in/hugo-galley/',
+                'https://github.com/Hugo-Galley',
+                'https://wiki.galleyhugo.com',
+              ],
+            },
+            hasPart: Object.entries(PROJECT_SCHEMAS).map(([path, p]) => ({
+              '@type': 'WebPage',
+              name: p.name,
+              url: `${SITE_URL}${path}/`,
+            })),
           },
-          knowsAbout: ['.NET', 'Blazor', 'C#', 'DevOps', 'Docker', 'CI/CD', 'Azure DevOps', 'Python'],
-          sameAs: [
-            'https://www.linkedin.com/in/hugo-galley/',
-            'https://github.com/Hugo-Galley',
-            'https://wiki.galleyhugo.com',
-          ],
-        },
+          {
+            '@type': 'ItemList',
+            name: language === 'fr' ? 'Navigation Projets' : 'Projects Navigation',
+            itemListElement: Object.entries(PROJECT_SCHEMAS).map(([path, p], index) => ({
+              '@type': 'SiteNavigationElement',
+              position: index + 1,
+              name: p.name,
+              url: `${SITE_URL}${path}/`,
+            })),
+          },
+        ],
       }
     : projectSchema
     ? {
         '@context': 'https://schema.org',
-        '@type': 'SoftwareSourceCode',
-        name: projectSchema.name,
-        description: seo.description,
-        url: absoluteUrl,
-        programmingLanguage: projectSchema.langs,
-        ...(projectSchema.repo ? { codeRepository: projectSchema.repo } : {}),
-        author: {
-          '@type': 'Person',
-          name: 'Hugo Galley',
-          url: SITE_URL,
-        },
+        '@graph': [
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: language === 'fr' ? 'Accueil' : 'Home',
+                item: `${SITE_URL}/`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: language === 'fr' ? 'Projets' : 'Projects',
+                item: `${SITE_URL}/#Projects`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: projectSchema.name,
+                item: absoluteUrl,
+              },
+            ],
+          },
+          {
+            '@type': 'SoftwareSourceCode',
+            name: projectSchema.name,
+            description: seo.description,
+            url: absoluteUrl,
+            programmingLanguage: projectSchema.langs,
+            ...(projectSchema.repo ? { codeRepository: projectSchema.repo } : {}),
+            author: {
+              '@type': 'Person',
+              name: 'Hugo Galley',
+              url: SITE_URL,
+            },
+          },
+        ],
       }
     : {
         '@context': 'https://schema.org',
@@ -222,6 +279,7 @@ export default function SeoManager() {
       <meta property="og:image:height" content="630" />
       <meta property="og:image:type" content="image/png" />
       <meta property="og:locale" content={language === 'fr' ? 'fr_FR' : 'en_US'} />
+      <meta property="og:locale:alternate" content={language === 'fr' ? 'en_US' : 'fr_FR'} />
       <meta property="og:site_name" content="Hugo Galley - Portfolio" />
 
       <meta name="twitter:card" content="summary_large_image" />
