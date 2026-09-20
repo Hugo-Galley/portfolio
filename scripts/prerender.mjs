@@ -21,16 +21,16 @@ const PORT = 45678;
 
 const ROUTES = [
   '/',
-  '/cartography',
-  '/instagram-clone',
-  '/sport-app',
-  '/admin-interface',
-  '/platformer-game',
-  '/ransomware',
-  '/gmail-ai-sort',
-  '/sync-crd-crm',
-  '/phantom',
-  '/easyworkenv',
+  '/cartography/',
+  '/instagram-clone/',
+  '/sport-app/',
+  '/admin-interface/',
+  '/platformer-game/',
+  '/ransomware/',
+  '/gmail-ai-sort/',
+  '/sync-crd-crm/',
+  '/phantom/',
+  '/easyworkenv/',
 ];
 
 /**
@@ -131,12 +131,13 @@ async function prerenderRoute(browser, route, port) {
   }
 
   // Save the pre-rendered HTML
-  const outputDir = join(BUILD_DIR, route === '/' ? '' : route);
-  if (route !== '/') {
+  const trimmedRoute = route.replace(/^\/|\/$/g, '');
+  const outputDir = trimmedRoute === '' ? BUILD_DIR : join(BUILD_DIR, trimmedRoute);
+  if (trimmedRoute !== '') {
     mkdirSync(outputDir, { recursive: true });
   }
 
-  const outputFile = route === '/'
+  const outputFile = trimmedRoute === ''
     ? join(BUILD_DIR, 'index.html')
     : join(outputDir, 'index.html');
 

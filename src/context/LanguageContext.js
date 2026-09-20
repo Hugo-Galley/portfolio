@@ -14,6 +14,15 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
+    // 1. Check URL query param (e.g. ?lang=fr or ?lang=en)
+    if (typeof window !== 'undefined' && window.location.search) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramLang = urlParams.get('lang');
+      if (paramLang === 'fr' || paramLang === 'en') {
+        return paramLang;
+      }
+    }
+
     const savedLanguage = localStorage.getItem('language');
     if (savedLanguage) {
       return savedLanguage;
@@ -38,6 +47,16 @@ export const LanguageProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    // Sync with URL query parameter if present
+    if (typeof window !== 'undefined' && window.location.search) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramLang = urlParams.get('lang');
+      if ((paramLang === 'fr' || paramLang === 'en') && paramLang !== language) {
+        setLanguage(paramLang);
+        return;
+      }
+    }
+
     localStorage.setItem('language', language);
     document.documentElement.setAttribute('lang', language);
   }, [language]);

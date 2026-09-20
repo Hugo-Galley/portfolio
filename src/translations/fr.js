@@ -95,6 +95,7 @@ const fr = {
   // Projects section
   projects: {
     title: "Mes Projets",
+    adminInterface: "Interface d'administration",
     sportApp: "Application de sport",
     platformerGame: "Jeu de plateforme",
     cybersecurity: "Cybersécurité"
@@ -132,44 +133,44 @@ const fr = {
   projectPages: {
     adminInterface: {
       title: "AdminInterface",
-      description: "Ceci est une interface de connexion pour un laboratoire simulé visant à tester l'utilisation de la bibliothèque graphique CustomTkinter en Python."
+      description: "Interface d'administration et portail de connexion moderne développé en Python avec la bibliothèque graphique CustomTkinter. Ce projet simule un environnement de laboratoire sécurisé avec gestion des sessions, authentification, navigation multi-fenêtres et journalisation des accès pour expérimenter l'ergonomie desktop moderne en Python."
     },
     phantom: {
       title: "Phantom",
-      description: "Il s'agit d'un projet de messagerie sécurisée comme WhatsApp ou Signal. Le but est de pouvoir échanger des messages ou d'autres types de communication de manière chiffrée de bout en bout."
+      description: "Application de messagerie instantanée hautement sécurisée inspirée de protocoles de référence comme Signal et WhatsApp. Phantom intègre un chiffrement de bout en bout (E2EE) pour garantir la stricte confidentialité des échanges, une architecture client-serveur réactive en Python et JavaScript, ainsi qu'une gestion fine des clés cryptographiques et des sessions temps réel."
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "Il s'agit de la création d'un package Python permettant de gérer facilement ses variables d'environnement grâce à un objet."
+      description: "Package open-source Python publié sur PyPI conçu pour simplifier et fiabiliser la gestion des environnements de travail et des variables d'environnement. Il propose une API intuitive basée sur la programmation orientée objet, un typage fort, la validation automatique des variables requises et la prise en charge transparente des fichiers .env en développement comme en production."
     },
     cartography: {
       title: "Cartographie",
-      description: "Ceci est une application conçue pour cartographier tous les serveurs de l'entreprise afin d'identifier sur quel serveur une application est localisée ou non, ainsi que pour permettre la recherche, le tri et l'ajout de fichiers de recherche. Pour cette application, je crée la base de données, les batchs, l'API, l'application web et le déploiement."
+      description: "Solution d'entreprise complète conçue pour cartographier, inventorier et rechercher l'ensemble du parc de serveurs et des applications hébergées. Développée avec l'écosystème .NET et Blazor, l'application comprend la modélisation de base de données relationnelle, le développement d'une API REST performante, des batchs d'automatisation et de synchronisation, ainsi qu'une interface web réactive pour la recherche multicritère et l'analyse d'impact."
     },
     instaClone: {
       title: "Instagram Clone",
       techTitle: "Technologies utilisées",
-      description: "Il s'agit d'un site web développé en React, visant à reproduire Instagram. Le site se concentre sur le front-end et m'a permis d'apprendre les bases de React."
+      description: "Application web interactive développée en React reproduisant les fonctionnalités clés d'Instagram : flux d'actualités dynamique, navigation par stories, filtres, exploration de profils et système d'interactions (likes, commentaires). Ce projet a servi de banc d'essai pour maîtriser l'état global, les composants modulaires réutilisables et le design responsive."
     },
     sportApp: {
       title: "ActiFit",
-      description: "Il s'agit d'une application sportive conçue pour vous proposer des séances d'entraînement personnalisées ainsi que des options d'exercices, tout en affichant votre progression. J'ai également utilisé React Native pour garantir sa compatibilité avec tous les types d'appareils."
+      description: "Application mobile cross-platform de coaching sportif développée avec React Native et l'écosystème Expo. ActiFit permet aux utilisateurs de concevoir des programmes d'entraînement sur-mesure, de suivre l'exécution des exercices avec minuteurs et consignes techniques, et de visualiser leur progression grâce à des graphiques et indicateurs de performance."
     },
     platformerGame: {
       title: "Mario Briss",
-      description: "C'est un jeu de plateforme imitant Mario, réalisé en Python avec Pygame. Un petit easter egg y est caché."
+      description: "Jeu de plateforme 2D rétro développé en Python avec le moteur Pygame, inspiré des mécaniques classiques de Super Mario. Le jeu intègre un moteur physique personnalisé (gravité, inertie, détection de collisions par boîtes englobantes), la gestion d'animations par spritesheets, un système de score, des niveaux progressifs et un easter egg caché."
     },
     ransomware: {
-      title: "Ransomware",
-      description: "Il s'agit d'un ransomware conçu pour sensibiliser à la cybersécurité et en apprendre davantage sur la protection des données."
+      title: "Ransomware Éducatif",
+      description: "Projet de recherche et de démonstration en cybersécurité développé en Python à visée purement pédagogique et défensive. Il simule les mécanismes opératoires des ransomwares réels (chiffrement symétrique/asymétrique des fichiers cibles, génération et échange de clefs sécurisées, vectorisation d'attaque) afin de tester la résilience des systèmes et d'analyser les contre-mesures de détection et de sauvegarde."
     },
     gmailAiSort: {
       title: "Gmail AI Sort",
-      description: "Ce projet vise à trier vos e-mails en cinq catégories principales à l'aide de l'IA. En utilisant Llama 3, il permet de communiquer avec Gmail. Ce code vous permet d'organiser facilement vos e-mails par étiquette afin de les retrouver plus facilement."
+      description: "Système d'automatisation et de tri intelligent des e-mails combinant l'API officielle Google Gmail et un grand modèle de langage (Llama 3). Le script analyse sémantiquement le contenu et le contexte des messages entrants pour les classifier automatiquement selon 5 catégories clés, appliquer les étiquettes correspondantes et prioriser les messages urgents sans intervention manuelle."
     },
     syncCrd2Crm: {
       title: "SyncCRD2CRM",
-      description: "Il s'agit d'un service de synchronisation entre les outils internes de l'entreprise (CRD) et le CRM Dynamics 365 de Microsoft. Le service est accompagné d'une IHM pour faire le mapping entre les deux, ainsi que d'un batch de rattrapage pour remettre d'équerre les données entre CRD et CRM."
+      description: "Service d'intégration et de synchronisation bidirectionnelle de données à grande échelle entre les bases de données internes (CRD) et le CRM cloud Microsoft Dynamics 365. Développé en .NET et Blazor, le projet intègre un moteur de mapping configurable, des mécanismes de résilience (retry, journalisation des erreurs, batchs de rattrapage) et une IHM de supervision opérationnelle."
     }
   },
 

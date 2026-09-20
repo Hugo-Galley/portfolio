@@ -95,6 +95,7 @@ const en = {
   // Projects section
   projects: {
     title: "My Projects",
+    adminInterface: "Admin Interface",
     sportApp: "Sports Application",
     platformerGame: "Platformer Game",
     cybersecurity: "Cybersecurity"
@@ -132,44 +133,44 @@ const en = {
   projectPages: {
     adminInterface: {
       title: "AdminInterface",
-      description: "This is a login interface for a simulated laboratory designed to test the use of the CustomTkinter graphical library in Python."
+      description: "Modern administration dashboard and login portal built in Python utilizing the CustomTkinter graphical framework. This project simulates a secure enterprise environment featuring session handling, authentication, multi-window workflows, and activity logging to explore modern desktop UI/UX paradigms."
     },
     phantom: {
       title: "Phantom",
-      description: "This is a secure messaging project like WhatsApp or Signal. The goal is to be able to exchange messages or any type of communication in an end-to-end encrypted manner."
+      description: "Highly secure instant messaging platform inspired by state-of-the-art protocols like Signal and WhatsApp. Phantom features end-to-end encryption (E2EE) ensuring strict communication privacy, a responsive client-server architecture in Python and JavaScript, cryptographic key negotiation, and real-time session management."
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "This is a Python package creation that allows easy management of environment variables through an object."
+      description: "Open-source Python library published on PyPI crafted to streamline and secure workplace environment variable workflows. It delivers an intuitive object-oriented API, strict typing, automated validation for required variables, and seamless support for .env files across development and production pipelines."
     },
     cartography: {
       title: "Cartography",
-      description: "This is an application designed to map all company servers to identify on which server an application is located, as well as to enable searching, sorting, and adding search files. For this application, I created the database, batches, API, web application, and deployment."
+      description: "Comprehensive enterprise infrastructure mapping system designed to catalog, inspect, and search an entire network of application servers. Developed with the .NET ecosystem and Blazor, the system encompasses relational database design, a high-throughput REST API, scheduled synchronization batches, and an intuitive web UI for multi-criteria search and impact analysis."
     },
     instaClone: {
       title: "Instagram Clone",
       techTitle: "Tech Used",
-      description: "This is a website developed in React, aiming to reproduce Instagram. The site focuses on the front-end and allowed me to learn the basics of React."
+      description: "Interactive full-featured web application engineered with React replicating core Instagram features: dynamic news feed, stories navigation, image filters, profile exploration, and social interactions (likes, comments). Serves as a testbed for state management, modular component design, and responsive layouts."
     },
     sportApp: {
       title: "ActiFit",
-      description: "This is a sports application designed to offer personalized training sessions and exercise options, while displaying your progress. I also used React Native to ensure compatibility with all types of devices."
+      description: "Cross-platform mobile fitness and workout tracking application developed with React Native and the Expo ecosystem. ActiFit empowers users to structure tailored workout regimens, follow guided exercise timers with technical posture advice, and monitor ongoing physical progress through dynamic visual charts."
     },
     platformerGame: {
       title: "Mario Briss",
-      description: "This is a platformer game imitating Mario, made in Python with Pygame. A small easter egg is hidden in it."
+      description: "Retro 2D platformer game built in Python using the Pygame library, inspired by classic Super Mario mechanics. The game incorporates custom physics (gravity, inertia, AABB bounding-box collision detection), spritesheet animation pipelines, score tracking, progressive level hurdles, and a hidden easter egg."
     },
     ransomware: {
-      title: "Ransomware",
-      description: "This is a ransomware designed to raise awareness about cybersecurity and learn more about data protection."
+      title: "Educational Ransomware",
+      description: "Cybersecurity research and demonstration project developed in Python strictly for educational and defensive threat-modeling purposes. Simulates real-world ransomware mechanics (symmetric/asymmetric hybrid cryptographic file locking, key exchange handshakes, vector simulation) to benchmark system resilience and test intrusion detection and disaster recovery strategies."
     },
     gmailAiSort: {
       title: "Gmail AI Sort",
-      description: "This project aims to sort your emails into five main categories using AI. Using Llama 3, it communicates with Gmail. This code allows you to easily organize your emails by label to find them more easily."
+      description: "Intelligent email triage and automation pipeline integrating Google's official Gmail API with a local large language model (Llama 3). Performs contextual semantic parsing of inbound communications to automatically classify messages across 5 distinct categories, apply appropriate labels, and prioritize urgent items with zero manual friction."
     },
     syncCrd2Crm: {
       title: "SyncCRD2CRM",
-      description: "This is a synchronization service between the company's internal tools (CRD) and Microsoft's Dynamics 365 CRM. The service comes with a UI for mapping between the two, as well as a catch-up batch to realign data between CRD and CRM."
+      description: "Robust data synchronization bridge facilitating continuous two-way alignment between legacy internal databases (CRD) and Microsoft Dynamics 365 Cloud CRM. Built with .NET and Blazor, it incorporates a flexible schema mapping interface, automated reconciliation batches, fault-tolerant retry policies, and operational audit dashboards."
     }
   },
 

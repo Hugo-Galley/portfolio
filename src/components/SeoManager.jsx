@@ -117,20 +117,28 @@ export default function SeoManager() {
   const location = useLocation();
   const { language } = useLanguage();
 
+  // Normalize path: strip trailing slash for translations lookup (except root '/')
+  const rawPath = location.pathname;
+  const normalizedPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '');
+  const lookupPath = normalizedPath === '/index.html' ? '/' : normalizedPath;
+
+  // Canonical URLs on GitHub Pages should have a trailing slash for directories to avoid 301 redirects
+  const canonicalPath = lookupPath === '/' ? '/' : `${lookupPath}/`;
+
   const translations = SEO_TRANSLATIONS[language] || SEO_TRANSLATIONS['en'];
-  const seo = translations[location.pathname] || {
+  const seo = translations[lookupPath] || {
     title: language === 'fr' ? 'Page introuvable | Hugo Galley' : 'Page Not Found | Hugo Galley',
     description: language === 'fr' ? 'La page demandée est introuvable.' : 'The requested page could not be found.',
     noIndex: true,
   };
 
-  const absoluteUrl = `${SITE_URL}${location.pathname}`;
-  const frUrl = `${SITE_URL}${location.pathname}?lang=fr`;
-  const enUrl = `${SITE_URL}${location.pathname}?lang=en`;
+  const absoluteUrl = `${SITE_URL}${canonicalPath}`;
+  const frUrl = `${SITE_URL}${canonicalPath}?lang=fr`;
+  const enUrl = `${SITE_URL}${canonicalPath}?lang=en`;
 
-  const projectSchema = PROJECT_SCHEMAS[location.pathname];
+  const projectSchema = PROJECT_SCHEMAS[lookupPath];
 
-  const structuredData = location.pathname === '/'
+  const structuredData = lookupPath === '/'
     ? {
         '@context': 'https://schema.org',
         '@type': 'ProfilePage',
