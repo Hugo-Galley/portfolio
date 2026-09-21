@@ -82,6 +82,8 @@ export default function Bento() {
                             src={portrait} 
                             alt="Hugo Galley - Portrait" 
                             className="bento-portrait-img" 
+                            width="800"
+                            height="1164"
                             loading="eager" 
                             decoding="async" 
                         />
@@ -105,7 +107,7 @@ export default function Bento() {
                 >
                     <div className="bento-studies-layout">
                         <div className="bento-epsi-frame">
-                            <img src={epsi} alt="EPSI Paris" className="bento-epsi-img" loading="lazy" decoding="async" />
+                            <img src={epsi} alt="EPSI Paris" className="bento-epsi-img" width="465" height="262" loading="lazy" decoding="async" />
                         </div>
                         <div className="bento-studies-info">
                             <span className="bento-eyebrow">{t('bentoCards.studies')}</span>
@@ -126,7 +128,7 @@ export default function Bento() {
                 >
                     <div>
                         <div className="bento-tech-icon-wrap">
-                            <img src={cs} alt="C#" className="bento-tech-icon" loading="lazy" decoding="async" />
+                            <img src={cs} alt="C#" className="bento-tech-icon" width="100" height="112" loading="lazy" decoding="async" />
                         </div>
                         <span className="bento-eyebrow">{t('bentoCards.language')}</span>
                         <h3 className="bento-title">C# & .NET</h3>
@@ -145,7 +147,7 @@ export default function Bento() {
                 >
                     <div>
                         <div className="bento-tech-icon-wrap">
-                            <img src={dockerLogo} alt="Docker" className="bento-tech-icon" loading="lazy" decoding="async" />
+                            <img src={dockerLogo} alt="Docker" className="bento-tech-icon" width="170" height="134" loading="lazy" decoding="async" />
                         </div>
                         <span className="bento-eyebrow">{t('bentoCards.docker')}</span>
                         <h3 className="bento-title">Docker</h3>
@@ -174,6 +176,8 @@ export default function Bento() {
                             src={wallet} 
                             alt="Passions - Wallet of Passion" 
                             className="bento-wallet-artwork" 
+                            width="599"
+                            height="467"
                             loading="lazy" 
                             decoding="async" 
                         />

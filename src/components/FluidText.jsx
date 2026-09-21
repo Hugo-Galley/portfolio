@@ -222,8 +222,8 @@ export default function FluidText({ children, className, as: Tag = 'span' }) {
       ref={containerRef}
       className={className}
       style={{ position: 'relative' }}
-      aria-label={accessibleLabel || undefined}
     >
+      <span className="sr-only">{accessibleLabel}</span>
       <span aria-hidden="true" style={{ display: 'contents' }}>
         {splitChildren}
       </span>
