@@ -1,9 +1,8 @@
 .herroBanner {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-
 }
 
 .herroBanner::before,
@@ -246,29 +245,6 @@ strong {
   }
 }
 
-@media (max-width: 768px) {
-  .herro {
-    text-align: center;
-  }
-
-  .button-div {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #herro-button1,
-  #herro-button2 {
-    display: block;
-    text-align: center;
-  }
-
-  #ScrollButton {
-    display: none;
-  }
-}
-
-
-
 @media (max-width: 1024px) {
   .hero-title {
     font-size: clamp(2.2rem, 6vw, 3.2rem);
@@ -277,20 +253,14 @@ strong {
   .hero-subtitle {
     font-size: clamp(1.1rem, 3vw, 1.3rem);
   }
-
-  .button-div {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  #herro-button1,
-  #herro-button2 {
-    width: 100%;
-    text-align: center;
-  }
 }
 
 @media (max-width: 768px) {
+  .herro {
+    text-align: center;
+    padding: 1.25rem;
+  }
+
   .hero-title {
     font-size: clamp(2.1rem, 7vw, 2.8rem);
   }
@@ -298,32 +268,37 @@ strong {
   .hero-subtitle {
     font-size: clamp(1.05rem, 3.5vw, 1.25rem);
     max-width: 90vw;
+    margin-bottom: 2rem;
+  }
+
+  #ScrollButton {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .hero-title {
-    font-size: clamp(2rem, 8vw, 2.5rem);
+    font-size: clamp(1.9rem, 8vw, 2.4rem);
   }
 
   .hero-subtitle {
-    font-size: clamp(1rem, 4vw, 1.2rem);
-    max-width: 90vw;
-    margin-top: 1.5vh;
+    font-size: clamp(0.95rem, 4vw, 1.15rem);
+    max-width: 95vw;
+    margin-top: 0.75rem;
+    margin-bottom: 1.75rem;
   }
 
   .button-div {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    gap: 0.85rem;
   }
 
   #herro-button1,
   #herro-button2 {
-    width: 45vw;
+    width: 100%;
     text-align: center;
-  }
-
-  .gradient-text {
-    margin-left: 0;
+    padding: 0.8rem 1.4rem;
   }
 }

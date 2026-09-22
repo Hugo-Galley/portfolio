@@ -11,6 +11,7 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
 
     const handleMouseMove = (e) => {
         if (!cardRef.current) return;
+        if (window.matchMedia && !window.matchMedia('(hover: hover)').matches) return;
         const card = cardRef.current;
         const rect = card.getBoundingClientRect();
         
@@ -34,6 +35,7 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
     };
 
     const handleMouseEnter = () => {
+        if (window.matchMedia && !window.matchMedia('(hover: hover)').matches) return;
         setIsHovered(true);
     };
 
@@ -115,7 +117,7 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
                         flexDirection: 'column', 
                         justifyContent: 'center' 
                     }}>
-                        <p className="work-desc" style={{ fontSize: '15px', lineHeight: '1.5', padding: '0 10px', color: 'var(--text-color)' }}>{desc}</p>
+                        <p className="work-desc">{desc}</p>
                     </div>
                 </div>
                 {/* Glare effect */}

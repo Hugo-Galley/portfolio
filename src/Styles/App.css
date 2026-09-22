@@ -143,7 +143,8 @@ html, body {
     position: relative;
     color: var(--text-color);
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100%;
     min-height: 100vh;
     z-index: 0;
     cursor: none;
@@ -229,32 +230,51 @@ a{
 }
 
 .grid-project {
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin: 40px auto 80px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    gap: 100px; 
-    padding: 40px; 
-
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); 
+    gap: 2.5rem; 
+    padding: 0 1.25rem; 
+    max-width: 1200px;
     justify-items: center; 
+    box-sizing: border-box;
 }
 .projectPage{
     margin-top: 50px;
+    width: 100%;
+    box-sizing: border-box;
 }
 .projectPage h1, .projectPage h2{
     color: var(--text-color);
     text-align: center;
-    font-size: 4em;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
     font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    padding: 0 1rem;
+    margin: 2.5rem auto 1.2rem auto;
     transition: color 0.3s ease;
 }
 
 #contactText{
-    margin-top: 20px;
+    margin: 15px auto 35px auto;
     text-align: center;
-    font-size: 1.2em;
-    font-weight: 700 ;
-
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0 1rem;
+    max-width: 600px;
+}
+.grid-work {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 40px auto 80px auto;
+    padding: 0 1.25rem;
+    box-sizing: border-box;
 }
 .work-app-container{
     margin-top: 60px;
@@ -343,13 +363,29 @@ a{
         align-items: center;
     }
     .cursor-wrapper{
-        display: none;
+        display: none !important;
     }
-    body{
-        cursor: pointer;
+    *, html, body {
+        cursor: auto !important;
     }
-    #WorkAt{
-        font-size: 3em;
+    a, button, [role="button"], input, select, textarea {
+        cursor: pointer !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .projectPage {
+        margin-top: 30px;
+    }
+    .grid-project {
+        gap: 1.5rem;
+        padding: 0 1rem;
+        margin: 30px auto 60px auto;
+    }
+    .grid-work {
+        gap: 1.5rem;
+        padding: 0 1rem;
+        margin: 30px auto 60px auto;
     }
 }
 

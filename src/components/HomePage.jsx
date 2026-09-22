@@ -50,7 +50,7 @@ export default function HomePage() {
         <h2 id="AboutMe">{t('about.title')}</h2>
         <Bento/>
         <Skills/>
-        <h2 id="Work">{t('work.title')}</h2>
+        <h2 id="WorkAt">{t('work.title')}</h2>
         <div className="grid-work">
           <CardWork 
             nom={t('work.softwareDevIntern')} 

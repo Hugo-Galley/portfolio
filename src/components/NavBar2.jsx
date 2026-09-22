@@ -3,18 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { trackEvent } from '../hooks/useUmami';
 
+const SECTIONS = [
+    { id: 'Home', label: 'Home' },
+    { id: 'AboutMe', label: 'About' },
+    { id: 'MySkills', label: 'Skills' },
+    { id: 'WorkAt', label: 'Work' },
+    { id: 'Projects', label: 'Projects' },
+    { id: 'Contact', label: 'Contact' }
+];
+
 export default function NavBar2() {
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState('Home');
-
-    const sections = [
-        { id: 'Home', label: 'Home' },
-        { id: 'AboutMe', label: 'About' },
-        { id: 'MySkills', label: 'Skills' },
-        { id: 'WorkAt', label: 'Work' },
-        { id: 'Projects', label: 'Projects' },
-        { id: 'Contact', label: 'Contact' }
-    ];
 
     const handleNavigation = (section) => {
         trackEvent('navbar-click', { section });
@@ -33,7 +33,7 @@ export default function NavBar2() {
             { threshold: 0.3 }
         );
 
-        sections.forEach((section) => {
+        SECTIONS.forEach((section) => {
             const element = document.getElementById(section.id);
             if (element) {
                 observer.observe(element);
@@ -41,7 +41,7 @@ export default function NavBar2() {
         });
 
         return () => {
-            sections.forEach((section) => {
+            SECTIONS.forEach((section) => {
                 const element = document.getElementById(section.id);
                 if (element) {
                     observer.unobserve(element);
@@ -53,7 +53,7 @@ export default function NavBar2() {
     return (
         <div className='navbar2'>
             <ul className='navbar2-right'>
-                {sections.map((section) => (
+                {SECTIONS.map((section) => (
                     <li 
                         key={section.id} 
                         className={`navbar2-items ${activeSection === section.id ? 'active' : ''}`}

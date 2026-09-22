@@ -106,6 +106,7 @@ export default function Skills(){
 
     return (
         <div 
+            id="MySkills"
             className="skills-track-wrapper" 
             aria-label="Competences techniques"
         >

@@ -1,10 +1,11 @@
 .contact-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: 2rem;
-    margin: 100px auto;
+    margin: 40px auto 80px auto;
     max-width: 1000px;
-    padding: 0 2rem;
+    padding: 0 1.25rem;
+    box-sizing: border-box;
 }
 
 .contact-container a {
@@ -170,8 +171,9 @@
     .contact-container{
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        margin: 80px auto;
-        padding: 0 1.5rem;
+        margin: 40px auto 60px auto;
+        padding: 0 1rem;
+        max-width: 480px;
     }
     
     .Github, .Linkedin, .email {
