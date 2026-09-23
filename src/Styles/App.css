@@ -265,23 +265,15 @@ a{
     padding: 0 1rem;
     max-width: 600px;
 }
-.grid-work {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: stretch;
-    gap: 2.5rem;
-    max-width: 900px;
-    margin: 40px auto 80px auto;
-    padding: 0 1.25rem;
-    box-sizing: border-box;
-}
-.work-app-container{
+.grid-work, .work-app-container {
     margin-top: 60px;
     margin-bottom: 100px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 .cursor-wrapper {
     position: fixed;
@@ -358,7 +350,7 @@ a{
 
 
 @media (max-width: 1200px) {
-    .work-app-container{
+    .work-app-container, .grid-work {
         flex-direction: column;
         align-items: center;
     }
@@ -378,11 +370,6 @@ a{
         margin-top: 30px;
     }
     .grid-project {
-        gap: 1.5rem;
-        padding: 0 1rem;
-        margin: 30px auto 60px auto;
-    }
-    .grid-work {
         gap: 1.5rem;
         padding: 0 1rem;
         margin: 30px auto 60px auto;

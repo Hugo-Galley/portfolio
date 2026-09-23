@@ -53,8 +53,8 @@ export default function HomePage() {
         <h2 id="WorkAt">{t('work.title')}</h2>
         <div className="grid-work">
           <CardWork 
-            nom={t('work.softwareDevIntern')} 
-            duree={`1 ${t('work.year')}`} 
+            nom={t('work.softwareEngineerIntern')} 
+            duree={t('work.currently')} 
             boite={"AXA France"} 
             img={axa}
             desc={t('work.axaDesc')}
