@@ -297,7 +297,6 @@ a{
     position: relative;
     pointer-events: none;
     opacity: 0.85;
-    animation: cursorPulse 2s ease-in-out infinite alternate;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .cursor::before {
@@ -321,16 +320,6 @@ a{
     transition: all 0.3s ease;
 }
 
-@keyframes cursorPulse {
-    from {
-        transform: scale(1);
-        opacity: 0.85;
-    }
-    to {
-        transform: scale(0.85);
-        opacity: 0.6;
-    }
-}
 
 @keyframes Anime2 {
     0% {
@@ -403,9 +392,8 @@ a{
     position: absolute;
     border-radius: 50%;
     opacity: 0.8;
-    animation: blobFloat 20s infinite alternate ease-in-out;
-    transform: translateZ(0); /* Hardware acceleration */
-    will-change: transform;
+    /* Static on purpose: an endlessly moving full-screen background forces every
+       backdrop-filter card above it to be re-blurred on each frame */
 }
 
 .blob-1 {
@@ -422,7 +410,6 @@ a{
     background: radial-gradient(circle, var(--blob-orange) 0%, transparent 60%);
     top: 40%;
     right: -300px;
-    animation-delay: -5s;
 }
 
 .blob-3 {
@@ -431,11 +418,4 @@ a{
     background: radial-gradient(circle, var(--blob-violet) 0%, transparent 60%);
     bottom: -200px;
     left: 10%;
-    animation-delay: -10s;
-}
-
-@keyframes blobFloat {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30px, 40px) scale(1.05); }
-    100% { transform: translate(-30px, 20px) scale(0.95); }
 }

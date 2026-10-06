@@ -29,7 +29,8 @@
     animation: skillsMarquee 35s linear infinite;
 }
 
-.skills-track-wrapper:hover .skills-track {
+.skills-track-wrapper:hover .skills-track,
+.skills-track-wrapper.is-offscreen .skills-track {
     animation-play-state: paused;
 }
 
@@ -44,7 +45,6 @@
     background: var(--card-bg, rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 24px;
-    backdrop-filter: blur(12px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;

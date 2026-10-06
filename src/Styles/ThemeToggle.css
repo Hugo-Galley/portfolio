@@ -33,11 +33,12 @@
   transition: all 0.3s ease;
 }
 
-.sun-icon {
+/* Animate only on hover: an always-running animation keeps the page repainting */
+.theme-toggle-button:hover .sun-icon {
   animation: sunRotate 20s linear infinite;
 }
 
-.moon-icon {
+.theme-toggle-button:hover .moon-icon {
   animation: moonFloat 3s ease-in-out infinite;
 }
 

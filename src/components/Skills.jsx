@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import py from '../assets/Pages/Python-logo-notext.svg.webp'
 import cs from '../assets/Card/cs.webp'
 import rct from '../assets/Pages/react.webp'
@@ -104,10 +104,20 @@ export default function Skills(){
 
     const repeatedList = [...skillsList, ...skillsList];
 
+    // Pause the marquee while it is off-screen so it doesn't keep the GPU busy
+    const wrapperRef = useRef(null);
+    const [isOnScreen, setIsOnScreen] = useState(false);
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => setIsOnScreen(entry.isIntersecting));
+        observer.observe(wrapperRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div 
             id="MySkills"
-            className="skills-track-wrapper" 
+            ref={wrapperRef}
+            className={`skills-track-wrapper${isOnScreen ? '' : ' is-offscreen'}`} 
             aria-label="Competences techniques"
         >
           <div className="skills-track">

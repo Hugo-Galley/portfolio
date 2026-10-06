@@ -209,11 +209,20 @@ export default function OrganicMesh() {
     parent.addEventListener('mousemove', handleMouseMove, { passive: true });
     parent.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
-    const animate = () => {
+    // Cap at 30fps: the flow is slow, so 60fps only doubles the CPU/GPU cost
+    const FRAME_INTERVAL = 1000 / 30;
+    let lastFrameTime = 0;
+
+    const animate = (now) => {
       if (!isVisibleRef.current) {
         animFrameRef.current = null;
         return;
       }
+      if (now - lastFrameTime < FRAME_INTERVAL) {
+        animFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = now;
 
       const width = canvas.width / dprRef.current;
       const height = canvas.height / dprRef.current;
@@ -249,12 +258,13 @@ export default function OrganicMesh() {
         const flowX = (Math.cos(angle) * 0.6 + Math.cos(angle2) * 0.4) * p.speed;
         const flowY = (Math.sin(angle) * 0.6 + Math.sin(angle2) * 0.4) * p.speed;
 
-        p.x += flowX * 0.5;
-        p.y += flowY * 0.5;
+        // Per-frame steps doubled to keep the same speed at 30fps
+        p.x += flowX;
+        p.y += flowY;
 
         // Gentle pull back towards base position
-        p.x += (p.baseX - p.x) * 0.002;
-        p.y += (p.baseY - p.y) * 0.002;
+        p.x += (p.baseX - p.x) * 0.004;
+        p.y += (p.baseY - p.y) * 0.004;
 
         // Mouse interaction — organic repulsion + growth
         const dx = p.x - mouse.x;
@@ -269,7 +279,7 @@ export default function OrganicMesh() {
           p.y += (dy / dist) * force;
           p.size = p.baseSize + mouseInfluence * 3;
         } else {
-          p.size += (p.baseSize - p.size) * 0.05;
+          p.size += (p.baseSize - p.size) * 0.1;
         }
 
         // Wrap around edges smoothly
@@ -403,7 +413,7 @@ export default function OrganicMesh() {
         ctx.stroke();
       }
 
-      timeRef.current += 1;
+      timeRef.current += 2;
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
