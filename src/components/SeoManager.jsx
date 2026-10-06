@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const SITE_URL = 'https://galleyhugo.com';
-const DEFAULT_IMAGE = `${SITE_URL}/preview.png?v=2`;
+const DEFAULT_IMAGE = `${SITE_URL}/preview.png?v=3`;
 
 const PROJECT_SCHEMAS = {
   '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
