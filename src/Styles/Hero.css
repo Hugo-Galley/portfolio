@@ -3,6 +3,9 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  /* Fade glows/particles out instead of cutting them at the hero's bottom edge */
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 240px), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 240px), transparent 100%);
 }
 
 .herroBanner::before,
