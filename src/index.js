@@ -8,13 +8,7 @@ const rootElement = document.getElementById('root');
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then((registration) => {
-        console.log('Service Worker enregistré avec succès :', registration);
-      })
-      .catch((error) => {
-        console.error('Erreur d\'enregistrement du Service Worker :', error);
-      });
+    navigator.serviceWorker.register('/service-worker.js').catch(() => {});
   });
 }
 

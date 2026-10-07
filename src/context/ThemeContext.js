@@ -13,12 +13,21 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark';
+    let savedTheme = null;
+    try {
+      savedTheme = localStorage.getItem('theme');
+    } catch (e) {
+      // localStorage indisponible (navigation privée, stockage bloqué)
+    }
+    return savedTheme === 'light' ? 'light' : 'dark';
   });
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {
+      // localStorage indisponible
+    }
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 

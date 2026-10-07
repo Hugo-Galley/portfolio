@@ -23,8 +23,13 @@ export const LanguageProvider = ({ children }) => {
       }
     }
 
-    const savedLanguage = localStorage.getItem('language');
-    if (savedLanguage) {
+    let savedLanguage = null;
+    try {
+      savedLanguage = localStorage.getItem('language');
+    } catch (e) {
+      // localStorage indisponible (navigation privée, stockage bloqué)
+    }
+    if (savedLanguage === 'fr' || savedLanguage === 'en') {
       return savedLanguage;
     }
 
@@ -57,7 +62,11 @@ export const LanguageProvider = ({ children }) => {
       }
     }
 
-    localStorage.setItem('language', language);
+    try {
+      localStorage.setItem('language', language);
+    } catch (e) {
+      // localStorage indisponible
+    }
     document.documentElement.setAttribute('lang', language);
   }, [language]);
 

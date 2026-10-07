@@ -4,28 +4,13 @@
     <meta charset="utf-8" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&display=swap">
-</noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&display=swap">
 <link rel="preload" href="%PUBLIC_URL%/fonts/Geist.ttf" as="font" type="font/ttf" crossorigin>
 
-<script>
-  (function(l) {
-    if (l.search[1] === '/' ) {
-      var decoded = l.search.slice(1).split('&').map(function(s) {
-        return s.replace(/~and~/g, '&');
-      }).join('?');
-      window.history.replaceState(null, null,
-        l.pathname.slice(0, -1) + decoded + l.hash
-      );
-    }
-  }(window.location));
-</script>
+<script src="%PUBLIC_URL%/spa-redirect.js"></script>
 
 <script defer src="https://analytics.galleyhugo.com/script.js" data-website-id="ecbac90b-157b-4347-9b88-d70269d34402" data-performance="true"></script>
-<script defer src="https://analytics.galleyhugo.com/recorder.js" data-website-id="ecbac90b-157b-4347-9b88-d70269d34402"></script>   
-  
+
     <link rel="icon" href="%PUBLIC_URL%/logo.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
