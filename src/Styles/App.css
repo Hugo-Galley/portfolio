@@ -1,8 +1,4 @@
-@font-face {
-    font-family: 'Geist';
-    src: url('../assets/fonts/Geist.ttf') format('truetype');
-    font-display: swap;
-}
+/* @font-face Geist et Fraunces : déclarés dans public/index.html (URLs fixes, préchargées) */
 
 /* ── Accessibilité : skip-link ── */
 .skip-link {
