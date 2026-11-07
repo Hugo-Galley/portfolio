@@ -158,6 +158,10 @@ const fr = {
       title: "Gmail AI Sort",
       description: "Système d'automatisation et de tri intelligent des e-mails combinant l'API officielle Google Gmail et un grand modèle de langage (Llama 3). Le script analyse sémantiquement le contenu et le contexte des messages entrants pour les classifier automatiquement selon 5 catégories clés, appliquer les étiquettes correspondantes et prioriser les messages urgents sans intervention manuelle."
     },
+    numera: {
+      title: "Numera",
+      description: "Application auto-hébergée de suivi de budget, d'épargne et d'investissements, pensée comme un remplaçant du tableur. Backend FastAPI et SQLite, frontend React, import de relevés CSV, projections et tableaux de bord, sauvegardes chiffrées et serveur MCP pour l'interroger avec Claude. Déployable en une commande via Docker (images amd64 et arm64) et disponible avec une démo en ligne."
+    },
     syncCrd2Crm: {
       title: "SyncCRD2CRM",
       description: "Service d'intégration et de synchronisation bidirectionnelle de données à grande échelle entre les bases de données internes (CRD) et le CRM cloud Microsoft Dynamics 365. Développé en .NET et Blazor, le projet intègre un moteur de mapping configurable, des mécanismes de résilience (retry, journalisation des erreurs, batchs de rattrapage) et une IHM de supervision opérationnelle."
@@ -171,6 +175,8 @@ const fr = {
     leafwikiDesc: "Pipeline CI/CD multi-plateforme, image Docker publiée à chaque release et support du CSS personnalisé.",
     easyWorkEnvRole: "Créateur",
     easyWorkEnvDesc: "Package Python publié sur PyPI qui prépare un environnement de travail en une commande.",
+    numeraRole: "Créateur",
+    numeraDesc: "Application auto-hébergée de budget, d'épargne et d'investissements : données locales en SQLite, installation Docker en une commande.",
     viewProfile: "Tout voir sur GitHub"
   }
 };

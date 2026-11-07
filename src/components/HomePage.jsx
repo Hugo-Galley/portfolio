@@ -19,6 +19,7 @@ import gmailAi from '../assets/Projects/gmail-ai-sort-card.webp';
 import Sync from '../assets/Projects/sync-crd-crm-card.webp';
 import axa from '../assets/Card/AXA_Logo.webp';
 import phantom from '../assets/Projects/phantom-card.webp';
+import numera from '../assets/Projects/numera-card.webp';
 import pythonPackage from '../assets/Projects/easyworkenv-card.webp';
 
 export default function HomePage() {
@@ -68,6 +69,7 @@ export default function HomePage() {
         <OpenSourceShowcase />
         <h2 id="Projects">{t('projects.title')}</h2>
         <div className="grid-project">
+          <Card titre={"Numera"} categorie={"FastAPI | React"} image={numera} lien={'/numera/'}/>
           <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom/'}/>
           <Card titre={"EasyWorkEnv"} categorie={"Package Python"} image={pythonPackage} lien={'/easyworkenv/'}/>
           <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography/'}/>

@@ -61,6 +61,15 @@ export default function OpenSourceShowcase() {
       stack: ['Python'],
       meta: 'PyPI',
     },
+    {
+      owner: 'Hugo-Galley',
+      repo: 'numera',
+      url: 'https://github.com/Hugo-Galley/numera',
+      role: t('openSource.numeraRole'),
+      desc: t('openSource.numeraDesc'),
+      stack: ['Python', 'React', 'Docker'],
+      meta: null,
+    },
   ];
 
   const handleLinkClick = (name, url) => {

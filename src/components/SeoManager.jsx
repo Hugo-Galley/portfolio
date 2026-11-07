@@ -14,6 +14,7 @@ const PROJECT_SCHEMAS = {
   '/sync-crd-crm': { name: 'SyncCRD2CRM', langs: ['.NET', 'Blazor', 'C#'], repo: null },
   '/phantom': { name: 'Phantom', langs: ['Python', 'JavaScript'], repo: 'https://github.com/Hugo-Galley' },
   '/easyworkenv': { name: 'EasyWorkEnv', langs: ['Python'], repo: 'https://github.com/Hugo-Galley/EasyWorkEnv' },
+  '/numera': { name: 'Numera', langs: ['Python', 'React', 'Docker'], repo: 'https://github.com/Hugo-Galley/numera' },
 };
 
 const SEO_TRANSLATIONS = {
@@ -54,6 +55,10 @@ const SEO_TRANSLATIONS = {
       title: 'EasyWorkEnv | Package Python - Hugo Galley',
       description: 'Package Python pour gérer facilement les variables d\'environnement avec une API simple.',
     },
+    '/numera': {
+      title: 'Numera | Budget auto-hébergé - Hugo Galley',
+      description: 'Numera : application auto-hébergée de suivi de budget, d\'épargne et d\'investissements (FastAPI, React, SQLite, Docker).',
+    },
   },
   en: {
     '/': {
@@ -91,6 +96,10 @@ const SEO_TRANSLATIONS = {
     '/easyworkenv': {
       title: 'EasyWorkEnv | Python Package - Hugo Galley',
       description: 'Python package to easily manage environment variables with a simple API.',
+    },
+    '/numera': {
+      title: 'Numera | Self-hosted Budget App - Hugo Galley',
+      description: 'Numera: self-hosted app to track budget, savings and investments (FastAPI, React, SQLite, Docker).',
     },
   },
 };

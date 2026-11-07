@@ -29,6 +29,7 @@ const ROUTES = [
   '/sync-crd-crm/',
   '/phantom/',
   '/easyworkenv/',
+  '/numera/',
 ];
 
 /**

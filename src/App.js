@@ -17,6 +17,7 @@ const Ransomware = lazy(() => import('./PagesProjects/Ransomware'));
 const GmailAiSort = lazy(() => import('./PagesProjects/GmailAISort'));
 const SyncCRD2CRM = lazy(() => import('./PagesProjects/SyncCRD2CRM'));
 const Phantom = lazy(() => import('./PagesProjects/Phantom'));
+const Numera = lazy(() => import('./PagesProjects/Numera'));
 const EasyWorkEnv = lazy(() => import('./PagesProjects/EasyWorkEnv'));
 
 function PageSkeleton() {
@@ -121,6 +122,7 @@ function App() {
           <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
           <Route path="/phantom" element={<Phantom />} />
           <Route path='/easyworkenv' element={<EasyWorkEnv/>}/>
+          <Route path="/numera" element={<Numera />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
         </Suspense>
