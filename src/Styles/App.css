@@ -228,7 +228,7 @@ a{
 .grid-project {
     margin: 40px auto 80px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); 
     gap: 2.5rem; 
     padding: 0 1.25rem; 
     max-width: 1200px;
