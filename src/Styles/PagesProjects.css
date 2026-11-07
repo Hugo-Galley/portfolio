@@ -260,6 +260,23 @@
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.project-actions .github-link {
+    margin-top: 0;
+}
+
+.project-note {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
 .github-link:hover {
     transform: translateX(4px);
 }

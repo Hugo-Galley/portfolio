@@ -124,7 +124,9 @@ const fr = {
 
   // Github button
   github: {
-    sourceCode: "Voir le code source"
+    sourceCode: "Voir le code source",
+    demo: "Essayer la démo",
+    demoNote: "Données fictives remises à zéro chaque jour, identifiants déjà remplis."
   },
 
   // Project pages

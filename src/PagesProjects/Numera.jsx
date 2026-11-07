@@ -4,6 +4,7 @@ import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import sqlite from '../assets/Pages/sqlite.webp';
 import docker from '../assets/Card/docker-icon-seeklogo.png';
 import GithubButton from '../components/GithubButton';
+import DemoButton from '../components/DemoButton';
 import '../Styles/PagesProjects.css';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
@@ -38,9 +39,15 @@ export default function Numera() {
                             <p>Docker</p>
                         </div>
                     </div>
-                    <a href="https://github.com/Hugo-Galley/numera" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/numera' })}>
-                        <GithubButton />
-                    </a>
+                    <div className='project-actions'>
+                        <a href="https://demo-budget.galleyhugo.com" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('demo-click', { project: 'numera' })}>
+                            <DemoButton />
+                        </a>
+                        <a href="https://github.com/Hugo-Galley/numera" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/numera' })}>
+                            <GithubButton />
+                        </a>
+                    </div>
+                    <p className='project-note'>{t('github.demoNote')}</p>
                 </div>
             </div>
         </div>

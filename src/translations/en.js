@@ -124,7 +124,9 @@ const en = {
 
   // Github button
   github: {
-    sourceCode: "Get source code"
+    sourceCode: "Get source code",
+    demo: "Try the live demo",
+    demoNote: "Fictional data reset every day, credentials already filled in."
   },
 
   // Project pages
