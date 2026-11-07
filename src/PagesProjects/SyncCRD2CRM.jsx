@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/SyncCRD2CRM.png';
+import imgtest from '../assets/Projects/sync-crd-crm.webp';
 import net from '../assets/Pages/NET_Core_Logo.svg.webp';
 import blazor from '../assets/Pages/Blazor.webp';
 import ssms from '../assets/Card/sql.png';

@@ -24,8 +24,6 @@ const ROUTES = [
   '/cartography/',
   '/instagram-clone/',
   '/sport-app/',
-  '/admin-interface/',
-  '/platformer-game/',
   '/ransomware/',
   '/gmail-ai-sort/',
   '/sync-crd-crm/',

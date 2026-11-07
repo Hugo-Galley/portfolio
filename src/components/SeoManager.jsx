@@ -9,8 +9,6 @@ const PROJECT_SCHEMAS = {
   '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
   '/instagram-clone': { name: 'Instagram Clone', langs: ['React', 'JavaScript'], repo: null },
   '/sport-app': { name: 'ActiFit', langs: ['React Native', 'Expo', 'JavaScript'], repo: null },
-  '/admin-interface': { name: 'Admin Interface', langs: ['Python'], repo: null },
-  '/platformer-game': { name: 'Mario Briss', langs: ['Python', 'Pygame'], repo: null },
   '/ransomware': { name: 'Educational Ransomware', langs: ['Python'], repo: null },
   '/gmail-ai-sort': { name: 'Gmail AI Sort', langs: ['Python'], repo: null },
   '/sync-crd-crm': { name: 'SyncCRD2CRM', langs: ['.NET', 'Blazor', 'C#'], repo: null },
@@ -35,14 +33,6 @@ const SEO_TRANSLATIONS = {
     '/sport-app': {
       title: 'ActiFit | Application Mobile - Hugo Galley',
       description: 'Application mobile de sport avec séances personnalisées et suivi de progression.',
-    },
-    '/admin-interface': {
-      title: 'Admin Interface | Projet Python - Hugo Galley',
-      description: 'Interface admin en Python avec CustomTkinter pour la gestion et la simulation de connexion.',
-    },
-    '/platformer-game': {
-      title: 'Mario Briss | Jeu Python Pygame - Hugo Galley',
-      description: 'Jeu de plateforme en Python et Pygame, inspiré de Mario, réalisé pour progresser en game dev.',
     },
     '/ransomware': {
       title: 'Ransomware Éducatif | Projet Python - Hugo Galley',
@@ -81,14 +71,6 @@ const SEO_TRANSLATIONS = {
     '/sport-app': {
       title: 'ActiFit | Mobile Application - Hugo Galley',
       description: 'Mobile workout tracking application with personalized routines and progress analytics.',
-    },
-    '/admin-interface': {
-      title: 'Admin Interface | Python Project - Hugo Galley',
-      description: 'Admin interface in Python with CustomTkinter for management and login simulation.',
-    },
-    '/platformer-game': {
-      title: 'Mario Briss | Python Pygame Game - Hugo Galley',
-      description: 'Platformer game in Python with Pygame, inspired by Mario, built to improve game dev skills.',
     },
     '/ransomware': {
       title: 'Educational Ransomware | Python Project - Hugo Galley',

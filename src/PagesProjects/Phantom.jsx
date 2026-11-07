@@ -1,4 +1,4 @@
-import imgtest from '../assets/Pages/phantom.png';
+import imgtest from '../assets/Projects/phantom.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import js from '../assets/Pages/JavaScript-logo.webp'
 import GithubButton from '../components/GithubButton';

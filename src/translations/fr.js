@@ -95,9 +95,7 @@ const fr = {
   // Projects section
   projects: {
     title: "Mes Projets",
-    adminInterface: "Interface d'administration",
     sportApp: "Application de sport",
-    platformerGame: "Jeu de plateforme",
     cybersecurity: "Cybersécurité"
   },
 
@@ -131,10 +129,6 @@ const fr = {
 
   // Project pages
   projectPages: {
-    adminInterface: {
-      title: "AdminInterface",
-      description: "Interface d'administration et portail de connexion moderne développé en Python avec la bibliothèque graphique CustomTkinter. Ce projet simule un environnement de laboratoire sécurisé avec gestion des sessions, authentification, navigation multi-fenêtres et journalisation des accès pour expérimenter l'ergonomie desktop moderne en Python."
-    },
     phantom: {
       title: "Phantom",
       description: "Application de messagerie instantanée hautement sécurisée inspirée de protocoles de référence comme Signal et WhatsApp. Phantom intègre un chiffrement de bout en bout (E2EE) pour garantir la stricte confidentialité des échanges, une architecture client-serveur réactive en Python et JavaScript, ainsi qu'une gestion fine des clés cryptographiques et des sessions temps réel."
@@ -155,10 +149,6 @@ const fr = {
     sportApp: {
       title: "ActiFit",
       description: "Application mobile cross-platform de coaching sportif développée avec React Native et l'écosystème Expo. ActiFit permet aux utilisateurs de concevoir des programmes d'entraînement sur-mesure, de suivre l'exécution des exercices avec minuteurs et consignes techniques, et de visualiser leur progression grâce à des graphiques et indicateurs de performance."
-    },
-    platformerGame: {
-      title: "Mario Briss",
-      description: "Jeu de plateforme 2D rétro développé en Python avec le moteur Pygame, inspiré des mécaniques classiques de Super Mario. Le jeu intègre un moteur physique personnalisé (gravité, inertie, détection de collisions par boîtes englobantes), la gestion d'animations par spritesheets, un système de score, des niveaux progressifs et un easter egg caché."
     },
     ransomware: {
       title: "Ransomware Éducatif",

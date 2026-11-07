@@ -1,4 +1,4 @@
-import imgtest from '../assets/Pages/InstaPreview.webp';
+import imgtest from '../assets/Projects/instagram-clone.webp';
 import rea from '../assets/Pages/react.webp';
 import js from '../assets/Pages/JavaScript-logo.webp';
 import GithubButton from '../components/GithubButton';

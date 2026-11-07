@@ -1,4 +1,4 @@
-import imgtest from '../assets/Pages/Screenshot 2022-11-05 at 10.44.06 PM.webp';
+import imgtest from '../assets/Projects/easyworkenv.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import pypi from '../assets/Card/PyPI-Logo-notext.svg.png';
 import github from '../assets/Contact/github.webp';

@@ -10,18 +10,16 @@ import OpenSourceShowcase from './OpenSourceShowcase';
 import Skills from './Skills';
 import Footer from "./Footer";
 
-import insta from '../assets/Card/instagram-2.webp';
-import cart from '../assets/Card/Carto.webp';
-import actifit from '../assets/Card/actifit.webp';
-import mario from '../assets/Card/mario.webp';
-import virus from '../assets/Card/virus.webp';
+import insta from '../assets/Projects/instagram-clone-card.webp';
+import cart from '../assets/Projects/cartography-card.webp';
+import actifit from '../assets/Projects/sport-app-card.webp';
+import virus from '../assets/Projects/ransomware-card.webp';
 import unif from '../assets/Card/unif.webp';
-import gmailAi from '../assets/Card/gmailAi.webp';
-import Sync from '../assets/Pages/SyncCard.png';
+import gmailAi from '../assets/Projects/gmail-ai-sort-card.webp';
+import Sync from '../assets/Projects/sync-crd-crm-card.webp';
 import axa from '../assets/Card/AXA_Logo.webp';
-import phantom from '../assets/Card/phantom-card.webp';
-import pythonPackage from '../assets/Pages/Screenshot 2022-11-05 at 10.44.06 PM.webp';
-import ctk from '../assets/Card/ctk2.webp';
+import phantom from '../assets/Projects/phantom-card.webp';
+import pythonPackage from '../assets/Projects/easyworkenv-card.webp';
 
 export default function HomePage() {
   const { t } = useLanguage();
@@ -75,8 +73,6 @@ export default function HomePage() {
           <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography/'}/>
           <Card titre={"Instagram clone"} categorie={"React"} image={insta} lien={'/instagram-clone/'} />
           <Card titre={t('projects.sportApp')} categorie={"Expo | React Native"} image={actifit} lien={'/sport-app/'} />
-          <Card titre={t('projects.adminInterface') || "Admin Interface"} categorie={"Python"} image={ctk} lien={'/admin-interface/'}/>
-          <Card titre={t('projects.platformerGame')} categorie={"Python"} image={mario} lien={"/platformer-game/"}/>
           <Card titre={t('projects.cybersecurity')} categorie={"Python"} image={virus} lien={'/ransomware/'} />
           <Card titre={"GmailAiSort"} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort/'} />
           <Card titre={"SyncCRD2CRM"} categorie={".NET | Blazor"} image={Sync} lien={'/sync-crd-crm/'}/>

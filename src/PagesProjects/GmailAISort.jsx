@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/gmailAi.webp';
+import imgtest from '../assets/Projects/gmail-ai-sort.webp';
 import python from '../assets/Pages/Python-logo-notext.svg.webp';
 import ollama from '../assets/Pages/ollama.png';
 import meta from '../assets/Pages/meta.webp';

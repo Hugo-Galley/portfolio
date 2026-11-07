@@ -6,13 +6,11 @@ import DownLoadButton from './DownloadButton';
 import GithubButton from './GithubButton';
 import CloseModalButton from './CloseModalButton';
 
-import AdminInterface from '../PagesProjects/AdminInterface';
 import Cartography from '../PagesProjects/Cartography';
 import EasyWorkEnv from '../PagesProjects/EasyWorkEnv';
 import GmailAISort from '../PagesProjects/GmailAISort';
 import InstaGramClone from '../PagesProjects/InstaGramClone';
 import Phantom from '../PagesProjects/Phantom';
-import PlatformerGame from '../PagesProjects/PlatformerGame';
 import Ransomware from '../PagesProjects/Ransomware';
 import SportApplication from '../PagesProjects/SportApplication';
 import SyncCRD2CRM from '../PagesProjects/SyncCRD2CRM';
@@ -60,13 +58,11 @@ describe('Milestone 1 Structural & Layout correctness tests', () => {
   });
 
   const projectPages = [
-    { name: 'AdminInterface', Component: AdminInterface },
     { name: 'Cartography', Component: Cartography },
     { name: 'EasyWorkEnv', Component: EasyWorkEnv },
     { name: 'GmailAISort', Component: GmailAISort },
     { name: 'InstaGramClone', Component: InstaGramClone },
     { name: 'Phantom', Component: Phantom },
-    { name: 'PlatformerGame', Component: PlatformerGame },
     { name: 'Ransomware', Component: Ransomware },
     { name: 'SportApplication', Component: SportApplication },
     { name: 'SyncCRD2CRM', Component: SyncCRD2CRM },

@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/virus.webp';
+import imgtest from '../assets/Projects/ransomware.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import GithubButton from '../components/GithubButton';
 import '../Styles/PagesProjects.css';

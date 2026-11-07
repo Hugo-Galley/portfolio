@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/actifit.webp';
+import imgtest from '../assets/Projects/sport-app.webp';
 import rea from '../assets/Pages/react.webp';
 import js from '../assets/Pages/JavaScript-logo.webp';
 import expo from '../assets/Pages/expo-1.webp';

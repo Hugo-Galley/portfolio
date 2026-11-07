@@ -1,4 +1,4 @@
-import imgtest from '../assets/Card/Carto.webp';
+import imgtest from '../assets/Projects/cartography.webp';
 import cs from '../assets/Bento/cs.webp';
 import net from '../assets/Pages/NET_Core_Logo.svg.webp';
 import blazor from '../assets/Pages/Blazor.webp';

@@ -95,9 +95,7 @@ const en = {
   // Projects section
   projects: {
     title: "My Projects",
-    adminInterface: "Admin Interface",
     sportApp: "Sports Application",
-    platformerGame: "Platformer Game",
     cybersecurity: "Cybersecurity"
   },
 
@@ -131,10 +129,6 @@ const en = {
 
   // Project pages
   projectPages: {
-    adminInterface: {
-      title: "AdminInterface",
-      description: "Modern administration dashboard and login portal built in Python utilizing the CustomTkinter graphical framework. This project simulates a secure enterprise environment featuring session handling, authentication, multi-window workflows, and activity logging to explore modern desktop UI/UX paradigms."
-    },
     phantom: {
       title: "Phantom",
       description: "Highly secure instant messaging platform inspired by state-of-the-art protocols like Signal and WhatsApp. Phantom features end-to-end encryption (E2EE) ensuring strict communication privacy, a responsive client-server architecture in Python and JavaScript, cryptographic key negotiation, and real-time session management."
@@ -155,10 +149,6 @@ const en = {
     sportApp: {
       title: "ActiFit",
       description: "Cross-platform mobile fitness and workout tracking application developed with React Native and the Expo ecosystem. ActiFit empowers users to structure tailored workout regimens, follow guided exercise timers with technical posture advice, and monitor ongoing physical progress through dynamic visual charts."
-    },
-    platformerGame: {
-      title: "Mario Briss",
-      description: "Retro 2D platformer game built in Python using the Pygame library, inspired by classic Super Mario mechanics. The game incorporates custom physics (gravity, inertia, AABB bounding-box collision detection), spritesheet animation pipelines, score tracking, progressive level hurdles, and a hidden easter egg."
     },
     ransomware: {
       title: "Educational Ransomware",
