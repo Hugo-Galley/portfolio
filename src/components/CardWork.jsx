@@ -77,14 +77,13 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
                         : `rotateX(0deg) rotateY(${isFlipped ? 180 : 0}deg) scale3d(1, 1, 1)`,
                     transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease',
                     cursor: desc ? 'pointer' : 'default',
-                    transformStyle: 'preserve-3d',
                     position: 'relative'
                 }}
             >
                 <div 
                     className="card-content" 
                     style={{ 
-                        transform: `translateZ(30px) ${isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'}`, 
+                        transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
                         pointerEvents: 'none',
                         transition: 'transform 0.5s ease',
                         position: 'relative',
@@ -100,7 +99,7 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
                         visibility: isFlipped ? 'hidden' : 'visible'
                     }}>
                         <p className="work-boite">{boite}</p>
-                        <img src={img} alt={boite} width="200" height="200" loading="lazy" decoding="async" />
+                        <img src={img} alt={boite} width="200" height="200" />
                         <p className="work-duree">{duree}</p>
                     </div>
 
@@ -132,8 +131,7 @@ export default function CardWork({ nom, boite, img, duree, desc }) {
                             height: '100%',
                             background: `radial-gradient(circle at ${50 + rotateY * 2}% ${50 - rotateX * 2}%, rgba(255,255,255,0.2) 0%, transparent 60%)`,
                             pointerEvents: 'none',
-                            borderRadius: 'inherit',
-                            transform: 'translateZ(1px)'
+                            borderRadius: 'inherit'
                         }}
                     />
                 )}
