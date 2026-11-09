@@ -30,6 +30,7 @@ const ROUTES = [
   '/phantom/',
   '/easyworkenv/',
   '/numera/',
+  '/clean-feed/',
 ];
 
 /**

@@ -160,6 +160,15 @@ const fr = {
       title: "Gmail AI Sort",
       description: "Système d'automatisation et de tri intelligent des e-mails combinant l'API officielle Google Gmail et un grand modèle de langage (Llama 3). Le script analyse sémantiquement le contenu et le contexte des messages entrants pour les classifier automatiquement selon 5 catégories clés, appliquer les étiquettes correspondantes et prioriser les messages urgents sans intervention manuelle."
     },
+    cleanFeed: {
+      title: "Clean Feed",
+      imageAlt: "Aperçu de l'extension Clean Feed et de son menu",
+      description: "Extension open source pour Firefox et Chrome qui supprime les parties addictives de YouTube et d'Instagram : Shorts, fil d'accueil, page Explorer et Reels. Les stories, les profils et les messages restent intacts. Chaque fonction se règle depuis un menu, en français ou en anglais, sans compte ni collecte de données. Le centrage des stories repose sur la mesure de la page plutôt que sur des noms de classes, qu'Instagram change régulièrement.",
+      firefox: "Ajouter à Firefox",
+      chrome: "Ajouter à Chrome",
+      chromeSoon: "Chrome : bientôt",
+      note: "Gratuite, open source (MIT), aucune donnée collectée."
+    },
     numera: {
       title: "Numera",
       description: "Application auto-hébergée de suivi de budget, d'épargne et d'investissements, pensée comme un remplaçant du tableur. Backend FastAPI et SQLite, frontend React, import de relevés CSV, projections et tableaux de bord, sauvegardes chiffrées et serveur MCP pour l'interroger avec Claude. Déployable en une commande via Docker (images amd64 et arm64) et disponible avec une démo en ligne."
@@ -173,12 +182,25 @@ const fr = {
   // Open Source section
   openSource: {
     title: "Open Source",
+    eyebrow: "Code partagé",
+    intro: "Des projets que je publie et des projets auxquels je contribue.",
+    contributions: "Mes contributions",
+    stars: "étoiles",
+    leafwikeIntro: "Wiki auto-hébergé open source dont je suis contributeur : j'y ai apporté de quoi le construire, le livrer et le personnaliser plus facilement.",
+    leafwikeC1Title: "Pipeline CI/CD multi-plateforme",
+    leafwikeC1Sub: "Build automatisé sur toutes les plateformes",
+    leafwikeC2Title: "Image Docker à chaque release",
+    leafwikeC2Sub: "Publiée automatiquement",
+    leafwikeC3Title: "Support du CSS personnalisé",
+    leafwikeC3Sub: "Thème modifiable par l'utilisateur",
     leafwikiRole: "Contributeur",
     leafwikiDesc: "Pipeline CI/CD multi-plateforme, image Docker publiée à chaque release et support du CSS personnalisé.",
     easyWorkEnvRole: "Créateur",
     easyWorkEnvDesc: "Package Python publié sur PyPI qui prépare un environnement de travail en une commande.",
     numeraRole: "Créateur",
     numeraDesc: "Application auto-hébergée de budget, d'épargne et d'investissements : données locales en SQLite, installation Docker en une commande.",
+    cleanFeedRole: "Créateur",
+    cleanFeedDesc: "Extension Firefox et Chrome qui masque les Shorts YouTube et les parties addictives d'Instagram.",
     viewProfile: "Tout voir sur GitHub"
   }
 };

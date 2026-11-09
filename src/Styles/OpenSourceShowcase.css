@@ -1,219 +1,390 @@
+/* ── Section Open Source : bento ──────────────────────────── */
 .os-section {
-  max-width: 760px;
-  margin: 0 auto 100px auto;
-  padding: 0 1.25rem;
+  --os-rgb: 242, 193, 182;
+  --os-surface: rgba(255, 255, 255, 0.06);
+  --os-chip: rgba(255, 255, 255, 0.08);
+  --os-chip-text: #d6dce6;
+  --os-body: #c9d0db;
+  --os-line: rgba(255, 255, 255, 0.1);
+  --os-line-strong: rgba(255, 255, 255, 0.22);
+  --os-inset: rgba(0, 0, 0, 0.38);
+  --os-hover-text: #000;
+
   position: relative;
+  overflow: hidden;
+  margin: 0 auto 100px auto;
+  padding: 90px 1.25rem;
+  box-sizing: border-box;
   z-index: 2;
+}
+
+[data-theme="light"] .os-section {
+  --os-rgb: 168, 85, 247;
+  --os-surface: rgba(0, 0, 0, 0.03);
+  --os-chip: rgba(0, 0, 0, 0.05);
+  --os-chip-text: #2d3748;
+  --os-body: #4a5568;
+  --os-line: rgba(0, 0, 0, 0.08);
+  --os-line-strong: rgba(0, 0, 0, 0.2);
+  --os-inset: rgba(0, 0, 0, 0.04);
+  --os-hover-text: #fff;
+}
+
+.os-section *,
+.os-section *::before,
+.os-section *::after {
   box-sizing: border-box;
 }
 
-/* ── Liste façon journal ───────────────────────────────────── */
-/* Panneau délimité, même finition que les cartes Bento */
-.os-log {
-  list-style: none;
-  margin: 2.5rem 0 0 0;
-  padding: 0.5rem;
-  background: var(--card-bg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 20px;
-  box-shadow: var(--card-shadow);
-}
-
-[data-theme="light"] .os-log {
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(252, 250, 255, 0.92) 50%,
-    rgba(248, 245, 252, 0.88) 100%
-  );
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.os-entry {
-  position: relative;
-  padding: 1.5rem 1.5rem;
-  border-radius: 14px;
-  transition: background 0.25s ease;
-}
-
-/* Filet entre les entrées, en retrait des bords du panneau */
-.os-entry + .os-entry::before {
-  content: '';
+.os-blob {
   position: absolute;
-  top: 0;
-  left: 1.5rem;
-  right: 1.5rem;
-  height: 1px;
-  background: var(--grid-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
 }
 
-.os-entry:hover {
-  background: rgba(255, 255, 255, 0.04);
+.os-blob-1 {
+  top: -120px;
+  left: -160px;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(197, 163, 255, 0.2), transparent 68%);
 }
 
-[data-theme="light"] .os-entry:hover {
-  background: rgba(0, 0, 0, 0.03);
+.os-blob-2 {
+  top: 380px;
+  right: -200px;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, rgba(242, 193, 182, 0.16), transparent 68%);
 }
 
-/* Pas de filet visible autour d'une entrée survolée */
-.os-entry:hover::before,
-.os-entry:hover + .os-entry::before {
-  opacity: 0;
+[data-theme="light"] .os-blob-1 { background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent 68%); }
+[data-theme="light"] .os-blob-2 { background: radial-gradient(circle, rgba(236, 72, 153, 0.08), transparent 68%); }
+
+.os-inner {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.os-entry-head {
+/* ── En-tête ── */
+.os-head {
   display: flex;
-  align-items: baseline;
-  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
 }
 
-.os-entry-name {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
+.os-eyebrow {
+  margin: 0 0 14px;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 1.2;
-  color: var(--text-color);
-  letter-spacing: -0.3px;
-  transition: color 0.25s ease;
-}
-
-/* Toute la ligne est cliquable via le lien du nom */
-.os-entry-name::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-}
-
-.os-entry-name:focus-visible {
-  outline: none;
-}
-
-.os-entry:has(.os-entry-name:focus-visible) {
-  outline: 2px solid var(--accent-color);
-  outline-offset: -2px;
-}
-
-.os-entry-owner {
-  font-family: inherit;
-  font-weight: inherit;
-  color: var(--text-secondary);
-}
-
-.os-entry-meta {
-  margin-left: auto;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.os-entry-arrow {
-  flex-shrink: 0;
-  align-self: center;
-  color: var(--text-secondary);
-  transition: transform 0.25s ease, color 0.25s ease;
-}
-
-.os-entry-name:not(:has(+ .os-entry-meta)) ~ .os-entry-arrow {
-  margin-left: auto;
-}
-
-.os-entry:hover .os-entry-name,
-.os-entry:hover .os-entry-arrow {
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
   color: var(--accent-color);
 }
 
-.os-entry:hover .os-entry-arrow {
-  transform: translate(3px, -3px);
-}
-
-.os-entry-role {
-  margin: 0.35rem 0 0.75rem 0;
-  font-size: 0.8rem;
-  letter-spacing: 0.4px;
-  color: var(--text-secondary);
-}
-
-.os-entry-desc {
+.os-head h2 {
   margin: 0;
-  max-width: 56ch;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-color);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -1.5px;
 }
 
-.os-entry-stack {
-  margin: 0.75rem 0 0 0;
-  font-size: 0.85rem;
+.os-intro {
+  margin: 16px 0 0;
+  max-width: 46ch;
+  font-size: 1.125rem;
+  line-height: 1.55;
   color: var(--text-secondary);
 }
 
-/* ── Lien profil ───────────────────────────────────────────── */
 .os-more {
-  display: block;
-  width: fit-content;
-  margin: 2rem auto 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid var(--os-line-strong);
   font-size: 0.95rem;
-  color: var(--text-secondary);
-  text-underline-offset: 4px;
-  transition: color 0.25s ease;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .os-more:hover,
 .os-more:focus-visible {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--os-hover-text);
+  outline: none;
+}
+
+.os-more:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+/* ── Carte de base ── */
+.os-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  border: 1px solid var(--os-line);
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--card-shadow);
   color: var(--text-color);
-  text-decoration: underline;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.os-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--os-rgb), 0.55);
+  box-shadow: var(--card-shadow), 0 0 0 1px rgba(var(--os-rgb), 0.15);
+}
+
+.os-card:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.os-card:hover .os-arrow {
+  transform: translate(3px, -3px);
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--os-hover-text);
+}
+
+.os-owner { color: var(--text-secondary); }
+
+/* ── Badges / tags ── */
+.os-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.os-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--os-line-strong);
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.os-role-solid {
+  min-height: 30px;
+  padding: 0 14px;
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--os-hover-text);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.os-role-tint {
+  background: rgba(var(--os-rgb), 0.16);
+  border-color: transparent;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.os-stars { min-height: 30px; padding: 0 14px; }
+
+.os-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.os-tag {
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--os-chip);
+  font-size: 0.78rem;
+  color: var(--os-chip-text);
+}
+
+.os-feat .os-tag { padding: 6px 12px; font-size: 0.82rem; }
+
+/* ── Icônes ── */
+.os-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(var(--os-rgb), 0.14);
+  color: var(--accent-color);
+}
+
+.os-icon-sm { width: 44px; height: 44px; border-radius: 12px; }
+
+.os-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--os-line-strong);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.os-arrow-lg { width: 46px; height: 46px; }
+
+/* ── Carte LeafWiki ── */
+.os-featured {
+  padding: 44px;
+  margin-bottom: 20px;
+  border-color: rgba(var(--os-rgb), 0.28);
+  background: linear-gradient(135deg, rgba(var(--os-rgb), 0.16) 0%, rgba(197, 163, 255, 0.08) 40%, var(--os-surface) 100%);
+}
+
+[data-theme="light"] .os-featured {
+  background: linear-gradient(135deg, rgba(var(--os-rgb), 0.1) 0%, rgba(255, 255, 255, 0.95) 55%);
+}
+
+.os-feat {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 40px;
+}
+
+.os-feat-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.os-feat .os-badges { margin-bottom: 22px; }
+
+.os-feat-name {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.os-feat-intro {
+  margin: 18px 0 0;
+  max-width: 42ch;
+  font-size: 1.06rem;
+  line-height: 1.6;
+  color: var(--os-body);
+}
+
+.os-feat-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.os-contribs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.os-contribs-label {
+  margin: 0 0 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.os-contrib {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--os-inset);
+  border: 1px solid var(--os-line);
+}
+
+.os-contrib-title { margin: 0; font-size: 1rem; font-weight: 500; }
+.os-contrib-sub { margin: 3px 0 0; font-size: 0.875rem; color: var(--text-secondary); }
+
+/* ── Grille des projets ── */
+.os-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.os-project { padding: 30px; }
+
+.os-project-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.os-project-name {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
+}
+
+.os-project-desc {
+  margin: 14px 0 24px;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--os-body);
+}
+
+.os-project-foot { margin-top: auto; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .os-feat { grid-template-columns: 1fr; gap: 28px; }
+  .os-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
-  .os-section {
-    margin-bottom: 70px;
-  }
-
-  .os-log {
-    padding: 0.25rem;
-  }
-
-  .os-entry {
-    padding: 1.25rem 1.1rem;
-  }
-
-  .os-entry + .os-entry::before {
-    left: 1.1rem;
-    right: 1.1rem;
-  }
-
-  .os-entry-head {
-    flex-wrap: wrap;
-    gap: 0.25rem 0.75rem;
-  }
-
-  .os-entry-name {
-    font-size: 1.3rem;
-    overflow-wrap: anywhere;
-  }
-
-  .os-entry-meta {
-    order: 3;
-    flex-basis: 100%;
-    margin-left: 0;
-  }
-
-  .os-entry-arrow {
-    margin-left: auto;
-  }
+  .os-section { padding: 60px 1.25rem; margin-bottom: 40px; }
+  .os-featured { padding: 28px 22px; }
+  .os-project { padding: 24px 22px; }
+  .os-more { width: 100%; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .os-entry-arrow,
-  .os-entry-name {
-    transition: none;
-  }
-
-  .os-entry:hover .os-entry-arrow {
-    transform: none;
-  }
+  .os-card, .os-arrow, .os-more { transition: none; }
+  .os-card:hover { transform: none; }
+  .os-card:hover .os-arrow { transform: none; }
 }

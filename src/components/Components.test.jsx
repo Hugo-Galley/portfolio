@@ -14,6 +14,7 @@ import Phantom from '../PagesProjects/Phantom';
 import Ransomware from '../PagesProjects/Ransomware';
 import SportApplication from '../PagesProjects/SportApplication';
 import SyncCRD2CRM from '../PagesProjects/SyncCRD2CRM';
+import CleanFeed from '../PagesProjects/CleanFeed';
 
 describe('Milestone 1 Structural & Layout correctness tests', () => {
   test('DownloadButton renders as a div, not a button', () => {
@@ -66,6 +67,7 @@ describe('Milestone 1 Structural & Layout correctness tests', () => {
     { name: 'Ransomware', Component: Ransomware },
     { name: 'SportApplication', Component: SportApplication },
     { name: 'SyncCRD2CRM', Component: SyncCRD2CRM },
+    { name: 'CleanFeed', Component: CleanFeed },
   ];
 
   projectPages.forEach(({ name, Component }) => {

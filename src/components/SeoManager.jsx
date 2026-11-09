@@ -15,6 +15,7 @@ const PROJECT_SCHEMAS = {
   '/phantom': { name: 'Phantom', langs: ['Python', 'JavaScript'], repo: 'https://github.com/Hugo-Galley' },
   '/easyworkenv': { name: 'EasyWorkEnv', langs: ['Python'], repo: 'https://github.com/Hugo-Galley/EasyWorkEnv' },
   '/numera': { name: 'Numera', langs: ['Python', 'React', 'Docker'], repo: 'https://github.com/Hugo-Galley/numera' },
+  '/clean-feed': { name: 'Clean Feed', langs: ['JavaScript', 'WebExtensions'], repo: 'https://github.com/Hugo-Galley/clean-feed' },
 };
 
 const SEO_TRANSLATIONS = {
@@ -54,6 +55,10 @@ const SEO_TRANSLATIONS = {
     '/easyworkenv': {
       title: 'EasyWorkEnv | Package Python - Hugo Galley',
       description: 'Package Python pour gérer facilement les variables d\'environnement avec une API simple.',
+    },
+    '/clean-feed': {
+      title: 'Clean Feed | Extension Firefox et Chrome - Hugo Galley',
+      description: 'Clean Feed : extension open source qui masque les Shorts YouTube et les parties addictives d\'Instagram (fil, Explorer, Reels).',
     },
     '/numera': {
       title: 'Numera | Budget auto-hébergé - Hugo Galley',
@@ -96,6 +101,10 @@ const SEO_TRANSLATIONS = {
     '/easyworkenv': {
       title: 'EasyWorkEnv | Python Package - Hugo Galley',
       description: 'Python package to easily manage environment variables with a simple API.',
+    },
+    '/clean-feed': {
+      title: 'Clean Feed | Firefox and Chrome Extension - Hugo Galley',
+      description: 'Clean Feed: open source extension that hides YouTube Shorts and the addictive parts of Instagram (feed, Explore, Reels).',
     },
     '/numera': {
       title: 'Numera | Self-hosted Budget App - Hugo Galley',

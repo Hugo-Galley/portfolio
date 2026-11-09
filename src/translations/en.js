@@ -160,6 +160,15 @@ const en = {
       title: "Gmail AI Sort",
       description: "Intelligent email triage and automation pipeline integrating Google's official Gmail API with a local large language model (Llama 3). Performs contextual semantic parsing of inbound communications to automatically classify messages across 5 distinct categories, apply appropriate labels, and prioritize urgent items with zero manual friction."
     },
+    cleanFeed: {
+      title: "Clean Feed",
+      imageAlt: "Preview of the Clean Feed extension and its menu",
+      description: "Open source extension for Firefox and Chrome that removes the addictive parts of YouTube and Instagram: Shorts, the home feed, the Explore page and Reels. Stories, profiles and messages stay untouched. Each feature has its own toggle in a menu available in English and French, with no account and no data collection. Story centering relies on measuring the page rather than on class names, which Instagram changes regularly.",
+      firefox: "Add to Firefox",
+      chrome: "Add to Chrome",
+      chromeSoon: "Chrome: coming soon",
+      note: "Free, open source (MIT), no data collected."
+    },
     numera: {
       title: "Numera",
       description: "Self-hosted app to track budget, savings and investments, built as a replacement for the spreadsheet. FastAPI and SQLite backend, React frontend, CSV statement import, projections and dashboards, encrypted backups and an MCP server to query it with Claude. Deployable in one command with Docker (amd64 and arm64 images), with a live demo available."
@@ -173,12 +182,25 @@ const en = {
   // Open Source section
   openSource: {
     title: "Open Source",
+    eyebrow: "Shared code",
+    intro: "Projects I publish and projects I contribute to.",
+    contributions: "My contributions",
+    stars: "stars",
+    leafwikeIntro: "Open source self-hosted wiki I contribute to: I added what makes it easier to build, ship and customize.",
+    leafwikeC1Title: "Multi-platform CI/CD pipeline",
+    leafwikeC1Sub: "Automated builds on every platform",
+    leafwikeC2Title: "Docker image on every release",
+    leafwikeC2Sub: "Published automatically",
+    leafwikeC3Title: "Custom CSS support",
+    leafwikeC3Sub: "User-editable theme",
     leafwikiRole: "Contributor",
     leafwikiDesc: "Multi-platform CI/CD pipeline, Docker image published on every release, and custom CSS support.",
     easyWorkEnvRole: "Creator",
     easyWorkEnvDesc: "Python package on PyPI that sets up a work environment in a single command.",
     numeraRole: "Creator",
     numeraDesc: "Self-hosted budget, savings and investments app: local SQLite data, one-command Docker install.",
+    cleanFeedRole: "Creator",
+    cleanFeedDesc: "Firefox and Chrome extension that hides YouTube Shorts and the addictive parts of Instagram.",
     viewProfile: "See everything on GitHub"
   }
 };
