@@ -143,19 +143,6 @@ const en = {
       title: "Cartography",
       description: "Comprehensive enterprise infrastructure mapping system designed to catalog, inspect, and search an entire network of application servers. Developed with the .NET ecosystem and Blazor, the system encompasses relational database design, a high-throughput REST API, scheduled synchronization batches, and an intuitive web UI for multi-criteria search and impact analysis."
     },
-    instaClone: {
-      title: "Instagram Clone",
-      techTitle: "Tech Used",
-      description: "Interactive full-featured web application engineered with React replicating core Instagram features: dynamic news feed, stories navigation, image filters, profile exploration, and social interactions (likes, comments). Serves as a testbed for state management, modular component design, and responsive layouts."
-    },
-    sportApp: {
-      title: "ActiFit",
-      description: "Cross-platform mobile fitness and workout tracking application developed with React Native and the Expo ecosystem. ActiFit empowers users to structure tailored workout regimens, follow guided exercise timers with technical posture advice, and monitor ongoing physical progress through dynamic visual charts."
-    },
-    ransomware: {
-      title: "Educational Ransomware",
-      description: "Cybersecurity research and demonstration project developed in Python strictly for educational and defensive threat-modeling purposes. Simulates real-world ransomware mechanics (symmetric/asymmetric hybrid cryptographic file locking, key exchange handshakes, vector simulation) to benchmark system resilience and test intrusion detection and disaster recovery strategies."
-    },
     gmailAiSort: {
       title: "Gmail AI Sort",
       description: "Intelligent email triage and automation pipeline integrating Google's official Gmail API with a local large language model (Llama 3). Performs contextual semantic parsing of inbound communications to automatically classify messages across 5 distinct categories, apply appropriate labels, and prioritize urgent items with zero manual friction."

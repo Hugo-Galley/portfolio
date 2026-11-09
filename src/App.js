@@ -11,9 +11,6 @@ import NotFound from './components/NotFound';
 import './Styles/App.css';
 
 const Cartography = lazy(() => import('./PagesProjects/Cartography'));
-const InstaGramClone = lazy(() => import('./PagesProjects/InstaGramClone'));
-const SportApplication = lazy(() => import('./PagesProjects/SportApplication'));
-const Ransomware = lazy(() => import('./PagesProjects/Ransomware'));
 const GmailAiSort = lazy(() => import('./PagesProjects/GmailAISort'));
 const SyncCRD2CRM = lazy(() => import('./PagesProjects/SyncCRD2CRM'));
 const Phantom = lazy(() => import('./PagesProjects/Phantom'));
@@ -116,9 +113,6 @@ function App() {
             <Route path="/index.html" element={<HomePage />} />
           
           <Route path="/cartography" element={<Cartography />} />
-          <Route path="/instagram-clone" element={<InstaGramClone />} />
-          <Route path="/sport-app" element={<SportApplication />} />
-          <Route path="/ransomware" element={<Ransomware />} />
           <Route path="/gmail-ai-sort" element={<GmailAiSort />} />
           <Route path="/sync-crd-crm" element={<SyncCRD2CRM />} />
           <Route path="/phantom" element={<Phantom />} />

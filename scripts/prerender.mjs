@@ -22,9 +22,6 @@ const PORT = 45678;
 const ROUTES = [
   '/',
   '/cartography/',
-  '/instagram-clone/',
-  '/sport-app/',
-  '/ransomware/',
   '/gmail-ai-sort/',
   '/sync-crd-crm/',
   '/phantom/',

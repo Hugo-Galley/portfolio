@@ -7,9 +7,6 @@ const DEFAULT_IMAGE = `${SITE_URL}/preview.png?v=3`;
 
 const PROJECT_SCHEMAS = {
   '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
-  '/instagram-clone': { name: 'Instagram Clone', langs: ['React', 'JavaScript'], repo: null },
-  '/sport-app': { name: 'ActiFit', langs: ['React Native', 'Expo', 'JavaScript'], repo: null },
-  '/ransomware': { name: 'Educational Ransomware', langs: ['Python'], repo: null },
   '/gmail-ai-sort': { name: 'Gmail AI Sort', langs: ['Python'], repo: null },
   '/sync-crd-crm': { name: 'SyncCRD2CRM', langs: ['.NET', 'Blazor', 'C#'], repo: null },
   '/phantom': { name: 'Phantom', langs: ['Python', 'JavaScript'], repo: 'https://github.com/Hugo-Galley' },
@@ -27,18 +24,6 @@ const SEO_TRANSLATIONS = {
     '/cartography': {
       title: 'Cartography | Projet .NET Blazor - Hugo Galley',
       description: 'Projet Cartography : application .NET et Blazor pour cartographier et rechercher les serveurs d\'entreprise.',
-    },
-    '/instagram-clone': {
-      title: 'Instagram Clone | Application Web - Hugo Galley',
-      description: 'Application web clone d\'Instagram pour explorer l\'architecture front-end et les composants réutilisables.',
-    },
-    '/sport-app': {
-      title: 'ActiFit | Application Mobile - Hugo Galley',
-      description: 'Application mobile de sport avec séances personnalisées et suivi de progression.',
-    },
-    '/ransomware': {
-      title: 'Ransomware Éducatif | Projet Python - Hugo Galley',
-      description: 'Projet éducatif en cybersécurité pour comprendre les risques ransomware et la protection des données.',
     },
     '/gmail-ai-sort': {
       title: 'Gmail AI Sort | Projet IA Python - Hugo Galley',
@@ -73,18 +58,6 @@ const SEO_TRANSLATIONS = {
     '/cartography': {
       title: 'Cartography | .NET Blazor Project - Hugo Galley',
       description: 'Cartography project: .NET and Blazor application to map and search company servers.',
-    },
-    '/instagram-clone': {
-      title: 'Instagram Clone | Web Application - Hugo Galley',
-      description: 'Instagram web clone built to explore modern front-end architecture and reusable UI components.',
-    },
-    '/sport-app': {
-      title: 'ActiFit | Mobile Application - Hugo Galley',
-      description: 'Mobile workout tracking application with personalized routines and progress analytics.',
-    },
-    '/ransomware': {
-      title: 'Educational Ransomware | Python Project - Hugo Galley',
-      description: 'Educational cybersecurity project to understand ransomware risks and data protection.',
     },
     '/gmail-ai-sort': {
       title: 'Gmail AI Sort | AI Python Project - Hugo Galley',

@@ -10,10 +10,7 @@ import OpenSourceShowcase from './OpenSourceShowcase';
 import Skills from './Skills';
 import Footer from "./Footer";
 
-import insta from '../assets/Projects/instagram-clone-card.webp';
 import cart from '../assets/Projects/cartography-card.webp';
-import actifit from '../assets/Projects/sport-app-card.webp';
-import virus from '../assets/Projects/ransomware-card.webp';
 import unif from '../assets/Card/unif.webp';
 import gmailAi from '../assets/Projects/gmail-ai-sort-card.webp';
 import Sync from '../assets/Projects/sync-crd-crm-card.webp';
@@ -75,9 +72,6 @@ export default function HomePage() {
           <Card titre={"Phantom"} categorie={"Python | JS"} image={phantom} lien={'/phantom/'}/>
           <Card titre={"EasyWorkEnv"} categorie={"Package Python"} image={pythonPackage} lien={'/easyworkenv/'}/>
           <Card titre={"Cartography"} categorie={".NET | Blazor"} image={cart} lien={'/cartography/'}/>
-          <Card titre={"Instagram clone"} categorie={"React"} image={insta} lien={'/instagram-clone/'} />
-          <Card titre={t('projects.sportApp')} categorie={"Expo | React Native"} image={actifit} lien={'/sport-app/'} />
-          <Card titre={t('projects.cybersecurity')} categorie={"Python"} image={virus} lien={'/ransomware/'} />
           <Card titre={"GmailAiSort"} categorie={"Python | AI"} image={gmailAi} lien={'/gmail-ai-sort/'} />
           <Card titre={"SyncCRD2CRM"} categorie={".NET | Blazor"} image={Sync} lien={'/sync-crd-crm/'}/>
         </div>

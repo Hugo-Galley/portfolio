@@ -143,19 +143,6 @@ const fr = {
       title: "Cartographie",
       description: "Solution d'entreprise complète conçue pour cartographier, inventorier et rechercher l'ensemble du parc de serveurs et des applications hébergées. Développée avec l'écosystème .NET et Blazor, l'application comprend la modélisation de base de données relationnelle, le développement d'une API REST performante, des batchs d'automatisation et de synchronisation, ainsi qu'une interface web réactive pour la recherche multicritère et l'analyse d'impact."
     },
-    instaClone: {
-      title: "Instagram Clone",
-      techTitle: "Technologies utilisées",
-      description: "Application web interactive développée en React reproduisant les fonctionnalités clés d'Instagram : flux d'actualités dynamique, navigation par stories, filtres, exploration de profils et système d'interactions (likes, commentaires). Ce projet a servi de banc d'essai pour maîtriser l'état global, les composants modulaires réutilisables et le design responsive."
-    },
-    sportApp: {
-      title: "ActiFit",
-      description: "Application mobile cross-platform de coaching sportif développée avec React Native et l'écosystème Expo. ActiFit permet aux utilisateurs de concevoir des programmes d'entraînement sur-mesure, de suivre l'exécution des exercices avec minuteurs et consignes techniques, et de visualiser leur progression grâce à des graphiques et indicateurs de performance."
-    },
-    ransomware: {
-      title: "Ransomware Éducatif",
-      description: "Projet de recherche et de démonstration en cybersécurité développé en Python à visée purement pédagogique et défensive. Il simule les mécanismes opératoires des ransomwares réels (chiffrement symétrique/asymétrique des fichiers cibles, génération et échange de clefs sécurisées, vectorisation d'attaque) afin de tester la résilience des systèmes et d'analyser les contre-mesures de détection et de sauvegarde."
-    },
     gmailAiSort: {
       title: "Gmail AI Sort",
       description: "Système d'automatisation et de tri intelligent des e-mails combinant l'API officielle Google Gmail et un grand modèle de langage (Llama 3). Le script analyse sémantiquement le contenu et le contexte des messages entrants pour les classifier automatiquement selon 5 catégories clés, appliquer les étiquettes correspondantes et prioriser les messages urgents sans intervention manuelle."
