@@ -8,8 +8,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
 
 const FIREFOX_URL = 'https://addons.mozilla.org/fr/firefox/addon/clean-feed-hide-shorts-reels/';
-// À renseigner quand l'extension est validée sur le Chrome Web Store.
-const CHROME_URL = '';
+const CHROME_URL = 'https://chromewebstore.google.com/detail/inhjhkkbaiodhbecdkempfnjkhnpdllf';
 const REPO_URL = 'https://github.com/Hugo-Galley/clean-feed';
 
 // Met en avant le bouton du navigateur du visiteur.
