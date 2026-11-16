@@ -18,5 +18,11 @@ const PROJECTS = [
 ];
 
 export const PROJECT_EVENT = 'globe:project';
+export const PAGE_EVENT = 'globe:page';
+
+export const projectIndex = (pathname) => {
+  const path = pathname.replace(/\/$/, '');
+  return PROJECTS.findIndex((p) => p.lien.replace(/\/$/, '') === path);
+};
 
 export default PROJECTS;

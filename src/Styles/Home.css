@@ -22,8 +22,8 @@
 .os-lead,
 .os-row { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.5); }
 
-/* the stack gets a full screen of its own, centred above the globe's horizon */
-.home-section--stack {
+/* the stack and the contact each get a full screen of their own */
+.home-section--full {
   min-height: 100vh;
   padding: 7rem 0;
   box-sizing: border-box;
@@ -31,7 +31,7 @@
   flex-direction: column;
   justify-content: center;
 }
-.home-section--stack + .home-section { padding-top: 6rem; }
+.home-section--full + .home-section { padding-top: 6rem; }
 
 /* ── Surface: the one card style ── */
 .surface {
@@ -162,8 +162,9 @@ a.surface:hover { transform: translateY(-3px); }
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  /* short fixed fade on the edges (a % fade ate a big part of the row on wide screens) */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 80px, #000 calc(100% - 80px), transparent);
 }
 .stack-row { overflow: hidden; }
 .stack-track {
@@ -291,7 +292,9 @@ a.surface:hover { transform: translateY(-3px); }
 }
 .project-row { border-top: 1px solid var(--line); }
 .project-row:last-child { border-bottom: 1px solid var(--line); }
+/* a click unfolds the project, a second one opens it */
 .project-link {
+  cursor: pointer;
   display: grid;
   grid-template-columns: 2.4rem 1fr auto 1.2rem;
   align-items: baseline;
@@ -355,19 +358,24 @@ a.surface:hover { transform: translateY(-3px); }
 }
 .globe-label.is-active { font-size: 1.05rem; font-weight: 600; color: #fff; }
 /* ═════════ 06 Contact ═════════ */
-.home-section--contact { padding-bottom: 2rem; }
+.home-section--contact { padding-bottom: 7rem; }
 .contact { margin-top: 2.5rem; display: flex; justify-content: center; }
 .contact-panel {
   width: 100%;
-  max-width: 640px;
-  padding: 2.4rem;
+  max-width: 520px;
+  padding: 1.9rem 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.4rem;
-  background: color-mix(in srgb, var(--bg-color) 55%, transparent);
+  gap: 1.1rem;
+  /* solid, like the stack chips: the globe must not glow through it */
+  background: rgb(12, 10, 20);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
 }
+.contact-panel:hover { background: rgb(12, 10, 20); border-color: var(--line); }
 .contact-text { margin: 0; color: var(--text-secondary); font-size: 1.05rem; }
 .contact-email {
   display: flex;
@@ -413,13 +421,6 @@ a.surface:hover { transform: translateY(-3px); }
   .project-cat { grid-column: 2; grid-row: 2; }
   .project-arrow { grid-row: 1; grid-column: 3; }
   .project-shot { margin-left: 0; }
-  .contact-panel { padding: 1.8rem 1.25rem; }
-}
-
-/* touch screens: no hover, so every project shows its preview */
-@media (hover: none) {
-  .project-preview { grid-template-rows: 1fr; }
-  .project-shot { opacity: 1; transform: none; }
-  .project-name { color: var(--text-color); }
+  .contact-panel { padding: 1.6rem 1.25rem; }
 }
 

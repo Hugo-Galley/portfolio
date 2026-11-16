@@ -1,43 +1,33 @@
-import imgtest from '../assets/Projects/easyworkenv.webp';
+import shot from '../assets/Projects/easyworkenv.webp';
 import pyth from '../assets/Pages/Python-logo-notext.svg.webp';
 import pypi from '../assets/Card/PyPI-Logo-notext.svg.png';
 import github from '../assets/Contact/github.webp';
 import GithubButton from '../components/GithubButton';
-import '../Styles/PagesProjects.css';
+import ProjectLayout from '../components/ProjectLayout';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
 
+const TECHS = [
+  { src: pyth, name: 'Python' },
+  { src: pypi, name: 'PyPI' },
+  { src: github, name: 'GitHub Actions' },
+];
+
 export default function EasyWorkEnv() {
-    const { t } = useLanguage();
-    
-    return (
-        <div className='project-container'>
-            <div className='project-card'>
-                <img src={imgtest} alt="Aperçu de l'interface" className='project-image' />
-                <div className='project-info'>
-                    <h1 className='project-title'>{t('projectPages.easyWorkEnv.title')}</h1>
-                    <p className='project-description'>
-                       {t('projectPages.easyWorkEnv.description')}
-                    </p>
-                    <div className='tech-stack'>
-                        <div className='tech-item'>
-                            <img src={pyth} alt="Python" />
-                            <p>Python</p>
-                        </div>
-                        <div className='tech-item'>
-                            <img src={pypi} alt="CustomTkinter" />
-                            <p>PyPi</p>
-                        </div>
-                        <div className='tech-item'>
-                            <img src={github} alt="SQLite" />
-                            <p>Github Actions</p>
-                        </div>
-                    </div>
-                    <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/EasyWorkEnv' })}>
-                        <GithubButton />
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
+  const { t } = useLanguage();
+  return (
+    <ProjectLayout
+      slug="easyworkenv"
+      title={t('projectPages.easyWorkEnv.title')}
+      description={t('projectPages.easyWorkEnv.description')}
+      image={shot}
+      imageAlt="Aperçu d'EasyWorkEnv"
+      techs={TECHS}
+      actions={
+        <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/EasyWorkEnv' })}>
+          <GithubButton />
+        </a>
+      }
+    />
+  );
 }

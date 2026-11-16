@@ -1,38 +1,26 @@
-import imgtest from '../assets/Projects/sync-crd-crm.webp';
+import shot from '../assets/Projects/sync-crd-crm.webp';
 import net from '../assets/Pages/NET_Core_Logo.svg.webp';
 import blazor from '../assets/Pages/Blazor.webp';
 import ssms from '../assets/Card/sql.png';
-import '../Styles/PagesProjects.css';
+import ProjectLayout from '../components/ProjectLayout';
 import { useLanguage } from '../context/LanguageContext';
 
+const TECHS = [
+  { src: net, name: '.NET' },
+  { src: blazor, name: 'Blazor' },
+  { src: ssms, name: 'SQL Server' },
+];
+
 export default function SyncCRD2CRM() {
-    const { t } = useLanguage();
-    
-    return (
-        <div className='project-container'>
-            <div className='project-card'>
-                <img src={imgtest} alt="Aperçu de l'application" className='project-image' />
-                <div className='project-info'>
-                    <h1 className='project-title'>{t('projectPages.syncCrd2Crm.title')}</h1>
-                    <p className='project-description'>
-                        {t('projectPages.syncCrd2Crm.description')}
-                    </p>
-                    <div className='tech-stack'>
-                        <div className='tech-item'>
-                            <img src={net} alt="NET" />
-                            <p>.NET</p>
-                        </div>
-                        <div className='tech-item'>
-                            <img src={blazor} alt="Blazor" />
-                            <p>Blazor</p>
-                        </div>
-                        <div className='tech-item'>
-                            <img src={ssms} alt="SQL Server" />
-                            <p>SQL Server</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+  const { t } = useLanguage();
+  return (
+    <ProjectLayout
+      slug="sync-crd-crm"
+      title={t('projectPages.syncCrd2Crm.title')}
+      description={t('projectPages.syncCrd2Crm.description')}
+      image={shot}
+      imageAlt="Aperçu de SyncCRD2CRM"
+      techs={TECHS}
+    />
+  );
 }

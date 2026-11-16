@@ -8,6 +8,9 @@ const en = {
 
   // Home sections (redesign)
   sections: {
+    builtWith: "Built with.",
+    builtWithMuted: "The tools behind it.",
+    nextProject: "Next project",
     cvLong: "Download my resume",
     aboutTitle: "About.",
     aboutMuted: "Who I am and what I like to build.",
@@ -64,10 +67,12 @@ const en = {
 
   // 404 page
   notFound: {
-    title: "404",
-    subtitle: "Page Not Found",
-    description: "The page you're looking for has been lost in space. It may have been moved or no longer exists.",
-    button: "Back to safety"
+    kicker: "Error 404",
+    title: "Page not found.",
+    muted: "This point isn't on the map.",
+    description: "The page you're looking for may have moved, or never existed.",
+    button: "Back home",
+    projects: "See the projects"
   },
 
   // Github button

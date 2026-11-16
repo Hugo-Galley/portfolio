@@ -8,6 +8,9 @@ const fr = {
 
   // Home sections (redesign)
   sections: {
+    builtWith: "Construit avec.",
+    builtWithMuted: "Les outils derrière le projet.",
+    nextProject: "Projet suivant",
     cvLong: "Télécharger mon CV",
     aboutTitle: "À propos.",
     aboutMuted: "Qui je suis, ce que j'aime construire.",
@@ -64,10 +67,12 @@ const fr = {
 
   // 404 page
   notFound: {
-    title: "404",
-    subtitle: "Page Non Trouvée",
-    description: "La page que vous recherchez s'est perdue dans l'espace. Elle a peut-être été déplacée ou n'existe plus.",
-    button: "Retour à la terre ferme"
+    kicker: "Erreur 404",
+    title: "Page introuvable.",
+    muted: "Ce point n'est pas sur la carte.",
+    description: "La page que vous cherchez a peut-être été déplacée, ou n'a jamais existé.",
+    button: "Retour à l'accueil",
+    projects: "Voir les projets"
   },
 
   // Github button

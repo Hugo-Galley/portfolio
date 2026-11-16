@@ -6,6 +6,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import HomePage from './components/HomePage';
 import NotFound from './components/NotFound';
 import BackHome from './components/BackHome';
+import GlobeHost from './components/GlobeHost';
 
 import './Styles/App.css';
 
@@ -47,6 +48,7 @@ function App() {
         <main className="main" id="main-content">
           <SeoManager />
           <BackHome />
+          <GlobeHost />
           <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

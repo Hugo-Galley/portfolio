@@ -8,6 +8,9 @@ const BLOCKS = [
   '.os-list li',
   '.project-row',
   '.contact-panel',
+  '.pp-frame',
+  '.pp-tech .stack-chip',
+  '.pp-next',
 ].join(',');
 const HEADS = '.section-head';
 
@@ -20,11 +23,17 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  *    reaching its final state once ~28% of its journey through the viewport is done
  *  - leaving through the top: it tips back slightly, but stays fully opaque
  *  - section titles rise and sharpen (blur -> none)
- * Nothing is touched without JS, in the pre-rendered HTML or with reduced motion.
+ * Nothing is touched without JS, on phones/touch screens, in the pre-rendered HTML
+ * or with reduced motion.
  */
-export default function useReveal() {
+// `key`: run again when the page content changes (e.g. from one project to the next)
+export default function useReveal(key) {
   useEffect(() => {
-    if (navigator.webdriver || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // off on phones and touch screens (it stuttered there), with reduced motion and when pre-rendering
+    const off = navigator.webdriver || !window.matchMedia
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      || window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    if (off) {
       return undefined;
     }
 
@@ -95,5 +104,5 @@ export default function useReveal() {
         el.style.willChange = '';
       });
     };
-  }, []);
+  }, [key]);
 }

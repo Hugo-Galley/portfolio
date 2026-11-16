@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { LanguageProvider } from '../context/LanguageContext';
 import GithubButton from './GithubButton';
 
@@ -36,9 +37,11 @@ describe('Milestone 1 Structural & Layout correctness tests', () => {
   projectPages.forEach(({ name, Component }) => {
     test(`Project page ${name} renders exactly one h1 element for the title`, () => {
       const { container } = render(
-        <LanguageProvider>
-          <Component />
-        </LanguageProvider>
+        <MemoryRouter>
+          <LanguageProvider>
+            <Component />
+          </LanguageProvider>
+        </MemoryRouter>
       );
       const h1Elements = container.querySelectorAll('h1');
       expect(h1Elements.length).toBe(1);

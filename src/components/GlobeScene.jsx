@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import PROJECTS, { PROJECT_EVENT } from '../data/projects';
+import PROJECTS, { PROJECT_EVENT, PAGE_EVENT } from '../data/projects';
 
 /*
  * Globe scene (three.js, no framework): "code is meant to be shared".
@@ -209,7 +209,19 @@ const STATES = {
   Projects:   { x: 2.6,  y: -0.05, s: 1.15, tilt: 0.15, arcs: 1.0, proj: 1 },
   Contact:    { x: 0,    y: -0.45, s: 1.05, tilt: -0.1, arcs: 1.4, proj: 0 },
 };
-const ORDER = Object.keys(STATES);
+
+/* On a project page: the globe faces that project next to the title, sinks behind the
+   screenshot, then comes back for the "next project" link */
+const PAGE_STATES = {
+  Home:        { x: 2.7, y: -0.1,  s: 1.15, tilt: 0.15, arcs: 1.2, proj: 1 },
+  ProjectShot: { x: 0,   y: -3.2,  s: 2.6,  tilt: 0.7,  arcs: 1.2, proj: 0 },
+  ProjectNext: { x: 2.6, y: -0.05, s: 1.1,  tilt: 0.15, arcs: 1.4, proj: 1 },
+};
+
+/* 404: the visitor is out in space, the globe is a horizon at the bottom of the screen */
+const LOST_STATES = {
+  Home: { x: 0, y: -5.7, s: 2.6, tilt: 0.55, arcs: 0.7, proj: 0 },
+};
 const KEYS = ['x', 'y', 's', 'tilt', 'arcs', 'proj'];
 
 /* each project gets a fixed place on the globe */
@@ -239,7 +251,7 @@ function randomOnSphere() {
 
 const smooth = (t) => t * t * (3 - 2 * t);
 
-export default function GlobeScene() {
+export default function GlobeScene({ project = null }) {
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -400,8 +412,8 @@ export default function GlobeScene() {
     requestAnimationFrame(measureLabels);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLabels).catch(() => {});
     window.addEventListener('resize', measureLabels);
-    let activeProject = 0;
-    let focusLat = PROJECT_DIRS[0].lat;
+    let activeProject = typeof project === 'number' ? project : 0;
+    let focusLat = PROJECT_DIRS[activeProject].lat;
 
     const ROUTE_COUNT = isSmall ? 9 : 14;
     for (let i = 0; i < ROUTE_COUNT; i++) {
@@ -455,17 +467,21 @@ export default function GlobeScene() {
     window.addEventListener('resize', resize);
 
     /* ── Scroll choreography: interpolate between section anchors ── */
-    const target = { ...STATES.Home };
-    const cur = { ...STATES.Home };
+    // null on the home page, the project's index on a project page, 'lost' on the 404
+    let page = project;
+    const table = () => (page == null ? STATES : page === 'lost' ? LOST_STATES : PAGE_STATES);
+    const target = { ...table().Home };
+    const cur = { ...table().Home };
     let anchors = [];
     const measure = () => {
       const vh = window.innerHeight || 800;
-      anchors = ORDER.map((id) => {
-        if (id === 'Home') return { id, y: 0 };
+      anchors = Object.keys(table()).map((id) => {
+        // project pages: hold the first position while the title is on screen
+        if (id === 'Home') return { id, y: page == null ? 0 : vh * 0.5 };
         const el = document.getElementById(id);
         if (!el) return null;
         // a full-screen section is "reached" when its centre is in the middle of the viewport
-        const full = el.closest('.home-section--stack');
+        const full = el.closest('.home-section--full');
         if (full) {
           const r = full.getBoundingClientRect();
           return { id, y: r.top + window.scrollY + r.height / 2 };
@@ -474,7 +490,7 @@ export default function GlobeScene() {
       }).filter(Boolean);
     };
     const stateFor = (id) => {
-      const s = STATES[id];
+      const s = table()[id];
       if (!narrow) return s;
       // phones: keep the globe centred, behind the content
       return { ...s, x: s.x * 0.12, y: id === 'Home' ? -4.2 : s.y, s: id === 'Home' ? 1.25 : s.s * 0.8 };
@@ -569,8 +585,16 @@ export default function GlobeScene() {
         routes.push(r);
       }
     };
-    labels[0].classList.add('is-active');
+    labels[activeProject].classList.add('is-active');
+    // the globe stays alive across pages: a route change only moves it and turns it
+    const onPage = (e) => {
+      page = e.detail ?? null;
+      if (typeof page === 'number') onProject({ detail: page });
+      measure();
+      computeTarget();
+    };
     window.addEventListener(PROJECT_EVENT, onProject);
+    window.addEventListener(PAGE_EVENT, onPage);
     window.addEventListener('pointermove', onMove, { passive: true });
     document.addEventListener('pointerleave', onLeave);
     window.addEventListener('pointerdown', onDown, { passive: true });
@@ -698,6 +722,7 @@ export default function GlobeScene() {
       ro.disconnect();
       themeObserver.disconnect();
       window.removeEventListener(PROJECT_EVENT, onProject);
+      window.removeEventListener(PAGE_EVENT, onPage);
       labelLayer.remove();
       window.removeEventListener('resize', measureLabels);
       window.removeEventListener('resize', resize);
@@ -714,7 +739,13 @@ export default function GlobeScene() {
       renderer.dispose();
       if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
     };
+    // mounted once: later page changes go through PAGE_EVENT
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent(PAGE_EVENT, { detail: project }));
+  }, [project]);
 
   return (
     <div ref={mountRef} className="globe-scene" aria-hidden="true" />

@@ -1,15 +1,19 @@
-import cleanFeedImg from '../assets/Projects/clean-feed.webp';
+import shot from '../assets/Projects/clean-feed.webp';
 import js from '../assets/Pages/JavaScript-logo.webp';
 import webTech from '../assets/Card/HTML-CSS-JS-Logo.webp';
 import GithubButton from '../components/GithubButton';
-import '../Styles/PagesProjects.css';
-import '../Styles/GithubButton.css';
+import ProjectLayout from '../components/ProjectLayout';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
 
 const FIREFOX_URL = 'https://addons.mozilla.org/fr/firefox/addon/clean-feed-hide-shorts-reels/';
 const CHROME_URL = 'https://chromewebstore.google.com/detail/inhjhkkbaiodhbecdkempfnjkhnpdllf';
 const REPO_URL = 'https://github.com/Hugo-Galley/clean-feed';
+
+const TECHS = [
+    { src: js, name: 'JavaScript' },
+    { src: webTech, name: 'WebExtensions' },
+];
 
 // Met en avant le bouton du navigateur du visiteur.
 function isFirefox() {
@@ -65,33 +69,22 @@ export default function CleanFeed() {
     );
 
     return (
-        <div className='project-container'>
-            <div className='project-card'>
-                <img src={cleanFeedImg} alt={t('projectPages.cleanFeed.imageAlt')} className='project-image' />
-                <div className='project-info'>
-                    <h1 className='project-title'>{t('projectPages.cleanFeed.title')}</h1>
-                    <p className='project-description'>
-                        {t('projectPages.cleanFeed.description')}
-                    </p>
-                    <div className='tech-stack'>
-                        <div className='tech-item'>
-                            <img src={js} alt="JavaScript" />
-                            <p>JavaScript</p>
-                        </div>
-                        <div className='tech-item'>
-                            <img src={webTech} alt="HTML / CSS" />
-                            <p>WebExtensions</p>
-                        </div>
-                    </div>
-                    <div className='project-actions'>
-                        {firefoxFirst ? [firefoxButton, chromeButton] : [chromeButton, firefoxButton]}
-                        <a href={REPO_URL} target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/clean-feed' })}>
-                            <GithubButton />
-                        </a>
-                    </div>
-                    <p className='project-note'>{t('projectPages.cleanFeed.note')}</p>
-                </div>
-            </div>
-        </div>
+        <ProjectLayout
+            slug="clean-feed"
+            title={t('projectPages.cleanFeed.title')}
+            description={t('projectPages.cleanFeed.description')}
+            image={shot}
+            imageAlt={t('projectPages.cleanFeed.imageAlt')}
+            techs={TECHS}
+            note={t('projectPages.cleanFeed.note')}
+            actions={
+                <>
+                    {firefoxFirst ? [firefoxButton, chromeButton] : [chromeButton, firefoxButton]}
+                    <a href={REPO_URL} target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/clean-feed' })}>
+                        <GithubButton />
+                    </a>
+                </>
+            }
+        />
     );
 }

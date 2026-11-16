@@ -1,52 +1,50 @@
+/* 404: centred above the globe, which sits low on the screen like a horizon */
 .error-container {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 2rem 1.25rem;
+  padding-top: clamp(7rem, 20vh, 12rem);
+  padding-bottom: 4rem;
   text-align: center;
 }
 .error-content {
-  max-width: 520px;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.5);
 }
-.error-content .title {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: clamp(5rem, 18vw, 9rem);
-  font-weight: 600;
-  letter-spacing: -0.06em;
-  line-height: 1;
-  background: linear-gradient(135deg, #a855f7, #ec4899);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.error-kicker {
+  margin: 0 0 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
-.error-content .subtitle {
-  margin: 1rem 0 0.75rem;
+.error-title {
+  margin: 0 0 1.4rem;
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
   color: var(--text-color);
+  text-wrap: balance;
 }
-.error-content .description {
-  margin: 0 0 2rem;
+.error-description {
+  margin: 0 0 2.2rem;
+  max-width: 480px;
+  font-size: 1.05rem;
   line-height: 1.7;
   color: var(--text-secondary);
 }
-.home-button {
-  display: inline-flex;
-  align-items: center;
-  height: 44px;
-  padding: 0 1.3rem;
-  border-radius: 999px;
-  background: var(--text-color);
-  color: var(--bg-color);
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.25s ease;
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
 }
-.home-button:hover { opacity: 0.9; transform: translateY(-1px); color: var(--bg-color); }
+
+@media (max-width: 768px) {
+  .error-container { min-height: 80vh; padding-top: 8rem; }
+}

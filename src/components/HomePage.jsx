@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import Hero from './Hero';
@@ -13,25 +13,9 @@ import SectionHead from './SectionHead';
 import useReveal from '../hooks/useReveal';
 import '../Styles/Home.css';
 
-const GlobeScene = lazy(() => import('./GlobeScene'));
-
-// The 3D globe is desktop-only: on phones it costs too much for too little
-const DESKTOP_QUERY = '(min-width: 769px)';
-function useIsDesktop() {
-  const [desktop, setDesktop] = useState(() => window.matchMedia(DESKTOP_QUERY).matches);
-  useEffect(() => {
-    const mql = window.matchMedia(DESKTOP_QUERY);
-    const onChange = (e) => setDesktop(e.matches);
-    mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
-  }, []);
-  return desktop;
-}
-
 export default function HomePage() {
   const { t } = useLanguage();
   const location = useLocation();
-  const isDesktop = useIsDesktop();
   useReveal();
 
   useEffect(() => {
@@ -45,11 +29,6 @@ export default function HomePage() {
 
   return (
     <>
-      {isDesktop && (
-        <Suspense fallback={null}>
-          <GlobeScene />
-        </Suspense>
-      )}
       <div id="Home">
         <Hero />
       </div>
@@ -60,7 +39,7 @@ export default function HomePage() {
           <About />
         </section>
 
-        <section className="home-section home-section--stack">
+        <section className="home-section home-section--full">
           <SectionHead title={t('sections.stackTitle')} muted={t('sections.stackMuted')} align="center" />
           <Stack />
         </section>
@@ -85,7 +64,7 @@ export default function HomePage() {
           <Projects />
         </section>
 
-        <section className="home-section home-section--contact">
+        <section className="home-section home-section--full home-section--contact">
           <SectionHead id="Contact" title={t('sections.contactTitle')} muted={t('sections.contactMuted')} align="center" />
           <Contact />
         </section>
