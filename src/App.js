@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, useEffect } from 'react';
-import NavBar2 from './components/NavBar2';
-import ThemeToggle from './components/ThemeToggle';
+import { lazy, Suspense } from 'react';
 import SeoManager from './components/SeoManager';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 import HomePage from './components/HomePage';
 import NotFound from './components/NotFound';
+import BackHome from './components/BackHome';
 
 import './Styles/App.css';
 
@@ -40,73 +39,14 @@ function PageSkeleton() {
 }
 
 function App() {
-  useEffect(() => {
-    const cursorWrapper = document.querySelector('.cursor-wrapper');
-    const cursor = document.querySelector('.cursor');
-
-    const isTouchOrMobile = 
-      window.matchMedia('(pointer: coarse)').matches || 
-      window.innerWidth <= 768;
-
-    if (isTouchOrMobile) {
-      if (cursorWrapper) {
-        cursorWrapper.style.display = 'none';
-      }
-      return;
-    }
-
-    if (cursorWrapper && cursor) {
-      const handleMouseMove = (e) => {
-        cursorWrapper.style.transform = `translate3d(${e.clientX - 25}px, ${e.clientY - 25}px, 0)`;
-      };
-
-      const handleClick = () => {
-        cursor.classList.add('expand');
-        setTimeout(() => {
-          cursor.classList.remove('expand');
-        }, 500);
-      };
-
-      const handleMouseEnter = () => {
-        cursorWrapper.style.display = 'flex';
-      };
-
-      const handleMouseLeave = () => {
-        cursorWrapper.style.display = 'none';
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('click', handleClick);
-      document.addEventListener('mouseenter', handleMouseEnter);
-      document.addEventListener('mouseleave', handleMouseLeave);
-
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('click', handleClick);
-        document.removeEventListener('mouseenter', handleMouseEnter);
-        document.removeEventListener('mouseleave', handleMouseLeave);
-      };
-    }
-  }, []);
-
   return (
     <ThemeProvider>
       <LanguageProvider>
       <Router>
         <a href="#main-content" className="skip-link">Aller au contenu principal</a>
-        <div className='cursor-wrapper'>
-          <div className='cursor'></div>
-        </div>
-        <div className="bg-blobs">
-          <div className="blob blob-1"></div>
-          <div className="blob blob-2"></div>
-          <div className="blob blob-3"></div>
-        </div>
-        <div className="bg-noise"></div>
         <main className="main" id="main-content">
           <SeoManager />
-          <NavBar2/>
-          <ThemeToggle />
+          <BackHome />
           <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

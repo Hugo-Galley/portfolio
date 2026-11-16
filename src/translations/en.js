@@ -4,114 +4,62 @@ const en = {
     hello: "Hello,",
     iAm: "I'm Hugo Galley",
     subtitle: "A curious developer, I believe in open and collaborative code.",
-    aboutButton: "About Me",
-    workButton: "My Work",
-    cvButton: "My Resume"
   },
 
-  // Aptitude bar
-  aptitude: {
-    developer: "Developer",
-    backend: "Backend",
-    web: "Web",
-    design: "Design"
-  },
-
-  // About / Bento section
-  about: {
-    title: "About Me",
-    whoAmI: "Who am I?",
-    whoAmIText: "I'm a young passionate developer studying at EPSI, based in Paris.",
-    passions: "My Passions",
-    sport: "Sports",
-    sportText: "I practice running and have completed several triathlons, which I'm truly passionate about.",
-    travel: "Travel",
-    travelText: "I love traveling because I enjoy moving around and discovering the world.",
-    music: "Music",
-    musicText: "I played the violin for over 13 years, which developed my taste for music."
+  // Home sections (redesign)
+  sections: {
+    cvLong: "Download my resume",
+    aboutTitle: "About.",
+    aboutMuted: "Who I am and what I like to build.",
+    stackTitle: "The stack.",
+    stackMuted: "The tools I build with every day.",
+    workTitle: "Experience.",
+    workMuted: "Where I learn by shipping.",
+    osTitle: "Open source.",
+    osMuted: "Projects I publish and projects I contribute to.",
+    projectsTitle: "Projects.",
+    projectsMuted: "Tools built to be used.",
+    contactTitle: "Let's build something",
+    contactMuted: "together.",
+    contactText: "An idea, a project or just a question: drop me a line.",
+    copyEmail: "Copy email",
+    writeMe: "Send an email",
+    viewProject: "View project",
+    built: "Designed and built by Hugo Galley.",
+    language: "Passer en français"
   },
 
   // Bento modals
   bento: {
-    me: {
-      title: "Me: Hugo",
-      text: "I'm Hugo Galley, a computer science student with a strong desire to learn. I enjoy developing IT projects and acquiring new skills."
-    },
-    studies: {
-      title: "My Studies",
-      text: "I obtained my baccalaureate with a specialization in Math/NSI in 2023 with honors. Currently, I'm studying computer science at EPSI Paris and aspire to obtain a master's degree to become a software engineer."
-    },
-    language: {
-      title: "Language",
-      text: "My favorite language is C#, because when combined with .NET, it allows for a wide variety of projects ranging from batch processes to APIs and web applications."
-    },
-    docker: {
-      title: "Docker & DevOps",
-      text: "I use Docker to isolate dependencies, create consistent development environments, and ensure reliable, reproducible deployments."
-    },
-    passion: {
-      title: "Passion",
-      text: "My passions in life are travel, because I love moving around and discovering the world. Music - I played the violin for over 13 years, which developed my taste for music. And sports - I practice running and have completed several triathlons, which I'm truly passionate about."
-    },
-    location: {
-      title: "Location",
-      text: "I live in France, specifically in Paris, and I study at La Défense, one of the largest business districts in the world, which provides an excellent learning environment."
-    }
   },
 
   // Bento cards
   bentoCards: {
     me: "About",
-    meDesc: "Software developer & DevOps at AXA and student at EPSI. I enjoy building clean, useful projects.",
+    meDesc: "Software developer & DevOps at AXA and student at EPSI.",
+    passions: "Passions",
+    passionsDesc: "Running, triathlons and 13 years of violin.",
     studies: "Education",
     studiesDesc: "Software engineering degree at EPSI Paris La Défense (2023 — 2028).",
     language: "Language",
     languageDesc: "What I use most to build solid APIs and backend applications.",
     docker: "DevOps",
     dockerDesc: "Containerizing services and ensuring reliable, reproducible deployment environments.",
-    passions: "Passions",
-    passionsDesc: "Running, triathlons, 13 years of violin, and traveling whenever possible.",
-    location: "Location",
-    locationDesc: "Available on-site or remote."
-  },
-
-  // Skills section
-  skills: {
-    title: "My Skills"
   },
 
   // Work experience section
   work: {
-    title: "Professional Experience",
     currently: "Currently",
     softwareEngineerIntern: "Software Engineer & DevOps Apprentice",
     devEngineerIntern: "Development Engineer Intern",
-    weeks: "weeks",
     stages: "internships",
     unifDesc: "Over two internships, I developed an end-to-end .NET application monitoring tool (DB, API, UI, CI/CD). I also created a Windows service and a Blazor interface to synchronize an internal tool with Dynamics 365 CRM, significantly improving user efficiency.",
     axaDesc: "Software Engineer & DevOps apprentice at AXA — building internal applications in C# .NET, setting up CI/CD pipelines, Docker containerization and participating in Agile ceremonies."
   },
 
-  // Projects section
-  projects: {
-    title: "My Projects",
-    sportApp: "Sports Application",
-    cybersecurity: "Cybersecurity"
-  },
-
   // Contact section
   contact: {
-    title: "Contact",
-    subtitle: "If you'd like to contact me or collaborate with me.",
     copied: "✓ Email copied!",
-    copyHint: "Click to copy",
-    openMail: "Open mail app"
-  },
-
-  // Footer
-  footer: {
-    info: "Information",
-    copyright: "©Copyright Hugo Galley"
   },
 
   // 404 page
@@ -168,9 +116,6 @@ const en = {
 
   // Open Source section
   openSource: {
-    title: "Open Source",
-    eyebrow: "Shared code",
-    intro: "Projects I publish and projects I contribute to.",
     contributions: "My contributions",
     stars: "stars",
     leafwikeIntro: "Open source self-hosted wiki I contribute to: I added what makes it easier to build, ship and customize.",
@@ -181,12 +126,8 @@ const en = {
     leafwikeC3Title: "Custom CSS support",
     leafwikeC3Sub: "User-editable theme",
     leafwikiRole: "Contributor",
-    leafwikiDesc: "Multi-platform CI/CD pipeline, Docker image published on every release, and custom CSS support.",
-    easyWorkEnvRole: "Creator",
     easyWorkEnvDesc: "Python package on PyPI that sets up a work environment in a single command.",
-    numeraRole: "Creator",
     numeraDesc: "Self-hosted budget, savings and investments app: local SQLite data, one-command Docker install.",
-    cleanFeedRole: "Creator",
     cleanFeedDesc: "Firefox and Chrome extension that hides YouTube Shorts and the addictive parts of Instagram.",
     viewProfile: "See everything on GitHub"
   }

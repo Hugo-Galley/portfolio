@@ -1,23 +1,13 @@
 import { trackEvent } from '../hooks/useUmami';
 import '../Styles/Hero.css'
-import DownLoadButton from './DownloadButton';
-import OrganicMesh from './OrganicMesh';
 import FluidText from './FluidText';
-import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
-      const navigate = useNavigate();
       const { t } = useLanguage();
   
-      const handleNavigation = (section) => {
-          navigate('/', { state: { scrollTo: section } });
-      };
-  
-
   return (
     <div className='herroBanner'>
-      <OrganicMesh />
       <div className='herro'>
         <div className='herro-description'>
           <FluidText as="h1" className="hero-title">
@@ -31,20 +21,15 @@ export default function Hero() {
             {t('hero.subtitle')}
           </FluidText>
 
-          <div className='button-div'>
-            <button type='button' id='herro-button1' onClick={() => handleNavigation('AboutMe')}>
-              <span>{t('hero.aboutButton')}</span>
-              <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </button>
-            <button type='button' id='herro-button2' onClick={() => handleNavigation('Projects')}>{t('hero.workButton')}</button>
+          <div className='hero-actions'>
+            <a className='btn btn--primary btn--lg hero-cv' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer' onClick={() => trackEvent('cv-download')}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+              {t('sections.cvLong')}
+            </a>
           </div>
-          
-          <a id='DownloadButton' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer' onClick={() => trackEvent('cv-download')}>
-            <DownLoadButton/>
-          </a>
         </div>
-        <div className="radial-glow" />
       </div>
+      <div className="hero-scroll-hint" aria-hidden="true"><span /></div>
     </div>
   );
 }

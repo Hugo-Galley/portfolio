@@ -1,43 +1,29 @@
 import { trackEvent } from '../hooks/useUmami';
-import '../Styles/Footer.css'
-import git from '../assets/Contact/github.webp'
-import lin from '../assets/Contact/img.icons8.com.webp'
-import { useLanguage } from '../context/LanguageContext'
+import { useLanguage } from '../context/LanguageContext';
+import { GithubGlyph, LinkedinGlyph } from './Contact';
+import '../Styles/Footer.css';
 
-export default function Footer(){
-    const { t, language, toggleLanguage } = useLanguage();
-    const date = new Date();
-    const year = date.getFullYear();
+export default function Footer() {
+  const { t, language, toggleLanguage } = useLanguage();
+  const year = new Date().getFullYear();
 
-    return(
-        <footer className="footer-main">
-            <button 
-                className="language-selector" 
-                onClick={toggleLanguage}
-                aria-label={`Switch to ${language === 'fr' ? 'English' : 'French'}`}
-            >
-                <span className={`flag-option ${language === 'fr' ? 'active' : ''}`}>
-                    🇫🇷
-                </span>
-                <span className={`flag-option ${language === 'en' ? 'active' : ''}`}>
-                    🇬🇧
-                </span>
-            </button>
-            <div className="footer-left">
-                <h2>{t('footer.info')}</h2>
-                <p>{t('footer.copyright')} {year} </p>
-                <p>contact@galleyhugo.com</p>
-            </div>
-            <div className="footer-right">
-                <div className='div-media'>
-                    <img src={git} alt="logo Github" width="30" height="30" loading="lazy" decoding="async" />
-                    <a href='https://github.com/Hugo-Galley' onClick={() => trackEvent('contact-github-profile')}>Github</a>
-                </div>
-                <div className='div-media'>
-                    <img src={lin} alt="logo Linkedin" width="30" height="30" loading="lazy" decoding="async" />
-                    <a href="https://www.linkedin.com/in/hugo-galley/" onClick={() => trackEvent('contact-linkedin')}>Linkedin</a>
-                </div>
-            </div>
-        </footer>
-    )
+  return (
+    <footer className="site-footer">
+      <div className="site-footer-inner">
+        <p className="site-footer-copy">
+          © {year} Hugo Galley — {t('sections.built')}
+        </p>
+        <nav className="site-footer-links" aria-label="Liens">
+          <button type="button" className="site-footer-lang" onClick={toggleLanguage} aria-label={t('sections.language')}>
+            <span className={language === 'fr' ? 'is-on' : ''}>FR</span>
+            <span aria-hidden="true">/</span>
+            <span className={language === 'en' ? 'is-on' : ''}>EN</span>
+          </button>
+          <a href="mailto:contact@galleyhugo.com" onClick={() => trackEvent('contact-email')}>contact@galleyhugo.com</a>
+          <a href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" aria-label="GitHub" onClick={() => trackEvent('contact-github-profile')}><GithubGlyph /></a>
+          <a href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" aria-label="LinkedIn" onClick={() => trackEvent('contact-linkedin')}><LinkedinGlyph /></a>
+        </nav>
+      </div>
+    </footer>
+  );
 }

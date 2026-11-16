@@ -4,114 +4,62 @@ const fr = {
     hello: "Hello,",
     iAm: "Je suis Hugo Galley",
     subtitle: "Développeur curieux, je crois que le code est fait pour être partagé",
-    aboutButton: "À propos",
-    workButton: "Mon Travail",
-    cvButton: "Mon CV"
   },
 
-  // Aptitude bar
-  aptitude: {
-    developer: "Développeur",
-    backend: "Backend",
-    web: "Web",
-    design: "Design"
-  },
-
-  // About / Bento section
-  about: {
-    title: "À propos",
-    whoAmI: "Qui suis-je ?",
-    whoAmIText: "Je suis un jeune développeur passionné étudiant à l'EPSI, basé à Paris.",
-    passions: "Mes Passions",
-    sport: "Sport",
-    sportText: "Je pratique la course à pied et j'ai réalisé plusieurs triathlons, ce qui me passionne vraiment.",
-    travel: "Voyages",
-    travelText: "J'aime les voyages, car j'adore bouger et découvrir le monde.",
-    music: "Musique",
-    musicText: "J'ai joué du violon pendant plus de 13 ans, ce qui a développé mon goût pour la musique."
+  // Home sections (redesign)
+  sections: {
+    cvLong: "Télécharger mon CV",
+    aboutTitle: "À propos.",
+    aboutMuted: "Qui je suis, ce que j'aime construire.",
+    stackTitle: "La stack.",
+    stackMuted: "Les outils avec lesquels je construis au quotidien.",
+    workTitle: "Expériences.",
+    workMuted: "Là où j'apprends en livrant.",
+    osTitle: "Open source.",
+    osMuted: "Des projets que je publie et ceux auxquels je contribue.",
+    projectsTitle: "Projets.",
+    projectsMuted: "Des outils construits pour être utilisés.",
+    contactTitle: "Construisons quelque chose",
+    contactMuted: "ensemble.",
+    contactText: "Une idée, un projet ou simplement une question : écrivez-moi.",
+    copyEmail: "Copier l'email",
+    writeMe: "Écrire un mail",
+    viewProject: "Voir le projet",
+    built: "Conçu et développé par Hugo Galley.",
+    language: "Switch to English"
   },
 
   // Bento modals
   bento: {
-    me: {
-      title: "Moi : Hugo",
-      text: "Je suis Hugo Galley, un étudiant en informatique avec une forte envie d'apprendre. J'aime développer des projets informatiques et acquérir de nouvelles compétences."
-    },
-    studies: {
-      title: "Mes études",
-      text: "J'ai obtenu mon baccalauréat avec une spécialisation en Math/NSI en 2023 avec la mention 'assez bien.' Actuellement, j'étudie l'informatique à l'EPSI Paris et j'aspire à obtenir un master pour devenir ingénieur logiciel."
-    },
-    language: {
-      title: "Langage",
-      text: "Mon langage préféré est le C#, car, lorsqu'il est combiné avec .NET, il permet de réaliser une grande variété de projets allant des batchs aux API, en passant par les applications web."
-    },
-    docker: {
-      title: "Docker & DevOps",
-      text: "J'utilise Docker pour isoler les dépendances, concevoir des environnements homogènes et assurer des déploiements fiables et reproductibles."
-    },
-    passion: {
-      title: "Passion",
-      text: "Mes passions dans la vie sont les voyages, car j'adore bouger et découvrir le monde. La musique, j'ai joué du violon pendant plus de 13 ans, ce qui a développé mon goût pour la musique. Et le sport, je pratique la course à pied et j'ai réalisé plusieurs triathlons, ce qui me passionne vraiment."
-    },
-    location: {
-      title: "Localisation",
-      text: "Je vis en France, plus précisément à Paris, et j'étudie à La Défense, l'un des plus grands quartiers d'affaires du monde, ce qui offre un excellent environnement d'apprentissage."
-    }
   },
 
   // Bento cards
   bentoCards: {
     me: "À propos",
-    meDesc: "Développeur & DevOps chez AXA et étudiant à l'EPSI. J'aime construire des projets utiles et bien pensés.",
+    meDesc: "Développeur & DevOps chez AXA et étudiant à l'EPSI.",
+    passions: "Passions",
+    passionsDesc: "Course à pied, triathlon et 13 ans de violon.",
     studies: "Formation",
     studiesDesc: "En formation d'ingénierie logicielle à l'EPSI Paris La Défense (2023 — 2028).",
     language: "Langage",
     languageDesc: "Ce que j'utilise le plus pour concevoir des API et des applications backend solides.",
     docker: "DevOps",
     dockerDesc: "Conteneuriser les services et garantir des environnements de déploiement fiables et reproductibles.",
-    passions: "Passions",
-    passionsDesc: "Course à pied, triathlon, 13 ans de violon et voyages dès que l'occasion se présente.",
-    location: "Localisation",
-    locationDesc: "Disponible sur place ou en télétravail."
-  },
-
-  // Skills section
-  skills: {
-    title: "Mes compétences"
   },
 
   // Work experience section
   work: {
-    title: "Expériences professionnelles",
     currently: "Actuellement",
     softwareEngineerIntern: "Alternant ingénieur logiciel",
     devEngineerIntern: "Stagiaire ingénieur en développement",
-    weeks: "semaines",
     stages: "stages",
     unifDesc: "Lors de mes deux stages, j'ai développé un outil complet de monitoring du parc applicatif (.NET) de bout en bout (BDD, API, UI, CI/CD). J'ai également créé un service Windows et une interface Blazor pour synchroniser un outil interne avec Dynamics 365 CRM, améliorant grandement la vie des utilisateurs.",
     axaDesc: "Alternance ingénieur logiciel & DevOps chez AXA — développement d'applications internes en C# .NET, mise en place de pipelines CI/CD, conteneurisation Docker et participation aux cérémonies Agile."
   },
 
-  // Projects section
-  projects: {
-    title: "Mes Projets",
-    sportApp: "Application de sport",
-    cybersecurity: "Cybersécurité"
-  },
-
   // Contact section
   contact: {
-    title: "Contact",
-    subtitle: "Si vous souhaitez me contacter ou collaborer avec moi.",
     copied: "✓ Email copié !",
-    copyHint: "Cliquer pour copier",
-    openMail: "Ouvrir l'application mail"
-  },
-
-  // Footer
-  footer: {
-    info: "Informations",
-    copyright: "©Copyright Hugo Galley"
   },
 
   // 404 page
@@ -168,9 +116,6 @@ const fr = {
 
   // Open Source section
   openSource: {
-    title: "Open Source",
-    eyebrow: "Code partagé",
-    intro: "Des projets que je publie et des projets auxquels je contribue.",
     contributions: "Mes contributions",
     stars: "étoiles",
     leafwikeIntro: "Wiki auto-hébergé open source dont je suis contributeur : j'y ai apporté de quoi le construire, le livrer et le personnaliser plus facilement.",
@@ -181,12 +126,8 @@ const fr = {
     leafwikeC3Title: "Support du CSS personnalisé",
     leafwikeC3Sub: "Thème modifiable par l'utilisateur",
     leafwikiRole: "Contributeur",
-    leafwikiDesc: "Pipeline CI/CD multi-plateforme, image Docker publiée à chaque release et support du CSS personnalisé.",
-    easyWorkEnvRole: "Créateur",
     easyWorkEnvDesc: "Package Python publié sur PyPI qui prépare un environnement de travail en une commande.",
-    numeraRole: "Créateur",
     numeraDesc: "Application auto-hébergée de budget, d'épargne et d'investissements : données locales en SQLite, installation Docker en une commande.",
-    cleanFeedRole: "Créateur",
     cleanFeedDesc: "Extension Firefox et Chrome qui masque les Shorts YouTube et les parties addictives d'Instagram.",
     viewProfile: "Tout voir sur GitHub"
   }

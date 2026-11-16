@@ -1,0 +1,82 @@
+/* ───────── Globe scene (fixed, behind the whole home page) ───────── */
+.globe-scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.globe-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  animation: globe-in 1.8s ease both;
+}
+@keyframes globe-in { from { opacity: 0; } }
+
+/* ───────── Section heads ───────── */
+.section-head {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.section-head--center { flex-direction: column; align-items: center; text-align: center; }
+.section-head-text { max-width: 760px; }
+.section-head h2 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 4.6vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: var(--text-color);
+  text-align: inherit;
+  text-wrap: balance;
+}
+.section-muted { color: color-mix(in srgb, var(--text-color) 56%, transparent); }
+
+/* ───────── Scroll-driven depth: blocks rise from behind the globe and
+   tip back slightly as they leave the top of the screen ───────── */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .section-head {
+      animation: head-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .about-photo,
+    .about-body,
+    .xp-row,
+    .os-lead,
+    .os-list li,
+    .project-row,
+    .contact-panel {
+      animation: block-in linear both, block-out linear forwards;
+      animation-timeline: view(), view();
+      animation-range: entry 0% cover 28%, exit 20% exit 100%;
+      transform-origin: 50% 100%;
+    }
+    @keyframes head-in {
+      from { opacity: 0; transform: translateY(40px); filter: blur(8px); }
+      to { opacity: 1; transform: none; filter: none; }
+    }
+    @keyframes block-in {
+      from { opacity: 0; transform: perspective(1400px) translate3d(0, 80px, -140px) rotateX(14deg); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes block-out {
+      from { opacity: 1; transform: none; }
+      to { opacity: 0.25; transform: perspective(1400px) translate3d(0, -20px, -120px) rotateX(-8deg); }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .section-head { align-items: flex-start; }
+}

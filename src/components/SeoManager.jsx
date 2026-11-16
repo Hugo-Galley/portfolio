@@ -19,7 +19,7 @@ const SEO_TRANSLATIONS = {
   fr: {
     '/': {
       title: 'Hugo Galley — Développeur Logiciel | Portfolio',
-      description: 'Hugo Galley — Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris. C#, .NET, DevOps. Découvrez mes projets open-source et mes expériences professionnelles.',
+      description: 'Hugo Galley — Développeur logiciel & DevOps chez AXA, étudiant à l’EPSI Paris. C#, .NET, DevOps. Découvrez mes projets open-source et mes expériences professionnelles.',
     },
     '/cartography': {
       title: 'Cartography | Projet .NET Blazor - Hugo Galley',
@@ -53,7 +53,7 @@ const SEO_TRANSLATIONS = {
   en: {
     '/': {
       title: 'Hugo Galley — Software Developer | Portfolio',
-      description: 'Hugo Galley — Software developer & DevOps at AXA, EPSI Paris graduate. C#, .NET, DevOps. Explore my open-source projects and professional experience.',
+      description: 'Hugo Galley — Software developer & DevOps at AXA, student at EPSI Paris. C#, .NET, DevOps. Explore my open-source projects and professional experience.',
     },
     '/cartography': {
       title: 'Cartography | .NET Blazor Project - Hugo Galley',
@@ -136,8 +136,8 @@ export default function SeoManager() {
               name: 'Hugo Galley',
               jobTitle: language === 'fr' ? 'Développeur logiciel & DevOps' : 'Software Developer & DevOps Engineer',
               description: language === 'fr'
-                ? 'Développeur logiciel & DevOps chez AXA, diplômé EPSI Paris, spécialisé en .NET, C# et DevOps.'
-                : 'Software developer & DevOps engineer at AXA, EPSI Paris graduate, specializing in .NET, C# and DevOps.',
+                ? 'Développeur logiciel & DevOps chez AXA, étudiant à l’EPSI Paris, spécialisé en .NET, C# et DevOps.'
+                : 'Software developer & DevOps engineer at AXA, student at EPSI Paris, specializing in .NET, C# and DevOps.',
               url: SITE_URL,
               image: DEFAULT_IMAGE,
               email: 'contact@galleyhugo.com',
