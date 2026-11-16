@@ -44,20 +44,3 @@
 @media (max-width: 700px) {
   .section-head { align-items: flex-start; }
 }
-
-/* ───────── Reveal on scroll (see hooks/useReveal.js) ─────────
-   Played once: the block rises and fades in, then stays fully opaque.
-   Only active once the script has run (.reveal-ready), so nothing is ever hidden without JS. */
-.reveal-ready [data-reveal] {
-  transition:
-    opacity 0.7s ease var(--reveal-delay, 0ms),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
-}
-.reveal-ready [data-reveal="out"] {
-  opacity: 0;
-  transform: translateY(28px);
-}
-.reveal-ready [data-reveal="in"] {
-  opacity: 1;
-  transform: none;
-}

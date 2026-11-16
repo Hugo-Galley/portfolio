@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
-const TARGETS = [
-  '.section-head',
+const BLOCKS = [
   '.about-photo',
   '.about-body',
   '.xp-row',
@@ -10,63 +9,90 @@ const TARGETS = [
   '.project-row',
   '.contact-panel',
 ].join(',');
+const HEADS = '.section-head';
+
+const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 
 /*
- * Reveal-on-scroll, played once per block: it rises slightly and fades in, then stays
- * fully opaque for good (no fade-out when it leaves the screen).
- * Works the same in every browser (IntersectionObserver, no scroll-driven CSS).
- * Progressive enhancement: nothing is hidden unless this code runs, so the content is
- * always visible without JS, for reduced-motion users and in the pre-rendered HTML.
- * A data attribute is used (not a class) so React re-renders never wipe it.
+ * Scroll-linked depth effect, computed in JS so it behaves the same in every browser
+ * (the CSS scroll-driven version left blocks half transparent in Firefox).
+ *  - entering: a block rises from behind (perspective, rotateX, depth) and fades in,
+ *    reaching its final state once ~28% of its journey through the viewport is done
+ *  - leaving through the top: it tips back slightly, but stays fully opaque
+ *  - section titles rise and sharpen (blur -> none)
+ * Nothing is touched without JS, in the pre-rendered HTML or with reduced motion.
  */
 export default function useReveal() {
   useEffect(() => {
-    if (
-      navigator.webdriver ||
-      !('IntersectionObserver' in window) ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    ) {
+    if (navigator.webdriver || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return undefined;
     }
 
-    const root = document.documentElement;
-    const elements = [...document.querySelectorAll(TARGETS)];
-    const show = (el) => el.setAttribute('data-reveal', 'in');
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        // stagger the blocks that enter together
-        let i = 0;
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.style.setProperty('--reveal-delay', `${Math.min(i, 5) * 80}ms`);
-          i += 1;
-          show(entry.target);
-          io.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    const vh = window.innerHeight;
-    elements.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      // already on screen when the page loads: show it straight away, no animation
-      if (r.top < vh && r.bottom > 0) {
-        el.setAttribute('data-reveal', 'in');
-        return;
-      }
-      el.setAttribute('data-reveal', 'out');
-      io.observe(el);
+    const blocks = [...document.querySelectorAll(BLOCKS)];
+    const heads = [...document.querySelectorAll(HEADS)];
+    const all = [...blocks, ...heads];
+    blocks.forEach((el) => {
+      el.style.transformOrigin = '50% 100%';
+      el.style.willChange = 'transform, opacity';
     });
-    root.classList.add('reveal-ready');
+    heads.forEach((el) => { el.style.willChange = 'transform, opacity, filter'; });
+
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const vh = window.innerHeight || 800;
+      // read everything first, then write (no layout thrashing)
+      const rects = all.map((el) => el.getBoundingClientRect());
+
+      all.forEach((el, i) => {
+        const { top, height } = rects[i];
+        const h = Math.max(height, 1);
+        // like CSS "entry 0% -> cover 28%": 0 when the top touches the bottom edge
+        const enter = clamp01((vh - top) / (0.28 * (vh + h)));
+
+        if (i >= blocks.length) {
+          // section title: rise + un-blur
+          const k = 1 - enter;
+          el.style.opacity = enter.toFixed(3);
+          el.style.transform = k ? `translate3d(0, ${(40 * k).toFixed(1)}px, 0)` : '';
+          el.style.filter = k > 0.01 ? `blur(${(8 * k).toFixed(2)}px)` : '';
+          return;
+        }
+
+        // like CSS "exit 20% -> 100%": starts once the block's top has left the screen
+        const exit = clamp01((-top / h - 0.2) / 0.8);
+        const k = 1 - enter;
+        const y = 80 * k - 20 * exit;
+        const z = -140 * k - 120 * exit;
+        const rx = 14 * k - 8 * exit;
+        el.style.opacity = enter.toFixed(3);
+        el.style.transform = k || exit
+          ? `perspective(1400px) translate3d(0, ${y.toFixed(1)}px, ${z.toFixed(1)}px) rotateX(${rx.toFixed(2)}deg)`
+          : '';
+      });
+    };
+    const kick = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', kick, { passive: true });
+    window.addEventListener('resize', kick);
+    // the page grows when images/lazy parts load
+    const ro = new ResizeObserver(kick);
+    ro.observe(document.body);
 
     return () => {
-      io.disconnect();
-      root.classList.remove('reveal-ready');
-      elements.forEach((el) => {
-        el.removeAttribute('data-reveal');
-        el.style.removeProperty('--reveal-delay');
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', kick);
+      window.removeEventListener('resize', kick);
+      ro.disconnect();
+      all.forEach((el) => {
+        el.style.opacity = '';
+        el.style.transform = '';
+        el.style.filter = '';
+        el.style.transformOrigin = '';
+        el.style.willChange = '';
       });
     };
   }, []);
