@@ -1,11 +1,12 @@
 import { trackEvent } from '../hooks/useUmami';
 import { useLanguage } from '../context/LanguageContext';
-import { GithubGlyph, LinkedinGlyph } from './Contact';
+import { GithubGlyph, LinkedinGlyph, useEmail } from './Contact';
 import '../Styles/Footer.css';
 
 export default function Footer() {
   const { t, language, toggleLanguage } = useLanguage();
   const year = new Date().getFullYear();
+  const email = useEmail();
 
   return (
     <footer className="site-footer">
@@ -19,7 +20,7 @@ export default function Footer() {
             <span aria-hidden="true">/</span>
             <span className={language === 'en' ? 'is-on' : ''}>EN</span>
           </button>
-          <a href="mailto:contact@galleyhugo.com" onClick={() => trackEvent('contact-email')}>contact@galleyhugo.com</a>
+          {email && <a href={`mailto:${email}`} onClick={() => trackEvent('contact-email')}>{email}</a>}
           <a href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" aria-label="GitHub" onClick={() => trackEvent('contact-github-profile')}><GithubGlyph /></a>
           <a href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" aria-label="LinkedIn" onClick={() => trackEvent('contact-linkedin')}><LinkedinGlyph /></a>
         </nav>

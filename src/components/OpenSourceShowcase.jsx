@@ -14,6 +14,8 @@ export default function OpenSourceShowcase() {
   const [stars, setStars] = useState(null);
 
   useEffect(() => {
+    // not during pre-rendering: the HTML must match the first client render (no stars yet)
+    if (navigator.webdriver) return;
     fetch('https://api.github.com/repos/perber/leafwiki')
       .then((res) => res.json())
       .then((data) => {

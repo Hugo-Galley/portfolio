@@ -43,7 +43,7 @@
 
 /* ───────── Scroll-driven depth: blocks rise from behind the globe and
    tip back slightly as they leave the top of the screen ───────── */
-@supports (animation-timeline: view()) {
+@supports (animation-timeline: view()) and (animation-range: entry 0% cover 30%) {
   @media (prefers-reduced-motion: no-preference) {
     .section-head {
       animation: head-in linear both;

@@ -1,8 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { trackEvent } from '../hooks/useUmami';
 import { useLanguage } from '../context/LanguageContext';
 
-const EMAIL = 'contact@galleyhugo.com';
+const EMAIL = ['contact', 'galleyhugo.com'].join('@');
+
+/*
+ * The address is added in the browser, after hydration, and never written into the
+ * pre-rendered HTML: Cloudflare rewrites e-mail addresses it finds in HTML, which made
+ * React's hydration fail (#418). It also keeps the address away from naive scrapers.
+ */
+export function useEmail() {
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    if (!navigator.webdriver) setEmail(EMAIL);
+  }, []);
+  return email;
+}
 
 export const GithubGlyph = () => (
   <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
@@ -20,6 +33,7 @@ export const LinkedinGlyph = () => (
 export default function Contact() {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
+  const email = useEmail();
 
   const copy = () => {
     if (navigator.clipboard) navigator.clipboard.writeText(EMAIL).catch(() => {});
@@ -33,13 +47,13 @@ export default function Contact() {
       <div className="surface contact-panel">
         <p className="contact-text">{t('sections.contactText')}</p>
         <button type="button" className="contact-email" onClick={copy}>
-          <span className="contact-email-addr">{EMAIL}</span>
+          <span className="contact-email-addr">{email || '\u00a0'}</span>
           <span className={`contact-email-hint${copied ? ' is-copied' : ''}`}>
             {copied ? t('contact.copied') : t('sections.copyEmail')}
           </span>
         </button>
         <div className="contact-actions">
-          <a className="btn btn--primary" href={`mailto:${EMAIL}`} onClick={() => trackEvent('contact-email')}>
+          <a className="btn btn--primary" href={email ? `mailto:${email}` : undefined} onClick={() => trackEvent('contact-email')}>
             {t('sections.writeMe')}
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </a>
