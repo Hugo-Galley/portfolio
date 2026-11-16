@@ -41,42 +41,6 @@
 }
 .section-muted { color: color-mix(in srgb, var(--text-color) 56%, transparent); }
 
-/* ───────── Scroll-driven depth: blocks rise from behind the globe and
-   tip back slightly as they leave the top of the screen ───────── */
-@supports (animation-timeline: view()) and (animation-range: entry 0% cover 30%) {
-  @media (prefers-reduced-motion: no-preference) {
-    .section-head {
-      animation: head-in linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 30%;
-    }
-    .about-photo,
-    .about-body,
-    .xp-row,
-    .os-lead,
-    .os-list li,
-    .project-row,
-    .contact-panel {
-      animation: block-in linear both, block-out linear forwards;
-      animation-timeline: view(), view();
-      animation-range: entry 0% cover 28%, exit 20% exit 100%;
-      transform-origin: 50% 100%;
-    }
-    @keyframes head-in {
-      from { opacity: 0; transform: translateY(40px); filter: blur(8px); }
-      to { opacity: 1; transform: none; filter: none; }
-    }
-    @keyframes block-in {
-      from { opacity: 0; transform: perspective(1400px) translate3d(0, 80px, -140px) rotateX(14deg); }
-      to { opacity: 1; transform: none; }
-    }
-    @keyframes block-out {
-      from { opacity: 1; transform: none; }
-      to { opacity: 0.25; transform: perspective(1400px) translate3d(0, -20px, -120px) rotateX(-8deg); }
-    }
-  }
-}
-
 @media (max-width: 700px) {
   .section-head { align-items: flex-start; }
 }

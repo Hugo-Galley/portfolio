@@ -306,7 +306,7 @@ a.surface:hover { transform: translateY(-3px); }
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: color-mix(in srgb, var(--text-color) 60%, transparent);
+  color: color-mix(in srgb, var(--text-color) 78%, transparent);
   transition: color 0.45s ease;
 }
 .project-cat { font-size: 0.88rem; color: var(--text-secondary); }
