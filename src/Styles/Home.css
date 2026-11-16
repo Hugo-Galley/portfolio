@@ -358,7 +358,10 @@ a.surface:hover { transform: translateY(-3px); }
 }
 .globe-label.is-active { font-size: 1.05rem; font-weight: 600; color: #fff; }
 /* ═════════ 06 Contact ═════════ */
-.home-section--contact { padding-bottom: 7rem; }
+/* keeps its 7rem on top (the title never touches the screen edge), less below so the
+   card sits as close to the footer as the title sits to the top */
+.home-section--contact { padding-bottom: 2.5rem; }
+.home + .site-footer { margin-top: 0; }
 .contact { margin-top: 2.5rem; display: flex; justify-content: center; }
 .contact-panel {
   width: 100%;
