@@ -10,6 +10,7 @@ import OpenSourceShowcase, { GithubProfileLink } from './OpenSourceShowcase';
 import Contact from './Contact';
 import Footer from './Footer';
 import SectionHead from './SectionHead';
+import useReveal from '../hooks/useReveal';
 import '../Styles/Home.css';
 
 const GlobeScene = lazy(() => import('./GlobeScene'));
@@ -31,6 +32,7 @@ export default function HomePage() {
   const { t } = useLanguage();
   const location = useLocation();
   const isDesktop = useIsDesktop();
+  useReveal();
 
   useEffect(() => {
     const section = location.state?.scrollTo;
