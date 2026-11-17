@@ -411,14 +411,19 @@ a.surface:hover { transform: translateY(-3px); }
   .os-row { grid-template-columns: 1fr 20px; gap: 0.4rem 1rem; }
   .os-row-desc, .os-row-meta { grid-column: 1; }
   .os-row-arrow { grid-row: 1; grid-column: 2; }
-  .about { grid-template-columns: 1fr; }
-  .about-photo { max-width: 340px; }
-  .about-facts { grid-template-columns: 1fr; gap: 0; }
-  .about-fact { padding: 1.1rem 0; }
+  /* tablets and small laptops: still two columns, a narrower photo next to the text */
+  .about { grid-template-columns: minmax(200px, 290px) 1fr; gap: clamp(2rem, 4vw, 3rem); align-items: start; }
+  .about-lead { margin-bottom: 2rem; }
+  .about-facts { grid-template-columns: 1fr; gap: 0; margin-bottom: 1.5rem; }
+  .about-fact { padding: 1rem 0; display: grid; grid-template-columns: 76px 1fr; column-gap: 1rem; align-items: start; }
+  .about-fact dt { display: contents; }
+  .about-fact .about-logo { grid-row: 1 / span 3; margin: 0; }
   .globe-labels { display: none; }
   .projects-list { width: 100%; }
 }
 @media (max-width: 700px) {
+  .about { grid-template-columns: 1fr; }
+  .about-photo { max-width: 340px; width: 100%; margin: 0 auto; }
   .home-section { padding-top: 6rem; }
   .project-link { grid-template-columns: 2rem 1fr 1.2rem; }
   .project-cat { grid-column: 2; grid-row: 2; }
