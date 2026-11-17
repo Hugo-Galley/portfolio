@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import PROJECTS, { PROJECT_EVENT } from '../data/projects';
 import useReveal from '../hooks/useReveal';
+import { trackEvent } from '../hooks/useUmami';
 import SectionHead from './SectionHead';
 import Footer from './Footer';
 import '../Styles/PagesProjects.css';
@@ -77,7 +78,7 @@ export default function ProjectLayout({ slug, title, description, image, imageAl
 
         <nav id="ProjectNext" ref={nextRef} className="pp-next container" aria-label={t('sections.nextProject')}>
           <p className="pp-next-label">{t('sections.nextProject')}</p>
-          <Link to={next.lien} className="pp-next-link">
+          <Link to={next.lien} className="pp-next-link" onClick={() => trackEvent('project-open', { project: next.titre, from: 'next' })}>
             <span className="pp-next-name">{next.titre}</span>
             <span className="pp-next-cat">{next.categorie}</span>
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>

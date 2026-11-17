@@ -24,7 +24,7 @@ export default function EasyWorkEnv() {
       imageAlt="Aperçu d'EasyWorkEnv"
       techs={TECHS}
       actions={
-        <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/EasyWorkEnv' })}>
+        <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'EasyWorkEnv', link: 'repo' })}>
           <GithubButton />
         </a>
       }

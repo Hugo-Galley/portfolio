@@ -22,7 +22,7 @@ export default function Phantom() {
       imageAlt="Aperçu de Phantom"
       techs={TECHS}
       actions={
-        <a href="https://github.com/Hugo-Galley/Phantom" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Phantom' })}>
+        <a href="https://github.com/Hugo-Galley/Phantom" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'Phantom', link: 'repo' })}>
           <GithubButton />
         </a>
       }

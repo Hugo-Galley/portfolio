@@ -24,7 +24,7 @@ export default function Cartography() {
       imageAlt="Aperçu de Cartography"
       techs={TECHS}
       actions={
-        <a href="https://github.com/Hugo-Galley/Cartography" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/Cartography' })}>
+        <a href="https://github.com/Hugo-Galley/Cartography" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'Cartography', link: 'repo' })}>
           <GithubButton />
         </a>
       }

@@ -38,7 +38,7 @@ export default function Contact() {
   const copy = () => {
     if (navigator.clipboard) navigator.clipboard.writeText(EMAIL).catch(() => {});
     setCopied(true);
-    trackEvent('contact-email-copy');
+    trackEvent('email-copy', { from: 'contact' });
     setTimeout(() => setCopied(false), 2200);
   };
 
@@ -53,14 +53,14 @@ export default function Contact() {
           </span>
         </button>
         <div className="contact-actions">
-          <a className="btn btn--primary" href={email ? `mailto:${email}` : undefined} onClick={() => trackEvent('contact-email')}>
+          <a className="btn btn--primary" href={email ? `mailto:${email}` : undefined} onClick={() => trackEvent('email-click', { from: 'contact' })}>
             {t('sections.writeMe')}
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </a>
-          <a className="btn btn--ghost" href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" onClick={() => trackEvent('contact-github-profile')}>
+          <a className="btn btn--ghost" href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" onClick={() => trackEvent('github-profile', { from: 'contact' })}>
             <GithubGlyph /> GitHub
           </a>
-          <a className="btn btn--ghost" href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" onClick={() => trackEvent('contact-linkedin')}>
+          <a className="btn btn--ghost" href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" onClick={() => trackEvent('linkedin-open', { from: 'contact' })}>
             <LinkedinGlyph /> LinkedIn
           </a>
         </div>

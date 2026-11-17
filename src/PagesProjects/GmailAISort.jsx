@@ -24,7 +24,7 @@ export default function GmailAiSort() {
       imageAlt="Aperçu de GmailAiSort"
       techs={TECHS}
       actions={
-        <a href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/GmailAiSort' })}>
+        <a href="https://github.com/Hugo-Galley/GmailAiSort" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'GmailAiSort', link: 'repo' })}>
           <GithubButton />
         </a>
       }

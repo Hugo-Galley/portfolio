@@ -30,9 +30,10 @@ export default function Projects() {
       e.preventDefault();
       interacted.current = true;
       setActive(i);
+      trackEvent('project-expand', { project: titre, source: 'list' });
       return;
     }
-    trackEvent('project-click', { project: titre });
+    trackEvent('project-open', { project: titre, from: 'home' });
   };
 
   // a click on a project's point on the globe unfolds that project here
@@ -42,7 +43,7 @@ export default function Projects() {
       if (!Number.isInteger(i) || !PROJECTS[i]) return;
       interacted.current = true;
       setActive(i);
-      trackEvent('project-globe-pick', { project: PROJECTS[i].titre });
+      trackEvent('project-expand', { project: PROJECTS[i].titre, source: 'globe' });
     };
     window.addEventListener(PICK_EVENT, onPick);
     return () => window.removeEventListener(PICK_EVENT, onPick);
@@ -92,7 +93,7 @@ export default function Projects() {
                   tabIndex={-1}
                   className="project-shot"
                   aria-label={`${t('sections.viewProject')} ${p.titre}`}
-                  onClick={() => trackEvent('project-click', { project: p.titre })}
+                  onClick={() => trackEvent('project-open', { project: p.titre, from: 'home' })}
                 >
                   <img src={p.image} alt="" width="1200" height="660" loading="lazy" decoding="async" />
                 </Link>

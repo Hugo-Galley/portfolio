@@ -20,9 +20,9 @@ export default function Footer() {
             <span aria-hidden="true">/</span>
             <span className={language === 'en' ? 'is-on' : ''}>EN</span>
           </button>
-          {email && <a href={`mailto:${email}`} onClick={() => trackEvent('contact-email')}>{email}</a>}
-          <a href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" aria-label="GitHub" onClick={() => trackEvent('contact-github-profile')}><GithubGlyph /></a>
-          <a href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" aria-label="LinkedIn" onClick={() => trackEvent('contact-linkedin')}><LinkedinGlyph /></a>
+          {email && <a href={`mailto:${email}`} onClick={() => trackEvent('email-click', { from: 'footer' })}>{email}</a>}
+          <a href="https://github.com/Hugo-Galley" target="_blank" rel="noreferrer" aria-label="GitHub" onClick={() => trackEvent('github-profile', { from: 'footer' })}><GithubGlyph /></a>
+          <a href="https://www.linkedin.com/in/hugo-galley/" target="_blank" rel="noreferrer" aria-label="LinkedIn" onClick={() => trackEvent('linkedin-open', { from: 'footer' })}><LinkedinGlyph /></a>
         </nav>
       </div>
     </footer>

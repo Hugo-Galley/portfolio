@@ -29,10 +29,10 @@ export default function Numera() {
       note={t('github.demoNote')}
       actions={
         <>
-          <a href="https://demo-budget.galleyhugo.com" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('demo-click', { project: 'numera' })}>
+          <a href="https://demo-budget.galleyhugo.com" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'Numera', link: 'demo' })}>
             <DemoButton />
           </a>
-          <a href="https://github.com/Hugo-Galley/numera" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/numera' })}>
+          <a href="https://github.com/Hugo-Galley/numera" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'Numera', link: 'repo' })}>
             <GithubButton />
           </a>
         </>

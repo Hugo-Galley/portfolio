@@ -43,7 +43,7 @@ export default function CleanFeed() {
             target="_blank"
             rel="noreferrer"
             className='github-link'
-            onClick={() => trackEvent('store-click', { project: 'clean-feed', store: 'firefox' })}
+            onClick={() => trackEvent('project-link', { project: 'Clean Feed', link: 'firefox' })}
         >
             <span className="github-button"><BrowserIcon path={FIREFOX_PATH} />{t('projectPages.cleanFeed.firefox')}</span>
         </a>
@@ -56,7 +56,7 @@ export default function CleanFeed() {
             target="_blank"
             rel="noreferrer"
             className='github-link'
-            onClick={() => trackEvent('store-click', { project: 'clean-feed', store: 'chrome' })}
+            onClick={() => trackEvent('project-link', { project: 'Clean Feed', link: 'chrome' })}
         >
             <span className="github-button"><BrowserIcon path={CHROME_PATH} />{t('projectPages.cleanFeed.chrome')}</span>
         </a>
@@ -80,7 +80,7 @@ export default function CleanFeed() {
             actions={
                 <>
                     {firefoxFirst ? [firefoxButton, chromeButton] : [chromeButton, firefoxButton]}
-                    <a href={REPO_URL} target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('github-repo-click', { repo: 'Hugo-Galley/clean-feed' })}>
+                    <a href={REPO_URL} target="_blank" rel="noreferrer" className='github-link' onClick={() => trackEvent('project-link', { project: 'Clean Feed', link: 'repo' })}>
                         <GithubButton />
                     </a>
                 </>

@@ -6,7 +6,7 @@ import { GithubGlyph } from './Contact';
 const GITHUB_PROFILE = 'https://github.com/Hugo-Galley';
 const LEAFWIKI = { owner: 'perber', repo: 'leafwiki', url: 'https://github.com/perber/leafwiki' };
 
-const track = (target, url) => trackEvent('opensource-click', { target, url });
+const trackRepo = (repo) => trackEvent('opensource-repo', { repo });
 
 /* Open source: the LeafWiki contribution first, then a plain list of my own repositories */
 export default function OpenSourceShowcase() {
@@ -46,7 +46,7 @@ export default function OpenSourceShowcase() {
         <div>
           <p className="os-role">{t('openSource.leafwikiRole')}</p>
           <h3 className="os-repo">
-            <a href={LEAFWIKI.url} target="_blank" rel="noreferrer" onClick={() => track(LEAFWIKI.repo, LEAFWIKI.url)}>
+            <a href={LEAFWIKI.url} target="_blank" rel="noreferrer" onClick={() => trackRepo(`${LEAFWIKI.owner}/${LEAFWIKI.repo}`)}>
               <span className="os-owner">{LEAFWIKI.owner}/</span>{LEAFWIKI.repo}
             </a>
           </h3>
@@ -66,7 +66,7 @@ export default function OpenSourceShowcase() {
       <ul className="os-list">
         {projects.map((p) => (
           <li key={p.url}>
-            <a className="os-row" href={p.url} target="_blank" rel="noreferrer" onClick={() => track(p.repo, p.url)}>
+            <a className="os-row" href={p.url} target="_blank" rel="noreferrer" onClick={() => trackRepo(`Hugo-Galley/${p.repo}`)}>
               <span className="os-row-name"><span className="os-owner">Hugo-Galley/</span>{p.repo}</span>
               <span className="os-row-desc">{p.desc}</span>
               <span className="os-row-meta">{p.meta}</span>
@@ -87,7 +87,7 @@ export function GithubProfileLink() {
       target="_blank"
       rel="noreferrer"
       className="btn btn--ghost"
-      onClick={() => track('hugo-github-profile', GITHUB_PROFILE)}
+      onClick={() => trackEvent('github-profile', { from: 'opensource' })}
     >
       <GithubGlyph />
       {t('openSource.viewProfile')}

@@ -659,6 +659,11 @@ export default function GlobeScene({ project = null }) {
       drag.x = e.clientX;
       drag.y = e.clientY;
       drag.moved += Math.abs(dx) + Math.abs(dy);
+      // once per page view: does anyone actually play with the globe, and where?
+      if (!grabTracked && drag.moved > 6 && !galaxyOn) {
+        grabTracked = true;
+        trackEvent('globe-grab', { section: currentSection() });
+      }
       // a bigger globe turns less per pixel, so the surface follows the cursor
       const k = 0.0055 / Math.max(planet.scale.x, 0.6);
       spin += dx * k;
@@ -682,6 +687,15 @@ export default function GlobeScene({ project = null }) {
         if (d < bestD) { bestD = d; best = i; }
       });
       return best;
+    };
+    let grabTracked = false;
+    const currentSection = () => {
+      if (page === 'lost') return '404';
+      if (typeof page === 'number') return 'project';
+      const y = window.scrollY + (window.innerHeight || 800) * 0.5;
+      let id = 'Home';
+      anchors.forEach((a) => { if (a.y <= y) id = a.id; });
+      return id;
     };
     let pickDown = -1;
     let pickHover = -1;
@@ -740,6 +754,7 @@ export default function GlobeScene({ project = null }) {
     // the globe stays alive across pages: a route change only moves it and turns it
     const onPage = (e) => {
       page = e.detail ?? null;
+      grabTracked = false;
       if (typeof page === 'number') onProject({ detail: page });
       measure();
       computeTarget();
