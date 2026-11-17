@@ -189,14 +189,14 @@ a.surface:hover { transform: translateY(-3px); }
   padding: 0 1.6rem 0 1.1rem;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: rgba(14, 11, 24, 0.82);
+  background: rgba(14, 14, 17, 0.86);
   font-weight: 500;
   font-size: 1.05rem;
   color: var(--text-color);
   white-space: nowrap;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
-.stack-chip:hover { border-color: var(--line-strong); background: rgba(24, 19, 38, 0.9); }
+.stack-chip:hover { border-color: var(--line-strong); background: rgba(24, 24, 28, 0.92); }
 .stack-chip img { width: 34px; height: 34px; object-fit: contain; }
 [data-theme="dark"] .stack-chip img.is-linux,
 :root:not([data-theme="light"]) .stack-chip img.is-linux { filter: invert(1); }
@@ -373,12 +373,12 @@ a.surface:hover { transform: translateY(-3px); }
   align-items: center;
   gap: 1.1rem;
   /* solid, like the stack chips: the globe must not glow through it */
-  background: rgb(12, 10, 20);
+  background: rgb(13, 13, 15);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
 }
-.contact-panel:hover { background: rgb(12, 10, 20); border-color: var(--line); }
+.contact-panel:hover { background: rgb(13, 13, 15); border-color: var(--line); }
 .contact-text { margin: 0; color: var(--text-secondary); font-size: 1.05rem; }
 .contact-email {
   display: flex;
@@ -394,14 +394,14 @@ a.surface:hover { transform: translateY(-3px); }
   cursor: copy;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
-.contact-email:hover { border-color: rgba(236, 72, 153, 0.6); background: rgba(236, 72, 153, 0.05); }
+.contact-email:hover { border-color: var(--text-secondary); background: rgba(255, 255, 255, 0.03); }
 .contact-email-addr {
   font-family: var(--font-mono);
   font-size: clamp(1rem, 2.6vw, 1.3rem);
   letter-spacing: -0.01em;
 }
 .contact-email-hint { font-size: 0.75rem; color: var(--text-secondary); }
-.contact-email-hint.is-copied { color: #86efac; }
+.contact-email-hint.is-copied { color: #b8cdbd; }
 .contact-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
 
 /* ═════════ Responsive ═════════ */
