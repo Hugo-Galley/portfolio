@@ -1,6 +1,5 @@
 import { trackEvent } from '../hooks/useUmami';
 import '../Styles/Hero.css'
-import FluidText from './FluidText';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
@@ -10,16 +9,14 @@ export default function Hero() {
     <div className='herroBanner'>
       <div className='herro'>
         <div className='herro-description'>
-          <FluidText as="h1" className="hero-title">
+          <h1 className="hero-title">
             <span className="hero-greeting">{t('hero.hello')}</span><br/>
             <span className="gradient-text">
               {t('hero.iAm')}
             </span>
-          </FluidText>
-          
-          <FluidText as="p" className="hero-subtitle">
-            {t('hero.subtitle')}
-          </FluidText>
+          </h1>
+
+          <p className="hero-subtitle">{t('hero.subtitle')}</p>
 
           <div className='hero-actions'>
             <a className='btn btn--primary btn--lg hero-cv' href="https://cvdesignr.com/p/635c197aeaa16?hl=fr_FR" target='_blank' rel='noreferrer' onClick={() => trackEvent('cv-open')}>

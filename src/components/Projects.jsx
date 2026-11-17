@@ -10,7 +10,7 @@ const focusGlobe = (index) => window.dispatchEvent(new CustomEvent(PROJECT_EVENT
  * Projects: an editorial list on the left, the globe on the right.
  * Each project is a named point on the globe. A first click on a project unfolds its
  * preview (and turns the globe towards it), a second click opens its page.
- * Until the visitor clicks, the list walks through the projects on its own.
+ * On desktop the scroll unfolds them one by one (the section is pinned meanwhile).
  */
 export default function Projects() {
   const { t } = useLanguage();
@@ -21,14 +21,15 @@ export default function Projects() {
     focusGlobe(active);
   }, [active]);
 
-  const hovering = useRef(false);
-  const interacted = useRef(false);
+  // scroll-driven unfolding: where the scroll is (target) and what is unfolded (shown)
+  const target = useRef(-1);
+  const shown = useRef(-1);
 
   const onRowClick = (e, i, titre) => {
     if (i !== active) {
       // first click: unfold this project instead of leaving the page
       e.preventDefault();
-      interacted.current = true;
+      shown.current = i;
       setActive(i);
       trackEvent('project-expand', { project: titre, source: 'list' });
       return;
@@ -41,7 +42,7 @@ export default function Projects() {
     const onPick = (e) => {
       const i = Number(e.detail);
       if (!Number.isInteger(i) || !PROJECTS[i]) return;
-      interacted.current = true;
+      shown.current = i;
       setActive(i);
       trackEvent('project-expand', { project: PROJECTS[i].titre, source: 'globe' });
     };
@@ -49,30 +50,56 @@ export default function Projects() {
     return () => window.removeEventListener(PICK_EVENT, onPick);
   }, []);
 
-  // While the section is on screen, nobody points at it and nothing was clicked yet,
-  // walk through the projects
+  // Desktop: the section is pinned and the scroll unfolds the projects one by one.
+  // A click still unfolds any project; the next step of scroll takes over again.
   useEffect(() => {
-    let visible = false;
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.3 });
-    io.observe(ref.current);
-    const id = setInterval(() => {
-      if (visible && !hovering.current && !interacted.current && !document.hidden) {
-        setActive((i) => (i + 1) % PROJECTS.length);
+    const mq = window.matchMedia('(min-width: 769px)');
+    const box = ref.current && ref.current.closest('.projects-scroll');
+    if (!box) return undefined;
+    let raf = null;
+    let timer = null;
+    // a fast scroll can jump several steps at once: unfold the projects in between one
+    // after the other anyway, so none is skipped
+    const advance = () => {
+      timer = null;
+      if (shown.current === target.current) return;
+      shown.current += Math.sign(target.current - shown.current);
+      setActive(shown.current);
+      timer = setTimeout(advance, 350);
+    };
+    const update = () => {
+      raf = null;
+      if (!mq.matches) return;
+      const r = box.getBoundingClientRect();
+      const span = r.height - window.innerHeight;
+      if (span <= 0) return;
+      const p = Math.min(1, Math.max(0, -r.top / span));
+      const step = Math.min(PROJECTS.length - 1, Math.floor(p * PROJECTS.length));
+      if (step === target.current) return;
+      target.current = step;
+      if (shown.current < 0) {
+        // first measure (page load, coming back from a project): no walk-through
+        shown.current = step;
+        setActive(step);
+      } else if (!timer) {
+        advance();
       }
-    }, 5000);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     return () => {
-      io.disconnect();
-      clearInterval(id);
+      if (raf) cancelAnimationFrame(raf);
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
   }, []);
 
   return (
     <div className="projects container" ref={ref}>
-      <ol
-        className="projects-list"
-        onPointerEnter={() => { hovering.current = true; }}
-        onPointerLeave={() => { hovering.current = false; }}
-      >
+      <ol className="projects-list">
         {PROJECTS.map((p, i) => (
           <li key={p.lien} className={`project-row${i === active ? ' is-active' : ''}`}>
             <Link

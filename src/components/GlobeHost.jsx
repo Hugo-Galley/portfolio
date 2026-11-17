@@ -25,9 +25,13 @@ function useIsDesktop() {
 export default function GlobeHost() {
   const { pathname } = useLocation();
   const isDesktop = useIsDesktop();
+  // mounted only after hydration: the pre-rendered HTML never contains the globe, so the
+  // first client render (nothing) matches it (React error #418 otherwise)
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(!navigator.webdriver); }, []);
   const home = pathname === '/' || pathname === '/index.html';
   const index = projectIndex(pathname);
-  if (!isDesktop) return null;
+  if (!mounted || !isDesktop) return null;
   const page = home ? null : index >= 0 ? index : 'lost';
   return (
     <Suspense fallback={null}>

@@ -11,6 +11,7 @@ import Contact from './Contact';
 import Footer from './Footer';
 import SectionHead from './SectionHead';
 import useReveal from '../hooks/useReveal';
+import PROJECTS from '../data/projects';
 import '../Styles/Home.css';
 
 export default function HomePage() {
@@ -59,9 +60,14 @@ export default function HomePage() {
           <OpenSourceShowcase />
         </section>
 
-        <section className="home-section">
-          <SectionHead id="Projects" title={t('sections.projectsTitle')} muted={t('sections.projectsMuted')} />
-          <Projects />
+        {/* desktop: the section stays pinned while the scroll unfolds the projects one by one */}
+        <section className="home-section home-section--projects" aria-labelledby="Projects">
+          <div className="projects-scroll" style={{ '--steps': PROJECTS.length }}>
+            <div className="projects-sticky">
+              <SectionHead id="Projects" title={t('sections.projectsTitle')} muted={t('sections.projectsMuted')} />
+              <Projects />
+            </div>
+          </div>
         </section>
 
         <section className="home-section home-section--full home-section--contact">

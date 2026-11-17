@@ -12,8 +12,8 @@ export const useLanguage = () => {
   return context;
 };
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(() => {
+// Language the visitor most likely wants: ?lang=, then saved choice, browser, timezone
+function detectLanguage() {
     // 1. Check URL query param (e.g. ?lang=fr or ?lang=en)
     if (typeof window !== 'undefined' && window.location.search) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -49,7 +49,22 @@ export const LanguageProvider = ({ children }) => {
     }
 
     return 'en';
-  });
+}
+
+// When the page was pre-rendered, the first render must reproduce its HTML exactly (React
+// hydration, error #418 otherwise): start in the language it was rendered in, then switch.
+const HYDRATING = typeof document !== 'undefined' && !!document.getElementById('root')?.hasChildNodes();
+
+export const LanguageProvider = ({ children }) => {
+  const [language, setLanguage] = useState(() => (
+    HYDRATING ? (document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'fr') : detectLanguage()
+  ));
+
+  useEffect(() => {
+    if (!HYDRATING) return;
+    const wanted = detectLanguage();
+    setLanguage((current) => (current === wanted ? current : wanted));
+  }, []);
 
   useEffect(() => {
     // Sync with URL query parameter if present

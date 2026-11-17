@@ -9,7 +9,7 @@
   width: 100% !important;
   height: 100% !important;
   display: block;
-  animation: globe-in 1.8s ease both;
+  animation: globe-in 2.4s ease both;
 }
 @keyframes globe-in { from { opacity: 0; } }
 /* the globe can be grabbed and spun */

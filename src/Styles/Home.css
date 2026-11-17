@@ -444,3 +444,23 @@ a.surface:hover { transform: translateY(-3px); }
   .contact-panel { padding: 1.6rem 1.25rem; }
 }
 
+
+/* ═════════ Projects, desktop: pinned while the scroll unfolds them one by one ═════════ */
+@media (min-width: 769px) {
+  .home-section.home-section--projects { padding-top: 0; }
+  .projects-scroll { height: calc(100vh + var(--steps, 7) * 55vh); }
+  .projects-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 0;
+    box-sizing: border-box;
+  }
+  .projects-sticky .projects { margin-top: 2rem; }
+  /* the unfolded preview shrinks on short screens so the whole list stays on screen */
+  .projects-sticky .project-link { padding-top: 0.85rem; padding-bottom: 0.85rem; }
+  .projects-sticky .project-shot { width: min(calc(100% - 3.4rem), calc((100vh - 690px) * 1.82)); min-width: 220px; margin-bottom: 1rem; }
+}

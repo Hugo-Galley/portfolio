@@ -561,6 +561,16 @@ export default function GlobeScene({ project = null }) {
         }
         return { id, y: el.getBoundingClientRect().top + window.scrollY + vh * 0.3 };
       }).filter(Boolean);
+      // the pinned Projects section: hold the "Projects" position for its whole scroll
+      const box = page == null && document.querySelector('.projects-scroll');
+      const pi = anchors.findIndex((a) => a.id === 'Projects');
+      if (box && pi >= 0) {
+        const r = box.getBoundingClientRect();
+        const top = r.top + window.scrollY;
+        const start = top + vh * 0.5;
+        const end = top + r.height - vh * 0.5;
+        if (end > start) anchors.splice(pi, 1, { id: 'Projects', y: start }, { id: 'Projects', y: end });
+      }
     };
     const stateFor = (id) => {
       const s = table()[id];
@@ -783,13 +793,18 @@ export default function GlobeScene({ project = null }) {
     let elapsed = 0;
     let spin = 0;
     const timeScale = reduceMotion ? 0.2 : 1;
-    const ease = reduceMotion ? 1 : 0.055;
+    // how fast the globe catches up with its target, per second (frame-rate independent)
+    const FOLLOW = 2.0;
+    const TURN = 2.4;
 
     const tick = () => {
       const dt = Math.min(clock.getDelta(), 0.05);
       elapsed += dt * timeScale;
-      intro = Math.min(intro + dt * 0.5, 1);
-      const introEase = 1 - Math.pow(1 - intro, 4);
+      // gentle entrance: ease in and out over ~3 s instead of shooting in
+      intro = Math.min(intro + dt * 0.33, 1);
+      const introEase = intro < 0.5 ? 4 * intro * intro * intro : 1 - Math.pow(-2 * intro + 2, 3) / 2;
+      const ease = reduceMotion ? 1 : 1 - Math.exp(-FOLLOW * dt);
+      const turn = reduceMotion ? 1 : 1 - Math.exp(-TURN * dt);
 
       const sy = window.scrollY;
       velocity += ((sy - lastScroll) - velocity) * 0.1;
@@ -815,8 +830,8 @@ export default function GlobeScene({ project = null }) {
         camera.lookAt(0, 0, 0);
       }
 
-      planet.position.set(cur.x, cur.y - (1 - introEase) * 0.6, 0);
-      planet.scale.setScalar(cur.s * (0.6 + 0.4 * introEase));
+      planet.position.set(cur.x, cur.y - (1 - introEase) * 0.35, 0);
+      planet.scale.setScalar(cur.s * (0.82 + 0.18 * introEase));
       planet.rotation.z = -velocity * 0.002;
 
       // free spin, sped up by scrolling; in "Projects" the globe turns to the active project
@@ -837,9 +852,9 @@ export default function GlobeScene({ project = null }) {
       // on the projects, the globe comes back to the active project once the throw has slowed
       const settle = drag.on ? 0 : 1 - Math.min(Math.abs(drag.vx) * 25, 1);
       spin += dt * timeScale * (0.07 + Math.min(Math.abs(velocity) * 0.01, 0.8)) * (1 - pw)
-        + (nearestYaw - spin) * 0.06 * pw * settle;
+        + (nearestYaw - spin) * turn * pw * settle;
       globe.rotation.y = spin + pointer.x * 0.15 * (1 - pw);
-      focusLat += (ap.lat - focusLat) * 0.06;
+      focusLat += (ap.lat - focusLat) * turn;
       planet.rotation.x = cur.tilt + (focusLat - cur.tilt) * pw + userTilt;
 
       const p = pointer.active ? cursorOnGlobe() : null;

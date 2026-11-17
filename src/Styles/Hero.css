@@ -94,12 +94,7 @@
   font-family: var(--font-body);
   font-weight: 800;
   letter-spacing: -0.015em;
-}
-/* FluidText splits the name into characters: each one gets its slice of the gradient */
-.gradient-text [data-fluid-char] {
   background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f43f5e 100%);
-  background-size: calc(var(--total-chars, 1) * 100%) 100%;
-  background-position: calc(var(--char-index, 0) * (100% / max(1, var(--total-chars, 1) - 1))) 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
