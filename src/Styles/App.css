@@ -8,12 +8,12 @@
 
   /* Colours (dark is the only active theme for now, see ThemeContext.js) */
   --bg-color: #000000;
-  --text-color: #eef0f5;
-  --text-secondary: #a8aab4;
+  --text-color: #eff2f8;
+  --text-secondary: #abadb8;
   /* softened palette: the original violet / rose, halfway towards grey */
-  --accent-color: #d6c0c1;
-  --blur-bg-1: rgba(148, 113, 195, 0.21);
-  --blur-bg-2: rgba(191, 116, 152, 0.19);
+  --accent-color: #ddc0be;
+  --blur-bg-1: rgba(153, 106, 208, 0.23);
+  --blur-bg-2: rgba(202, 105, 152, 0.22);
 
   /* Surfaces shared by every card */
   --surface: rgba(255, 255, 255, 0.025);
@@ -67,8 +67,8 @@ a {
   transition: color 0.3s ease;
 }
 img { max-width: 100%; }
-::selection { background: rgba(205, 144, 185, 0.31); color: #fff; }
-:focus-visible { outline: 2px solid rgba(228, 181, 213, 0.87); outline-offset: 3px; border-radius: 6px; }
+::selection { background: rgba(213, 126, 177, 0.32); color: #fff; }
+:focus-visible { outline: 2px solid rgba(232, 164, 205, 0.88); outline-offset: 3px; border-radius: 6px; }
 
 /* ── Accessibility ── */
 .skip-link {
