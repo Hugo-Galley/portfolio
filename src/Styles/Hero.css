@@ -86,7 +86,7 @@
   font-size: 1.05em;
   letter-spacing: 0.01em;
   color: var(--accent-color);
-  text-shadow: 0 2px 10px rgba(242, 193, 182, 0.12);
+  text-shadow: 0 2px 10px rgba(242, 193, 182, 0.08);
 }
 .gradient-text {
   display: inline-block;
@@ -96,14 +96,14 @@
 }
 /* FluidText splits the name into characters: each one gets its slice of the gradient */
 .gradient-text [data-fluid-char] {
-  background: linear-gradient(135deg, #ae81e0 0%, #db80ad 50%, #e4818b 100%);
+  background: linear-gradient(135deg, #b090d8 0%, #d692b4 50%, #df979a 100%);
   background-size: calc(var(--total-chars, 1) * 100%) 100%;
   background-position: calc(var(--char-index, 0) * (100% / max(1, var(--total-chars, 1) - 1))) 0;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  filter: drop-shadow(0 4px 18px rgba(159, 112, 211, 0.24));
+  filter: drop-shadow(0 4px 18px rgba(156, 121, 199, 0.22));
 }
 
 .hero-subtitle {
