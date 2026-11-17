@@ -12,6 +12,9 @@
   animation: globe-in 1.8s ease both;
 }
 @keyframes globe-in { from { opacity: 0; } }
+/* the globe can be grabbed and spun */
+html.globe-grab, html.globe-grab body { cursor: grab; }
+html.globe-dragging, html.globe-dragging * { cursor: grabbing !important; user-select: none; -webkit-user-select: none; }
 
 /* ───────── Section heads ───────── */
 .section-head {

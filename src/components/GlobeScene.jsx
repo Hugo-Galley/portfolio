@@ -552,12 +552,12 @@ export default function GlobeScene({ project = null }) {
       pointer.active = !(e.target instanceof Element && e.target.closest(BLOCKERS));
     };
     const onLeave = () => { pointer.active = false; };
-    const onDown = (e) => {
-      if (e.target instanceof Element && e.target.closest(BLOCKERS)) return;
-      onMove(e);
-      const p = cursorOnGlobe();
-      if (!p) return;
-      const from = p.clone().normalize();
+    /* grab the globe to spin it (with inertia); a simple click sends packets from there */
+    const root = document.documentElement;
+    const drag = { on: false, x: 0, y: 0, moved: 0, from: null, vx: 0, vy: 0 };
+    let userTilt = 0;
+    let grabbable = false;
+    const sendFrom = (from) => {
       for (let i = 0; i < 2; i++) {
         const old = routes.shift();
         if (old) disposeRoute(old);
@@ -565,6 +565,41 @@ export default function GlobeScene({ project = null }) {
         r.head = 0;
         r.dir = 1;
         routes.push(r);
+      }
+    };
+    const onDown = (e) => {
+      if (e.button !== 0) return;
+      if (e.target instanceof Element && e.target.closest(BLOCKERS)) return;
+      onMove(e);
+      const p = cursorOnGlobe();
+      if (!p) return;
+      Object.assign(drag, { on: true, x: e.clientX, y: e.clientY, moved: 0, from: p.clone().normalize(), vx: 0, vy: 0 });
+      root.classList.add('globe-dragging');
+      const sel = window.getSelection && window.getSelection();
+      if (sel) sel.removeAllRanges();
+    };
+    const onDrag = (e) => {
+      if (!drag.on) return;
+      const dx = e.clientX - drag.x;
+      const dy = e.clientY - drag.y;
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+      drag.moved += Math.abs(dx) + Math.abs(dy);
+      // a bigger globe turns less per pixel, so the surface follows the cursor
+      const k = 0.0055 / Math.max(planet.scale.x, 0.6);
+      spin += dx * k;
+      userTilt = Math.max(-0.9, Math.min(0.9, userTilt + dy * k));
+      drag.vx += (dx * k - drag.vx) * 0.5;
+      drag.vy += (dy * k - drag.vy) * 0.5;
+    };
+    const onUp = () => {
+      if (!drag.on) return;
+      drag.on = false;
+      root.classList.remove('globe-dragging');
+      if (drag.moved < 6) {
+        drag.vx = 0;
+        drag.vy = 0;
+        sendFrom(drag.from);
       }
     };
     const onProject = (e) => {
@@ -598,6 +633,10 @@ export default function GlobeScene({ project = null }) {
     window.addEventListener('pointermove', onMove, { passive: true });
     document.addEventListener('pointerleave', onLeave);
     window.addEventListener('pointerdown', onDown, { passive: true });
+    window.addEventListener('pointermove', onDrag, { passive: true });
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    window.addEventListener('blur', onUp);
 
     /* ── Loop ── */
     const labelVec = new THREE.Vector3();
@@ -641,13 +680,27 @@ export default function GlobeScene({ project = null }) {
       const camAngle = Math.atan2(planet.position.x - camera.position.x, camera.position.z - planet.position.z);
       const focusYaw = -ap.lon - camAngle - 0.45;
       const nearestYaw = focusYaw + Math.PI * 2 * Math.round((spin - focusYaw) / (Math.PI * 2));
+      // after a throw the globe keeps turning, slows down, and slowly levels out again
+      if (!drag.on) {
+        spin += drag.vx;
+        userTilt += drag.vy;
+        drag.vx *= 0.95;
+        drag.vy *= 0.9;
+        userTilt = Math.max(-0.9, Math.min(0.9, userTilt * 0.985));
+      }
+      // on the projects, the globe comes back to the active project once the throw has slowed
+      const settle = drag.on ? 0 : 1 - Math.min(Math.abs(drag.vx) * 25, 1);
       spin += dt * timeScale * (0.07 + Math.min(Math.abs(velocity) * 0.01, 0.8)) * (1 - pw)
-        + (nearestYaw - spin) * 0.06 * pw;
+        + (nearestYaw - spin) * 0.06 * pw * settle;
       globe.rotation.y = spin + pointer.x * 0.15 * (1 - pw);
       focusLat += (ap.lat - focusLat) * 0.06;
-      planet.rotation.x = cur.tilt + (focusLat - cur.tilt) * pw;
+      planet.rotation.x = cur.tilt + (focusLat - cur.tilt) * pw + userTilt;
 
       const p = pointer.active ? cursorOnGlobe() : null;
+      if (!!p !== grabbable) {
+        grabbable = !!p;
+        root.classList.toggle('globe-grab', grabbable);
+      }
       dotUniforms.uCursor.value.lerp(p || new THREE.Vector3(0, 0, 100), p ? 0.25 : 1);
 
       // routes fade in, carry packets back and forth, then hand over to a new pair of cities
@@ -729,6 +782,11 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointermove', onDrag);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      window.removeEventListener('blur', onUp);
+      root.classList.remove('globe-dragging', 'globe-grab');
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVis);
       scene.traverse((o) => {
