@@ -100,8 +100,8 @@ void main(){
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
   float edge = smoothstep(0.0, 0.55, vFacing);   // fade towards the limb
-  vec3 base = mix(vec3(0.8, 0.79, 0.86), vec3(0.32, 0.22, 0.55), uLight);
-  vec3 hot = vec3(0.86, 0.78, 0.84);
+  vec3 base = mix(vec3(0.79, 0.765, 0.93), vec3(0.32, 0.22, 0.55), uLight);
+  vec3 hot = vec3(0.93, 0.62, 0.81);
   vec3 col = mix(base, hot, vGlow);
   float a = (0.45 + 0.55 * edge) * (0.8 + vGlow * 0.2);
   gl_FragColor = vec4(col, a);
@@ -128,8 +128,8 @@ void main(){
   float f = 1.0 - abs(dot(vN, vV));
   float glow = pow(f, 3.2) * 1.4;
   // violet on top, pink/orange toward the sides
-  vec3 col = mix(vec3(0.5, 0.47, 0.66), vec3(0.66, 0.54, 0.6), smoothstep(0.2, 0.9, abs(vN.x)));
-  col = mix(col, vec3(0.5, 0.57, 0.7), smoothstep(0.3, 1.0, vN.y) * 0.5);
+  vec3 col = mix(vec3(0.525, 0.41, 0.83), vec3(0.83, 0.47, 0.6), smoothstep(0.2, 0.9, abs(vN.x)));
+  col = mix(col, vec3(0.44, 0.585, 0.85), smoothstep(0.3, 1.0, vN.y) * 0.5);
   float a = glow * (0.9 + uBoost * 0.6) * mix(1.0, 0.6, uLight);
   gl_FragColor = vec4(col * a, a);
 }
@@ -157,7 +157,7 @@ void main(){
   float packet = exp(-d * d / 0.0016) * live;
   float tail = d < 0.0 ? exp(d / 0.1) * 0.6 * live : 0.0;
   float a = (0.32 + packet * 1.5 + tail) * ends * uLife;
-  vec3 route = mix(vec3(0.64, 0.62, 0.76), vec3(0.8, 0.7, 0.76), vT);
+  vec3 route = mix(vec3(0.62, 0.535, 0.88), vec3(0.875, 0.6, 0.78), vT);
   vec3 col = route * (0.75 + packet) + vec3(1.0) * packet * 0.6;
   gl_FragColor = vec4(col, a * mix(1.0, 0.9, uLight));
 }
@@ -192,7 +192,7 @@ varying float vAlpha;
 void main(){
   float d = length(gl_PointCoord - 0.5);
   float a = smoothstep(0.5, 0.15, d);
-  vec3 c = mix(vec3(0.88, 0.88, 0.92), vec3(0.35, 0.25, 0.55), uLight);
+  vec3 c = mix(vec3(0.89, 0.88, 0.96), vec3(0.35, 0.25, 0.55), uLight);
   gl_FragColor = vec4(c, a * vAlpha * mix(0.75, 0.5, uLight));
 }
 `;
@@ -314,7 +314,7 @@ export default function GlobeScene({ project = null }) {
     }));
     globe.add(dots);
 
-    const coreMat = new THREE.MeshBasicMaterial({ color: isLight() ? 0xffffff : 0x060607 });
+    const coreMat = new THREE.MeshBasicMaterial({ color: isLight() ? 0xffffff : 0x050407 });
     globe.add(new THREE.Mesh(new THREE.SphereGeometry(R * 0.985, 64, 64), coreMat));
 
     const atmoUniforms = { uLight: light, uBoost: { value: 0 } };
@@ -336,8 +336,8 @@ export default function GlobeScene({ project = null }) {
       const g = c.getContext('2d');
       const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
       grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.25, 'rgba(224,210,218,0.9)');
-      grad.addColorStop(1, 'rgba(224,210,218,0)');
+      grad.addColorStop(0.25, 'rgba(236,189,215,0.9)');
+      grad.addColorStop(1, 'rgba(236,189,215,0)');
       g.fillStyle = grad;
       g.fillRect(0, 0, 64, 64);
       return new THREE.CanvasTexture(c);
@@ -448,7 +448,7 @@ export default function GlobeScene({ project = null }) {
     /* ── Theme ── */
     const themeObserver = new MutationObserver(() => {
       light.value = isLight() ? 1 : 0;
-      coreMat.color.set(light.value ? 0xffffff : 0x060607);
+      coreMat.color.set(light.value ? 0xffffff : 0x050407);
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
