@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import PROJECTS, { PROJECT_EVENT, PAGE_EVENT } from '../data/projects';
+import { trackEvent } from '../hooks/useUmami';
+import createGalaxy from './galaxy';
 
 /*
  * Globe scene (three.js, no framework): "code is meant to be shared".
@@ -188,12 +190,13 @@ void main(){
 
 const STARS_FRAG = /* glsl */ `
 uniform float uLight;
+uniform float uFade;
 varying float vAlpha;
 void main(){
   float d = length(gl_PointCoord - 0.5);
   float a = smoothstep(0.5, 0.15, d);
   vec3 c = mix(vec3(0.89, 0.88, 0.96), vec3(0.35, 0.25, 0.55), uLight);
-  gl_FragColor = vec4(c, a * vAlpha * mix(0.75, 0.5, uLight));
+  gl_FragColor = vec4(c, a * vAlpha * mix(0.75, 0.5, uLight) * uFade);
 }
 `;
 
@@ -273,7 +276,7 @@ export default function GlobeScene({ project = null }) {
     mount.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 420);
     camera.position.set(0, 0, 7);
 
     const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
@@ -440,10 +443,78 @@ export default function GlobeScene({ project = null }) {
     sGeo.setAttribute('aSize', new THREE.BufferAttribute(sSize, 1));
     const stars = new THREE.Points(sGeo, new THREE.ShaderMaterial({
       vertexShader: STARS_VERT, fragmentShader: STARS_FRAG,
-      uniforms: { uTime: time, uPixelRatio: pixelRatio, uScroll: scroll, uLight: light },
+      uniforms: { uTime: time, uPixelRatio: pixelRatio, uScroll: scroll, uLight: light, uFade: { value: 1 } },
       transparent: true, depthWrite: false,
     }));
     scene.add(stars);
+
+    /* ── Easter egg: 8 clicks on the Earth in the hero, and you are lost in the galaxy ── */
+    const galaxy = createGalaxy(pixelRatio, isSmall);
+    scene.add(galaxy.root);
+    const GALAXY_STATE = { x: 0, y: 0, s: 0.45, tilt: 0.25, arcs: 1.6, proj: 0 };
+    let galaxyOn = false;
+    let galaxyT = 0;
+    let uniYaw = 0;
+    let uniPitch = 0.12;
+    let eggClicks = [];
+    let eggLayer = null;
+    const EGG_TEXT = {
+      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis rentre quand tu veux.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
+      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then head home whenever you like.', back: 'Back to Earth', here: 'You are here' },
+    };
+    const leaveGalaxy = () => {
+      if (!galaxyOn) return;
+      galaxyOn = false;
+      document.documentElement.classList.remove('galaxy-mode');
+      if (eggLayer) eggLayer.classList.remove('is-on');
+    };
+    const enterGalaxy = () => {
+      if (galaxyOn) return;
+      galaxyOn = true;
+      eggClicks = [];
+      const L = EGG_TEXT[document.documentElement.lang === 'en' ? 'en' : 'fr'];
+      if (!eggLayer) {
+        eggLayer = document.createElement('div');
+        eggLayer.className = 'galaxy-egg';
+        eggLayer.setAttribute('role', 'dialog');
+        eggLayer.setAttribute('aria-live', 'polite');
+        document.body.appendChild(eggLayer);
+      }
+      eggLayer.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'galaxy-egg-card';
+      const kicker = document.createElement('p');
+      kicker.className = 'galaxy-egg-kicker';
+      kicker.textContent = L.kicker;
+      const title = document.createElement('p');
+      title.className = 'galaxy-egg-title';
+      title.append(`${L.title} `);
+      const muted = document.createElement('span');
+      muted.className = 'section-muted';
+      muted.textContent = L.muted;
+      title.append(muted);
+      const text = document.createElement('p');
+      text.className = 'galaxy-egg-text';
+      text.textContent = L.text;
+      const back = document.createElement('button');
+      back.type = 'button';
+      back.className = 'btn btn--primary btn--lg';
+      back.textContent = L.back;
+      back.addEventListener('click', leaveGalaxy);
+      card.append(kicker, title, text, back);
+      const here = document.createElement('span');
+      here.className = 'galaxy-here';
+      here.textContent = L.here;
+      eggLayer.append(here, card);
+      document.documentElement.classList.add('galaxy-mode');
+      requestAnimationFrame(() => {
+        eggLayer.classList.add('is-on');
+        back.focus({ preventScroll: true });
+      });
+      trackEvent('easter-egg-galaxy');
+    };
+    const onKey = (e) => { if (e.key === 'Escape') leaveGalaxy(); };
+    window.addEventListener('keydown', onKey);
 
     /* ── Theme ── */
     const themeObserver = new MutationObserver(() => {
@@ -545,7 +616,7 @@ export default function GlobeScene({ project = null }) {
       return local.copy(hit).applyMatrix4(inv);
     };
 
-    const BLOCKERS = 'a, button, input, textarea, .bento-card, .Card, .os-card, .language-box, nav, footer';
+    const BLOCKERS = 'a, button, input, textarea, .bento-card, .Card, .os-card, .language-box, nav, footer, .galaxy-egg-card';
     const onMove = (e) => {
       pointer.tx = (e.clientX / window.innerWidth) * 2 - 1;
       pointer.ty = -((e.clientY / window.innerHeight) * 2 - 1);
@@ -572,8 +643,9 @@ export default function GlobeScene({ project = null }) {
       if (e.target instanceof Element && e.target.closest(BLOCKERS)) return;
       onMove(e);
       const p = cursorOnGlobe();
-      if (!p) return;
-      Object.assign(drag, { on: true, x: e.clientX, y: e.clientY, moved: 0, from: p.clone().normalize(), vx: 0, vy: 0 });
+      // in the galaxy, the whole universe can be grabbed
+      if (!p && !galaxyOn) return;
+      Object.assign(drag, { on: true, x: e.clientX, y: e.clientY, moved: 0, from: p ? p.clone().normalize() : null, vx: 0, vy: 0 });
       root.classList.add('globe-dragging');
       const sel = window.getSelection && window.getSelection();
       if (sel) sel.removeAllRanges();
@@ -591,6 +663,10 @@ export default function GlobeScene({ project = null }) {
       userTilt = Math.max(-0.9, Math.min(0.9, userTilt + dy * k));
       drag.vx += (dx * k - drag.vx) * 0.5;
       drag.vy += (dy * k - drag.vy) * 0.5;
+      if (galaxyOn) {
+        uniYaw += dx * 0.004;
+        uniPitch = Math.max(-0.7, Math.min(0.9, uniPitch + dy * 0.003));
+      }
     };
     const onUp = () => {
       if (!drag.on) return;
@@ -599,7 +675,14 @@ export default function GlobeScene({ project = null }) {
       if (drag.moved < 6) {
         drag.vx = 0;
         drag.vy = 0;
-        sendFrom(drag.from);
+        if (drag.from) sendFrom(drag.from);
+        // 8 clicks on the Earth in the hero, within a few seconds
+        if (drag.from && !galaxyOn && page == null && window.scrollY < window.innerHeight * 0.5) {
+          const now = performance.now();
+          eggClicks = eggClicks.filter((t) => now - t < 5000);
+          eggClicks.push(now);
+          if (eggClicks.length >= 8) enterGalaxy();
+        }
       }
     };
     const onProject = (e) => {
@@ -640,6 +723,8 @@ export default function GlobeScene({ project = null }) {
 
     /* ── Loop ── */
     const labelVec = new THREE.Vector3();
+    const lookVec = new THREE.Vector3();
+    const hereVec = new THREE.Vector3();
     const normalVec = new THREE.Vector3();
     const camVec = new THREE.Vector3();
     const clock = new THREE.Clock();
@@ -663,11 +748,22 @@ export default function GlobeScene({ project = null }) {
 
       pointer.x += (pointer.tx - pointer.x) * 0.05;
       pointer.y += (pointer.ty - pointer.y) * 0.05;
-      KEYS.forEach((k) => { cur[k] += (target[k] - cur[k]) * ease; });
+      KEYS.forEach((k) => { cur[k] += ((galaxyOn ? GALAXY_STATE[k] : target[k]) - cur[k]) * ease; });
+      galaxyT += ((galaxyOn ? 1 : 0) - galaxyT) * (reduceMotion ? 1 : 0.025);
+      const gz = smooth(Math.min(1, Math.max(0, galaxyT)));
 
-      camera.position.x = pointer.x * 0.35;
-      camera.position.y = pointer.y * 0.2;
-      camera.lookAt(0, 0, 0);
+      // easter egg: the camera backs out of the Earth, through the arm, then rises above the galaxy
+      const rise = gz * gz;
+      camera.position.x = pointer.x * (0.35 + gz * 4);
+      camera.position.y = pointer.y * (0.2 + gz * 3) + rise * 92;
+      camera.position.z = 7 + gz * 40;
+      if (gz > 0.001) {
+        // look towards the galaxy's centre, so the Earth ends up off to one side
+        galaxy.disc.getWorldPosition(lookVec);
+        camera.lookAt(lookVec.multiplyScalar(rise * 0.55));
+      } else {
+        camera.lookAt(0, 0, 0);
+      }
 
       planet.position.set(cur.x, cur.y - (1 - introEase) * 0.6, 0);
       planet.scale.setScalar(cur.s * (0.6 + 0.4 * introEase));
@@ -755,6 +851,27 @@ export default function GlobeScene({ project = null }) {
 
       // stars only drift slowly with the page; the camera parallax is enough for the mouse
       stars.rotation.y = sy * 0.00005;
+      stars.material.uniforms.uFade.value = 1 - gz;
+      if (galaxyOn && !drag.on) {
+        uniYaw += drag.vx * 0.7 + dt * 0.02;
+        uniPitch = Math.max(-0.7, Math.min(0.9, uniPitch + drag.vy * 0.5));
+      }
+      galaxy.root.rotation.set(uniPitch, uniYaw, 0);
+      galaxy.update(dt * timeScale, gz);
+      if (eggLayer && gz > 0.01) {
+        const here = eggLayer.querySelector('.galaxy-here');
+        if (here) {
+          hereVec.copy(planet.position).project(camera);
+          const hx = (hereVec.x * 0.5 + 0.5) * window.innerWidth;
+          const hy = (-hereVec.y * 0.5 + 0.5) * window.innerHeight;
+          here.style.transform = `translate3d(${hx.toFixed(1)}px, ${hy.toFixed(1)}px, 0)`;
+          here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3));
+        }
+      }
+      if (!galaxyOn && galaxyT < 0.01 && eggLayer) {
+        eggLayer.remove();
+        eggLayer = null;
+      }
 
       time.value = elapsed;
       renderer.render(scene, camera);
@@ -786,6 +903,10 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('pointerup', onUp);
       window.removeEventListener('pointercancel', onUp);
       window.removeEventListener('blur', onUp);
+      window.removeEventListener('keydown', onKey);
+      document.documentElement.classList.remove('galaxy-mode');
+      if (eggLayer) eggLayer.remove();
+      galaxy.dispose();
       root.classList.remove('globe-dragging', 'globe-grab');
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVis);
