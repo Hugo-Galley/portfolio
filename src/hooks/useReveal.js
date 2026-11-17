@@ -57,7 +57,9 @@ export default function useReveal(key) {
         const { top, height } = rects[i];
         const h = Math.max(height, 1);
         // like CSS "entry 0% -> cover 28%": 0 when the top touches the bottom edge
-        const enter = clamp01((vh - top) / (0.28 * (vh + h)));
+        // small blocks (a list row) are fully in place once they are 12% above the bottom edge,
+        // so a section that fits on screen is entirely visible
+        const enter = clamp01((vh - top) / Math.min(0.28 * (vh + h), 0.12 * vh + h));
 
         if (i >= blocks.length) {
           // section title: rise + un-blur

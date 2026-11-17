@@ -49,7 +49,7 @@ export default function HomePage() {
           <Experience />
         </section>
 
-        <section className="home-section" aria-labelledby="OpenSource">
+        <section className="home-section home-section--full home-section--os" aria-labelledby="OpenSource">
           <SectionHead
             id="OpenSource"
             title={t('sections.osTitle')}

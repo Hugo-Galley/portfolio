@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import PROJECTS, { PROJECT_EVENT, PAGE_EVENT } from '../data/projects';
+import PROJECTS, { PROJECT_EVENT, PAGE_EVENT, PICK_EVENT } from '../data/projects';
 import { trackEvent } from '../hooks/useUmami';
 import createGalaxy from './galaxy';
 
@@ -208,7 +208,9 @@ const STATES = {
   AboutMe:    { x: -3.7, y: 0.25,  s: 1.6,  tilt: 0.1,  arcs: 0.8, proj: 0 },
   MySkills:   { x: 0,    y: -3.05, s: 2.7,  tilt: 0.75, arcs: 1.2, proj: 0 },
   WorkAt:     { x: 5.5,  y: 0.05,  s: 1.35, tilt: 0.2,  arcs: 0.9, proj: 0 },
-  OpenSource: { x: 5.4,  y: 0.2,   s: 1.3,  tilt: 0.3,  arcs: 2.2, proj: 0 },
+  // the code leaves home and spreads: the globe swings to the far left (an arc along the edge,
+  // clear of the text), grows and gets busier
+  OpenSource: { x: -7.0, y: -0.2,  s: 2.1,  tilt: 0.4,  arcs: 3.2, proj: 0 },
   Projects:   { x: 2.6,  y: -0.05, s: 1.15, tilt: 0.15, arcs: 1.0, proj: 1 },
   Contact:    { x: 0,    y: -0.45, s: 1.05, tilt: -0.1, arcs: 1.4, proj: 0 },
 };
@@ -668,6 +670,37 @@ export default function GlobeScene({ project = null }) {
         uniPitch = Math.max(-0.7, Math.min(0.9, uniPitch + dy * 0.003));
       }
     };
+    /* project points are clickable: they unfold the matching project in the list */
+    const hits = PROJECTS.map(() => ({ px: 0, py: 0, lx: 0, ly: 0, w: 0, h: 0, on: false }));
+    const pickAt = (x, y) => {
+      let best = -1;
+      let bestD = 26;
+      hits.forEach((h, i) => {
+        if (!h.on) return;
+        const onLabel = x >= h.lx - 6 && x <= h.lx + h.w + 6 && y >= h.ly - 6 && y <= h.ly + h.h + 6;
+        const d = onLabel ? 0 : Math.hypot(x - h.px, y - h.py);
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    };
+    let pickDown = -1;
+    let pickHover = -1;
+    const pickStart = { x: 0, y: 0 };
+    const onPickDown = (e) => {
+      pickDown = -1;
+      if (galaxyOn || e.button !== 0) return;
+      if (e.target instanceof Element && e.target.closest(BLOCKERS)) return;
+      pickDown = pickAt(e.clientX, e.clientY);
+      if (pickDown >= 0) Object.assign(pickStart, { x: e.clientX, y: e.clientY });
+    };
+    const onPickUp = (e) => {
+      if (pickDown < 0) return;
+      const i = pickDown;
+      pickDown = -1;
+      if (Math.hypot(e.clientX - pickStart.x, e.clientY - pickStart.y) > 6) return;
+      if (pickAt(e.clientX, e.clientY) !== i) return;
+      window.dispatchEvent(new CustomEvent(PICK_EVENT, { detail: i }));
+    };
     const onUp = () => {
       if (!drag.on) return;
       drag.on = false;
@@ -715,6 +748,8 @@ export default function GlobeScene({ project = null }) {
     window.addEventListener(PAGE_EVENT, onPage);
     window.addEventListener('pointermove', onMove, { passive: true });
     document.addEventListener('pointerleave', onLeave);
+    window.addEventListener('pointerdown', onPickDown, { passive: true });
+    window.addEventListener('pointerup', onPickUp);
     window.addEventListener('pointerdown', onDown, { passive: true });
     window.addEventListener('pointermove', onDrag, { passive: true });
     window.addEventListener('pointerup', onUp);
@@ -845,8 +880,21 @@ export default function GlobeScene({ project = null }) {
           lx = Math.max(EDGE, lx);
           const ly = Math.max(EDGE, Math.min(py - size.h / 2, vh - EDGE - size.h));
           labels[i].style.transform = `translate3d(${lx.toFixed(1)}px, ${ly.toFixed(1)}px, 0)`;
-          labels[i].style.opacity = visible ? (i === activeProject ? '1' : '0.75') : '0';
+          labels[i].style.opacity = visible ? (i === activeProject || i === pickHover ? '1' : '0.75') : '0';
+          Object.assign(hits[i], { px, py, lx, ly, w: size.w, h: size.h, on: visible && pw > 0.5 });
         }
+      } else {
+        hits.forEach((h) => { h.on = false; });
+      }
+      // hovering a project point: hand cursor and a brighter name
+      const hover = pointer.active && !drag.on
+        ? pickAt((pointer.tx * 0.5 + 0.5) * window.innerWidth, (-pointer.ty * 0.5 + 0.5) * window.innerHeight)
+        : -1;
+      if (hover !== pickHover) {
+        if (pickHover >= 0) labels[pickHover].classList.remove('is-hover');
+        pickHover = hover;
+        if (pickHover >= 0) labels[pickHover].classList.add('is-hover');
+        root.classList.toggle('globe-pick', pickHover >= 0);
       }
 
       // stars only drift slowly with the page; the camera parallax is enough for the mouse
@@ -899,6 +947,8 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('pointermove', onMove);
       document.removeEventListener('pointerleave', onLeave);
       window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerdown', onPickDown);
+      window.removeEventListener('pointerup', onPickUp);
       window.removeEventListener('pointermove', onDrag);
       window.removeEventListener('pointerup', onUp);
       window.removeEventListener('pointercancel', onUp);
@@ -907,7 +957,7 @@ export default function GlobeScene({ project = null }) {
       document.documentElement.classList.remove('galaxy-mode');
       if (eggLayer) eggLayer.remove();
       galaxy.dispose();
-      root.classList.remove('globe-dragging', 'globe-grab');
+      root.classList.remove('globe-dragging', 'globe-grab', 'globe-pick');
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVis);
       scene.traverse((o) => {

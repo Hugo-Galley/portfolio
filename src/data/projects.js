@@ -19,6 +19,8 @@ const PROJECTS = [
 
 export const PROJECT_EVENT = 'globe:project';
 export const PAGE_EVENT = 'globe:page';
+// a project point (or its name) was clicked on the globe
+export const PICK_EVENT = 'globe:pick';
 
 export const projectIndex = (pathname) => {
   const path = pathname.replace(/\/$/, '');

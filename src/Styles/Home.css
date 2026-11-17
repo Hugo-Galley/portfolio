@@ -32,6 +32,12 @@
   justify-content: center;
 }
 .home-section--full + .home-section { padding-top: 6rem; }
+/* open source: a full screen too, with less air so the whole section fits on a laptop */
+.home-section.home-section--os { padding: 4.5rem 0; }
+.home-section--os .os { margin-top: 2rem; }
+.home-section--os .os-lead { padding-bottom: 1.75rem; }
+.home-section--os .os-contrib-list li { padding: 0.75rem 0; }
+.home-section--os .os-row { padding: 1rem 0.25rem; }
 
 /* ── Surface: the one card style ── */
 .surface {
@@ -357,6 +363,7 @@ a.surface:hover { transform: translateY(-3px); }
   will-change: transform;
 }
 .globe-label.is-active { font-size: 1.05rem; font-weight: 600; color: #fff; }
+.globe-label.is-hover { color: #fff; }
 /* ═════════ 06 Contact ═════════ */
 /* keeps its 7rem on top (the title never touches the screen edge), less below so the
    card sits as close to the footer as the title sits to the top */
@@ -407,10 +414,13 @@ a.surface:hover { transform: translateY(-3px); }
 /* ═════════ Responsive ═════════ */
 @media (max-width: 1024px) {
   .xp-row { grid-template-columns: 1fr; gap: 1rem; }
-  .os-lead { grid-template-columns: 1fr; gap: 1.5rem; }
-  .os-row { grid-template-columns: 1fr 20px; gap: 0.4rem 1rem; }
-  .os-row-desc, .os-row-meta { grid-column: 1; }
-  .os-row-arrow { grid-row: 1; grid-column: 2; }
+  /* still two columns for the contribution; each repo on two lines (name + meta, then the description) */
+  .os-lead { grid-template-columns: 1.1fr 1fr; gap: 2rem; }
+  .os-row { grid-template-columns: auto 1fr 20px; gap: 0.3rem 1rem; }
+  .os-row-name { grid-column: 1; grid-row: 1; }
+  .os-row-meta { grid-column: 2; grid-row: 1; justify-self: end; }
+  .os-row-arrow { grid-column: 3; grid-row: 1; }
+  .os-row-desc { grid-column: 1 / -1; grid-row: 2; }
   /* tablets and small laptops: still two columns, a narrower photo next to the text */
   .about { grid-template-columns: minmax(200px, 290px) 1fr; gap: clamp(2rem, 4vw, 3rem); align-items: start; }
   .about-lead { margin-bottom: 2rem; }
@@ -422,6 +432,8 @@ a.surface:hover { transform: translateY(-3px); }
   .projects-list { width: 100%; }
 }
 @media (max-width: 700px) {
+  .os-lead { grid-template-columns: 1fr; gap: 1.5rem; }
+  .os-row-meta { grid-column: 1 / -1; grid-row: 3; justify-self: start; }
   .about { grid-template-columns: 1fr; }
   .about-photo { max-width: 340px; width: 100%; margin: 0 auto; }
   .home-section { padding-top: 6rem; }

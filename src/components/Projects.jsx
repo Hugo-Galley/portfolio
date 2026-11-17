@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '../hooks/useUmami';
 import { useLanguage } from '../context/LanguageContext';
-import PROJECTS, { PROJECT_EVENT } from '../data/projects';
+import PROJECTS, { PROJECT_EVENT, PICK_EVENT } from '../data/projects';
 
 const focusGlobe = (index) => window.dispatchEvent(new CustomEvent(PROJECT_EVENT, { detail: index }));
 
@@ -34,6 +34,19 @@ export default function Projects() {
     }
     trackEvent('project-click', { project: titre });
   };
+
+  // a click on a project's point on the globe unfolds that project here
+  useEffect(() => {
+    const onPick = (e) => {
+      const i = Number(e.detail);
+      if (!Number.isInteger(i) || !PROJECTS[i]) return;
+      interacted.current = true;
+      setActive(i);
+      trackEvent('project-globe-pick', { project: PROJECTS[i].titre });
+    };
+    window.addEventListener(PICK_EVENT, onPick);
+    return () => window.removeEventListener(PICK_EVENT, onPick);
+  }, []);
 
   // While the section is on screen, nobody points at it and nothing was clicked yet,
   // walk through the projects
