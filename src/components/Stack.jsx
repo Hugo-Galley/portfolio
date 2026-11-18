@@ -6,8 +6,6 @@ import web from '../assets/Card/HTML-CSS-JS-Logo.webp';
 import sql from '../assets/Card/sql.webp';
 import linux from '../assets/Card/linux.png';
 import git from '../assets/Card/git.png';
-import c from '../assets/Card/C_Logo.webp';
-import figma from '../assets/Card/Figma-logo.svg.png';
 import azure from '../assets/Card/azure.webp';
 import docker from '../assets/Card/docker-icon-seeklogo.png';
 
@@ -16,15 +14,13 @@ const ROW_A = [
   { src: py, name: 'Python' },
   { src: rct, name: 'React' },
   { src: web, name: 'HTML · CSS · JS' },
-  { src: sql, name: 'SQL' },
-  { src: c, name: 'C' },
+  { src: sql, name: 'SQL' }
 ];
 const ROW_B = [
   { src: docker, name: 'Docker' },
   { src: azure, name: 'Azure DevOps' },
   { src: git, name: 'Git' },
   { src: linux, name: 'Linux' },
-  { src: figma, name: 'Figma' },
 ];
 
 function Row({ items, reverse }) {

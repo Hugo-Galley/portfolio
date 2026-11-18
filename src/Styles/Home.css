@@ -205,7 +205,7 @@ a.surface:hover { transform: translateY(-3px); }
 .stack-chip:hover { border-color: var(--line-strong); background: rgba(24, 21, 33, 0.91); }
 .stack-chip img { width: 34px; height: 34px; object-fit: contain; }
 [data-theme="dark"] .stack-chip img.is-linux,
-:root:not([data-theme="light"]) .stack-chip img.is-linux { filter: invert(1); }
+:root:not([data-theme="light"]) .stack-chip img.is-linux { filter: brightness(0) invert(1); }
 
 /* ═════════ 03 Experience: an editorial list, like a printed CV ═════════ */
 .xp { margin-top: 3rem; }
