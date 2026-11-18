@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import py from '../assets/Pages/Python-logo-notext.svg.webp';
 import cs from '../assets/Card/cs.webp';
-import rct from '../assets/Pages/react.webp';
+import bash from '../assets/Card/bash.svg';
 import web from '../assets/Card/HTML-CSS-JS-Logo.webp';
 import sql from '../assets/Card/sql.webp';
 import linux from '../assets/Card/linux.png';
@@ -12,7 +12,7 @@ import docker from '../assets/Card/docker-icon-seeklogo.png';
 const ROW_A = [
   { src: cs, name: 'C# / .NET' },
   { src: py, name: 'Python' },
-  { src: rct, name: 'React' },
+  { src: bash, name: 'Bash' },
   { src: web, name: 'HTML · CSS · JS' },
   { src: sql, name: 'SQL' }
 ];
