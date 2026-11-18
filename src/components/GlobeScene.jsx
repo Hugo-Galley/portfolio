@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import PROJECTS, { PROJECT_EVENT, PAGE_EVENT, PICK_EVENT } from '../data/projects';
 import { trackEvent } from '../hooks/useUmami';
-import createGalaxy from './galaxy';
+import createGalaxy, { createWarp, createFlyby } from './galaxy';
 
 /*
  * Globe scene (three.js, no framework): "code is meant to be shared".
@@ -455,19 +455,29 @@ export default function GlobeScene({ project = null }) {
     scene.add(galaxy.root);
     const GALAXY_STATE = { x: 0, y: 0, s: 0.45, tilt: 0.25, arcs: 1.6, proj: 0 };
     let galaxyOn = false;
+    // both trips are timed, so the speed (and the warp streaks) peak half way
+    const GALAXY_ENTER_S = 4.2;
+    const GALAXY_RETURN_S = 3.6;
+    let prevGz = 0;
+    let warpW = 0;
+    const warp = createWarp(isSmall);
+    camera.add(warp.object);
+    const flyby = createFlyby(isSmall, pixelRatio);
+    camera.add(flyby.object);
+    scene.add(camera);
     let galaxyT = 0;
     let uniYaw = 0;
     let uniPitch = 0.12;
     let eggClicks = [];
     let eggLayer = null;
     const EGG_TEXT = {
-      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis rentre quand tu veux.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
-      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then head home whenever you like.', back: 'Back to Earth', here: 'You are here' },
+      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis double-clique sur la Terre pour rentrer.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
+      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then double-click the Earth to head home.', back: 'Back to Earth', here: 'You are here' },
     };
     const leaveGalaxy = () => {
       if (!galaxyOn) return;
       galaxyOn = false;
-      document.documentElement.classList.remove('galaxy-mode');
+      // the page comes back only once the trip home is almost over (see the loop)
       if (eggLayer) eggLayer.classList.remove('is-on');
     };
     const enterGalaxy = () => {
@@ -509,14 +519,20 @@ export default function GlobeScene({ project = null }) {
       here.textContent = L.here;
       eggLayer.append(here, card);
       document.documentElement.classList.add('galaxy-mode');
-      requestAnimationFrame(() => {
-        eggLayer.classList.add('is-on');
-        back.focus({ preventScroll: true });
-      });
+      // the card shows up once we drop out of the jump (see the loop)
       trackEvent('easter-egg-galaxy');
     };
     const onKey = (e) => { if (e.key === 'Escape') leaveGalaxy(); };
     window.addEventListener('keydown', onKey);
+    // where the Earth is on screen while lost in the galaxy (it is only a dot, so the target is generous)
+    const earthOnScreen = { x: -1e4, y: -1e4 };
+    const onDouble = (e) => {
+      if (!galaxyOn) return;
+      if (Math.hypot(e.clientX - earthOnScreen.x, e.clientY - earthOnScreen.y) > 48) return;
+      trackEvent('easter-egg-home', { via: 'earth' });
+      leaveGalaxy();
+    };
+    window.addEventListener('dblclick', onDouble);
 
     /* ── Theme ── */
     const themeObserver = new MutationObserver(() => {
@@ -814,20 +830,45 @@ export default function GlobeScene({ project = null }) {
       pointer.x += (pointer.tx - pointer.x) * 0.05;
       pointer.y += (pointer.ty - pointer.y) * 0.05;
       KEYS.forEach((k) => { cur[k] += ((galaxyOn ? GALAXY_STATE[k] : target[k]) - cur[k]) * ease; });
-      galaxyT += ((galaxyOn ? 1 : 0) - galaxyT) * (reduceMotion ? 1 : 0.025);
-      const gz = smooth(Math.min(1, Math.max(0, galaxyT)));
+      // the trips out and home are steady in time, eased by smootherstep: slow start, a jump, a soft arrival
+      const tripS = galaxyOn ? GALAXY_ENTER_S : GALAXY_RETURN_S;
+      if (reduceMotion) galaxyT = galaxyOn ? 1 : 0;
+      else galaxyT = Math.min(1, Math.max(0, galaxyT + (galaxyOn ? dt : -dt) / tripS));
+      if (!galaxyOn && galaxyT < 0.08) document.documentElement.classList.remove('galaxy-mode');
+      const gt = galaxyT;
+      const gz = gt * gt * gt * (gt * (gt * 6 - 15) + 10);
 
-      // easter egg: the camera backs out of the Earth, through the arm, then rises above the galaxy
+      // warp intensity follows the speed of the trip (smootherstep peaks at 1.875 / duration)
+      const gSpeed = dt > 0 ? Math.abs(gz - prevGz) / dt : 0;
+      prevGz = gz;
+      const wTarget = reduceMotion ? 0 : Math.pow(Math.min(1, (gSpeed * tripS) / 1.875), 1.6);
+      warpW += (wTarget - warpW) * (1 - Math.exp(-dt * 10));
+      warp.update(dt, warpW, galaxyOn ? -1 : 1);
+      // planets met on the way, only while actually travelling
+      const travelling = !reduceMotion && galaxyT > 0.001 && galaxyT < 0.999;
+      flyby.update(dt, galaxyOn ? gz : 1 - gz, travelling, galaxyOn ? -1 : 1);
+
+      // easter egg: the camera backs out of the Earth, through the arm, then rises above the galaxy;
+      // on the way it swings wide along the arm and banks, like a ship taking a turn
       const rise = gz * gz;
-      camera.position.x = pointer.x * (0.35 + gz * 4);
-      camera.position.y = pointer.y * (0.2 + gz * 3) + rise * 92;
-      camera.position.z = 7 + gz * 40;
+      const arc = Math.sin(Math.PI * gz);
+      camera.position.x = pointer.x * (0.35 + gz * 4) + arc * 16;
+      camera.position.y = pointer.y * (0.2 + gz * 3) + rise * 92 + arc * 4;
+      camera.position.z = 7 + gz * 40 + arc * 10;
       if (gz > 0.001) {
         // look towards the galaxy's centre, so the Earth ends up off to one side
         galaxy.disc.getWorldPosition(lookVec);
         camera.lookAt(lookVec.multiplyScalar(rise * 0.55));
+        camera.rotateZ(arc * arc * 0.32 * (galaxyOn ? 1 : -1));
       } else {
         camera.lookAt(0, 0, 0);
+      }
+      // the view widens with the speed, then snaps back when we drop out of the jump
+      const baseFov = narrow ? 60 : 40;
+      const fov = baseFov + warpW * 32;
+      if (Math.abs(camera.fov - fov) > 0.01) {
+        camera.fov = fov;
+        camera.updateProjectionMatrix();
       }
 
       planet.position.set(cur.x, cur.y - (1 - introEase) * 0.35, 0);
@@ -936,12 +977,20 @@ export default function GlobeScene({ project = null }) {
       }
       galaxy.root.rotation.set(uniPitch, uniYaw, 0);
       galaxy.update(dt * timeScale, gz);
+      if (galaxyOn && gz > 0.86 && eggLayer && !eggLayer.classList.contains('is-on')) {
+        eggLayer.classList.add('is-on');
+        const back = eggLayer.querySelector('button');
+        // keyboard users land on the button, without the focus ring showing up for mouse users
+        if (back) back.focus({ preventScroll: true, focusVisible: false });
+      }
       if (eggLayer && gz > 0.01) {
         const here = eggLayer.querySelector('.galaxy-here');
         if (here) {
           hereVec.copy(planet.position).project(camera);
           const hx = (hereVec.x * 0.5 + 0.5) * window.innerWidth;
           const hy = (-hereVec.y * 0.5 + 0.5) * window.innerHeight;
+          earthOnScreen.x = hx;
+          earthOnScreen.y = hy;
           here.style.transform = `translate3d(${hx.toFixed(1)}px, ${hy.toFixed(1)}px, 0)`;
           here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3));
         }
@@ -984,6 +1033,9 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('pointercancel', onUp);
       window.removeEventListener('blur', onUp);
       window.removeEventListener('keydown', onKey);
+      window.removeEventListener('dblclick', onDouble);
+      warp.dispose();
+      flyby.dispose();
       document.documentElement.classList.remove('galaxy-mode');
       if (eggLayer) eggLayer.remove();
       galaxy.dispose();
