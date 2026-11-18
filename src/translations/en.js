@@ -90,7 +90,8 @@ const en = {
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "Open-source Python library published on PyPI crafted to streamline and secure workplace environment variable workflows. It delivers an intuitive object-oriented API, strict typing, automated validation for required variables, and seamless support for .env files across development and production pipelines."
+      description: "Open-source Python library published on PyPI crafted to streamline and secure workplace environment variable workflows. It delivers an intuitive object-oriented API, strict typing, automated validation for required variables, and seamless support for .env files across development and production pipelines.",
+      pypi: "View on PyPI",
     },
     cartography: {
       title: "Cartography",

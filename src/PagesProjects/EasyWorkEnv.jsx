@@ -24,9 +24,17 @@ export default function EasyWorkEnv() {
       imageAlt="Aperçu d'EasyWorkEnv"
       techs={TECHS}
       actions={
+        <>
+        <a href="https://pypi.org/project/easyworkenv/" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'EasyWorkEnv', link: 'pypi' })}>
+          <span className="github-button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true"><path d="M12 2.8 20 7v10l-8 4.2L4 17V7z"/><path d="M4 7l8 4.2L20 7M12 11.2v10"/></svg>
+            {t('projectPages.easyWorkEnv.pypi')}
+          </span>
+        </a>
         <a href="https://github.com/Hugo-Galley/EasyWorkEnv" target="_blank" rel="noreferrer" className="github-link" onClick={() => trackEvent('project-link', { project: 'EasyWorkEnv', link: 'repo' })}>
           <GithubButton />
         </a>
+        </>
       }
     />
   );

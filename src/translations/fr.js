@@ -90,7 +90,8 @@ const fr = {
     },
     easyWorkEnv: {
       title: "EasyWorkEnv",
-      description: "Package open-source Python publié sur PyPI conçu pour simplifier et fiabiliser la gestion des environnements de travail et des variables d'environnement. Il propose une API intuitive basée sur la programmation orientée objet, un typage fort, la validation automatique des variables requises et la prise en charge transparente des fichiers .env en développement comme en production."
+      description: "Package open-source Python publié sur PyPI conçu pour simplifier et fiabiliser la gestion des environnements de travail et des variables d'environnement. Il propose une API intuitive basée sur la programmation orientée objet, un typage fort, la validation automatique des variables requises et la prise en charge transparente des fichiers .env en développement comme en production.",
+      pypi: "Voir sur PyPI",
     },
     cartography: {
       title: "Cartographie",

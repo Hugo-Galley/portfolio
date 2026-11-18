@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { trackEvent } from '../hooks/useUmami';
 import { GithubGlyph } from './Contact';
@@ -30,9 +31,10 @@ export default function OpenSourceShowcase() {
   }));
 
   const projects = [
-    { repo: 'Numera', url: 'https://github.com/Hugo-Galley/numera', desc: t('openSource.numeraDesc'), meta: 'Python · React · Docker' },
-    { repo: 'EasyWorkEnv', url: 'https://github.com/Hugo-Galley/EasyWorkEnv', desc: t('openSource.easyWorkEnvDesc'), meta: 'Python · PyPI' },
-    { repo: 'clean-feed', url: 'https://github.com/Hugo-Galley/clean-feed', desc: t('openSource.cleanFeedDesc'), meta: 'JavaScript · Firefox, Chrome' },
+    // each row opens the project page (screenshot, demo, links) rather than the bare repo
+    { repo: 'Numera', project: 'Numera', to: '/numera/', desc: t('openSource.numeraDesc'), meta: 'Python · React · Docker' },
+    { repo: 'EasyWorkEnv', project: 'EasyWorkEnv', to: '/easyworkenv/', desc: t('openSource.easyWorkEnvDesc'), meta: 'Python · PyPI' },
+    { repo: 'clean-feed', project: 'Clean Feed', to: '/clean-feed/', desc: t('openSource.cleanFeedDesc'), meta: 'JavaScript · Firefox, Chrome' },
   ];
 
   const meta = [
@@ -65,13 +67,13 @@ export default function OpenSourceShowcase() {
 
       <ul className="os-list">
         {projects.map((p) => (
-          <li key={p.url}>
-            <a className="os-row" href={p.url} target="_blank" rel="noreferrer" onClick={() => trackRepo(`Hugo-Galley/${p.repo}`)}>
+          <li key={p.to}>
+            <Link className="os-row" to={p.to} onClick={() => trackEvent('project-open', { project: p.project, from: 'opensource' })}>
               <span className="os-row-name"><span className="os-owner">Hugo-Galley/</span>{p.repo}</span>
               <span className="os-row-desc">{p.desc}</span>
               <span className="os-row-meta">{p.meta}</span>
-              <span className="os-row-arrow" aria-hidden="true">↗</span>
-            </a>
+              <span className="os-row-arrow" aria-hidden="true">→</span>
+            </Link>
           </li>
         ))}
       </ul>
