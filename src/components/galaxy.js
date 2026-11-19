@@ -487,7 +487,7 @@ export function createFlyby(isSmall, pixelRatio) {
 export function createFriendPlanet(friend, isSmall, pixelRatio) {
   const rimGeo = new THREE.SphereGeometry(1, 40, 30);
   const disposables = [rimGeo];
-  const d = { r: 2.3, color: friend.planet, ring: !!friend.ring };
+  const d = { r: 1.1, color: friend.planet, ring: !!friend.ring };
   const { holder, body, fade } = makePlanet(d, isSmall, pixelRatio, rimGeo, disposables);
   fade.value = 0;
   const r = friend.orbit;

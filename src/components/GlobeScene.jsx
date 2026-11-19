@@ -455,7 +455,7 @@ export default function GlobeScene({ project = null }) {
     /* ── Easter egg: 8 clicks on the Earth in the hero, and you are lost in the galaxy ── */
     const galaxy = createGalaxy(pixelRatio, isSmall);
     scene.add(galaxy.root);
-    const GALAXY_STATE = { x: 0, y: 0, s: 0.95, tilt: 0.25, arcs: 1.6, proj: 0 };
+    const GALAXY_STATE = { x: 0, y: 0, s: 0.45, tilt: 0.25, arcs: 1.6, proj: 0 };
     let galaxyOn = false;
     // both trips are timed, so the speed (and the warp streaks) peak half way
     const GALAXY_ENTER_S = 4.2;
@@ -513,8 +513,8 @@ export default function GlobeScene({ project = null }) {
     let eggClicks = [];
     let eggLayer = null;
     const EGG_TEXT = {
-      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis clique sur la Terre pour rentrer.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
-      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then click the Earth to head home.', back: 'Back to Earth', here: 'You are here' },
+      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis double-clique sur la Terre pour rentrer.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
+      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then double-click the Earth to head home.', back: 'Back to Earth', here: 'You are here' },
     };
     const leaveGalaxy = () => {
       if (!galaxyOn || trip) return;
@@ -566,10 +566,6 @@ export default function GlobeScene({ project = null }) {
         a.style.setProperty('--friend', `rgb(${f.planet.map((c) => Math.round(c * 255)).join(' ')})`);
         a.href = warpUrl(f);
         a.textContent = f.name;
-        const pulse = document.createElement('span');
-        pulse.className = 'galaxy-pulse';
-        pulse.setAttribute('aria-hidden', 'true');
-        a.prepend(pulse);
         a.addEventListener('click', (ev) => {
           if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
           ev.preventDefault();
@@ -586,21 +582,13 @@ export default function GlobeScene({ project = null }) {
     window.addEventListener('keydown', onKey);
     // where the Earth is on screen while lost in the galaxy (it is only a dot, so the target is generous)
     const earthOnScreen = { x: -1e4, y: -1e4 };
-    // what sits under the pointer in the galaxy: the Earth, a friend's planet, or nothing
-    // (they are small on screen, so the targets are generous)
-    const galaxyTargetAt = (x, y) => {
-      if (!galaxyOn || trip || galaxyT < 0.9) return null;
-      let best = null;
-      let bestD = 46;
-      const dE = Math.hypot(x - earthOnScreen.x, y - earthOnScreen.y);
-      if (dE < bestD) { best = 'earth'; bestD = dE; }
-      friends.forEach((f) => {
-        if (!f.onScreen) return;
-        const d = Math.hypot(x - f.sx, y - f.sy);
-        if (d < bestD) { best = f; bestD = d; }
-      });
-      return best;
+    const onDouble = (e) => {
+      if (!galaxyOn) return;
+      if (Math.hypot(e.clientX - earthOnScreen.x, e.clientY - earthOnScreen.y) > 48) return;
+      trackEvent('easter-egg-home', { via: 'earth' });
+      leaveGalaxy();
     };
+    window.addEventListener('dblclick', onDouble);
 
     /* ── Theme ── */
     const themeObserver = new MutationObserver(() => {
@@ -817,14 +805,6 @@ export default function GlobeScene({ project = null }) {
         drag.vx = 0;
         drag.vy = 0;
         if (drag.from) sendFrom(drag.from);
-        // in the galaxy, one click on the Earth brings you home, one on a friend's planet flies there
-        const target = galaxyTargetAt(drag.x, drag.y);
-        if (target === 'earth') {
-          trackEvent('easter-egg-home', { via: 'earth' });
-          leaveGalaxy();
-          return;
-        }
-        if (target) { flyToFriend(target); return; }
         // 8 clicks on the Earth in the hero, within a few seconds
         if (drag.from && !galaxyOn && page == null && window.scrollY < window.innerHeight * 0.5) {
           const now = performance.now();
@@ -1077,12 +1057,6 @@ export default function GlobeScene({ project = null }) {
         root.classList.toggle('globe-pick', pickHover >= 0);
       }
 
-      // in the galaxy, the Earth and the friends' planets take the hand cursor
-      const galaxyHover = galaxyOn && pointer.active && !drag.on
-        ? galaxyTargetAt((pointer.tx * 0.5 + 0.5) * window.innerWidth, (-pointer.ty * 0.5 + 0.5) * window.innerHeight)
-        : null;
-      root.classList.toggle('galaxy-pick', !!galaxyHover);
-
       // stars only drift slowly with the page; the camera parallax is enough for the mouse
       stars.rotation.y = sy * 0.00005;
       stars.material.uniforms.uFade.value = 1 - gz;
@@ -1118,9 +1092,6 @@ export default function GlobeScene({ project = null }) {
         const fx = (hereVec.x * 0.5 + 0.5) * window.innerWidth;
         const fy = (-hereVec.y * 0.5 + 0.5) * window.innerHeight;
         const inView = hereVec.z < 1 && Math.abs(hereVec.x) < 0.92 && Math.abs(hereVec.y) < 0.9;
-        f.sx = fx;
-        f.sy = fy;
-        f.onScreen = inView;
         f.label.style.transform = `translate3d(${fx.toFixed(1)}px, ${fy.toFixed(1)}px, 0)`;
         f.label.style.opacity = String(inView && !trip ? Math.max(0, (gz - 0.75) / 0.25) : 0);
         f.label.style.pointerEvents = inView && !trip && gz > 0.9 ? 'auto' : 'none';
@@ -1163,6 +1134,7 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('pointercancel', onUp);
       window.removeEventListener('blur', onUp);
       window.removeEventListener('keydown', onKey);
+      window.removeEventListener('dblclick', onDouble);
       window.removeEventListener('pageshow', onPageShow);
       friends.forEach((f) => f.p.dispose());
       if (veil) veil.remove();
@@ -1171,7 +1143,7 @@ export default function GlobeScene({ project = null }) {
       document.documentElement.classList.remove('galaxy-mode');
       if (eggLayer) eggLayer.remove();
       galaxy.dispose();
-      root.classList.remove('globe-dragging', 'globe-grab', 'globe-pick', 'galaxy-pick');
+      root.classList.remove('globe-dragging', 'globe-grab', 'globe-pick');
       window.removeEventListener('scroll', onScroll);
       document.removeEventListener('visibilitychange', onVis);
       scene.traverse((o) => {

@@ -14,8 +14,7 @@
 @keyframes globe-in { from { opacity: 0; } }
 /* the globe can be grabbed and spun */
 html.globe-grab, html.globe-grab body { cursor: grab; }
-html.globe-pick, html.globe-pick body,
-html.galaxy-pick, html.galaxy-pick body { cursor: pointer; }
+html.globe-pick, html.globe-pick body { cursor: pointer; }
 html.globe-dragging, html.globe-dragging * { cursor: grabbing !important; user-select: none; -webkit-user-select: none; }
 
 /* ───────── Section heads ───────── */
@@ -143,29 +142,6 @@ html.galaxy-mode #main-content > :not(.globe-scene) {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 .galaxy-friend::after { content: ' →'; color: var(--text-secondary); }
-/* a slow pulse around the Earth and the friends' planets, so they stand out in the stars */
-.galaxy-here::after,
-.galaxy-friend > .galaxy-pulse {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  margin-top: -9px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  animation: galaxy-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  pointer-events: none;
-}
-.galaxy-here::after { left: -9px; }
-.galaxy-friend > .galaxy-pulse { left: -9px; border-color: var(--friend, #e26a4f); animation-delay: 1.2s; }
-@keyframes galaxy-pulse {
-  0% { transform: scale(1); opacity: 0.9; }
-  100% { transform: scale(2.6); opacity: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .galaxy-here::after, .galaxy-friend > .galaxy-pulse { animation: none; opacity: 0; }
-}
 .galaxy-friend:hover,
 .galaxy-friend:focus-visible { color: #fff; outline: none; }
 .galaxy-friend:hover::before,
