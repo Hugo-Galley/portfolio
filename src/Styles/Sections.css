@@ -112,6 +112,52 @@ html.galaxy-mode #main-content > :not(.globe-scene) {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
   will-change: transform;
 }
+.galaxy-friend {
+  position: fixed;
+  left: 0;
+  top: 0;
+  margin-top: -0.65em;
+  padding: 0.2rem 0.4rem 0.2rem 22px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+  will-change: transform;
+  transition: color 0.25s ease;
+}
+.galaxy-friend::before {
+  content: '';
+  position: absolute;
+  left: -11px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border: 1px dashed var(--friend, #e26a4f);
+  border-radius: 50%;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+.galaxy-friend::after { content: ' →'; color: var(--text-secondary); }
+.galaxy-friend:hover,
+.galaxy-friend:focus-visible { color: #fff; outline: none; }
+.galaxy-friend:hover::before,
+.galaxy-friend:focus-visible::before { transform: scale(1.35) rotate(45deg); border-style: solid; }
+/* flying to a friend: the card and the markers step aside */
+.galaxy-egg.is-leaving .galaxy-egg-card,
+.galaxy-egg.is-leaving .galaxy-here { opacity: 0 !important; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s ease; transition-delay: 0s; }
+.galaxy-egg.is-leaving .galaxy-egg-card { transform: translateY(12px); }
+/* the hand-over: the page fades to the friend's own background before landing on their site */
+.friend-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+}
 .galaxy-here::before {
   content: '';
   position: absolute;

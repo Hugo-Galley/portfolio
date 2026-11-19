@@ -389,63 +389,69 @@ function dotRing(count, rIn, rOut) {
   return geo;
 }
 
+// one planet in the site's style: a soft body, a dotted surface, a rim glow (and maybe a dotted ring)
+function makePlanet(d, isSmall, pixelRatio, rimGeo, disposables) {
+  const holder = new THREE.Group();
+  const color = new THREE.Vector3(...d.color);
+  const fade = { value: 0 };
+  const dotsMat = (size) => new THREE.ShaderMaterial({
+    vertexShader: DOT_VERT, fragmentShader: DOT_FRAG,
+    uniforms: { uPixelRatio: pixelRatio, uSize: { value: size }, uColor: { value: color }, uFade: fade },
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const body = new THREE.Group();
+  const count = Math.round((isSmall ? 500 : 900) * d.r);
+  const sGeo = dotSphere(count, d.r);
+  const sMat = dotsMat(2.6);
+  body.add(new THREE.Points(sGeo, sMat));
+  const rimMat = new THREE.ShaderMaterial({
+    vertexShader: RIM_VERT, fragmentShader: RIM_FRAG,
+    uniforms: { uColor: { value: color }, uFade: fade },
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  const solidMat = new THREE.ShaderMaterial({
+    vertexShader: BODY_VERT, fragmentShader: BODY_FRAG,
+    uniforms: { uColor: { value: color }, uFade: fade }, transparent: true,
+  });
+  const solid = new THREE.Mesh(rimGeo, solidMat);
+  solid.scale.setScalar(d.r * 0.985);
+  holder.add(solid);
+  disposables.push(solidMat);
+  const rim = new THREE.Mesh(rimGeo, rimMat);
+  rim.scale.setScalar(d.r * 1.06);
+  holder.add(rim);
+  disposables.push(sGeo, sMat, rimMat);
+  if (d.ring) {
+    const rGeo = dotRing(isSmall ? 600 : 1100, d.r * 1.45, d.r * 2.3);
+    const rMat = dotsMat(2.0);
+    const ring = new THREE.Points(rGeo, rMat);
+    ring.rotation.set(0.42, 0, 0.3);
+    holder.add(ring);
+    const bandIn = d.r * 1.4;
+    const bandOut = d.r * 2.35;
+    const bGeo = new THREE.RingGeometry(bandIn, bandOut, 128, 1);
+    const bMat = new THREE.ShaderMaterial({
+      vertexShader: RINGBAND_VERT, fragmentShader: RINGBAND_FRAG,
+      uniforms: { uColor: { value: color }, uFade: fade, uIn: { value: bandIn }, uOut: { value: bandOut } },
+      transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
+    });
+    const band = new THREE.Mesh(bGeo, bMat);
+    // child of the dotted ring, laid flat in its plane
+    band.rotation.x = -Math.PI / 2;
+    ring.add(band);
+    disposables.push(rGeo, rMat, bGeo, bMat);
+  }
+  body.rotation.z = 0.35;
+  holder.add(body);
+  return { holder, body, fade };
+}
+
 export function createFlyby(isSmall, pixelRatio) {
   const group = new THREE.Group();
   const rimGeo = new THREE.SphereGeometry(1, 40, 30);
   const disposables = [rimGeo];
   const items = PLANETS.map((d) => {
-    const holder = new THREE.Group();
-    const color = new THREE.Vector3(...d.color);
-    const fade = { value: 0 };
-    const dotsMat = (size) => new THREE.ShaderMaterial({
-      vertexShader: DOT_VERT, fragmentShader: DOT_FRAG,
-      uniforms: { uPixelRatio: pixelRatio, uSize: { value: size }, uColor: { value: color }, uFade: fade },
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    });
-    const body = new THREE.Group();
-    const count = Math.round((isSmall ? 500 : 900) * d.r);
-    const sGeo = dotSphere(count, d.r);
-    const sMat = dotsMat(2.6);
-    body.add(new THREE.Points(sGeo, sMat));
-    const rimMat = new THREE.ShaderMaterial({
-      vertexShader: RIM_VERT, fragmentShader: RIM_FRAG,
-      uniforms: { uColor: { value: color }, uFade: fade },
-      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-    });
-    const solidMat = new THREE.ShaderMaterial({
-      vertexShader: BODY_VERT, fragmentShader: BODY_FRAG,
-      uniforms: { uColor: { value: color }, uFade: fade }, transparent: true,
-    });
-    const solid = new THREE.Mesh(rimGeo, solidMat);
-    solid.scale.setScalar(d.r * 0.985);
-    holder.add(solid);
-    disposables.push(solidMat);
-    const rim = new THREE.Mesh(rimGeo, rimMat);
-    rim.scale.setScalar(d.r * 1.06);
-    holder.add(rim);
-    disposables.push(sGeo, sMat, rimMat);
-    if (d.ring) {
-      const rGeo = dotRing(isSmall ? 600 : 1100, d.r * 1.45, d.r * 2.3);
-      const rMat = dotsMat(2.0);
-      const ring = new THREE.Points(rGeo, rMat);
-      ring.rotation.set(0.42, 0, 0.3);
-      holder.add(ring);
-      const bandIn = d.r * 1.4;
-      const bandOut = d.r * 2.35;
-      const bGeo = new THREE.RingGeometry(bandIn, bandOut, 128, 1);
-      const bMat = new THREE.ShaderMaterial({
-        vertexShader: RINGBAND_VERT, fragmentShader: RINGBAND_FRAG,
-        uniforms: { uColor: { value: color }, uFade: fade, uIn: { value: bandIn }, uOut: { value: bandOut } },
-        transparent: true, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending,
-      });
-      const band = new THREE.Mesh(bGeo, bMat);
-      // child of the dotted ring, laid flat in its plane
-      band.rotation.x = -Math.PI / 2;
-      ring.add(band);
-      disposables.push(rGeo, rMat, bGeo, bMat);
-    }
-    body.rotation.z = 0.35;
-    holder.add(body);
+    const { holder, body, fade } = makePlanet(d, isSmall, pixelRatio, rimGeo, disposables);
     holder.renderOrder = 12;
     holder.visible = false;
     group.add(holder);
@@ -474,5 +480,27 @@ export function createFlyby(isSmall, pixelRatio) {
     dispose() {
       disposables.forEach((x) => x.dispose());
     },
+  };
+}
+
+/* A friend's planet, set in the other arm of the galaxy: a real place you can fly to */
+export function createFriendPlanet(friend, isSmall, pixelRatio) {
+  const rimGeo = new THREE.SphereGeometry(1, 40, 30);
+  const disposables = [rimGeo];
+  const d = { r: 1.1, color: friend.planet, ring: !!friend.ring };
+  const { holder, body, fade } = makePlanet(d, isSmall, pixelRatio, rimGeo, disposables);
+  fade.value = 0;
+  const r = friend.orbit;
+  const a = armAngle(friend.arm ?? 1, r) + 0.12;
+  holder.position.set(Math.cos(a) * r, 0.8, Math.sin(a) * r);
+  return {
+    object: holder,
+    radius: d.r,
+    update(dt, g) {
+      holder.visible = g > 0.01;
+      fade.value = g;
+      body.rotation.y += dt * 0.2;
+    },
+    dispose() { disposables.forEach((x) => x.dispose()); },
   };
 }

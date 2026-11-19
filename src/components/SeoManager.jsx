@@ -3,7 +3,17 @@ import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const SITE_URL = 'https://galleyhugo.com';
-const DEFAULT_IMAGE = `${SITE_URL}/preview.png?v=3`;
+// share images, in the site's look: the dotted globe centred, so Google's square crop lands on it
+const OG_VERSION = 5;
+const OG_IMAGE = {
+  fr: `${SITE_URL}/og/galleyhugo-fr.jpg?v=${OG_VERSION}`,
+  en: `${SITE_URL}/og/galleyhugo-en.jpg?v=${OG_VERSION}`,
+};
+const OG_SQUARE = `${SITE_URL}/og/galleyhugo-square.jpg?v=${OG_VERSION}`;
+const OG_ALT = {
+  fr: 'Hugo Galley, développeur logiciel & DevOps : son nom sur un globe en points, sur fond spatial',
+  en: 'Hugo Galley, software developer & DevOps: his name over a dotted globe, against a space background',
+};
 
 const PROJECT_SCHEMAS = {
   '/cartography': { name: 'Cartography', langs: ['.NET', 'Blazor', 'C#'], repo: null },
@@ -110,6 +120,13 @@ export default function SeoManager() {
   const enUrl = `${SITE_URL}${canonicalPath}?lang=en`;
 
   const projectSchema = PROJECT_SCHEMAS[lookupPath];
+  const ogImage = OG_IMAGE[language] || OG_IMAGE.fr;
+  const ogAlt = OG_ALT[language] || OG_ALT.fr;
+  // several aspect ratios let Google pick the best crop for each place it shows the page
+  const schemaImages = [
+    { '@type': 'ImageObject', url: ogImage, width: 1200, height: 630, caption: ogAlt },
+    { '@type': 'ImageObject', url: OG_SQUARE, width: 1200, height: 1200, caption: ogAlt },
+  ];
 
   const structuredData = lookupPath === '/'
     ? {
@@ -130,6 +147,9 @@ export default function SeoManager() {
             name: seo.title,
             description: seo.description,
             url: absoluteUrl,
+            primaryImageOfPage: schemaImages[0],
+            image: schemaImages,
+            thumbnailUrl: OG_SQUARE,
             mainEntity: {
               '@type': 'Person',
               '@id': `${SITE_URL}/#person`,
@@ -139,7 +159,7 @@ export default function SeoManager() {
                 ? 'Développeur logiciel & DevOps chez AXA, étudiant à l’EPSI Paris, spécialisé en .NET, C# et DevOps.'
                 : 'Software developer & DevOps engineer at AXA, student at EPSI Paris, specializing in .NET, C# and DevOps.',
               url: SITE_URL,
-              image: DEFAULT_IMAGE,
+              image: OG_SQUARE,
               email: 'contact@galleyhugo.com',
               worksFor: {
                 '@type': 'Organization',
@@ -222,6 +242,9 @@ export default function SeoManager() {
         name: seo.title,
         description: seo.description,
         url: absoluteUrl,
+        primaryImageOfPage: schemaImages[0],
+        image: schemaImages,
+        thumbnailUrl: OG_SQUARE,
         author: {
           '@type': 'Person',
           name: 'Hugo Galley',
@@ -241,16 +264,18 @@ export default function SeoManager() {
       <link rel="alternate" hreflang="x-default" href={absoluteUrl} />
 
       <meta name="description" content={seo.description} />
-      <meta name="robots" content={seo.noIndex ? 'noindex, nofollow' : 'index, follow'} />
+      <meta name="robots" content={seo.noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
 
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={absoluteUrl} />
-      <meta property="og:image" content={DEFAULT_IMAGE} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:secure_url" content={ogImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:alt" content={ogAlt} />
       <meta property="og:locale" content={language === 'fr' ? 'fr_FR' : 'en_US'} />
       <meta property="og:locale:alternate" content={language === 'fr' ? 'en_US' : 'fr_FR'} />
       <meta property="og:site_name" content="Hugo Galley - Portfolio" />
@@ -258,8 +283,8 @@ export default function SeoManager() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
-      <meta name="twitter:image" content={DEFAULT_IMAGE} />
-      <meta name="twitter:image:alt" content={seo.title} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content={ogAlt} />
 
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}

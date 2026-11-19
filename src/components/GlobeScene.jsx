@@ -2,7 +2,8 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import PROJECTS, { PROJECT_EVENT, PAGE_EVENT, PICK_EVENT } from '../data/projects';
 import { trackEvent } from '../hooks/useUmami';
-import createGalaxy, { createWarp, createFlyby } from './galaxy';
+import createGalaxy, { createWarp, createFlyby, createFriendPlanet } from './galaxy';
+import FRIENDS, { WARP_PARAM, WARP_FROM } from '../data/friends';
 
 /*
  * Globe scene (three.js, no framework): "code is meant to be shared".
@@ -255,6 +256,7 @@ function randomOnSphere() {
 }
 
 const smooth = (t) => t * t * (3 - 2 * t);
+const smoother = (t) => t * t * t * (t * (t * 6 - 15) + 10);
 
 export default function GlobeScene({ project = null }) {
   const mountRef = useRef(null);
@@ -464,6 +466,46 @@ export default function GlobeScene({ project = null }) {
     camera.add(warp.object);
     const flyby = createFlyby(isSmall, pixelRatio);
     camera.add(flyby.object);
+
+    /* friends' planets: click one and the same jump takes you to their site */
+    const FRIEND_S = 3.6;
+    const friends = FRIENDS.map((f) => {
+      const p = createFriendPlanet(f, isSmall, pixelRatio);
+      galaxy.disc.add(p.object);
+      return { ...f, p, label: null };
+    });
+    let trip = null; // { friend, t, fromPos, fromLook, navigated }
+    let veil = null;
+    const friendWorld = new THREE.Vector3();
+    const tripPos = new THREE.Vector3();
+    const tripLook = new THREE.Vector3();
+    const tripDir = new THREE.Vector3();
+    const paperOf = (f) => (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? f.paper.dark : f.paper.light);
+    const warpUrl = (f) => {
+      const u = new URL(f.url);
+      u.searchParams.set(WARP_PARAM, WARP_FROM);
+      return u.toString();
+    };
+    const flyToFriend = (f) => {
+      if (trip || !galaxyOn) return;
+      trackEvent('friend-warp', { friend: f.id });
+      if (reduceMotion) { window.location.href = warpUrl(f); return; }
+      trip = { friend: f, t: 0, fromPos: camera.position.clone(), fromLook: new THREE.Vector3(), navigated: false };
+      camera.getWorldDirection(trip.fromLook).multiplyScalar(60).add(camera.position);
+      if (eggLayer) eggLayer.classList.add('is-leaving');
+      veil = document.createElement('div');
+      veil.className = 'friend-veil';
+      veil.style.background = paperOf(f);
+      document.body.appendChild(veil);
+    };
+    // back from the friend's site (back/forward cache): drop the finished trip, stay in the galaxy
+    const onPageShow = (e) => {
+      if (!e.persisted || !trip) return;
+      trip = null;
+      if (veil) { veil.remove(); veil = null; }
+      if (eggLayer) eggLayer.classList.remove('is-leaving');
+    };
+    window.addEventListener('pageshow', onPageShow);
     scene.add(camera);
     let galaxyT = 0;
     let uniYaw = 0;
@@ -475,7 +517,7 @@ export default function GlobeScene({ project = null }) {
       en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then double-click the Earth to head home.', back: 'Back to Earth', here: 'You are here' },
     };
     const leaveGalaxy = () => {
-      if (!galaxyOn) return;
+      if (!galaxyOn || trip) return;
       galaxyOn = false;
       // the page comes back only once the trip home is almost over (see the loop)
       if (eggLayer) eggLayer.classList.remove('is-on');
@@ -518,6 +560,20 @@ export default function GlobeScene({ project = null }) {
       here.className = 'galaxy-here';
       here.textContent = L.here;
       eggLayer.append(here, card);
+      friends.forEach((f) => {
+        const a = document.createElement('a');
+        a.className = 'galaxy-friend';
+        a.style.setProperty('--friend', `rgb(${f.planet.map((c) => Math.round(c * 255)).join(' ')})`);
+        a.href = warpUrl(f);
+        a.textContent = f.name;
+        a.addEventListener('click', (ev) => {
+          if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
+          ev.preventDefault();
+          flyToFriend(f);
+        });
+        eggLayer.append(a);
+        f.label = a;
+      });
       document.documentElement.classList.add('galaxy-mode');
       // the card shows up once we drop out of the jump (see the loop)
       trackEvent('easter-egg-galaxy');
@@ -667,7 +723,7 @@ export default function GlobeScene({ project = null }) {
       }
     };
     const onDown = (e) => {
-      if (e.button !== 0) return;
+      if (e.button !== 0 || trip) return;
       if (e.target instanceof Element && e.target.closest(BLOCKERS)) return;
       onMove(e);
       const p = cursorOnGlobe();
@@ -841,12 +897,23 @@ export default function GlobeScene({ project = null }) {
       // warp intensity follows the speed of the trip (smootherstep peaks at 1.875 / duration)
       const gSpeed = dt > 0 ? Math.abs(gz - prevGz) / dt : 0;
       prevGz = gz;
-      const wTarget = reduceMotion ? 0 : Math.pow(Math.min(1, (gSpeed * tripS) / 1.875), 1.6);
+      let wTarget = reduceMotion ? 0 : Math.pow(Math.min(1, (gSpeed * tripS) / 1.875), 1.6);
+      // the trip to a friend's planet: steady in time, eased, with the same jump
+      let fz = 0;
+      if (trip) {
+        const prevFz = smoother(trip.t);
+        trip.t = Math.min(1, trip.t + dt / FRIEND_S);
+        fz = smoother(trip.t);
+        const fSpeed = dt > 0 ? (fz - prevFz) / dt : 0;
+        // the streaks die down just before touching down, the surface takes over
+        wTarget = Math.max(wTarget, Math.pow(Math.min(1, (fSpeed * FRIEND_S) / 1.875), 1.6) * (1 - smooth(Math.max(0, (trip.t - 0.8) / 0.2))));
+      }
       warpW += (wTarget - warpW) * (1 - Math.exp(-dt * 10));
-      warp.update(dt, warpW, galaxyOn ? -1 : 1);
+      warp.update(dt, warpW, galaxyOn && !trip ? -1 : 1);
       // planets met on the way, only while actually travelling
       const travelling = !reduceMotion && galaxyT > 0.001 && galaxyT < 0.999;
-      flyby.update(dt, galaxyOn ? gz : 1 - gz, travelling, galaxyOn ? -1 : 1);
+      if (trip) flyby.update(dt, Math.min(fz * 1.15, 1), trip.t < 0.85, 1);
+      else flyby.update(dt, galaxyOn ? gz : 1 - gz, travelling, galaxyOn ? -1 : 1);
 
       // easter egg: the camera backs out of the Earth, through the arm, then rises above the galaxy;
       // on the way it swings wide along the arm and banks, like a ship taking a turn
@@ -862,6 +929,28 @@ export default function GlobeScene({ project = null }) {
         camera.rotateZ(arc * arc * 0.32 * (galaxyOn ? 1 : -1));
       } else {
         camera.lookAt(0, 0, 0);
+      }
+      if (trip) {
+        // from where we were, swing towards the friend's planet and dive until its surface fills the view
+        const f = trip.friend;
+        f.p.object.getWorldPosition(friendWorld);
+        const radius = f.p.radius;
+        tripDir.copy(trip.fromPos).sub(friendWorld).normalize();
+        tripPos.copy(friendWorld).addScaledVector(tripDir, radius * 1.15);
+        const swing = Math.sin(Math.PI * fz);
+        camera.position.copy(trip.fromPos).lerp(tripPos, fz);
+        camera.position.y += swing * 10;
+        camera.position.x += swing * 6;
+        tripLook.copy(trip.fromLook).lerp(friendWorld, smooth(Math.min(1, trip.t * 2.2)));
+        camera.lookAt(tripLook);
+        camera.rotateZ(swing * swing * 0.28);
+        // the last moments: the page fades to the friend's own background, then we land there
+        const v = smooth(Math.max(0, (trip.t - 0.84) / 0.16));
+        if (veil) veil.style.opacity = String(v);
+        if (trip.t >= 1 && !trip.navigated) {
+          trip.navigated = true;
+          window.location.href = warpUrl(f);
+        }
       }
       // the view widens with the speed, then snaps back when we drop out of the jump
       const baseFov = narrow ? 60 : 40;
@@ -995,6 +1084,18 @@ export default function GlobeScene({ project = null }) {
           here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3));
         }
       }
+      friends.forEach((f) => {
+        f.p.update(dt * timeScale, gz);
+        if (!f.label || !eggLayer) return;
+        f.p.object.getWorldPosition(friendWorld);
+        hereVec.copy(friendWorld).project(camera);
+        const fx = (hereVec.x * 0.5 + 0.5) * window.innerWidth;
+        const fy = (-hereVec.y * 0.5 + 0.5) * window.innerHeight;
+        const inView = hereVec.z < 1 && Math.abs(hereVec.x) < 0.92 && Math.abs(hereVec.y) < 0.9;
+        f.label.style.transform = `translate3d(${fx.toFixed(1)}px, ${fy.toFixed(1)}px, 0)`;
+        f.label.style.opacity = String(inView && !trip ? Math.max(0, (gz - 0.75) / 0.25) : 0);
+        f.label.style.pointerEvents = inView && !trip && gz > 0.9 ? 'auto' : 'none';
+      });
       if (!galaxyOn && galaxyT < 0.01 && eggLayer) {
         eggLayer.remove();
         eggLayer = null;
@@ -1034,6 +1135,9 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('blur', onUp);
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('dblclick', onDouble);
+      window.removeEventListener('pageshow', onPageShow);
+      friends.forEach((f) => f.p.dispose());
+      if (veil) veil.remove();
       warp.dispose();
       flyby.dispose();
       document.documentElement.classList.remove('galaxy-mode');
