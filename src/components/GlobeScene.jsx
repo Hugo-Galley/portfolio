@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import PROJECTS, { PROJECT_EVENT, PAGE_EVENT, PICK_EVENT } from '../data/projects';
 import { trackEvent } from '../hooks/useUmami';
-import createGalaxy, { createWarp, createFlyby, createFriendPlanet } from './galaxy';
+import createGalaxy, { createWarp, createFlyby, createFriendPlanet, createHomePlanet } from './galaxy';
 import FRIENDS, { WARP_PARAM, WARP_FROM } from '../data/friends';
 
 /*
@@ -474,6 +474,10 @@ export default function GlobeScene({ project = null }) {
       galaxy.disc.add(p.object);
       return { ...f, p, label: null };
     });
+    const homePlanet = createHomePlanet(isSmall, pixelRatio);
+    scene.add(homePlanet.object);
+    // where the visitor came from: null (this site, 8 clicks on the Earth) or a friend (?warp=…)
+    let origin = null;
     let trip = null; // { friend, t, fromPos, fromLook, navigated }
     let veil = null;
     const friendWorld = new THREE.Vector3();
@@ -513,8 +517,8 @@ export default function GlobeScene({ project = null }) {
     let eggClicks = [];
     let eggLayer = null;
     const EGG_TEXT = {
-      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Le petit point, c’est la Terre. Attrape la galaxie pour la faire tourner, puis double-clique sur la Terre pour rentrer.', back: 'Revenir sur Terre', here: 'Vous êtes ici' },
-      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'That little dot is the Earth. Grab the galaxy to spin it, then double-click the Earth to head home.', back: 'Back to Earth', here: 'You are here' },
+      fr: { kicker: 'Easter egg trouvé', title: 'Bien joué.', muted: 'Te voilà perdu dans la galaxie.', text: 'Attrape la galaxie pour la faire tourner, et clique sur une planète pour t’y rendre.', back: 'Revenir sur Terre', backTo: (n) => `Revenir chez ${n}`, home: 'Revenir ici', me: 'Hugo Galley' },
+      en: { kicker: 'Easter egg found', title: 'Well played.', muted: 'You are now lost in the galaxy.', text: 'Grab the galaxy to spin it, and click a planet to go there.', back: 'Back to Earth', backTo: (n) => `Back to ${n}'s`, home: 'Back here', me: 'Hugo Galley' },
     };
     const leaveGalaxy = () => {
       if (!galaxyOn || trip) return;
@@ -550,22 +554,40 @@ export default function GlobeScene({ project = null }) {
       const text = document.createElement('p');
       text.className = 'galaxy-egg-text';
       text.textContent = L.text;
+      // a small arrow over the planet you came from, which reads "back here"
+      const withArrow = (el) => {
+        const arrow = document.createElement('span');
+        arrow.className = 'galaxy-arrow';
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '↓';
+        el.prepend(arrow);
+        el.classList.add('is-home');
+      };
+      const firstName = (f) => f.name.split(' ')[0];
       const back = document.createElement('button');
       back.type = 'button';
       back.className = 'btn btn--primary btn--lg';
-      back.textContent = L.back;
-      back.addEventListener('click', leaveGalaxy);
+      back.textContent = origin ? L.backTo(firstName(origin)) : L.back;
+      back.addEventListener('click', () => (origin ? flyToFriend(origin) : leaveGalaxy()));
       card.append(kicker, title, text, back);
-      const here = document.createElement('span');
+      // this site's planet: "back here" when you came from here, its name when you came from a friend
+      const here = document.createElement('button');
+      here.type = 'button';
       here.className = 'galaxy-here';
-      here.textContent = L.here;
+      here.append(origin ? L.me : L.home);
+      if (!origin) withArrow(here);
+      here.addEventListener('click', () => {
+        trackEvent('easter-egg-home', { via: 'marker' });
+        leaveGalaxy();
+      });
       eggLayer.append(here, card);
       friends.forEach((f) => {
         const a = document.createElement('a');
         a.className = 'galaxy-friend';
         a.style.setProperty('--friend', `rgb(${f.planet.map((c) => Math.round(c * 255)).join(' ')})`);
         a.href = warpUrl(f);
-        a.textContent = f.name;
+        a.append(f === origin ? L.home : f.name);
+        if (f === origin) withArrow(a);
         a.addEventListener('click', (ev) => {
           if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
           ev.preventDefault();
@@ -592,6 +614,8 @@ export default function GlobeScene({ project = null }) {
       const text = friend
         ? { kicker: en ? `Straight from ${friend.name.split(' ')[0]}'s place` : `Tout droit venu de chez ${friend.name.split(' ')[0]}` }
         : {};
+      // the friends' entries (with their planet), not the raw data
+      origin = friends.find((f) => f.id === warpFrom) || null;
       enterGalaxy({ from: warpFrom, text });
       galaxyT = 1;
       prevGz = 1;
@@ -601,6 +625,8 @@ export default function GlobeScene({ project = null }) {
         setTimeout(() => document.documentElement.classList.remove('warp-arrival', 'warp-reveal'), 1300);
       } else {
         arrival = { t: 0, revealed: false };
+        // the jump is already at full speed: the CSS streaks of the veil hand over to these
+        warpW = 1;
       }
     }
     // where the Earth is on screen while lost in the galaxy (it is only a dot, so the target is generous)
@@ -1126,9 +1152,13 @@ export default function GlobeScene({ project = null }) {
           earthOnScreen.x = hx;
           earthOnScreen.y = hy;
           here.style.transform = `translate3d(${hx.toFixed(1)}px, ${hy.toFixed(1)}px, 0)`;
-          here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3) * smooth(Math.max(0, (arrivalEase - 0.8) / 0.2)));
+          here.style.opacity = String(trip ? 0 : Math.max(0, (gz - 0.7) / 0.3) * smooth(Math.max(0, (arrivalEase - 0.8) / 0.2)));
+          here.style.pointerEvents = !trip && gz > 0.9 && arrivalEase > 0.9 ? 'auto' : 'none';
         }
       }
+      // this site's planet wraps the little Earth once it is far enough to read as a planet
+      homePlanet.object.position.copy(planet.position);
+      homePlanet.update(dt * timeScale, smooth(Math.min(1, Math.max(0, (gz - 0.45) / 0.4))));
       friends.forEach((f) => {
         f.p.update(dt * timeScale, gz);
         if (!f.label || !eggLayer) return;
@@ -1182,6 +1212,7 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('dblclick', onDouble);
       window.removeEventListener('pageshow', onPageShow);
       friends.forEach((f) => f.p.dispose());
+      homePlanet.dispose();
       if (veil) veil.remove();
       warp.dispose();
       flyby.dispose();

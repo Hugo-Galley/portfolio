@@ -504,3 +504,22 @@ export function createFriendPlanet(friend, isSmall, pixelRatio) {
     dispose() { disposables.forEach((x) => x.dispose()); },
   };
 }
+
+/* Hugo's own planet, in the galaxy: built like the friends' planets, in the site's violet,
+   wrapped around the dotted Earth once we are far enough to see it as a planet among others */
+export function createHomePlanet(isSmall, pixelRatio) {
+  const rimGeo = new THREE.SphereGeometry(1, 40, 30);
+  const disposables = [rimGeo];
+  const d = { r: 1.05, color: [0.74, 0.46, 1.0], ring: false };
+  const { holder, body, fade } = makePlanet(d, isSmall, pixelRatio, rimGeo, disposables);
+  holder.visible = false;
+  return {
+    object: holder,
+    update(dt, g) {
+      holder.visible = g > 0.01;
+      fade.value = g;
+      body.rotation.y += dt * 0.15;
+    },
+    dispose() { disposables.forEach((x) => x.dispose()); },
+  };
+}
