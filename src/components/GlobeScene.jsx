@@ -522,11 +522,11 @@ export default function GlobeScene({ project = null }) {
       // the page comes back only once the trip home is almost over (see the loop)
       if (eggLayer) eggLayer.classList.remove('is-on');
     };
-    const enterGalaxy = () => {
+    const enterGalaxy = (opts = {}) => {
       if (galaxyOn) return;
       galaxyOn = true;
       eggClicks = [];
-      const L = EGG_TEXT[document.documentElement.lang === 'en' ? 'en' : 'fr'];
+      const L = { ...EGG_TEXT[document.documentElement.lang === 'en' ? 'en' : 'fr'], ...(opts.text || {}) };
       if (!eggLayer) {
         eggLayer = document.createElement('div');
         eggLayer.className = 'galaxy-egg';
@@ -576,10 +576,33 @@ export default function GlobeScene({ project = null }) {
       });
       document.documentElement.classList.add('galaxy-mode');
       // the card shows up once we drop out of the jump (see the loop)
-      trackEvent('easter-egg-galaxy');
+      trackEvent('easter-egg-galaxy', opts.from ? { via: 'warp', from: opts.from } : { via: 'clicks' });
     };
     const onKey = (e) => { if (e.key === 'Escape') leaveGalaxy(); };
     window.addEventListener('keydown', onKey);
+
+    /* arriving from a friend's site (public/warp-arrival.js): straight into the galaxy, out of a jump */
+    const ARRIVE_S = 2.6;
+    let arrival = null;
+    const warpFrom = project == null ? window.__warpFrom : null;
+    if (warpFrom) {
+      // the hand-over is only marked as taken once the first frame runs (React may mount twice in dev)
+      const friend = FRIENDS.find((f) => f.id === warpFrom);
+      const en = document.documentElement.lang === 'en';
+      const text = friend
+        ? { kicker: en ? `Straight from ${friend.name.split(' ')[0]}'s place` : `Tout droit venu de chez ${friend.name.split(' ')[0]}` }
+        : {};
+      enterGalaxy({ from: warpFrom, text });
+      galaxyT = 1;
+      prevGz = 1;
+      if (reduceMotion) {
+        window.__warpFrom = null;
+        document.documentElement.classList.add('warp-reveal');
+        setTimeout(() => document.documentElement.classList.remove('warp-arrival', 'warp-reveal'), 1300);
+      } else {
+        arrival = { t: 0, revealed: false };
+      }
+    }
     // where the Earth is on screen while lost in the galaxy (it is only a dot, so the target is generous)
     const earthOnScreen = { x: -1e4, y: -1e4 };
     const onDouble = (e) => {
@@ -898,6 +921,22 @@ export default function GlobeScene({ project = null }) {
       const gSpeed = dt > 0 ? Math.abs(gz - prevGz) / dt : 0;
       prevGz = gz;
       let wTarget = reduceMotion ? 0 : Math.pow(Math.min(1, (gSpeed * tripS) / 1.875), 1.6);
+      // arriving from a friend's site: full jump at first, braking down to a stop above the galaxy
+      let arrivalEase = 1;
+      if (arrival) {
+        if (!arrival.revealed) {
+          arrival.revealed = true;
+          window.__warpFrom = null;
+          document.documentElement.classList.add('warp-reveal');
+        }
+        arrival.t = Math.min(1, arrival.t + dt / ARRIVE_S);
+        arrivalEase = 1 - Math.pow(1 - arrival.t, 3);
+        wTarget = Math.max(wTarget, Math.pow(1 - smooth(arrival.t), 1.3));
+        if (arrival.t >= 1) {
+          arrival = null;
+          document.documentElement.classList.remove('warp-arrival', 'warp-reveal');
+        }
+      }
       // the trip to a friend's planet: steady in time, eased, with the same jump
       let fz = 0;
       if (trip) {
@@ -909,10 +948,11 @@ export default function GlobeScene({ project = null }) {
         wTarget = Math.max(wTarget, Math.pow(Math.min(1, (fSpeed * FRIEND_S) / 1.875), 1.6) * (1 - smooth(Math.max(0, (trip.t - 0.8) / 0.2))));
       }
       warpW += (wTarget - warpW) * (1 - Math.exp(-dt * 10));
-      warp.update(dt, warpW, galaxyOn && !trip ? -1 : 1);
+      warp.update(dt, warpW, galaxyOn && !trip && arrivalEase >= 1 ? -1 : 1);
       // planets met on the way, only while actually travelling
       const travelling = !reduceMotion && galaxyT > 0.001 && galaxyT < 0.999;
       if (trip) flyby.update(dt, Math.min(fz * 1.15, 1), trip.t < 0.85, 1);
+      else if (arrivalEase < 1) flyby.update(dt, Math.min(1, 0.5 + arrivalEase * 0.6), true, 1);
       else flyby.update(dt, galaxyOn ? gz : 1 - gz, travelling, galaxyOn ? -1 : 1);
 
       // easter egg: the camera backs out of the Earth, through the arm, then rises above the galaxy;
@@ -929,6 +969,11 @@ export default function GlobeScene({ project = null }) {
         camera.rotateZ(arc * arc * 0.32 * (galaxyOn ? 1 : -1));
       } else {
         camera.lookAt(0, 0, 0);
+      }
+      if (arrivalEase < 1) {
+        // coming out of the jump: from far behind, the camera brakes down into its place above the galaxy
+        camera.translateZ((1 - arrivalEase) * 90);
+        camera.rotateZ((1 - arrivalEase) * (1 - arrivalEase) * 0.35);
       }
       if (trip) {
         // from where we were, swing towards the friend's planet and dive until its surface fills the view
@@ -1066,7 +1111,7 @@ export default function GlobeScene({ project = null }) {
       }
       galaxy.root.rotation.set(uniPitch, uniYaw, 0);
       galaxy.update(dt * timeScale, gz);
-      if (galaxyOn && gz > 0.86 && eggLayer && !eggLayer.classList.contains('is-on')) {
+      if (galaxyOn && gz > 0.86 && arrivalEase > 0.8 && eggLayer && !eggLayer.classList.contains('is-on')) {
         eggLayer.classList.add('is-on');
         const back = eggLayer.querySelector('button');
         // keyboard users land on the button, without the focus ring showing up for mouse users
@@ -1081,7 +1126,7 @@ export default function GlobeScene({ project = null }) {
           earthOnScreen.x = hx;
           earthOnScreen.y = hy;
           here.style.transform = `translate3d(${hx.toFixed(1)}px, ${hy.toFixed(1)}px, 0)`;
-          here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3));
+          here.style.opacity = String(Math.max(0, (gz - 0.7) / 0.3) * smooth(Math.max(0, (arrivalEase - 0.8) / 0.2)));
         }
       }
       friends.forEach((f) => {
@@ -1093,7 +1138,7 @@ export default function GlobeScene({ project = null }) {
         const fy = (-hereVec.y * 0.5 + 0.5) * window.innerHeight;
         const inView = hereVec.z < 1 && Math.abs(hereVec.x) < 0.92 && Math.abs(hereVec.y) < 0.9;
         f.label.style.transform = `translate3d(${fx.toFixed(1)}px, ${fy.toFixed(1)}px, 0)`;
-        f.label.style.opacity = String(inView && !trip ? Math.max(0, (gz - 0.75) / 0.25) : 0);
+        f.label.style.opacity = String(inView && !trip ? Math.max(0, (gz - 0.75) / 0.25) * smooth(Math.max(0, (arrivalEase - 0.8) / 0.2)) : 0);
         f.label.style.pointerEvents = inView && !trip && gz > 0.9 ? 'auto' : 'none';
       });
       if (!galaxyOn && galaxyT < 0.01 && eggLayer) {
