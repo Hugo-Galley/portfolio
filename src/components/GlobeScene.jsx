@@ -266,6 +266,7 @@ export default function GlobeScene({ project = null }) {
     if (!mount || navigator.webdriver || !hasWebGL()) return undefined;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let disposed = false;
     const isSmall = window.innerWidth <= 768;
 
     let renderer;
@@ -603,6 +604,26 @@ export default function GlobeScene({ project = null }) {
     const onKey = (e) => { if (e.key === 'Escape') leaveGalaxy(); };
     window.addEventListener('keydown', onKey);
 
+    /* the galaxy's shaders are compiled ahead of time, off the critical moment: otherwise the first
+       frame of the trip (or of an arrival) stalls while the GPU builds them all at once */
+    const precompileGalaxy = () => {
+      galaxy.update(0, 1);
+      homePlanet.update(0, 1);
+      friends.forEach((f) => f.p.update(0, 1));
+      warp.update(0, 1, 1);
+      flyby.object.traverse((o) => { o.visible = true; });
+      // synchronous on purpose: three's compileAsync keeps polling and throws if the scene is disposed
+      // meanwhile; during an arrival the waiting streaks run in a worker, so this pause does not show
+      renderer.compile(scene, camera);
+      if (!galaxyOn) {
+        galaxy.update(0, 0);
+        homePlanet.update(0, 0);
+        friends.forEach((f) => f.p.update(0, 0));
+      }
+      warp.update(0, 0, 1);
+      flyby.update(0, 0, false, 1);
+    };
+
     /* arriving from a friend's site (public/warp-arrival.js): straight into the galaxy, out of a jump */
     const ARRIVE_S = 2.6;
     let arrival = null;
@@ -625,10 +646,26 @@ export default function GlobeScene({ project = null }) {
         document.documentElement.classList.add('warp-reveal');
         setTimeout(() => document.documentElement.classList.remove('warp-arrival', 'warp-reveal'), 1300);
       } else {
-        arrival = { t: 0, revealed: false };
-        // the jump is already at full speed: the CSS streaks of the veil hand over to these
+        // the 2D streaks of the veil keep going until every shader is ready, then the 3D jump takes over
+        arrival = { t: 0, revealed: false, ready: false };
         warpW = 1;
+        const a = arrival;
+        // a frame later, so the veil's streaks are on screen before the main thread pauses to compile
+        requestAnimationFrame(() => {
+          if (disposed) return;
+          precompileGalaxy();
+          a.ready = true;
+        });
       }
+    }
+    // the usual way in (8 clicks): get the galaxy ready once the page has settled, while nothing happens
+    let precompileTimer = null;
+    if (!warpFrom) {
+      precompileTimer = setTimeout(() => {
+        const run = () => { if (!galaxyOn) precompileGalaxy(); };
+        if (window.requestIdleCallback) window.requestIdleCallback(run, { timeout: 3000 });
+        else run();
+      }, 3000);
     }
     // where the Earth is on screen while lost in the galaxy (it is only a dot, so the target is generous)
     const earthOnScreen = { x: -1e4, y: -1e4 };
@@ -950,7 +987,8 @@ export default function GlobeScene({ project = null }) {
       let wTarget = reduceMotion ? 0 : Math.pow(Math.min(1, (gSpeed * tripS) / 1.875), 1.6);
       // arriving from a friend's site: full jump at first, braking down to a stop above the galaxy
       let arrivalEase = 1;
-      if (arrival) {
+      if (arrival && !arrival.ready) arrivalEase = 0;
+      if (arrival && arrival.ready) {
         if (!arrival.revealed) {
           arrival.revealed = true;
           window.__warpFrom = null;
@@ -1180,7 +1218,8 @@ export default function GlobeScene({ project = null }) {
       }
 
       time.value = elapsed;
-      renderer.render(scene, camera);
+      // while an arrival waits for its shaders, the veil's streaks are on screen: nothing to draw yet
+      if (!arrival || arrival.ready) renderer.render(scene, camera);
       raf = document.hidden ? null : requestAnimationFrame(tick);
     };
 
@@ -1194,6 +1233,7 @@ export default function GlobeScene({ project = null }) {
     onVis();
 
     return () => {
+      disposed = true;
       if (raf) cancelAnimationFrame(raf);
       ro.disconnect();
       themeObserver.disconnect();
@@ -1214,6 +1254,7 @@ export default function GlobeScene({ project = null }) {
       window.removeEventListener('keydown', onKey);
       window.removeEventListener('dblclick', onDouble);
       window.removeEventListener('pageshow', onPageShow);
+      clearTimeout(precompileTimer);
       friends.forEach((f) => f.p.dispose());
       homePlanet.dispose();
       if (veil) veil.remove();

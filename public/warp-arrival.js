@@ -3,7 +3,8 @@
 // no 'unsafe-inline'). The friend's page left in the middle of a hyperspace jump, so this one starts in
 // the very same jump: the streaks below copy the 3D ones (createWarp in src/components/galaxy.js) at
 // full speed (same tunnel, speed, length, colours, 72° field of view), drawn in 2D so they show up at
-// once. GlobeScene then takes over with the real 3D jump, still at full speed, and fades these out.
+// once (public/warp-streaks.js, in a worker). GlobeScene takes over with the real 3D jump, still at
+// full speed, once its shaders are compiled, and fades these out.
 (function () {
   var params = new URLSearchParams(location.search);
   var from = params.get('warp');
@@ -28,65 +29,49 @@
     canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:5001;pointer-events:none;background:#000;transition:opacity .35s ease';
     root.appendChild(canvas);
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W = 0, H = 0, f = 1;
-    var size = function () {
-      W = canvas.width = Math.round(innerWidth * dpr);
-      H = canvas.height = Math.round(innerHeight * dpr);
-      f = (H / 2) / Math.tan((72 / 2) * Math.PI / 180); // camera fov 40 + 32 at full warp
-    };
-    size();
-    window.addEventListener('resize', size);
-    var ctx = canvas.getContext('2d');
-    // same seeds as createWarp: a hollow tunnel around the view, three tints
-    var N = innerWidth < 768 ? 500 : 1100;
-    var FAR = 70;
-    var seeds = [];
-    for (var i = 0; i < N; i++) {
-      var a = Math.random() * Math.PI * 2;
-      var r = 0.9 + Math.pow(Math.random(), 0.6) * 9;
-      var tint = Math.random();
-      var c = tint < 0.6 ? '217,217,255' : tint < 0.85 ? '179,158,255' : '255,153,199';
-      seeds.push({ x: Math.cos(a) * r, y: Math.sin(a) * r, z: -2 - Math.random() * FAR, k: 0.6 + Math.random() * 0.8, c: c });
+    var count = innerWidth < 768 ? 500 : 1100;
+    var dims = function () { return { width: Math.round(innerWidth * dpr), height: Math.round(innerHeight * dpr), dpr: dpr }; };
+    var src = (document.currentScript && document.currentScript.src || '/warp-arrival.js').replace(/warp-arrival\.js.*$/, 'warp-streaks.js');
+    var onResize;
+    var halt;
+    // the streaks are drawn in a worker, so they keep flowing while the page and the 3D scene start up
+    if (window.Worker && canvas.transferControlToOffscreen) {
+      var worker = new Worker(src);
+      var off = canvas.transferControlToOffscreen();
+      var d = dims();
+      worker.postMessage({ canvas: off, count: count, width: d.width, height: d.height, dpr: d.dpr }, [off]);
+      onResize = function () { var r = dims(); worker.postMessage({ resize: true, width: r.width, height: r.height, dpr: r.dpr }); };
+      halt = function () { worker.postMessage({ stop: true }); setTimeout(function () { worker.terminate(); }, 50); };
+    } else {
+      // fallback: the same drawing, on the main thread
+      var running = true;
+      halt = function () { running = false; };
+      var script = document.createElement('script');
+      script.src = src;
+      script.onload = function () {
+        if (!running || !window.__warpStreaks) return;
+        var streaks = window.__warpStreaks(canvas.getContext('2d'), count);
+        var r = dims();
+        streaks.resize(r.width, r.height, r.dpr);
+        onResize = function () { var q = dims(); streaks.resize(q.width, q.height, q.dpr); };
+        var last = performance.now();
+        var loop = function (now) {
+          if (!running) return;
+          streaks.frame(Math.min((now - last) / 1000, 0.05));
+          last = now;
+          requestAnimationFrame(loop);
+        };
+        requestAnimationFrame(loop);
+      };
+      document.head.appendChild(script);
     }
-    var SPEED = 180, LEN = 22.4, NEAR = 0.5;
-    var last = performance.now();
-    var running = true;
-    var frame = function (now) {
-      if (!running) return;
-      var dt = Math.min((now - last) / 1000, 0.05);
-      last = now;
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, W, H);
-      ctx.globalCompositeOperation = 'lighter';
-      ctx.lineWidth = dpr;
-      var cx = W / 2, cy = H / 2;
-      for (var i = 0; i < N; i++) {
-        var s = seeds[i];
-        s.z += SPEED * s.k * dt;
-        if (s.z > -1) s.z -= FAR;
-        var head = Math.min(s.z, -NEAR);
-        var tail = s.z - LEN * s.k;
-        if (tail >= head) continue;
-        var hx = cx + (s.x * f) / -head, hy = cy - (s.y * f) / -head;
-        var tx = cx + (s.x * f) / -tail, ty = cy - (s.y * f) / -tail;
-        var g = ctx.createLinearGradient(hx, hy, tx, ty);
-        g.addColorStop(0, 'rgba(' + s.c + ',0.8)');
-        g.addColorStop(1, 'rgba(' + s.c + ',0)');
-        ctx.strokeStyle = g;
-        ctx.beginPath();
-        ctx.moveTo(hx, hy);
-        ctx.lineTo(tx, ty);
-        ctx.stroke();
-      }
-      requestAnimationFrame(frame);
-    };
-    requestAnimationFrame(frame);
+    var resize = function () { if (onResize) onResize(); };
+    window.addEventListener('resize', resize);
     stop = function () {
       canvas.style.opacity = '0';
       setTimeout(function () {
-        running = false;
-        window.removeEventListener('resize', size);
+        halt();
+        window.removeEventListener('resize', resize);
         canvas.remove();
       }, 400);
     };

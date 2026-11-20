@@ -52,7 +52,8 @@ html.globe-dragging, html.globe-dragging * { cursor: grabbing !important; user-s
 }
 
 /* ── Easter egg: lost in the galaxy ── */
-#main-content > :not(.globe-scene) { transition: opacity 0.9s ease, filter 0.9s ease; }
+/* a plain fade: a blur over the whole page made the start of the trip stutter */
+#main-content > :not(.globe-scene) { transition: opacity 0.9s ease; }
 html.galaxy-mode { overflow: hidden; }
 /* arriving from a friend's site (?warp=…): the jump goes on (streaks drawn by public/warp-arrival.js),
    over black until the globe's own 3D jump takes over */
@@ -70,7 +71,6 @@ html.warp-arrival.warp-reveal body::after { opacity: 0; }
 html.warp-arrival #main-content > :not(.globe-scene) { opacity: 0; pointer-events: none; }
 html.galaxy-mode #main-content > :not(.globe-scene) {
   opacity: 0;
-  filter: blur(8px);
   pointer-events: none;
 }
 .galaxy-egg {
