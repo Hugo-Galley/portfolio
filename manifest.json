@@ -1,0 +1,21 @@
+{
+  "short_name": "Hugo Galley — Portfolio",
+  "name": "Hugo Galley — Développeur Logiciel",
+  "icons": [
+    {
+      "src": "logo.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src" : "og/galleyhugo-square.jpg",
+      "sizes" : "1200x1200",
+      "type" : "image/jpeg",
+      "purpose" : "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#050407"
+}
