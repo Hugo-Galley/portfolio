@@ -12,6 +12,8 @@
   animation: globe-in 2.4s ease both;
 }
 @keyframes globe-in { from { opacity: 0; } }
+/* arriving mid-jump from a friend's site: the scene is there at once, no fade-in */
+html.warp-arrived .globe-canvas { animation: none; }
 /* the globe can be grabbed and spun */
 html.globe-grab, html.globe-grab body { cursor: grab; }
 html.globe-pick, html.globe-pick body { cursor: pointer; }
@@ -52,34 +54,19 @@ html.globe-dragging, html.globe-dragging * { cursor: grabbing !important; user-s
 /* ── Easter egg: lost in the galaxy ── */
 #main-content > :not(.globe-scene) { transition: opacity 0.9s ease, filter 0.9s ease; }
 html.galaxy-mode { overflow: hidden; }
-/* arriving from a friend's site (?warp=…): straight into the lights. Until the 3D jump is ready,
-   CSS streaks rush out from the centre, then the real ones take over at full speed */
+/* arriving from a friend's site (?warp=…): the jump goes on (streaks drawn by public/warp-arrival.js),
+   over black until the globe's own 3D jump takes over */
 html.warp-arrival { overflow: hidden; }
 html.warp-arrival body::after {
   content: '';
   position: fixed;
-  inset: -20%;
+  inset: 0;
   z-index: 5000;
+  background: #000;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 50%, #000 0 4%, transparent 26%),
-    repeating-conic-gradient(from 0deg at 50% 50%, rgba(226, 222, 255, 0.5) 0deg 0.3deg, transparent 0.5deg 4.1deg),
-    repeating-conic-gradient(from 1.7deg at 50% 50%, rgba(190, 160, 255, 0.32) 0deg 0.25deg, transparent 0.4deg 6.7deg),
-    #000;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 3%, #000 30%);
-  mask-image: radial-gradient(circle at 50% 50%, transparent 3%, #000 30%);
-  filter: blur(0.7px);
-  animation: warp-rush 0.45s linear infinite;
   transition: opacity 0.35s ease;
 }
 html.warp-arrival.warp-reveal body::after { opacity: 0; }
-@keyframes warp-rush {
-  from { transform: scale(1); }
-  to { transform: scale(1.18); }
-}
-@media (prefers-reduced-motion: reduce) {
-  html.warp-arrival body::after { animation: none; background: #000; -webkit-mask-image: none; mask-image: none; }
-}
 html.warp-arrival #main-content > :not(.globe-scene) { opacity: 0; pointer-events: none; }
 html.galaxy-mode #main-content > :not(.globe-scene) {
   opacity: 0;
@@ -183,25 +170,28 @@ html.galaxy-mode #main-content > :not(.globe-scene) {
 }
 .galaxy-friend::after { content: ' →'; color: var(--text-secondary); }
 .galaxy-friend.is-home::after { content: none; }
+/* the planets speak for themselves: no ring drawn around them */
+.galaxy-egg .galaxy-here::before,
+.galaxy-egg .galaxy-friend::before { content: none; }
 /* the planet you came from: a small arrow bobbing over it, "back here" */
 .galaxy-arrow {
   position: absolute;
   left: 0;
-  bottom: calc(100% + 14px);
+  bottom: calc(100% + 12px);
   width: 1em;
   margin-left: -0.5em;
   text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-secondary);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
   line-height: 1;
-  color: var(--text-color);
   animation: galaxy-arrow 1.6s ease-in-out infinite;
   pointer-events: none;
 }
 @keyframes galaxy-arrow {
-  0%, 100% { transform: translateY(0); opacity: 0.65; }
-  50% { transform: translateY(5px); opacity: 1; }
+  0%, 100% { transform: translateY(0); opacity: 0.45; }
+  50% { transform: translateY(3px); opacity: 0.8; }
 }
 @media (prefers-reduced-motion: reduce) { .galaxy-arrow { animation: none; } }
 .galaxy-friend:hover,

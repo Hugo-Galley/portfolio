@@ -621,6 +621,7 @@ export default function GlobeScene({ project = null }) {
       prevGz = 1;
       if (reduceMotion) {
         window.__warpFrom = null;
+        if (window.__warpHandOver) window.__warpHandOver();
         document.documentElement.classList.add('warp-reveal');
         setTimeout(() => document.documentElement.classList.remove('warp-arrival', 'warp-reveal'), 1300);
       } else {
@@ -953,6 +954,8 @@ export default function GlobeScene({ project = null }) {
         if (!arrival.revealed) {
           arrival.revealed = true;
           window.__warpFrom = null;
+          // the 2D streaks of the veil hand over to the 3D ones, both at full speed
+          if (window.__warpHandOver) window.__warpHandOver();
           document.documentElement.classList.add('warp-reveal');
         }
         arrival.t = Math.min(1, arrival.t + dt / ARRIVE_S);

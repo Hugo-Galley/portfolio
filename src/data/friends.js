@@ -7,11 +7,11 @@ const FRIENDS = [
   {
     id: 'damien',
     name: 'Damien de Montgolfier',
-    url: 'https://damiendemontgolfier.fr/',
+    url: 'https://portfolio.damiendemontgolfier.fr/',
     // his rust accent, for the planet
     planet: [0.89, 0.42, 0.31],
-    // his page background, light and dark (prefers-color-scheme), for the hand-over
-    paper: { light: '#f4f1ea', dark: '#16150f' },
+    // his portfolio's background (a single dark theme), for the hand-over
+    paper: { light: '#010100', dark: '#010100' },
     orbit: 26,
     arm: 1,
   },
