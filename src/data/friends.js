@@ -8,10 +8,10 @@ const FRIENDS = [
     id: 'damien',
     name: 'Damien de Montgolfier',
     url: 'https://portfolio.damiendemontgolfier.fr/',
-    // his rust accent, for the planet
-    planet: [0.89, 0.42, 0.31],
+    // the blue-cyan of his accent gradient (#8b5cf6 → #6d7bff → #22d3ee); the violet end is already ours
+    planet: [0.28, 0.66, 0.96],
     // his portfolio's background (a single dark theme), for the hand-over
-    paper: { light: '#010100', dark: '#010100' },
+    paper: { light: '#050505', dark: '#050505' },
     orbit: 26,
     arm: 1,
   },

@@ -508,6 +508,7 @@ export default function GlobeScene({ project = null }) {
       if (!e.persisted || !trip) return;
       trip = null;
       if (veil) { veil.remove(); veil = null; }
+      planet.visible = true;
       if (eggLayer) eggLayer.classList.remove('is-leaving');
     };
     window.addEventListener('pageshow', onPageShow);
@@ -1006,13 +1007,15 @@ export default function GlobeScene({ project = null }) {
       }
       // the trip to a friend's planet: steady in time, eased, with the same jump
       let fz = 0;
+      let tripFade = 1;
       if (trip) {
-        const prevFz = smoother(trip.t);
         trip.t = Math.min(1, trip.t + dt / FRIEND_S);
         fz = smoother(trip.t);
-        const fSpeed = dt > 0 ? (fz - prevFz) / dt : 0;
-        // the streaks die down just before touching down, the surface takes over
-        wTarget = Math.max(wTarget, Math.pow(Math.min(1, (fSpeed * FRIEND_S) / 1.875), 1.6) * (1 - smooth(Math.max(0, (trip.t - 0.8) / 0.2))));
+        // the friend's site opens mid-jump (its own streaks, braking), so the jump here only builds
+        // up and stays at full speed to the end
+        wTarget = Math.max(wTarget, smooth(Math.min(1, trip.t / 0.55)));
+        // and the galaxy melts away, leaving the streaks alone on the friend's background
+        tripFade = 1 - smooth(Math.min(1, Math.max(0, (trip.t - 0.55) / 0.33)));
       }
       warpW += (wTarget - warpW) * (1 - Math.exp(-dt * 10));
       warp.update(dt, warpW, galaxyOn && !trip && arrivalEase >= 1 ? -1 : 1);
@@ -1043,12 +1046,12 @@ export default function GlobeScene({ project = null }) {
         camera.rotateZ((1 - arrivalEase) * (1 - arrivalEase) * 0.35);
       }
       if (trip) {
-        // from where we were, swing towards the friend's planet and dive until its surface fills the view
+        // from where we were, swing towards the friend's planet and rush at it, as it melts into the jump
         const f = trip.friend;
         f.p.object.getWorldPosition(friendWorld);
         const radius = f.p.radius;
         tripDir.copy(trip.fromPos).sub(friendWorld).normalize();
-        tripPos.copy(friendWorld).addScaledVector(tripDir, radius * 1.15);
+        tripPos.copy(friendWorld).addScaledVector(tripDir, radius * 4);
         const swing = Math.sin(Math.PI * fz);
         camera.position.copy(trip.fromPos).lerp(tripPos, fz);
         camera.position.y += swing * 10;
@@ -1056,9 +1059,9 @@ export default function GlobeScene({ project = null }) {
         tripLook.copy(trip.fromLook).lerp(friendWorld, smooth(Math.min(1, trip.t * 2.2)));
         camera.lookAt(tripLook);
         camera.rotateZ(swing * swing * 0.28);
-        // the last moments: the page fades to the friend's own background, then we land there
-        const v = smooth(Math.max(0, (trip.t - 0.84) / 0.16));
-        if (veil) veil.style.opacity = String(v);
+        // behind the scene, the background turns into the friend's own as the galaxy fades
+        if (veil) veil.style.opacity = String(1 - tripFade);
+        planet.visible = tripFade > 0.5;
         if (trip.t >= 1 && !trip.navigated) {
           trip.navigated = true;
           window.location.href = warpUrl(f);
@@ -1177,7 +1180,7 @@ export default function GlobeScene({ project = null }) {
         uniPitch = Math.max(-0.7, Math.min(0.9, uniPitch + drag.vy * 0.5));
       }
       galaxy.root.rotation.set(uniPitch, uniYaw, 0);
-      galaxy.update(dt * timeScale, gz);
+      galaxy.update(dt * timeScale, gz * tripFade);
       if (galaxyOn && gz > 0.86 && arrivalEase > 0.8 && eggLayer && !eggLayer.classList.contains('is-on')) {
         eggLayer.classList.add('is-on');
         const back = eggLayer.querySelector('button');
@@ -1199,9 +1202,9 @@ export default function GlobeScene({ project = null }) {
       }
       // this site's planet wraps the little Earth once it is far enough to read as a planet
       homePlanet.object.position.copy(planet.position);
-      homePlanet.update(dt * timeScale, smooth(Math.min(1, Math.max(0, (gz - 0.45) / 0.4))));
+      homePlanet.update(dt * timeScale, smooth(Math.min(1, Math.max(0, (gz - 0.45) / 0.4))) * tripFade);
       friends.forEach((f) => {
-        f.p.update(dt * timeScale, gz);
+        f.p.update(dt * timeScale, gz * tripFade);
         if (!f.label || !eggLayer) return;
         f.p.object.getWorldPosition(friendWorld);
         hereVec.copy(friendWorld).project(camera);

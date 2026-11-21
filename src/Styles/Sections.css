@@ -202,11 +202,12 @@ html.galaxy-mode #main-content > :not(.globe-scene) {
 .galaxy-egg.is-leaving .galaxy-egg-card,
 .galaxy-egg.is-leaving .galaxy-here { opacity: 0 !important; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s ease; transition-delay: 0s; }
 .galaxy-egg.is-leaving .galaxy-egg-card { transform: translateY(12px); }
-/* the hand-over: the page fades to the friend's own background before landing on their site */
+/* the hand-over: behind the 3D scene, the background turns into the friend's own, while the
+   streaks keep going on top, so their page (which opens on its background, mid-jump) takes over */
 .friend-veil {
   position: fixed;
   inset: 0;
-  z-index: 3000;
+  z-index: -2;
   opacity: 0;
   pointer-events: none;
 }
