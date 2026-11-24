@@ -2,23 +2,23 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-<link rel="preload" href="%PUBLIC_URL%/fonts/Geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/Geist-latin.woff2" as="font" type="font/woff2" crossorigin>
 
 <style>
 @font-face{font-family:'Geist';src:url('/fonts/Geist-latin.woff2') format('woff2');font-weight:100 900;font-display:swap}
 </style>
 
-<script src="%PUBLIC_URL%/warp-arrival.js"></script>
+<script src="/warp-arrival.js"></script>
 
 <!-- Umami, seulement en prod et hors navigateurs exclus (?umami=off) : voir umami-loader.js -->
-<script defer src="%PUBLIC_URL%/umami-loader.js"></script>
+<script defer src="/umami-loader.js"></script>
 
-    <link rel="icon" href="%PUBLIC_URL%/logo.ico" type="image/x-icon"/>
+    <link rel="icon" href="/logo.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="author" content="Hugo Galley">
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.ico" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="apple-touch-icon" href="/logo.ico" />
+    <link rel="manifest" href="/manifest.json" />
 
     <!--
       All SEO meta tags (title, description, og:*, twitter:*, canonical, hreflang, structured data)
@@ -47,5 +47,6 @@
       <p>Contact : <a href="mailto:contact@galleyhugo.com">contact@galleyhugo.com</a> | <a href="https://github.com/Hugo-Galley">GitHub</a> | <a href="https://www.linkedin.com/in/hugo-galley/">LinkedIn</a></p>
     </noscript>
     <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>
