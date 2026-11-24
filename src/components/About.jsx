@@ -17,7 +17,7 @@ export default function About() {
   return (
     <div className="about container">
       <figure className="about-photo">
-        <img src={portrait} alt="Hugo Galley" width="800" height="1164" loading="lazy" decoding="async" />
+        <img src={portrait} alt="Hugo Galley" width="1000" height="1454" loading="lazy" decoding="async" />
       </figure>
       <div className="about-body">
         <p className="about-lead">{t('bentoCards.meDesc')}</p>

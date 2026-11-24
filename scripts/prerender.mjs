@@ -116,6 +116,20 @@ async function prerenderRoute(browser, route, port) {
   }
   await new Promise((r) => setTimeout(r, 800));
 
+  // Adjacent text nodes (JSX like `{n} / {total}`) would be merged into one when the HTML is parsed
+  // again, and hydration would no longer find them (React errors #425 then #418, the whole page
+  // rendered again). Separate them with an empty comment, as React's own server rendering does.
+  await page.evaluate(() => {
+    const root = document.getElementById('root');
+    if (!root) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const texts = [];
+    while (walker.nextNode()) texts.push(walker.currentNode);
+    texts.forEach((t) => {
+      if (t.nextSibling && t.nextSibling.nodeType === Node.TEXT_NODE) t.after(document.createComment(' '));
+    });
+  });
+
   // Get the full rendered HTML
   let html = await page.content();
 

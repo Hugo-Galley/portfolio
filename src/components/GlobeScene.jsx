@@ -238,10 +238,19 @@ const PROJECT_DIRS = PROJECTS.map((_, i) => {
   return { lon, lat, dir: new THREE.Vector3(Math.cos(lat) * Math.sin(lon), Math.sin(lat), Math.cos(lat) * Math.cos(lon)) };
 });
 
+// WebGL drawn by the CPU (no GPU, or hardware acceleration off: SwiftShader, llvmpipe…) runs the
+// scene at a few frames per second and freezes the page, so the site goes on without the globe
+const SOFTWARE_GL = /swiftshader|llvmpipe|softpipe|software|basic render|microsoft basic/i;
+
 function hasWebGL() {
   try {
     const c = document.createElement('canvas');
-    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+    const gl = window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl'));
+    if (!gl) return false;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const name = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER);
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return !SOFTWARE_GL.test(String(name || ''));
   } catch (e) {
     return false;
   }
@@ -263,7 +272,16 @@ export default function GlobeScene({ project = null }) {
 
   useEffect(() => {
     const mount = mountRef.current;
-    if (!mount || navigator.webdriver || !hasWebGL()) return undefined;
+    if (!mount || navigator.webdriver || !hasWebGL()) {
+      // no globe: an arrival from a friend's site lifts its veil now instead of after the 7 s safety net
+      if (window.__warpFrom) {
+        window.__warpFrom = null;
+        if (window.__warpHandOver) window.__warpHandOver();
+        document.documentElement.classList.add('warp-reveal');
+        setTimeout(() => document.documentElement.classList.remove('warp-arrival', 'warp-reveal'), 1300);
+      }
+      return undefined;
+    }
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let disposed = false;

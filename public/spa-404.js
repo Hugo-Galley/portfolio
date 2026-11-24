@@ -1,4 +1,4 @@
-// Redirige les URL inconnues de GitHub Pages vers index.html (voir spa-redirect.js).
+// Redirige les URL inconnues de GitHub Pages vers index.html (voir le début de warp-arrival.js).
 // Externalisé depuis 404.html pour permettre une CSP sans 'unsafe-inline'.
 var pathSegmentsToKeep = 0;
 var l = window.location;
